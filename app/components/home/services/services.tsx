@@ -4,24 +4,14 @@ import "./services.scss";
 import { useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
-import WheelGestures from "embla-carousel-wheel-gestures";
 import Image from "next/image";
-import { ReactNode } from "react";
-import Autoplay from "embla-carousel-autoplay";
+import type { ReactNode } from "react";
 import Link from "next/link";
 export default function Services() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [active, setActive] = useState(0);
-  const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
   const router = useRouter();
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const activeRef = useRef(active);
-
-  useEffect(() => {
-    activeRef.current = active;
-  }, [active]);
 
   const autoScroll = useRef(
     AutoScroll({
@@ -31,7 +21,7 @@ export default function Services() {
     }),
   );
 
-  const [emblaRef, emblaApi] = useEmblaCarousel(
+  const [emblaRef] = useEmblaCarousel(
     {
       loop: true,
       dragFree: true,
@@ -41,14 +31,8 @@ export default function Services() {
   );
 
   const handleManagedTabChange = (index: number) => {
-    if (index === active || isTransitioning) return;
-
-    setIsTransitioning(true);
-
-    setTimeout(() => {
-      setActive(index);
-      setIsTransitioning(false);
-    }, 400);
+    if (index === active) return;
+    setActive(index);
   };
 
   useEffect(() => {
@@ -219,9 +203,7 @@ export default function Services() {
   ];
   useEffect(() => {
     const interval = setInterval(() => {
-      const next = (activeRef.current + 1) % managedServices.length;
-
-      handleManagedTabChange(next);
+      setActive((current) => (current + 1) % managedServices.length);
     }, 8000);
 
     return () => clearInterval(interval);
@@ -348,9 +330,7 @@ export default function Services() {
               </div>
             </div>
 
-            <div
-              className={`managed-content ${isTransitioning ? "fade-out" : ""}`}
-            >
+            <div className="managed-content">
               <div className="managed-image">
                 <Image
                   src={service.image}
@@ -523,28 +503,6 @@ function TimelineStep({
           ))}
         </ul>
       </div>
-    </div>
-  );
-}
-
-function ServiceTile({
-  title,
-  points,
-  icon,
-}: {
-  title: string;
-  points: string[];
-  icon: string;
-}) {
-  return (
-    <div className="managed-card">
-      <div className="managed-icon">{icon}</div>
-      <h3>{title}</h3>
-      <ul>
-        {points.map((p, i) => (
-          <li key={i}>{p}</li>
-        ))}
-      </ul>
     </div>
   );
 }

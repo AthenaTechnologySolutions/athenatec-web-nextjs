@@ -50,9 +50,9 @@ function FloatingInput({ id, label, type = "text", register, error, icon, option
   );
 }
 
-type Props = { onSuccess?: () => void; caseStudyTitle?: string; wpApiUrl?: string; };
+type Props = { onSuccess?: () => void };
 
-export default function DownloadForm({ onSuccess, caseStudyTitle = "Case Study" }: Props) {
+export default function DownloadForm({ onSuccess }: Props) {
   const { register, handleSubmit, setValue, trigger, formState: { errors, isSubmitting } } =
     useForm<FormData>({ mode: "onTouched" });
 
@@ -114,9 +114,9 @@ export default function DownloadForm({ onSuccess, caseStudyTitle = "Case Study" 
         </div>
         <div className="df-success-badge">Case Study Unlocked</div>
         <h3 className="df-success-title">Check Your Inbox!</h3>
-        <p className="df-success-body">We've sent the full case study to</p>
+        <p className="df-success-body">We&apos;ve sent the full case study to</p>
         <p className="df-success-email">{submittedEmail}</p>
-        <p className="df-success-sub">Usually arrives within a minute. Check spam if you don't see it.</p>
+        <p className="df-success-sub">Usually arrives within a minute. Check spam if you don&apos;t see it.</p>
         <div className="df-success-divider"/>
         <div className="df-success-steps">
           <div className="df-success-step"><span className="df-step-num">1</span><span>Check your email</span></div>

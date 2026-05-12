@@ -6,6 +6,8 @@ import Footer from "@/app/components/home/footer";
 import "./globals.css";
 import AIChatbot from "@/app/components/chatbot/chatbot";
 import ScrollToTop from "@/app/components/ScrollToTop";
+import SmoothScrollProvider from "@/app/components/providers/SmoothScrollProvider";
+import ScrollProgressBar from "@/app/components/ui/ScrollProgressBar";
 import {
   SITE_NAME,
   SITE_URL,
@@ -103,11 +105,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
 
-        <Header />
-        {children}
-        <AIChatbot />
-        <ScrollToTop />
-        <Footer />
+        <SmoothScrollProvider>
+          <ScrollProgressBar />
+           
+          <Header />
+          {children}
+          <AIChatbot />
+          <ScrollToTop />
+          <Footer />
+        </SmoothScrollProvider>
       </body>
     </html>
   );
