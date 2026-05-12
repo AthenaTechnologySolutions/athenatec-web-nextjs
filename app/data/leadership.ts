@@ -108,11 +108,11 @@ export const leadershipProfiles: LeaderProfile[] = [
     name: "Jothi Periasamy",
     designation: "Strategic Technology Collaborator",
     shortBio:
-      "Jothi Periasamy is Chief Agentic AI Architect for the State of California and creator of the AAMVA-awarded California DMV Personalized License Plate machine learning algorithm.He leads Agentic AI deployments across the California DMV, Caltrans, EDD, and other state agencies, and is the founder of the multi-agent orchestration platform LLM at Scale.AI",
+      "Jothi Periasamy is Chief Agentic AI Architect for the State of California and creator of the AAMVA-awarded California DMV Personalized License Plate machine learning algorithm. He leads Agentic AI deployments across the California DMV, Caltrans, EDD, and other state agencies, is the founder of the multi-agent orchestration platform LLM at Scale.AI, and has trained over 300,000 professionals worldwide.",
     fullBio: [
-      "Jothi Periasamy is Chief Agentic AI Architect for the State of California and creator of the AAMVA-awarded California DMV Personalized License Plate machine learning algorithm.",
-      "He leads Agentic AI deployments across the California DMV, Caltrans, EDD, and other state agencies, and is the founder of the multi-agent orchestration platform LLM at Scale.AI.",
-      "Jothi has trained over 300,000 professionals worldwide and collaborates with Athena on practical AI transformation, multi-agent orchestration, and public-sector technology modernization.",
+      "Jothi Periasamy is Chief Agentic AI Architect for the State of California and creator of the AAMVA-awarded California DMV Personalized License Plate machine learning algorithm. He leads Agentic AI deployments across the California DMV, Caltrans, EDD, and other state agencies, is the founder of the multi-agent orchestration platform LLM at Scale.AI, and has trained over 300,000 professionals worldwide.",
+      "He has advised the Prime Minister's Offices of Dubai and Malaysia on adopting AI in public services, facilitated AI for Executives at the Massachusetts Institute of Technology (MIT), and taught data science at UC Davis. He designed and delivered the nation's first after-school Agentic AI program for middle and high school students with SMUD and the City of Rancho Cordova.",
+      "A published author and global speaker, Jothi holds a Master's in Data Science from Harvard University.",
     ],
     profileImage: "/assets/images/Jothi.webp",
         linkedinUrl: "https://www.linkedin.com/in/jothiperiasamy/",

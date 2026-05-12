@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import {
   advisoryBoard,
   leadershipTeam,
@@ -42,7 +43,7 @@ export default function Leadership() {
         <div className="advisory-list">
           {strategicCollaborators.map((collab) => (
             <Link
-              className="advisory-profile-card"
+              className="advisory-profile-card advisory-profile-card--collaborator"
               href={`/leadership/${collab.slug}`}
               key={collab.id}
               aria-label={`Read more about ${collab.name}`}
@@ -61,7 +62,11 @@ export default function Leadership() {
               <div className="advisory-profile-card__content">
                 <h3>{collab.name}</h3>
                 <p className="advisory-profile-card__role">{collab.designation}</p>
-                <p className="advisory-profile-card__bio">{collab.fullBio.join(" ")}</p>
+                <p className="advisory-profile-card__bio">{collab.shortBio}</p>
+                <span className="advisory-profile-card__cta">
+                  Read More
+                  <ArrowUpRight size={14} />
+                </span>
               </div>
             </Link>
           ))}

@@ -527,6 +527,41 @@
   line-height: 1.72;
 }
 
+.advisory-profile-card--collaborator {
+  .advisory-profile-card__bio {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6;
+  }
+}
+
+.advisory-profile-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin-top: 18px;
+  color: var(--leadership-gold-soft);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: color 0.25s ease;
+
+  svg {
+    transition: transform 0.28s ease;
+  }
+}
+
+.advisory-profile-card:hover .advisory-profile-card__cta {
+  color: #ffffff;
+
+  svg {
+    transform: translate(4px, -4px);
+  }
+}
+
 @media (max-width: 1100px) {
   .leadership-grid {
     gap: 16px;
