@@ -106,7 +106,7 @@ export const leadershipProfiles: LeaderProfile[] = [
     id: "jothi-periasamy",
     slug: "jothi-periasamy",
     name: "Jothi Periasamy",
-    designation: "Strategic Technology Collaborator",
+    designation: "Chief Agentic AI Architect",
     shortBio:
       "Jothi Periasamy is Chief Agentic AI Architect for the State of California and creator of the AAMVA-awarded California DMV Personalized License Plate machine learning algorithm. He leads Agentic AI deployments across the California DMV, Caltrans, EDD, and other state agencies, is the founder of the multi-agent orchestration platform LLM at Scale.AI, and has trained over 300,000 professionals worldwide.",
     fullBio: [

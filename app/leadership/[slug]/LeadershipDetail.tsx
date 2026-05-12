@@ -68,11 +68,11 @@ export default function LeadershipDetail({
     leader.group === "advisory"
       ? "Advisor"
       : leader.group === "collaborator"
-        ? "Collaborator"
+        ? "Chief Agentic AI Architect"
         : "Executive";
   const profileEyebrow =
     leader.group === "collaborator"
-      ? "Strategic Collaborator Profile"
+      ? "Chief Agentic AI Architect Profile"
       : "Executive Profile";
   return (
     <main className="leader-detail" ref={pageRef}>
