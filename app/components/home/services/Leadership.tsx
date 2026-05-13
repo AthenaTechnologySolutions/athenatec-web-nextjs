@@ -33,7 +33,7 @@ export default function Leadership() {
         </div>
 
         <div className="collaborators-header">
-          <h2>Chief Agentic AI Architect</h2>
+          <h2>Strategic Collobarators</h2>
           <p>
             Partnering with world-class organizations to deliver manufacturing excellence and
             accelerate digital transformation across industries.
