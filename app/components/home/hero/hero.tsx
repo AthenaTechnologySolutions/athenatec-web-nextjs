@@ -4,6 +4,36 @@ import "./hero.scss";
 import { useEffect, useState, useRef } from "react";
 import { logos } from "@/app/components/ClientLogos";
 import Image from "next/image";
+import { Building2, Globe2, MapPin, UsersRound } from "lucide-react";
+
+const statItems = [
+  {
+    title: "Founded",
+    value: 2011,
+    subtitle: "15+ years experience",
+    icon: Building2,
+  },
+  {
+    title: "Team Strength",
+    value: 150,
+    suffix: "+",
+    subtitle: "Industry experts",
+    icon: UsersRound,
+  },
+  {
+    title: "Global HQ",
+    value: "USA",
+    subtitle: "California",
+    icon: Globe2,
+  },
+  {
+    title: "Delivery Centers",
+    value: "India",
+    subtitle: "Bangalore, Hyderabad, Chennai & Trichy",
+    icon: MapPin,
+  },
+];
+
 export default function HeroSection() {
   const [cloneMarquee, setCloneMarquee] = useState(false);
 
@@ -38,37 +68,46 @@ export default function HeroSection() {
 
   return (
     <>
-      <section className="relative flex flex-col overflow-hidden pt-[62px]">
+      <section className="relative flex min-h-screen flex-col overflow-hidden bg-[#f5fafd] pt-[62px]">
         <div className="relative flex-1">
           <HeroCarousel />
         </div>
 
-        <div className="bg-[#F5FAFD] py-5">
-          <div className="container mx-auto px-6">
-            <h2 className="text-center text-xl md:text-2xl font-semibold mb-8 text-black">
-              A Decade of Delivering Manufacturing Excellence
-            </h2>
+        <div className="relative overflow-hidden border-t border-[#dbe9f3] bg-[#f5fafd] py-3 text-[#10233f] shadow-[0_-12px_34px_rgba(28,69,132,0.08)] sm:py-4">
+          <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(23,172,228,0.13),rgba(255,255,255,0.78)_42%,rgba(28,69,132,0.08))]" />
+          <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[#17ace4]/60 to-transparent" />
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-black">
-              <StatCard
-                title="Founded"
-                value={2011}
-                subtitle="13+ years experience"
-              />
+          <div className="container relative z-10 mx-auto px-4 sm:px-6">
+            <div className="mb-3 flex flex-col items-center justify-between gap-2 text-center md:mb-4">
+              {/* <span className="rounded-full border border-[#17ace4]/35 bg-white/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#1c4584] shadow-sm">
+                Athena at a glance
+              </span> */}
+              <h2 className="max-w-3xl text-xl font-semibold leading-tight text-[#07152d] sm:text-2xl">
+                A Decade of Delivering Manufacturing Excellence
+              </h2>
+            </div>
 
-              <StatCard
-                title="Team Strength"
-                value={150}
-                suffix="+"
-                subtitle="Industry experts"
-              />
-
-              <InfoCard title="Global HQ" value="USA" subtitle="California" />
-              <InfoCard
-                title="Delivery Centers"
-                value="India"
-                subtitle="Bangalore, Hyderabad, Chennai & Trichy"
-              />
+            <div className="grid grid-cols-2 gap-3 text-[#10233f] md:grid-cols-4 md:gap-4">
+              {statItems.map((item) =>
+                typeof item.value === "number" ? (
+                  <StatCard
+                    key={item.title}
+                    title={item.title}
+                    value={item.value}
+                    suffix={item.suffix}
+                    subtitle={item.subtitle}
+                    icon={item.icon}
+                  />
+                ) : (
+                  <InfoCard
+                    key={item.title}
+                    title={item.title}
+                    value={item.value}
+                    subtitle={item.subtitle}
+                    icon={item.icon}
+                  />
+                ),
+              )}
             </div>
           </div>
         </div>
@@ -111,16 +150,26 @@ function InfoCard({
   title,
   value,
   subtitle,
+  icon: Icon,
 }: {
   title: string;
   value: string;
   subtitle: string;
+  icon: React.ElementType;
 }) {
   return (
-    <div className="rounded-2xl bg-white p-4 md:p-6 text-center shadow-sm">
-      <p className="text-[17px] text-gray-500 mb-2">{title}</p>
-      <p className="text-3xl font-semibold mb-2">{value}</p>
-      <p className="text-sm text-gray-600 leading-snug">{subtitle}</p>
+    <div className="group relative min-h-[116px] overflow-hidden rounded-xl border border-[#d9e7f2] bg-white/90 p-3 text-center shadow-[0_10px_26px_rgba(28,69,132,0.1)] transition-all duration-300 hover:-translate-y-1 hover:border-[#17ace4]/70 hover:bg-white hover:shadow-[0_18px_36px_rgba(28,69,132,0.16)] md:min-h-[124px] md:p-4">
+      <div className="absolute inset-x-5 top-0 h-[3px] rounded-b-full bg-gradient-to-r from-[#17ace4] to-[#1c4584] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-lg bg-[#eaf8fe] text-[#1c4584] ring-1 ring-[#17ace4]/25 transition-all duration-300 group-hover:bg-[#17ace4] group-hover:text-white group-hover:ring-[#17ace4]">
+        <Icon size={18} strokeWidth={2.2} />
+      </div>
+      <p className="mb-1 text-sm font-medium text-[#5f6b7c]">{title}</p>
+      <p className="mb-1 text-2xl font-semibold text-[#07152d] sm:text-3xl">
+        {value}
+      </p>
+      <p className="mx-auto max-w-[15rem] text-xs leading-snug text-[#3f4f64] sm:text-sm">
+        {subtitle}
+      </p>
     </div>
   );
 }
@@ -130,9 +179,16 @@ type StatCardProps = {
   value: number;
   suffix?: string;
   subtitle: string;
+  icon: React.ElementType;
 };
 
-function StatCard({ title, value, suffix = "", subtitle }: StatCardProps) {
+function StatCard({
+  title,
+  value,
+  suffix = "",
+  subtitle,
+  icon: Icon,
+}: StatCardProps) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -173,14 +229,20 @@ function StatCard({ title, value, suffix = "", subtitle }: StatCardProps) {
   return (
     <div
       ref={ref}
-      className="rounded-2xl bg-white p-2 md:p-4 text-center shadow-sm"
+      className="group relative min-h-[116px] overflow-hidden rounded-xl border border-[#d9e7f2] bg-white/90 p-3 text-center shadow-[0_10px_26px_rgba(28,69,132,0.1)] transition-all duration-300 hover:-translate-y-1 hover:border-[#17ace4]/70 hover:bg-white hover:shadow-[0_18px_36px_rgba(28,69,132,0.16)] md:min-h-[124px] md:p-4"
     >
-      <p className="text-sm text-gray-500 mb-2">{title}</p>
-      <p className="text-3xl font-semibold mb-2">
+      <div className="absolute inset-x-5 top-0 h-[3px] rounded-b-full bg-gradient-to-r from-[#17ace4] to-[#1c4584] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-lg bg-[#eaf8fe] text-[#1c4584] ring-1 ring-[#17ace4]/25 transition-all duration-300 group-hover:bg-[#17ace4] group-hover:text-white group-hover:ring-[#17ace4]">
+        <Icon size={18} strokeWidth={2.2} />
+      </div>
+      <p className="mb-1 text-sm font-medium text-[#5f6b7c]">{title}</p>
+      <p className="mb-1 text-2xl font-semibold text-[#07152d] sm:text-3xl">
         {count}
         {suffix}
       </p>
-      <p className="text-sm text-gray-600 leading-snug">{subtitle}</p>
+      <p className="text-xs leading-snug text-[#3f4f64] sm:text-sm">
+        {subtitle}
+      </p>
     </div>
   );
 }

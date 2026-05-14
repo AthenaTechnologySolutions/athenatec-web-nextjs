@@ -17,6 +17,7 @@ export type LeaderProfile = {
   group: "leadership" | "advisory" | "collaborator";
   photoWidth?: string;
   photoAspect?: string;
+  photoObjectPosition?: string;
 };
 
 export const leadershipProfiles: LeaderProfile[] = [
@@ -119,6 +120,7 @@ export const leadershipProfiles: LeaderProfile[] = [
     group: "collaborator",
     photoWidth: "310px",
     photoAspect: "2756 / 3543",
+    photoObjectPosition: "center 8%",
   },
  
   {
@@ -151,6 +153,7 @@ export const leadershipProfiles: LeaderProfile[] = [
     group: "advisory",
     photoWidth: "310px",
     photoAspect: "827 / 1162",
+    photoObjectPosition: "center 18%",
   },
   {
     id: "ed-mathias",
@@ -182,6 +185,7 @@ export const leadershipProfiles: LeaderProfile[] = [
     group: "advisory",
     photoWidth: "310px",
     photoAspect: "827 / 1162",
+    photoObjectPosition: "center 12%",
   },
 ];
 

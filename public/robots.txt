@@ -3,4 +3,4 @@ Allow: /
 Disallow: /wp-admin/
 Disallow: /cgi-bin/
 
-Sitemap: https://athenatec.com/sitemap.xml
+Sitemap: https://www.athenatec.com/sitemap.xml

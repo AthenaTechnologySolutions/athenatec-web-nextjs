@@ -37,6 +37,17 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "athenatec.com",
+          },
+        ],
+        destination: "https://www.athenatec.com/:path*",
+        statusCode: 301,
+      },
+      {
         source: "/mes/siemens-opcenter-mes",
         destination: "/siemens-opcenter-mes",
         permanent: true,
