@@ -9,6 +9,7 @@ export default function SmoothScrollProvider({
   children: React.ReactNode;
 }) {
   const lenisRef = useRef<Lenis | null>(null);
+  const frameIdRef = useRef<number | null>(null);
 
   useEffect(() => {
     // Respect prefers-reduced-motion
@@ -31,16 +32,26 @@ export default function SmoothScrollProvider({
     // Expose on window so GSAP ScrollTrigger can sync
     (window as unknown as Record<string, unknown>).__lenis__ = lenis;
 
+    let active = true;
+
     function raf(time: number) {
+      if (!active) return;
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      if (active) {
+        frameIdRef.current = requestAnimationFrame(raf);
+      }
     }
-    const rafId = requestAnimationFrame(raf);
+    frameIdRef.current = requestAnimationFrame(raf);
 
     return () => {
-      cancelAnimationFrame(rafId);
+      active = false;
+      if (frameIdRef.current !== null) {
+        cancelAnimationFrame(frameIdRef.current);
+      }
       lenis.destroy();
       lenisRef.current = null;
+      frameIdRef.current = null;
+      delete (window as unknown as Record<string, unknown>).__lenis__;
     };
   }, []);
 

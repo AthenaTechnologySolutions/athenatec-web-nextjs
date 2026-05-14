@@ -24,9 +24,9 @@ export default function TermsOfUsePage() {
           <h2>1. Agreement to Terms</h2>
           <p>
             Please read these Terms of Use carefully. By accessing or using the
-            Athena Technology Solutions website at athenatec.com ("Site"), or by
+            Athena Technology Solutions website at athenatec.com (&quot;Site&quot;), or by
             engaging Athena for professional services, you agree to be legally
-            bound by these Terms of Use ("Terms"). If you do not agree to these
+            bound by these Terms of Use (&quot;Terms&quot;). If you do not agree to these
             Terms in full, you must immediately discontinue use of this Site and
             our services.
           </p>
@@ -98,7 +98,7 @@ export default function TermsOfUsePage() {
           </p>
           <ul>
             <li>
-              <strong>Trademarks:</strong> "Athena Technology Solutions," the
+              <strong>Trademarks:</strong> &quot;Athena Technology Solutions,&quot; the
               Athena logo, and all related brand assets are trademarks of Athena
               Technology Solutions, Inc. and may not be used without prior
               written consent.
@@ -213,7 +213,7 @@ export default function TermsOfUsePage() {
             </li>
           </ul>
           <p>
-            THE SITE AND ITS CONTENT ARE PROVIDED "AS IS" AND "AS AVAILABLE"
+            THE SITE AND ITS CONTENT ARE PROVIDED &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot;
             WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING WARRANTIES OF
             MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR
             NON-INFRINGEMENT.
@@ -232,7 +232,7 @@ export default function TermsOfUsePage() {
             information provided on this Site without formal engagement.
           </p>
           <p>
-            In no event shall Athena's total liability to you for all claims
+            In no event shall Athena&apos;s total liability to you for all claims
             arising from your use of this Site exceed the amount, if any, paid
             by you to Athena in the twelve (12) months preceding the claim.
           </p>
@@ -288,7 +288,7 @@ export default function TermsOfUsePage() {
           <p>
             Athena reserves the right to modify these Terms of Use at any time.
             Changes will be effective upon posting of the revised Terms on this
-            page with an updated "Last Updated" date. Your continued use of
+            page with an updated &quot;Last Updated&quot; date. Your continued use of
             this Site following the posting of modified Terms constitutes your
             acceptance of the updated Terms.
           </p>

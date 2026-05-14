@@ -1,3 +1,4 @@
+@use "../../../styles/abstracts/mixins" as *;
 .leader-detail {
   --detail-navy: #07152d;
   --detail-blue: #1c4584;
@@ -447,7 +448,7 @@
   }
 }
 
-@media (max-width: 980px) {
+@include tablet {
   .leader-detail__hero .leader-detail__shell,
   .leader-detail__grid {
     grid-template-columns: 1fr;
@@ -460,7 +461,7 @@
   }
 }
 
-@media (max-width: 680px) {
+@include mobile {
   .leader-detail__shell {
     width: min(100% - 32px, 1180px);
   }

@@ -54,7 +54,7 @@ export default async function NewsRoom() {
     name: "Newsroom",
     description:
       "Latest company news, partnerships and digital manufacturing updates from Athenatec.",
-    url: "https://athenatec.com/newsroom",
+    url: "https://www.athenatec.com/newsroom",
     publisher: {
       "@type": "Organization",
       name: "Athenatec",
@@ -68,7 +68,7 @@ export default async function NewsRoom() {
       itemListElement: posts.map((post, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        url: `https://athenatec.com/blog/${post.slug}`,
+        url: `https://www.athenatec.com/blog/${post.slug}`,
         name: stripHtml(post.title.rendered),
       })),
     },
@@ -128,12 +128,9 @@ export default async function NewsRoom() {
                     </div>
 
                     <div className="p-6">
-                      <h2
-                        className="text-xl font-semibold mb-3"
-                        dangerouslySetInnerHTML={{
-                          __html: post.title.rendered,
-                        }}
-                      />
+                      <h2 className="text-xl font-semibold mb-3">
+                        {stripHtml(post.title.rendered)}
+                      </h2>
 
                       <p className="text-gray-600 text-sm mb-4">
                         {truncate(stripHtml(post.excerpt.rendered), 140)}

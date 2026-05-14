@@ -1,5 +1,5 @@
-export default function () {
-  <>
-    <h1>TWINZO NEW PAGE</h1>
-  </>;
+import { permanentRedirect } from "next/navigation";
+
+export default function TwinzoPage() {
+  permanentRedirect("/blog/authorised-reseller-partnership-with-twinzo");
 }

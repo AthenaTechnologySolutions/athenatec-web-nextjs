@@ -1,0 +1,35 @@
+@use "../../../../../styles/abstracts/mixins" as *;
+.hero-swiper {
+  .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.35);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 32px;
+    background-color: #17ace4;
+  }
+
+  .swiper-button-disabled {
+    opacity: 0.3 !important;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .swiper-pagination {
+    bottom: 150px !important;
+    z-index: 30 !important;
+    pointer-events: auto;
+
+    @include tablet {
+      bottom: 168px !important;
+    }
+
+    @include mobile {
+      bottom: 175px !important;
+    }
+  }
+}

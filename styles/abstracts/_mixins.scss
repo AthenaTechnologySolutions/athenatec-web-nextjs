@@ -1,0 +1,62 @@
+@use "sass:map";
+@use "./breakpoints" as bp;
+
+@mixin _max-breakpoint($name) {
+  $width: map.get(bp.$breakpoints, $name);
+
+  @if $width == null {
+    @error "Unknown breakpoint `#{$name}`. Available breakpoints: #{map.keys(bp.$breakpoints)}.";
+  }
+
+  @media (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin _min-breakpoint($name) {
+  $width: map.get(bp.$breakpoints, $name);
+
+  @if $width == null {
+    @error "Unknown breakpoint `#{$name}`. Available breakpoints: #{map.keys(bp.$breakpoints)}.";
+  }
+
+  @media (min-width: $width) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @include _max-breakpoint(mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @include _max-breakpoint(tablet) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @include _max-breakpoint(laptop) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @include _min-breakpoint(desktop) {
+    @content;
+  }
+}
+
+@mixin hover-none {
+  @media (hover: none) {
+    @content;
+  }
+}
+
+@mixin motion-reduce {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}

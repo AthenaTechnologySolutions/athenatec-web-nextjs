@@ -1,3 +1,4 @@
+@use "../../styles/abstracts/mixins" as *;
 // ─── Variables ────────────────────────────────────────
 $primary: #1d6fe8;
 $primary-dark: #1558c0;
@@ -183,7 +184,7 @@ $shadow: 0 24px 60px rgba(15, 47, 79, 0.1);
   grid-template-columns: 1fr 1fr;
   gap: 14px;
 
-  @media (max-width: 560px) {
+  @include mobile {
     grid-template-columns: 1fr;
   }
 }
@@ -486,7 +487,7 @@ $shadow: 0 24px 60px rgba(15, 47, 79, 0.1);
 }
 
 // ─── Responsive ───────────────────────────────────────
-@media (max-width: 820px) {
+@include tablet {
   .case-study {
     padding: 70px 16px;
   }
@@ -504,7 +505,7 @@ $shadow: 0 24px 60px rgba(15, 47, 79, 0.1);
   }
 }
 
-@media (max-width: 480px) {
+@include mobile {
   .case-intro h2 {
     font-size: 26px;
   }

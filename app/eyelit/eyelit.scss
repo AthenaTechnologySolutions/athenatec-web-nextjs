@@ -1,3 +1,4 @@
+@use "../../styles/abstracts/mixins" as *;
  
 .eyelit-hero {
   padding: 70px 0 70px;
@@ -80,13 +81,13 @@
 }
 
  
-@media (max-width: 1200px) {
+@include laptop {
   .eyelit-hero .hero-content h1 {
     font-size: 52px;
   }
 }
 
-@media (max-width: 992px) {
+@include tablet {
   .eyelit-hero {
     padding: 100px 0 90px;
   }
@@ -100,7 +101,7 @@
   }
 }
 
-@media (max-width: 576px) {
+@include mobile {
   .eyelit-hero {
     padding: 80px 0 70px;
   }
@@ -179,7 +180,7 @@
 }
 
  
-@media (max-width: 1200px) {
+@include laptop {
   .expertise-section {
     .expertise-title {
       font-size: 40px;
@@ -187,7 +188,7 @@
   }
 }
 
-@media (max-width: 992px) {
+@include tablet {
   .expertise-section {
     padding: 80px 0;
 
@@ -206,7 +207,7 @@
   }
 }
 
-@media (max-width: 576px) {
+@include mobile {
   .expertise-section {
     padding: 60px 0;
 
@@ -298,7 +299,7 @@
 }
 
  
-@media (max-width: 992px) {
+@include tablet {
   .eyelit-features {
     padding: 90px 0;
 
@@ -312,7 +313,7 @@
   }
 }
 
-@media (max-width: 576px) {
+@include mobile {
   .eyelit-features {
     padding: 70px 0;
 
@@ -425,13 +426,13 @@
 }
 
  
-@media (max-width: 1200px) {
+@include laptop {
   .equipment-connect .equipment-content h2 {
     font-size: 40px;
   }
 }
 
-@media (max-width: 992px) {
+@include tablet {
   .equipment-connect {
     padding: 90px 0;
 
@@ -446,7 +447,7 @@
   }
 }
 
-@media (max-width: 576px) {
+@include mobile {
   .equipment-connect {
     padding: 70px 0;
 

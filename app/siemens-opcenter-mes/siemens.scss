@@ -1,3 +1,4 @@
+@use "../../styles/abstracts/mixins" as *;
 .soc-description {
   background: #f2f2f2;
   padding: clamp(40px, 6vw, 80px) clamp(16px, 4vw, 20px);
@@ -31,10 +32,10 @@
     grid-template-columns: repeat(3, 1fr);
     gap: clamp(16px, 2.5vw, 30px);
 
-    @media (max-width: 992px) {
+    @include tablet {
       grid-template-columns: repeat(2, 1fr);
     }
-    @media (max-width: 600px) {
+    @include mobile {
       grid-template-columns: 1fr;
     }
   }
@@ -106,7 +107,7 @@
     }
   }
 
-  @media (hover: none) {
+  @include hover-none {
     &:hover {
       transform: none;
     }
@@ -241,7 +242,7 @@
       }
     }
 
-    @media (hover: none) {
+    @include hover-none {
       &:hover {
         transform: none;
       }
@@ -324,13 +325,13 @@
     align-items: center;
     justify-items: center;
 
-    @media (max-width: 1200px) {
+    @include laptop {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
-    @media (max-width: 992px) {
+    @include tablet {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
-    @media (max-width: 576px) {
+    @include mobile {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 28px 16px;
     }
@@ -395,7 +396,7 @@
       transform: translateY(-6px);
     }
 
-    @media (hover: none) {
+    @include hover-none {
       &:hover {
         transform: none;
       }
@@ -461,7 +462,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@include mobile {
   .soc-description,
   .soc-services,
   .soc-expertise,

@@ -1,3 +1,4 @@
+@use "../../../styles/abstracts/mixins" as *;
 @use "sass:color";
 @import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Outfit:wght@300;400;500;600&display=swap");
 
@@ -816,7 +817,7 @@ $radius-xl: 28px;
 
 // ── Responsive ────────────────────────────────────────────────────────────────
 
-@media (max-width: 540px) {
+@include mobile {
   .df-card {
     border-radius: $radius-lg;
     max-width: 100%;

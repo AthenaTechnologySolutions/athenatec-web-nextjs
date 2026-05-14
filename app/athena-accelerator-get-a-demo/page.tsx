@@ -362,7 +362,7 @@ export default function GetADemoPage() {
         </div>
         <div className="hero__copy">
           <h1 className="hero__title">Athena Accelerator<br/>Get a Demo</h1>
-          <p className="hero__desc">Leave us a little info, and we'll be in touch — our team moves fast.</p>
+          <p className="hero__desc">Leave us a little info, and we&apos;ll be in touch - our team moves fast.</p>
           <div className="hero__actions">
             <button className="hero-cta hero-cta--solid" onClick={scrollToForm}>Fill Out the Form</button>
             <a href="mailto:info@athenatec.com" className="hero-cta hero-cta--outline">Contact Us</a>

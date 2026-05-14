@@ -1,4 +1,12 @@
 import GallerySection, { GalleryItem } from "@/app/components/events/GallerySection";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Event Gallery | Athenatec",
+  description:
+    "Explore Athenatec event photos from Siemens Realize Live, partner conferences, and manufacturing technology events.",
+  path: "/gallery",
+});
 
 const EVENTS: GalleryItem[] = [
   {

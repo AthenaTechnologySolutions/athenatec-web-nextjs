@@ -1,27 +1,34 @@
+import {
+  enforceSameOrigin,
+  formText,
+  isValidEmail,
+  rateLimit,
+} from "@/lib/request-guard";
 import { getWpApiUrl } from "@/lib/wp";
 
 const CF7_FORM_ID = "17";
 const CF7_SITE_URL = process.env.WP_SITE_URL || "https://cms.athenatec.com";
 
-function formValue(formData: FormData, key: string) {
-  const value = formData.get(key);
-  return typeof value === "string" ? value.trim() : "";
-}
-
 export async function POST(req: Request) {
   try {
+    const originError = enforceSameOrigin(req);
+    if (originError) return originError;
+
+    const limitError = rateLimit(req, { keyPrefix: "contact", limit: 8 });
+    if (limitError) return limitError;
+
     const incoming = await req.formData();
 
-    const name = formValue(incoming, "your-name");
-    const email = formValue(incoming, "your-email");
-    const phone = formValue(incoming, "your-phone");
-    const subject = formValue(incoming, "your-subject");
-    const message = formValue(incoming, "your-message");
-    const page = formValue(incoming, "your-page") || "Contact Page";
+    const name = formText(incoming, "your-name", 120);
+    const email = formText(incoming, "your-email", 254);
+    const phone = formText(incoming, "your-phone", 40);
+    const subject = formText(incoming, "your-subject", 160);
+    const message = formText(incoming, "your-message", 4_000);
+    const page = formText(incoming, "your-page", 160) || "Contact Page";
     const pageUrl =
-      formValue(incoming, "page-url") || req.headers.get("referer") || "";
+      formText(incoming, "page-url", 500) || req.headers.get("referer") || "";
 
-    if (!name || !email || !phone || !subject || !message) {
+    if (!name || !isValidEmail(email) || !phone || !subject || !message) {
       return Response.json(
         {
           status: "validation_failed",

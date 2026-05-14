@@ -1,4 +1,6 @@
-import { getPost, getAllPosts, getPostImage } from "@/lib/wordpress";
+import type { CSSProperties } from "react";
+import type { Metadata } from "next";
+import { getAllPosts, getPost, getPostImage, type WPPost } from "@/lib/wordpress";
 import {
   buildArticleSchema,
   buildMetadata,
@@ -10,7 +12,9 @@ import Link from "next/link";
 import Image from "next/image";
 import "./post.scss";
 
-export const dynamic = "force-dynamic";
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
 
 const NEWSROOM_SLUGS = new Set([
   "athena-and-tech-mahindra-announce-partnership",
@@ -18,10 +22,14 @@ const NEWSROOM_SLUGS = new Set([
   "athena-launches-faborchestrator-agentic-ai-for-manufacturing",
 ]);
 
-function getPostDescription(post) {
+function getPostDescription(post: WPPost) {
   const excerpt = stripHtml(post.excerpt?.rendered || "");
   const content = stripHtml(post.content?.rendered || "");
   return truncate(excerpt || content, 160);
+}
+
+function getPostTitle(post: WPPost) {
+  return stripHtml(post.title.rendered);
 }
 
 export async function generateStaticParams() {
@@ -29,7 +37,9 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPost(slug);
 
@@ -43,54 +53,39 @@ export async function generateMetadata({ params }) {
     });
   }
 
-  const title = stripHtml(post.title.rendered);
-  const description = getPostDescription(post);
-  const image = getPostImage(post);
-
   return buildMetadata({
-    title,
-    description,
+    title: getPostTitle(post),
+    description: getPostDescription(post),
     path: `/blog/${slug}`,
-    image,
+    image: getPostImage(post) ?? undefined,
     type: "article",
     publishedTime: post.date,
     modifiedTime: post.modified,
   });
 }
 
-export default async function PostPage({ params }) {
+export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
-
   const post = await getPost(slug);
+
   if (!post) notFound();
 
   const allPosts = await getAllPosts();
-  const currentIndex = allPosts.findIndex((p) => p.slug === slug);
+  const currentIndex = allPosts.findIndex((item) => item.slug === slug);
   const nextPost = allPosts[currentIndex - 1];
   const prevPost = allPosts[currentIndex + 1];
-
-const isNewsroomPost = NEWSROOM_SLUGS.has(post.slug);
-
-let relatedPosts = [];
-
-if (isNewsroomPost) {
-  // 👉 ONLY those 3 posts
-  relatedPosts = allPosts.filter(
-    (p) =>
-      NEWSROOM_SLUGS.has(p.slug) &&
-      p.slug !== post.slug
-  );
-} else {
-  // 👉 Normal blogs → show other normal blogs
-  relatedPosts = allPosts
-    .filter(
-      (p) =>
-        !NEWSROOM_SLUGS.has(p.slug) &&
-        p.slug !== post.slug
-    )
-    .slice(0, 3); // limit to 3
-}
+  const isNewsroomPost = NEWSROOM_SLUGS.has(post.slug);
+  const relatedPosts: WPPost[] = isNewsroomPost
+    ? allPosts.filter(
+        (item) => NEWSROOM_SLUGS.has(item.slug) && item.slug !== post.slug,
+      )
+    : allPosts
+        .filter(
+          (item) => !NEWSROOM_SLUGS.has(item.slug) && item.slug !== post.slug,
+        )
+        .slice(0, 3);
   const heroImage = getPostImage(post);
+  const title = getPostTitle(post);
 
   const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
     year: "numeric",
@@ -98,17 +93,19 @@ if (isNewsroomPost) {
     day: "numeric",
   });
 
-  const readTime = Math.ceil(
-    (post.content?.rendered || "").replace(/<[^>]+>/g, "").split(" ").length /
-      200
+  const contentHtml = post.content?.rendered || "";
+  const readTime = Math.max(
+    1,
+    Math.ceil(contentHtml.replace(/<[^>]+>/g, "").split(/\s+/).length / 200),
   );
 
   const articleSchema = buildArticleSchema({
-    headline: stripHtml(post.title.rendered),
+    headline: title,
     description: getPostDescription(post),
     path: `/blog/${slug}`,
-    image: heroImage,
+    image: heroImage ?? undefined,
     datePublished: post.date,
+    dateModified: post.modified,
   });
 
   return (
@@ -122,7 +119,7 @@ if (isNewsroomPost) {
           <div className="post-hero__bg">
             <Image
               src={heroImage}
-              alt={stripHtml(post.title.rendered)}
+              alt={title}
               fill
               sizes="100vw"
               className="post-hero__img"
@@ -148,14 +145,11 @@ if (isNewsroomPost) {
 
           <div className="post-hero__meta">
             <time className="post-hero__date">{formattedDate}</time>
-            <span className="post-hero__dot">·</span>
+            <span className="post-hero__dot">.</span>
             <span className="post-hero__read">{readTime} min read</span>
           </div>
 
-          <h1
-            className="post-hero__title"
-            dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-          />
+          <h1 className="post-hero__title">{title}</h1>
         </div>
       </header>
 
@@ -163,56 +157,68 @@ if (isNewsroomPost) {
         <article className="post-article">
           <div
             className="post-content"
-            dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+            dangerouslySetInnerHTML={{ __html: contentHtml }}
           />
 
           <nav className="post-nav">
             {prevPost && (
-              <Link href={`/blog/${prevPost.slug}`} className="post-nav__item post-nav__item--prev">
+              <Link
+                href={`/blog/${prevPost.slug}`}
+                className="post-nav__item post-nav__item--prev"
+              >
                 <span className="post-nav__label">
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                    <path d="M13 8H3M7 12l-4-4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path
+                      d="M13 8H3M7 12l-4-4 4-4"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                   Previous
                 </span>
-                <span
-                  className="post-nav__title"
-                  dangerouslySetInnerHTML={{ __html: prevPost.title.rendered }}
-                />
+                <span className="post-nav__title">{getPostTitle(prevPost)}</span>
               </Link>
             )}
             {nextPost && (
-              <Link href={`/blog/${nextPost.slug}`} className="post-nav__item post-nav__item--next">
+              <Link
+                href={`/blog/${nextPost.slug}`}
+                className="post-nav__item post-nav__item--next"
+              >
                 <span className="post-nav__label">
                   Next
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path
+                      d="M3 8h10M9 4l4 4-4 4"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </span>
-                <span
-                  className="post-nav__title"
-                  dangerouslySetInnerHTML={{ __html: nextPost.title.rendered }}
-                />
+                <span className="post-nav__title">{getPostTitle(nextPost)}</span>
               </Link>
             )}
           </nav>
         </article>
       </div>
 
-{relatedPosts.length > 0 && (
+      {relatedPosts.length > 0 && (
         <section className="related-section">
           <div className="related-header">
             <span className="related-eyebrow">
               <span className="eyebrow-line" />
-      Continue Reading
+              Continue Reading
               <span className="eyebrow-line" />
             </span>
           </div>
 
           <div className="related-grid">
-            {relatedPosts.map((item, i) => {
+            {relatedPosts.map((item, index) => {
               const img = getPostImage(item);
-
+              const itemTitle = getPostTitle(item);
               const itemDate = new Date(item.date).toLocaleDateString("en-US", {
                 month: "short",
                 day: "numeric",
@@ -224,41 +230,44 @@ if (isNewsroomPost) {
                   key={item.id}
                   href={`/blog/${item.slug}`}
                   className="related-card"
-                  style={{ "--i": i }}
+                  style={{ "--i": index } as CSSProperties}
                 >
                   <div className="related-card__img-wrap">
                     {img ? (
-              <Image
+                      <Image
                         src={img}
-                        alt={stripHtml(item.title.rendered)}
-                fill
+                        alt={itemTitle}
+                        fill
                         sizes="(max-width: 768px) 100vw, 33vw"
                         className="related-card__img"
-              />
+                      />
                     ) : (
                       <div className="related-card__no-img" />
                     )}
                     <div className="related-card__shine" />
-            </div>
+                  </div>
                   <div className="related-card__body">
                     <time className="related-card__date">{itemDate}</time>
-              <h3
-                      className="related-card__title"
-                      dangerouslySetInnerHTML={{ __html: item.title.rendered }}
-              />
+                    <h3 className="related-card__title">{itemTitle}</h3>
                     <span className="related-card__cta">
                       Read Article
                       <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-                        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path
+                          d="M3 8h10M9 4l4 4-4 4"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
                       </svg>
                     </span>
-            </div>
-        </Link>
+                  </div>
+                </Link>
               );
             })}
-    </div>
-  </section>
-)}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

@@ -1,3 +1,4 @@
+@use "../../styles/abstracts/mixins" as *;
 .about-page {
   font-family: "outfitRegular", sans-serif;
  
@@ -362,7 +363,7 @@
  
   }
  
-@media (max-width: 1200px) {
+@include laptop {
 
   .about-page .container {
     width: 92%;
@@ -391,7 +392,7 @@
 }
 
  
-@media (max-width: 1024px) {
+@include tablet {
 
   .about-page .hero {
     height: 420px;
@@ -432,7 +433,7 @@
 
 
  
-@media (max-width: 768px) {
+@include mobile {
 
   .about-page .hero {
     height: 350px;
@@ -495,7 +496,7 @@
 
 
  
-@media (max-width: 480px) {
+@include mobile {
 
   .about-page .hero {
     height: 300px;

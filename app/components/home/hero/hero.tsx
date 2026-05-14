@@ -68,8 +68,8 @@ export default function HeroSection() {
 
   return (
     <>
-      <section className="relative flex min-h-screen flex-col overflow-hidden bg-[#f5fafd] pt-[62px]">
-        <div className="relative flex-1">
+      <section className="relative overflow-hidden bg-[#f5fafd] pt-[72px]">
+        <div className="relative">
           <HeroCarousel />
         </div>
 
@@ -82,12 +82,12 @@ export default function HeroSection() {
               {/* <span className="rounded-full border border-[#17ace4]/35 bg-white/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#1c4584] shadow-sm">
                 Athena at a glance
               </span> */}
-              <h2 className="max-w-3xl text-xl font-semibold leading-tight text-[#07152d] sm:text-2xl">
+              <h2 className="max-w-[21rem] text-balance break-words text-lg font-semibold leading-tight text-[#07152d] sm:max-w-3xl sm:text-2xl">
                 A Decade of Delivering Manufacturing Excellence
               </h2>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 text-[#10233f] md:grid-cols-4 md:gap-4">
+            <div className="grid grid-cols-1 gap-3 text-[#10233f] sm:grid-cols-2 md:grid-cols-4 md:gap-4">
               {statItems.map((item) =>
                 typeof item.value === "number" ? (
                   <StatCard

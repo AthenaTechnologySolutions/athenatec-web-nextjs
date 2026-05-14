@@ -1,3 +1,4 @@
+@use "../../styles/abstracts/mixins" as *;
  
 :root {
   --hero-cyan:  #17ace4;
@@ -30,7 +31,7 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  @media (max-width: 768px) { height: auto; min-height: 320px; padding: 100px 0 56px; }
+  @include mobile { height: auto; min-height: 320px; padding: 100px 0 56px; }
 
   &__bg {
     position: absolute; inset: 0; z-index: 0;
@@ -59,8 +60,8 @@
     position: relative; z-index: 3;
     padding: 0 60px; max-width: 540px;
     animation: copyIn .7s cubic-bezier(.22,1,.36,1) both;
-    @media (max-width: 900px) { padding: 0 36px; }
-    @media (max-width: 768px) { padding: 0 24px; max-width: 100%; }
+    @include tablet { padding: 0 36px; }
+    @include mobile { padding: 0 24px; max-width: 100%; }
   }
   &__title {
     font-family: var(--font-display);
@@ -94,9 +95,9 @@
 .speedo-wrap {
   position: absolute; right: 2%; top: 50%; transform: translateY(-50%);
   width: 560px; height: 470px; z-index: 2; pointer-events: none;
-  @media (max-width: 1100px) { width:400px; height:400px; right:-2%; }
-  @media (max-width: 900px)  { width:320px; height:320px; right:-8%; opacity:.75; }
-  @media (max-width: 768px)  { display:none; }
+  @include laptop { width:400px; height:400px; right:-2%; }
+  @include tablet  { width:320px; height:320px; right:-8%; opacity:.75; }
+  @include mobile  { display:none; }
 }
 .speedo-svg {
   width: 100%; height: 100%;
@@ -123,18 +124,18 @@
     display: grid; grid-template-columns: 400px 1fr;
     border-radius: var(--r-xl); overflow: hidden;
     box-shadow: 0 4px 6px rgba(15,31,61,.04), 0 20px 56px rgba(15,31,61,.1);
-    @media (max-width: 960px) { grid-template-columns: 1fr; }
+    @include tablet { grid-template-columns: 1fr; }
   }
   &__form-side {
     background: var(--card-bg); border: 1px solid var(--border); border-left: none;
     padding: 42px 42px 48px;
-    @media (max-width: 960px) { border-left: 1px solid var(--border); border-top: none; }
-    @media (max-width: 580px) { padding: 28px 18px 36px; }
+    @include tablet { border-left: 1px solid var(--border); border-top: none; }
+    @include mobile { padding: 28px 18px 36px; }
   }
 }
 
  .fip { position: relative; overflow: hidden; min-height: 520px; display: flex;
-  @media (max-width: 960px) { min-height: 280px; }
+  @include tablet { min-height: 280px; }
 }
 .warp-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
@@ -143,7 +144,7 @@
 
 .frow { display: grid; gap: 14px;
   &--2 { grid-template-columns: 1fr 1fr;
-    @media (max-width: 560px) { grid-template-columns: 1fr; }
+    @include mobile { grid-template-columns: 1fr; }
   }
 }
 
@@ -315,7 +316,7 @@
 }
 @keyframes successPop { from { transform:scale(.4); opacity:0; } to { transform:scale(1); opacity:1; } }
 
- @media (max-width: 480px) {
+ @include mobile {
   .hero__actions { flex-direction: column; }
   .hero-cta { width: 100%; justify-content: center; }
   .fs { padding: 52px 16px 72px; }

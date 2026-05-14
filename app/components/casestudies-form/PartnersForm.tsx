@@ -256,7 +256,7 @@ export default function PartnersForm({ study }: Props) {
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
-                  <h3>You're all set!</h3>
+                  <h3>You&apos;re all set!</h3>
                   <p>
                     Your download link has been sent to{" "}
                     <strong>{formData.email}</strong>. Check your inbox in the

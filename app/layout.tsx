@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import Header from "@/app/components/home/header";
 import Footer from "@/app/components/home/footer";
-import "./globals.css";
+import "../styles/globals.scss";
 import AIChatbot from "@/app/components/chatbot/chatbot";
 import ScrollToTop from "@/app/components/ScrollToTop";
 import SmoothScrollProvider from "@/app/components/providers/SmoothScrollProvider";
@@ -15,7 +15,6 @@ import {
   buildOrganizationSchema,
   buildWebSiteSchema,
 } from "@/lib/seo";
-import { homeFaqs } from "@/lib/home-faqs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,6 +51,16 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   manifest: "/manifest.json",
   applicationName: SITE_NAME,
+  icons: {
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    shortcut: "/favicon-32x32.png",
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   title: {
     default: "Best MES Solution Provider | Athenatec",
     template: "%s",
@@ -65,18 +74,6 @@ export default function RootLayout({
 }) {
   const websiteSchema = buildWebSiteSchema();
   const organizationSchema = buildOrganizationSchema();
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: homeFaqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.a,
-      },
-    })),
-  };
 
   return (
     <html
@@ -96,7 +93,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
       </head>
-      <body>
+      <body className="antialiased">
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-5L4F5JNK"
@@ -120,7 +117,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         <SmoothScrollProvider>
           <ScrollProgressBar />
-           
           <Header />
           {children}
           <AIChatbot />

@@ -90,8 +90,6 @@ function VideoPlayer() {
 
 // ── Main component ─────────────────────────────────────────────────────────────
 export default function WhoWeAre() {
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-
   return (
     <>
       {/* ═══════════════════════════════════════════════════
@@ -287,16 +285,7 @@ export default function WhoWeAre() {
         <div className="what-container">
           <div className="what-media">
             <div className="what-image-wrapper">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full h-full object-cover rounded-md"
-              >
-                <source src="/assets/videos/aps.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+              <VideoPlayer />
             </div>
           </div>
 

@@ -5,4 +5,5 @@ module.exports = {
   changefreq: "weekly",
   priority: 0.7,
   autoLastmod: true,
+  exclude: ["/hero-option-1", "/thank-you", "/partners/twinzo", "/icon.png"],
 };

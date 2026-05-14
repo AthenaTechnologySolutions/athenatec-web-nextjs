@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const SITE_URL = "https://athenatec.com";
+export const SITE_URL = "https://www.athenatec.com";
 export const SITE_NAME = "Athenatec";
 export const ORGANIZATION_NAME = "Athena Technology Solutions";
 export const LOGO_PATH = "/assets/images/logo.webp";
