@@ -144,36 +144,6 @@ $shadow: 0 24px 60px rgba(15, 47, 79, 0.1);
   width: fit-content;
 }
 
-.overlay-stats {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-
-  .stat {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-
-    strong {
-      font-size: 26px;
-      font-weight: 800;
-      color: $white;
-      line-height: 1;
-    }
-
-    span {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.75);
-    }
-  }
-
-  &-divider {
-    width: 1px;
-    height: 36px;
-    background: rgba(255, 255, 255, 0.3);
-  }
-}
-
 // ─── Form Panel ───────────────────────────────────────
 .download-content {
   padding: 48px 44px;
@@ -543,11 +513,4 @@ $shadow: 0 24px 60px rgba(15, 47, 79, 0.1);
     padding: 28px 20px;
   }
 
-  .overlay-stats {
-    gap: 16px;
-
-    .stat strong {
-      font-size: 20px;
-    }
-  }
 }

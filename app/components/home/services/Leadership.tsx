@@ -1,140 +1,105 @@
-"use client";
-
-import "./leadership.scss";
 import Image from "next/image";
-
-type Leader = {
-  name: string;
-  role: string;
-  image: string;
-  bio?: string;
-};
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import {
+  advisoryBoard,
+  leadershipTeam,
+  strategicCollaborators,
+} from "@/app/data/leadership";
+import LeadershipCard from "./LeadershipCard";
+import "./leadership.scss";
 
 export default function Leadership() {
-  const leadershipTeam: Leader[] = [
-    {
-      name: "Senthil Ranganathan",
-      role: "Founder & CEO",
-      image: "/assets/images/Senthil.webp",
-      bio: "Visionary leader with over two decades of experience driving digital manufacturing and MES transformations globally.",
-    },
-    {
-      name: "Peter Nakaso",
-      role: "VP of Sales",
-      image: "/assets/images/Peter-Picture.webp",
-      bio: "Sales strategist focused on enterprise manufacturing solutions, partnerships, and global revenue growth.",
-    },
-    {
-      name: "Sachi Javli",
-      role: "Managing Director & Global Delivery",
-      image: "/assets/images/Sachii.webp",
-      bio: "Leads global delivery and execution with a strong focus on operational excellence and customer success.",
-    },
-    {
-      name: "Chaitra Raviprakash",
-      role: "Director of Manufacturing Systems (Opcenter COE) & Site Head",
-      image: "/assets/images/Media.webp",
-      bio: "Experienced leader driving MES implementations and smart manufacturing initiatives.",
-    },
-  ];
-
-  const advisoryBoard: Leader[] = [
-    {
-      name: "Maryanne Steidinger",
-      role: "Advisor",
-      image:
-        "/assets/images/IMG_4310-2021_12_09-22_37_18-UTC-e1748495136653.webp",
-      bio: "Maryanne Steidinger is a member of Athena's Advisory Board. She concentrates on partner strategy, encompassing go to market, strategic alliances, marketing and positioning. Maryanne has a strong background in operational software (MES) and industrial controls, spending over 35 years in marketing and partner management with companies including Siemens, Rockwell and Schneider Electric.",
-    },
-    {
-      name: "ED Mathias",
-      role: "Advisor",
-      image: "/assets/images/ed-mathias.webp",
-      bio: "Ed Mathias is an Advisor at Athena Technology Solutions, bringing decades of leadership experience in manufacturing operations and systems integration. Since joining Athena in 2017, Ed has played a key role in guiding strategic initiatives and ensuring operational alignment with customer expectations. With a strong focus on lean principles and data-driven decision-making, Ed helps Athena maintain transparency and efficiency across its delivery processes.",
-    },
-  ];
-
   return (
-    <section className="leadership">
-      {/* ── Decorative Background Elements ── */}
-      <div className="glow-shape shape-1"></div>
-      <div className="glow-shape shape-2"></div>
-
-      {/* Center Logo Watermark */}
-      <div className="bg-logo-watermark">
-        <Image src="/assets/images/logo.webp" alt="Athena Watermark" fill className="watermark-img" unoptimized />
-      </div>
-
-      <div className="decorative-side left">
-        <span className="watermark">ATHENA</span>
-      </div>
-      <div className="decorative-side right">
-        <span className="watermark">LEADERS</span>
-      </div>
-
+    <section className="leadership" id="leadership">
       <div className="container">
-        {/* ── Leadership Team ── */}
-        <div className="header">
+        <div className="leadership-header">
           <h2>Meet Our Leadership Team</h2>
           <p>
-            Meet the visionaries behind our success. Our leadership team brings
-            a wealth of experience, expertise, and a commitment to driving
-            innovation and excellence in every aspect of our business.
+            Meet the visionaries behind our success. Our leadership team brings a wealth of
+            experience, expertise, and a commitment to driving innovation and excellence in every
+            aspect of our business.
           </p>
         </div>
 
-        <div className="leadership-grid">
-          {leadershipTeam.map((leader, i) => (
-            <div className="flip-card" key={i}>
-              <div className="flip-inner">
-                <div className="flip-front">
-                  <Image
-                    src={leader.image}
-                    alt={leader.name}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 580px"
-                    className="leader-img"
-                    quality={80}
-                  />
-                  <div className="overlay">
-                    <h4>{leader.name}</h4>
-                    <span>{leader.role}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="leadership-showcase">
+          <LeadershipCard leader={leadershipTeam[0]} featured />
+
+          <div className="leadership-grid">
+            {leadershipTeam.slice(1).map((leader) => (
+              <LeadershipCard leader={leader} key={leader.id} />
+            ))}
+          </div>
         </div>
 
-        {/* ── Advisory Board ── */}
-        <div className="header advisory-header">
-          <h2>Advisory Board</h2>
+        <div className="collaborators-header">
+          <h2>Strategic Collobarators</h2>
           <p>
-            Our advisory board provides strategic guidance, industry insight,
-            and long-term vision to support Athena's growth.
+            Partnering with world-class organizations to deliver manufacturing excellence and
+            accelerate digital transformation across industries.
           </p>
         </div>
 
         <div className="advisory-list">
-          {advisoryBoard.map((advisor, i) => (
-            <div className="advisory-card" key={i}>
-              <div className="advisory-image">
+          {strategicCollaborators.map((collab) => (
+            <Link
+              className="advisory-profile-card advisory-profile-card--collaborator"
+              href={`/leadership/${collab.slug}`}
+              key={collab.id}
+              aria-label={`Read more about ${collab.name}`}
+            >
+              <div className="advisory-profile-card__image">
                 <Image
-                  src={advisor.image}
-                  alt={advisor.name}
-                  width={280}
-                  height={280}
-                  sizes="(max-width: 900px) 100vw, 280px"
-                  className="advisor-img"
-                  quality={80}
+                  src={collab.profileImage}
+                  alt={collab.name}
+                  fill
+                  sizes="(max-width: 760px) 100vw, 340px"
+                  className="advisory-profile-card__img"
+                  quality={90}
                 />
               </div>
-              <div className="advisory-content">
-                <h3>{advisor.name}</h3>
-                <h4>{advisor.role}</h4>
-                <p>{advisor.bio}</p>
+
+              <div className="advisory-profile-card__content">
+                <h3>{collab.name}</h3>
+                <p className="advisory-profile-card__role">{collab.designation}</p>
+                <p className="advisory-profile-card__bio">{collab.shortBio}</p>
+                <span className="advisory-profile-card__cta">
+                  Read More
+                  <ArrowUpRight size={14} />
+                </span>
               </div>
-            </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className="advisory-header">
+          <h2>Advisory Board</h2>
+          <p>
+            Our advisory board provides strategic guidance, industry insight, and long-term vision
+            to support Athena&apos;s growth.
+          </p>
+        </div>
+
+        <div className="advisory-list">
+          {advisoryBoard.map((advisor) => (
+            <article className="advisory-profile-card" key={advisor.id}>
+              <div className="advisory-profile-card__image">
+                <Image
+                  src={advisor.profileImage}
+                  alt={advisor.name}
+                  fill
+                  sizes="(max-width: 760px) 100vw, 320px"
+                  className="advisory-profile-card__img"
+                  quality={88}
+                />
+              </div>
+
+              <div className="advisory-profile-card__content">
+                <h3>{advisor.name}</h3>
+                <p className="advisory-profile-card__role">{advisor.designation}</p>
+                <p className="advisory-profile-card__bio">{advisor.fullBio.join(" ")}</p>
+              </div>
+            </article>
           ))}
         </div>
       </div>

@@ -147,43 +147,6 @@
   }
 }
  
-.modules-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
- @media (min-width: 768px) {
-  .modules-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
- @media (min-width: 1200px) {
-  .modules-grid {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
-
- 
-.module-card {
-  background: #e6edf5;
-  padding: 20px 10px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  color: #1c4584;
-  transition: 0.3s ease;
-  cursor: pointer;
-
-  &:hover {
-    background: #1c4584;
-    color: #fff;
-    transform: translateY(-4px);
-  }
-}
-
- 
 .partner-profile-section {
   padding: clamp(60px, 8vw, 50px) 20px;
   background: #ffffff;
@@ -248,11 +211,6 @@
     margin-bottom: 20px;
   }
 
-  .card-icon {
-    flex-shrink: 0;
-  }
-
- 
   .capability-section {
     margin-top: 100px;
     display: grid;
