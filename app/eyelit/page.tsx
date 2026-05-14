@@ -53,18 +53,23 @@ export default function EyelitPage() {
                 At Athena, we specialize in delivering advanced manufacturing
                 solutions through our partnership with Eyelit Technologies. As a
                 certified implementation partner, we offer deep expertise in
-                Eyelit’s Manufacturing Execution System (MES) and Equipment
+                Eyelit&apos;s Manufacturing Execution System (MES) and Equipment
                 Connect, empowering your operations with real-time data
                 visibility, enhanced control, and seamless integration.
               </p>
 
               <div className="hero-actions">
-                <Link href="https://eyelit.ai/mesaps/" target="_blank">
-                  <button className="primary-btn">Learn More</button>
+                <Link
+                  href="https://eyelit.ai/mesaps/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="primary-btn"
+                >
+                  Learn More
                 </Link>
 
-                <Link href="/contact">
-                  <button className="secondary-btn">Contact Us</button>
+                <Link href="/contact" className="secondary-btn">
+                  Contact Us
                 </Link>
               </div>
             </div>
@@ -94,7 +99,7 @@ export default function EyelitPage() {
 
                 <li>
                   <strong>Seamless Integration:</strong> Our team ensures the
-                  seamless connection of Eyelit’s MES and Equipment Connect with
+                  seamless connection of Eyelit&apos;s MES and Equipment Connect with
                   your existing systems, driving a more efficient and automated
                   production environment.
                 </li>
@@ -125,7 +130,7 @@ export default function EyelitPage() {
           <div className="section-header">
             <h2>Eyelit MES: Streamline Your Manufacturing Operations</h2>
             <p>
-              Eyelit’s MES offers a comprehensive suite of applications designed
+              Eyelit&apos;s MES offers a comprehensive suite of applications designed
               to optimize manufacturing processes. Key features include:
             </p>
           </div>
@@ -133,10 +138,12 @@ export default function EyelitPage() {
           <div className="features-grid">
             <div className="feature-card">
               <div className="feature-head">
-                <img
+                <Image
                   src="/assets/icons/dashboard.svg"
-                  alt="Real Time"
-                  loading="lazy"
+                  alt=""
+                  width={44}
+                  height={44}
+                  aria-hidden="true"
                 />
                 <h3>Real-Time Data Visibility</h3>
               </div>
@@ -149,10 +156,12 @@ export default function EyelitPage() {
 
             <div className="feature-card">
               <div className="feature-head">
-                <img
+                <Image
                   src="/assets/icons/scheduling.svg"
-                  alt="Planning"
-                  loading="lazy"
+                  alt=""
+                  width={44}
+                  height={44}
+                  aria-hidden="true"
                 />
                 <h3>Advanced Planning and Scheduling (APS)</h3>
               </div>
@@ -165,10 +174,12 @@ export default function EyelitPage() {
             </div>
             <div className="feature-card">
               <div className="feature-head">
-                <img
+                <Image
                   src="/assets/icons/data-visualization.svg"
-                  alt="Planning"
-                  loading="lazy"
+                  alt=""
+                  width={44}
+                  height={44}
+                  aria-hidden="true"
                 />
                 <h3>Production Process Monitoring</h3>
               </div>
@@ -181,10 +192,12 @@ export default function EyelitPage() {
             </div>
             <div className="feature-card">
               <div className="feature-head">
-                <img
+                <Image
                   src="/assets/icons/regulatory-compliance.svg"
-                  alt="Planning"
-                  loading="lazy"
+                  alt=""
+                  width={44}
+                  height={44}
+                  aria-hidden="true"
                 />
                 <h3>Regulatory Compliance</h3>
               </div>
@@ -219,17 +232,19 @@ export default function EyelitPage() {
               </h2>
 
               <p className="section-desc">
-                Eyelit’s Equipment Connect integrates your shop floor equipment
+                Eyelit&apos;s Equipment Connect integrates your shop floor equipment
                 with your MES, providing valuable insights into equipment
                 performance, utilization, and downtime. Benefits include:
               </p>
 
               <div className="benefits-list">
                 <div className="benefit-item">
-                  <img
+                  <Image
                     src="/assets/icons/check-mark.svg"
-                    alt="icon"
-                    loading="lazy"
+                    alt=""
+                    width={24}
+                    height={24}
+                    aria-hidden="true"
                   />
                   <div>
                     <h4>Real-Time Monitoring and Diagnostics</h4>
@@ -242,10 +257,12 @@ export default function EyelitPage() {
                 </div>
 
                 <div className="benefit-item">
-                  <img
+                  <Image
                     src="/assets/icons/check-mark.svg"
-                    alt="icon"
-                    loading="lazy"
+                    alt=""
+                    width={24}
+                    height={24}
+                    aria-hidden="true"
                   />
                   <div>
                     <h4>Predictive Maintenance</h4>
@@ -258,10 +275,12 @@ export default function EyelitPage() {
                 </div>
 
                 <div className="benefit-item">
-                  <img
+                  <Image
                     src="/assets/icons/check-mark.svg"
-                    alt="icon"
-                    loading="lazy"
+                    alt=""
+                    width={24}
+                    height={24}
+                    aria-hidden="true"
                   />
                   <div>
                     <h4>Enhanced Operational Efficiency</h4>

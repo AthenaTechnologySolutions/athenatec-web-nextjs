@@ -1,3 +1,4 @@
+@use "../../../styles/abstracts/mixins" as *;
 // oracle-on-prem.scss
 
 .onprem-description {
@@ -32,7 +33,7 @@
     gap: 0;
     flex-wrap: wrap;
 
-    @media (max-width: 600px) {
+    @include mobile {
       gap: 32px;
     }
   }
@@ -66,7 +67,7 @@
     background: #dde4f0;
     flex-shrink: 0;
 
-    @media (max-width: 600px) {
+    @include mobile {
       display: none;
     }
   }
@@ -103,7 +104,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
 
-    @media (max-width: 768px) {
+    @include mobile {
       grid-template-columns: 1fr;
     }
   }

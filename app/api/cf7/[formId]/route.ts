@@ -1,6 +1,19 @@
+import {
+  enforceSameOrigin,
+  rateLimit,
+  sanitizeText,
+} from "@/lib/request-guard";
 import { getWpApiUrl } from "@/lib/wp";
 
 const CF7_SITE_URL = process.env.WP_SITE_URL || "https://cms.athenatec.com";
+
+const ALLOWED_CF7_FORM_IDS = new Set([
+  "227902",
+  "228423",
+  "230890",
+  "231155",
+  "231536",
+]);
 
 const RESERVED_CF7_FIELDS = new Set([
   "_wpcf7",
@@ -10,14 +23,35 @@ const RESERVED_CF7_FIELDS = new Set([
   "_wpcf7_container_post",
 ]);
 
+const ALLOWED_CF7_FIELDS = new Set([
+  "checkbox-649",
+  "company-name",
+  "country",
+  "industries",
+  "job",
+  "page-url",
+  "receive",
+  "support-needed",
+  "textarea-11",
+  "topic",
+  "your-email",
+  "your-name",
+]);
+
 export async function POST(
   req: Request,
   { params }: { params: Promise<{ formId: string }> },
 ) {
   try {
+    const originError = enforceSameOrigin(req);
+    if (originError) return originError;
+
+    const limitError = rateLimit(req, { keyPrefix: "cf7", limit: 8 });
+    if (limitError) return limitError;
+
     const { formId } = await params;
 
-    if (!/^\d+$/.test(formId)) {
+    if (!ALLOWED_CF7_FORM_IDS.has(formId)) {
       return Response.json(
         { status: "validation_failed", message: "Invalid form id." },
         { status: 400 },
@@ -34,8 +68,12 @@ export async function POST(
     fd.append("_wpcf7_container_post", "0");
 
     for (const [key, value] of incoming.entries()) {
-      if (!RESERVED_CF7_FIELDS.has(key)) {
-        fd.append(key, value);
+      if (
+        !RESERVED_CF7_FIELDS.has(key) &&
+        ALLOWED_CF7_FIELDS.has(key) &&
+        typeof value === "string"
+      ) {
+        fd.append(key, sanitizeText(value, key === "textarea-11" ? 2_000 : 500));
       }
     }
 

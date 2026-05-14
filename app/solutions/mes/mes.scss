@@ -1,3 +1,4 @@
+@use "../../../styles/abstracts/mixins" as *;
 .who-we-are {
   background: #f4fbff;
   padding: 3rem 0;
@@ -54,7 +55,7 @@
   }
 
  
-  @media (max-width: 1024px) {
+  @include tablet {
     .container {
       grid-template-columns: 1fr;
       gap: 3rem;
@@ -70,7 +71,7 @@
   }
 
  
-  @media (max-width: 768px) {
+  @include mobile {
     padding: 4rem 0;
 
     .container {
@@ -91,7 +92,7 @@
   }
 
  
-  @media (max-width: 480px) {
+  @include mobile {
     padding: 3rem 0;
 
     .section-eyebrow {

@@ -1,3 +1,4 @@
+@use "../../../../styles/abstracts/mixins" as *;
 .leadership {
   --leadership-blue: #1c4584;
   --leadership-blue-dark: #12274c;
@@ -562,7 +563,7 @@
   }
 }
 
-@media (max-width: 1100px) {
+@include laptop {
   .leadership-grid {
     gap: 16px;
   }
@@ -585,7 +586,7 @@
   }
 }
 
-@media (max-width: 760px) {
+@include mobile {
   .leadership {
     padding: 72px 0;
   }
@@ -633,7 +634,7 @@
   }
 }
 
-@media (max-width: 520px) {
+@include mobile {
   .leadership-header,
   .advisory-header,
   .collaborators-header {

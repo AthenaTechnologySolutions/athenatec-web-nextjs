@@ -1,3 +1,4 @@
+@use "./abstracts/mixins" as *;
 @import "tailwindcss";
 
 @font-face {
@@ -40,7 +41,6 @@
   font-display: swap;
 }
 
- 
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -55,11 +55,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "OutfitRegular", "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
 }
 
-/* ── Lenis smooth scroll ───────────────────────────────────────────────────── */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -81,16 +80,20 @@ html.lenis body {
   pointer-events: none;
 }
 
-/* ── Base styles ───────────────────────────────────────────────────────────── */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: "OutfitRegular", sans-serif;
-
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 .container {
@@ -99,12 +102,7 @@ body {
   padding-inline: 1.5rem;
 }
 
-/* ── Liquid background ─────────────────────────────────────────────────────── */
-
-/* ── GPU optimisation hints ────────────────────────────────────────────────── */
-
-/* ── Reduced motion — global safety net ────────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
+@include motion-reduce {
   *,
   *::before,
   *::after {
@@ -115,7 +113,6 @@ body {
   }
 }
 
-/* ── Selection colour ──────────────────────────────────────────────────────── */
 ::selection {
   background: rgba(23, 172, 228, 0.2);
   color: inherit;

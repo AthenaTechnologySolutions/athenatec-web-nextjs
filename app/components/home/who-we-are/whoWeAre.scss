@@ -1,3 +1,4 @@
+@use "../../../../styles/abstracts/mixins" as *;
 /* ═══════════════════════════════════════════════════════════════════════════
    WHO WE ARE — Premium Redesign
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -357,7 +358,7 @@
 
 
 
-@media (max-width: 1024px) {
+@include tablet {
   .wwa-grid {
     grid-template-columns: 1fr;
     gap: 3rem;
@@ -376,7 +377,7 @@
   }
 }
 
-@media (max-width: 900px) {
+@include tablet {
   .what-we-do .what-container {
     grid-template-columns: 1fr;
     gap: 3rem;
@@ -404,7 +405,7 @@
 
 }
 
-@media (max-width: 768px) {
+@include mobile {
   .wwa-section {
     padding: 4rem 0;
   }
@@ -422,7 +423,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@include mobile {
   .wwa-section {
     padding: 3rem 0;
   }
