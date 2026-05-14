@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: "https://athenatec.com",
+  siteUrl: "https://www.athenatec.com",
   generateRobotsTxt: false,
   sitemapSize: 7000,
   changefreq: "weekly",

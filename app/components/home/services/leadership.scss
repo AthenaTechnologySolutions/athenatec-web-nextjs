@@ -491,7 +491,7 @@
 
 .advisory-profile-card__img {
   object-fit: cover;
-  object-position: center center;
+  object-position: var(--leader-photo-position, center center);
 }
 
 .advisory-profile-card__content {
@@ -629,7 +629,7 @@
 
   .advisory-profile-card__image {
     min-height: 0;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1 / 1;
   }
 }
 
