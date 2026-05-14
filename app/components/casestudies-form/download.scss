@@ -1,3 +1,4 @@
+@use "sass:color";
 @import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Outfit:wght@300;400;500;600&display=swap");
 
 // ── Design Tokens ─────────────────────────────────────────────────────────────
@@ -151,7 +152,7 @@ $radius-xl: 28px;
 
   &:hover:not(:focus-within) {
     border-color: $border-hover;
-    background: darken($bg-input, 1%);
+    background: color.adjust($bg-input, $lightness: -1%);
   }
 
   &:focus-within {
@@ -317,7 +318,7 @@ $radius-xl: 28px;
 
   &:hover:not(&--open):not(&--error) {
     border-color: $border-hover;
-    background: darken($bg-input, 1%);
+    background: color.adjust($bg-input, $lightness: -1%);
   }
 
   &--open {
@@ -481,19 +482,6 @@ $radius-xl: 28px;
   line-height: 1.6;
   margin: 0 0 10px;
   font-weight: 400;
-}
-
-.df-consent-link {
-  color: $accent;
-  font-weight: 500;
-  text-decoration: none;
-  border-bottom: 1px solid rgba($accent, 0.3);
-  transition: color 0.15s ease, border-color 0.15s ease;
-
-  &:hover {
-    color: $brand;
-    border-bottom-color: rgba($brand, 0.4);
-  }
 }
 
 .df-consent-label {
@@ -708,7 +696,7 @@ $radius-xl: 28px;
   gap: 5px;
   background: rgba($success, 0.08);
   border: 1px solid rgba($success, 0.2);
-  color: darken($success, 5%);
+  color: color.adjust($success, $lightness: -5%);
   border-radius: 50px;
   padding: 4px 13px;
   font-size: 11px;

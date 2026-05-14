@@ -59,7 +59,29 @@
   --font-mono: var(--font-geist-mono);
 }
 
- 
+/* ── Lenis smooth scroll ───────────────────────────────────────────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ── Base styles ───────────────────────────────────────────────────────────── */
 body {
   background: var(--background);
   color: var(--foreground);
@@ -67,6 +89,8 @@ body {
 
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
@@ -75,24 +99,24 @@ body {
   padding-inline: 1.5rem;
 }
 
-.liquid-bg {
-  position: absolute;
-  inset: -20%;
-  background: linear-gradient(120deg, #1c4584, #17ace4, #5172b0);
-  background-size: 300% 300%;
-  animation: liquidMove 12s ease infinite;
-  filter: blur(80px);
-  z-index: 0;
+/* ── Liquid background ─────────────────────────────────────────────────────── */
+
+/* ── GPU optimisation hints ────────────────────────────────────────────────── */
+
+/* ── Reduced motion — global safety net ────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
-@keyframes liquidMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+/* ── Selection colour ──────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(23, 172, 228, 0.2);
+  color: inherit;
 }

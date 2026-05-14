@@ -82,19 +82,6 @@
       background: var(--c-navy);
       border-color: var(--c-navy);
       color: var(--c-white);
-
-      .live-dot {
-        background: #ff6b6b;
-      }
-    }
-
-    .live-dot {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--c-live);
-      animation: pulse 1.6s infinite;
     }
   }
 }
