@@ -70,7 +70,8 @@ const LOCATION_OPTIONS: SelectOption[] = [
   { value: "Bangalore", label: "Bangalore" },
   { value: "Chennai",   label: "Chennai" },
   { value: "Hyderabad", label: "Hyderabad" },
-  { value: "Pune",      label: "Pune" },
+  { value: "Trichy",    label: "Trichy" },
+  // { value: "Pune",      label: "Pune" },
   { value: "India",     label: "India" },
 ];
 

@@ -132,9 +132,12 @@ export default async function NewsRoom() {
                         {stripHtml(post.title.rendered)}
                       </h2>
 
-                      <p className="text-gray-600 text-sm mb-4">
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="block text-gray-600 text-sm mb-4 hover:text-[#1c4584]"
+                      >
                         {truncate(stripHtml(post.excerpt.rendered), 140)}
-                      </p>
+                      </Link>
 
                       <p className="text-xs text-gray-400 mb-4">
                         {new Date(post.date).toLocaleDateString("en-US")}
