@@ -20,7 +20,12 @@ export const jobs: Job[] = [
     type:         "Full Time",
     experience:   "8+ Years",
     noticePeriod: "Immediate Joiner – 15 Days",
-    locations:    ["Chennai", "Hyderabad", "Bangalore", "Pune"],
+    locations:    [
+      "Chennai",
+      "Hyderabad",
+      "Bangalore",
+      // "Pune",
+    ],
     wpJobId:      "226650",  
 
     overview:
@@ -73,7 +78,7 @@ export const jobs: Job[] = [
     experience: "1 to 3 Years",
     shift:      "9:30 AM IST to 6:30 PM IST",
     education:  "Computer Science Graduate / Degree / Engineering",
-    locations:  ["Chennai", "India"],
+    locations:  ["Chennai", "Trichy", "India"],
     wpJobId:    "226649",
 
     overview:

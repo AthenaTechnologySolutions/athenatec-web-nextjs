@@ -374,7 +374,7 @@
 }
 
 .why-us-faq {
-  background: linear-gradient(180deg, #f7faff, #ffffff);
+  // background: linear-gradient(180deg, #f7faff, #ffffff);
   padding: 3rem 0;
 
   .faq-title {
@@ -394,11 +394,11 @@
   }
 
    .faq-item {
-    background: #ffffff;
+    background: rgb(245, 246, 248);
     border-radius: 20px;
     padding: 1.5rem 2rem;
     break-inside: avoid;
-    box-shadow: 0 14px 30px rgba(28, 69, 132, 0.08);
+    // box-shadow: 0 14px 30px rgba(28, 69, 132, 0.08);
     transition: all 0.35s ease;
   }
 
@@ -493,6 +493,11 @@
   text-align: center;
   position: relative;
 
+
+  @include mobile {
+    margin: 20px;
+  }
+
   .testimonial-section::before,
   .testimonial-section::after {
     content: "";
@@ -546,9 +551,9 @@
   .testimonial-card {
     background: #ffffff;
     border-radius: 22px;
-    padding: 2.5rem;
+    padding: 1.5rem;
     height: 100%;
-
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
