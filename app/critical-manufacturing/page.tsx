@@ -4,7 +4,19 @@ import "./critical.scss";
 import CaseStudiesSection from "@/app/components/CaseStudiesSection";
 import GallerySection from "@/app/components/events/GallerySection";
 import CTASection from "@/app/components/CTASection";
-import { buildMetadata } from "@/lib/seo";
+// import FaqSection from "@/app/components/seo/FaqSection";
+import InternalLinkCluster, {
+  manufacturingSeoLinks,
+} from "@/app/components/seo/InternalLinkCluster";
+import StructuredData from "@/app/components/seo/StructuredData";
+import {
+  buildBreadcrumbSchema,
+  buildFaqSchema,
+  buildMetadata,
+  buildServiceSchema,
+  buildWebPageSchema,
+} from "@/lib/seo";
+import { criticalManufacturingFaqs, priorityServiceOffers } from "@/app/data/seoContent";
 
 export const metadata = buildMetadata({
   title: "Critical Manufacturing MES Partner | Athenatec",
@@ -12,6 +24,13 @@ export const metadata = buildMetadata({
     "Athenatec is a Premier Critical Manufacturing partner with a dedicated CoE. We implement CM MES for semiconductor and medical device industries.",
   path: "/critical-manufacturing",
   image: "/assets/images/CMC.webp",
+  keywords: [
+    "Critical Manufacturing MES implementation",
+    "CM MES implementation partner",
+    "Critical Manufacturing integration",
+    "semiconductor MES implementation",
+    "medical device MES implementation",
+  ],
 });
 const caseStudies = [
   {
@@ -101,38 +120,52 @@ const ListItem = ({ icon, text }: ListItemProps) => {
 };
 
 export default function CriticalManufacturingPage() {
+  const seoSchema = [
+    buildWebPageSchema({
+      name: "Critical Manufacturing MES Implementation",
+      description:
+        "Critical Manufacturing MES implementation, upgrades, customization, integration, and support for complex manufacturers.",
+      path: "/critical-manufacturing",
+      primaryImage: "/assets/images/CMC.webp",
+    }),
+    buildServiceSchema({
+      name: "Critical Manufacturing MES Implementation",
+      description:
+        "Athenatec implements, upgrades, customizes, integrates, and supports Critical Manufacturing MES with a dedicated Center of Excellence.",
+      path: "/critical-manufacturing",
+      serviceType: "Critical Manufacturing MES Implementation",
+      keywords: [
+        "Critical Manufacturing MES implementation",
+        "CM MES implementation",
+        "Critical Manufacturing integration",
+        "Critical Manufacturing upgrade",
+      ],
+      areaServed: ["United States", "North America", "APAC", "EMEA"],
+      offers: priorityServiceOffers,
+    }),
+    buildBreadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "MES Implementation Services", path: "/mes-implementation-services" },
+      { name: "Critical Manufacturing MES Implementation", path: "/critical-manufacturing" },
+    ]),
+    buildFaqSchema(criticalManufacturingFaqs, "/critical-manufacturing"),
+  ];
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            name: "Critical Manufacturing MES Implementation",
-            provider: {
-              "@type": "Organization",
-              name: "Athenatec",
-              url: "https://athenatec.com",
-            },
-            description:
-              "Critical Manufacturing MES implementation, upgrades, customization, and enterprise system integration.",
-            areaServed: "Worldwide",
-          }),
-        }}
-      />
+      <StructuredData data={seoSchema} id="critical-manufacturing-seo-schema" />
       <HeroSection
-        title="Critical Manufacturing"
-        description="Athena specializes in the implementation, upgrade, and customization of CM MES, along with seamless integrations with external systems such as PLM, ERP, LIMS and Camline."
+        title="Critical Manufacturing MES Implementation"
+        description="Implementation, upgrades, customization, and enterprise integrations for Critical Manufacturing MES across semiconductor, medical device, electronics, and industrial manufacturing."
         image="/assets/images/CMC.webp"
         align="center"
-        buttonText="Contact Us"
+        buttonText="Discuss a Critical Manufacturing MES project"
         buttonLink="/contact"
       />
 
       <section className="partner-section">
         <div className="container">
-          <h2 className="section-title">Premier Implementation Partner</h2>
+          <h2 className="section-title">Critical Manufacturing Premier Implementation Partner</h2>
 
           <div className="partner-badge">
             <Image
@@ -175,7 +208,7 @@ export default function CriticalManufacturingPage() {
       <section className="cmf-section">
         <div className="container cmf-grid">
           <div className="cmf-content">
-            <h2>CMF Overview</h2>
+            <h2>Critical Manufacturing MES Platform Overview</h2>
             <p>
               Critical Manufacturing is dedicated to empowering manufacturers of
               complex, high tech discrete products with a manufacturing
@@ -216,7 +249,7 @@ export default function CriticalManufacturingPage() {
       </section>
       <section className="templatization-section">
         <div className="container">
-           <h2 className="section-title">Athena Templatization Solution</h2>
+           <h2 className="section-title">Critical Manufacturing MES Templatization Solution</h2>
 
            <div className="templatization-diagram">
             <Image
@@ -228,7 +261,7 @@ export default function CriticalManufacturingPage() {
           </div>
 
            <h2 className="section-title benefits-title">
-            Templatization: Benefits
+            Critical Manufacturing MES Templatization Benefits
           </h2>
 
            <div className="benefits-diagram">
@@ -241,7 +274,7 @@ export default function CriticalManufacturingPage() {
           </div>
 
            <h2 className="section-title modules-title">
-            CM: MES Modules - One FAB solution
+            Critical Manufacturing MES Modules and OneFab Solution
           </h2>
 
           <p className="modules-subtitle">
@@ -261,7 +294,7 @@ export default function CriticalManufacturingPage() {
       </section>
       <section className="partner-profile-section">
         <div className="container">
-          <h2 className="section-title">Partner Profile</h2>
+          <h2 className="section-title">Critical Manufacturing Partner Profile</h2>
 
           <div className="profile-grid">
              <div className="profile-card">
@@ -415,7 +448,7 @@ export default function CriticalManufacturingPage() {
 
            <div className="capability-section">
             <div className="capability-content">
-              <h2>Our CM MES Capability</h2>
+              <h2>Critical Manufacturing MES Capability and Center of Excellence</h2>
               <p>
                 Athena is a premier services partner supporting various client
                 projects working closely with CM services group. We have
@@ -443,6 +476,16 @@ export default function CriticalManufacturingPage() {
       </section>
       <CaseStudiesSection title="Case Studies" data={caseStudies} bg="light" />
       <GallerySection title="Event Gallery" data={galleryItems} bg="light" />
+      {/* <FaqSection
+        title="Critical Manufacturing MES Implementation FAQs"
+        intro="Answers for manufacturers evaluating Critical Manufacturing MES deployment, customization, integration, and support."
+        faqs={criticalManufacturingFaqs}
+      /> */}
+      <InternalLinkCluster
+        links={manufacturingSeoLinks}
+        title="Connect Critical Manufacturing MES with the broader digital thread"
+        description="Use these related service pages and resources to plan ERP, PLM, Opcenter, accelerators, and case study research around your MES roadmap."
+      />
       <CTASection
         title={
           <>
@@ -451,8 +494,8 @@ export default function CriticalManufacturingPage() {
             Got an enquiry?
           </>
         }
-        description="At Athena, our team guides your Industry 4.0 journey with deep expertise in digital transformation and manufacturing solutions. "
-        buttonText="Contact Us"
+        description="Engage Athenatec for Critical Manufacturing MES implementation, integration, upgrade, customization, and production support."
+        buttonText="Request Critical Manufacturing MES consulting"
         buttonLink="/contact"
         note="We typically respond within 24 hours."
         backgroundImage="/assets/images/new-req.webp"

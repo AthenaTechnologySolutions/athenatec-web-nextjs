@@ -239,7 +239,7 @@ export default function CyberSecurityServices() {
             provider: {
               "@type": "Organization",
               name: "Athenatec",
-              url: "https://athenatec.com",
+              url: "https://www.athenatec.com/",
             },
             description:
               "Enterprise cyber security services including GRC, IT security, vCISO advisory, and compliance consulting.",

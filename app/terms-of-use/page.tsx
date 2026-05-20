@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./terms-of-use.scss";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Terms of Use | Athena Technology Solutions",
   description: "Terms of Use for Athena Technology Solutions. Please read these terms carefully before using our website or services.",
-};
+  path: "/terms-of-use",
+});
 
 export default function TermsOfUsePage() {
   return (

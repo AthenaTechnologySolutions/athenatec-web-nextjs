@@ -128,7 +128,7 @@ export default function WhoWeAre() {
             </p>
 
             <Link href="/about" className="wwa-btn">
-              <span>Explore Us</span>
+              <span>Meet our MES implementation experts</span>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>

@@ -3,14 +3,33 @@ import Image from "next/image";
 import "./plm.scss";
 import PracticeSection from "@/app/components/PracticeSection";
 import CTASection from "@/app/components/CTASection";
-import { buildMetadata } from "@/lib/seo";
+// import FaqSection from "@/app/components/seo/FaqSection";
+import InternalLinkCluster, {
+  manufacturingSeoLinks,
+} from "@/app/components/seo/InternalLinkCluster";
+import StructuredData from "@/app/components/seo/StructuredData";
+import {
+  buildBreadcrumbSchema,
+  buildFaqSchema,
+  buildMetadata,
+  buildServiceSchema,
+  buildWebPageSchema,
+} from "@/lib/seo";
+import { oracleAgilePlmFaqs } from "@/app/data/seoContent";
 
 export const metadata = buildMetadata({
-  title: "Oracle Agile PLM Implementation Services | Athenatec",
+  title: "Oracle Agile PLM Implementation Services",
   description:
-    "Athenatec implements Oracle Agile PLM with seamless ERP and MES integration. Manage product lifecycles with centralized change control and automation.",
+    "Implement Oracle Agile PLM with ERP and MES integrations, BOM governance, change control, migration, validation, and long-term support.",
   path: "/solutions/plm",
   image: "/assets/images/PLM.webp",
+  keywords: [
+    "Oracle Agile PLM implementation services",
+    "Agile PLM implementation",
+    "PLM MES integration",
+    "PLM ERP integration",
+    "manufacturing PLM consulting",
+  ],
 });
 const practiceData = [
   {
@@ -53,33 +72,58 @@ const practiceData = [
   },
 ];
 export default function PlmSolution() {
+  const seoSchema = [
+    buildWebPageSchema({
+      name: "Oracle Agile PLM Implementation Services",
+      description:
+        "Oracle Agile PLM implementation, migration, upgrades, and ERP/MES integration services for manufacturers.",
+      path: "/solutions/plm",
+      primaryImage: "/assets/images/PLM.webp",
+    }),
+    buildServiceSchema({
+      name: "Oracle Agile PLM Implementation Services",
+      description:
+        "Athenatec implements Oracle Agile PLM for product records, BOMs, change management, quality processes, ERP integration, MES integration, migrations, and support.",
+      path: "/solutions/plm",
+      serviceType: "Oracle Agile PLM Implementation",
+      keywords: [
+        "Oracle Agile PLM implementation services",
+        "Agile PLM implementation",
+        "PLM MES integration",
+        "PLM ERP integration",
+      ],
+      areaServed: ["United States", "North America", "APAC", "EMEA"],
+      offers: [
+        {
+          name: "Oracle Agile PLM implementation",
+          description:
+            "Configuration for product records, BOMs, engineering changes, supplier data, and quality processes.",
+        },
+        {
+          name: "PLM integrations",
+          description:
+            "Controlled PLM integrations with ERP, MES, quality, supplier, and analytics systems.",
+        },
+ 
+      ],
+    }),
+    buildBreadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "Solutions", path: "/solutions/mes" },
+      { name: "Oracle Agile PLM Implementation Services", path: "/solutions/plm" },
+    ]),
+    buildFaqSchema(oracleAgilePlmFaqs, "/solutions/plm"),
+  ];
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            name: "Agile PLM Implementation Services",
-            provider: {
-              "@type": "Organization",
-              name: "Athenatec",
-              url: "https://athenatec.com",
-            },
-            description:
-              "Oracle Agile PLM implementation, migration, upgrades, and ERP/MES system integration services.",
-            serviceType: "Product Lifecycle Management Implementation",
-            areaServed: "Worldwide",
-          }),
-        }}
-      />
+      <StructuredData data={seoSchema} id="oracle-agile-plm-seo-schema" />
       <HeroSection
-        title="PLM Solutions"
-        description="Leave us a little info, and we’ll be in touch."
+        title="Oracle Agile PLM Implementation Services"
+        description="Implement, migrate, upgrade, and integrate Oracle Agile PLM so product, BOM, change, ERP, and MES data stay controlled across the manufacturing lifecycle."
         image="/assets/images/PLM.webp"
         align="center"
-        buttonText="Contact Us"
+        buttonText="Discuss Oracle Agile PLM implementation"
         buttonLink="/contact"
       />
       <section className="plm-description">
@@ -101,12 +145,12 @@ export default function PlmSolution() {
       </section>
       <section className="plm-team">
         <div className="plm-team__container">
-          <h2 className="plm-team__title">Agile PLM Close Loop System</h2>
+          <h2 className="plm-team__title">Oracle Agile PLM Closed-Loop System</h2>
 
           <div className="plm-team__image">
          <Image
   src="/assets/images/05-6.webp"
-  alt="Athena Opcenter Team"
+  alt="Oracle Agile PLM closed-loop change management workflow"
   width={700}
   height={470}
   sizes="(max-width: 768px) 100vw, 700px"
@@ -117,8 +161,18 @@ export default function PlmSolution() {
         </div>
       </section>
       <PracticeSection
-        title="Professional Agile PLM Solutions"
+        title="Oracle Agile PLM Implementation and Support Services"
         cards={practiceData}
+      />
+      {/* <FaqSection
+        title="Oracle Agile PLM Implementation FAQs"
+        intro="Common questions about Agile PLM implementation, migration, change control, and ERP/MES integration."
+        faqs={oracleAgilePlmFaqs}
+      /> */}
+      <InternalLinkCluster
+        links={manufacturingSeoLinks}
+        title="Connect Oracle Agile PLM with MES and ERP"
+        description="Explore MES implementation, Siemens Opcenter, Critical Manufacturing, Oracle Cloud ERP, accelerators, and case studies that support the product-to-production digital thread."
       />
       <CTASection
         title={
@@ -127,8 +181,8 @@ export default function PlmSolution() {
             <br /> Got an enquiry?
           </>
         }
-        description="At Athena, our team guides your Industry 4.0 journey with deep expertise in digital transformation and manufacturing solutions. "
-        buttonText="Contact Us"
+        description="Engage Athenatec for Oracle Agile PLM implementation, migration, ERP integration, MES integration, and support."
+        buttonText="Request Oracle Agile PLM consulting"
         buttonLink="/contact"
         note="We typically respond within 24 hours."
         backgroundImage="/assets/images/new-req.webp"

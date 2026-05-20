@@ -361,7 +361,7 @@ export default function Services() {
         <div className="container why-us-grid">
           <div className="why-us-content">
             <span className="why-us-label">WHY US</span>
-            <h2>Expertise, Innovation, and Global Excellence</h2>
+            <h2>MES Implementation Expertise, Innovation, and Global Delivery</h2>
             <p>
               At Athena, we blend deep industry expertise with a commitment to
               excellence, offering a comprehensive range of services tailored to
@@ -371,7 +371,7 @@ export default function Services() {
               technology and manufacturing solutions.
             </p>
             <Link href="/about" className="why-us-btn">
-              See More
+              Review Athenatec manufacturing expertise
             </Link>
           </div>
         </div>
@@ -422,8 +422,8 @@ export default function Services() {
               out today. Our dedicated team is here to assist you!
             </p>
 
-            <Link href="contact" className="cta-button">
-              Contact Us
+            <Link href="/contact" className="cta-button">
+              Talk to an MES implementation consultant
             </Link>
 
             <span className="cta-subtext">

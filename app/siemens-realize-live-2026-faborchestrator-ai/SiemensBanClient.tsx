@@ -1,0 +1,811 @@
+"use client";
+
+import Image from "next/image";
+import {
+  AlertCircle,
+  BriefcaseBusiness,
+  Building2,
+  CalendarDays,
+  Check,
+  CheckCircle2,
+  ChevronDown,
+  Loader2,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Send,
+  Sparkles,
+  User,
+} from "lucide-react";
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+  type KeyboardEvent as ReactKeyboardEvent,
+  type ReactNode,
+} from "react";
+
+const CF7_FORM_ID = "232878";
+const CF7_URL = `/api/cf7/${CF7_FORM_ID}/`;
+
+const industryOptions = [
+  "Semiconductor",
+  "Medical Devices",
+  "Electronics",
+  "Batteries",
+  "Solar Panels",
+  "Discrete Manufacturing",
+  "Other",
+];
+
+const focusOptions = [
+  "Athena Opcenter Capabilities",
+  "Purpose-built Accelerators",
+  "FabOrchestrator.AI",
+  "Realize LIVE Booth Meeting",
+  "Knowledge Theatre Session",
+];
+
+type MeetingFormData = {
+  name: string;
+  email: string;
+  companyName: string;
+  jobTitle: string;
+  industry: string;
+  meetingFocus: string;
+  message: string;
+  receiveUpdates: boolean;
+  agreePolicy: boolean;
+};
+
+type MeetingErrors = Partial<Record<keyof MeetingFormData, string>>;
+
+type Cf7Response = {
+  status?: string;
+  message?: string;
+  invalid_fields?: Array<{
+    field?: string;
+    message?: string;
+  }>;
+};
+
+const cf7FieldMap: Record<string, keyof MeetingFormData> = {
+  consent: "agreePolicy",
+  "company-name": "companyName",
+  "full-name": "name",
+  industry: "industry",
+  "job-title": "jobTitle",
+  message: "message",
+  "meeting-focus": "meetingFocus",
+  "textarea-11": "message",
+  "work-email": "email",
+};
+
+const emptyForm: MeetingFormData = {
+  name: "",
+  email: "",
+  companyName: "",
+  jobTitle: "",
+  industry: "",
+  meetingFocus: "",
+  message: "",
+  receiveUpdates: false,
+  agreePolicy: false,
+};
+
+export default function SiemensBanClient() {
+  const formRef = useRef<HTMLElement | null>(null);
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  return (
+    <main className="siemens-ban-page">
+      <section className="siemens-ban-hero">
+        <Image
+          src="/assets/images/siemens-realize-live2026.webp"
+          alt="Athenatec Realize LIVE 2026 banner"
+          fill
+          priority
+          sizes="100vw"
+          className="siemens-ban-hero__image"
+        />
+        {/* <div className="siemens-ban-hero__overlay" /> */}
+        <div className="siemens-ban-hero__content">
+          <p className="siemens-ban-kicker">Siemens Realize LIVE 2026</p>
+          <h1>
+            We&apos;re heading to Realize LIVE 2026, and bringing
+            FabOrchestrator.AI to Detroit!
+          </h1>
+          <p>
+            Meet our leadership team at Booth P2 to learn more about
+            Athena&apos;s Siemens Opcenter capabilities, purpose built
+            accelerators, and FabOrchestrator.AI, our AI powered orchestration
+            platform designed for real manufacturing operations and connected
+            shop floor intelligence.
+          </p>
+
+          <div className="siemens-ban-hero__actions">
+            <button
+              type="button"
+              className="siemens-ban-button siemens-ban-button--primary"
+              onClick={scrollToForm}
+            >
+              Book a meeting
+            </button>
+          </div>
+
+          <div className="siemens-ban-hero__details" aria-label="Event details">
+            <span>
+              <CalendarDays size={18} />
+              June 1 - 4, 2026
+            </span>
+            <span>
+              <Building2 size={18} />
+              Booth P2
+            </span>
+            <span>
+              <MapPin size={18} />
+              Huntington Place, Detroit
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section className="siemens-ban-intro">
+        <div className="siemens-ban-container">
+          <h2>What we&apos;re bringing to Detroit:</h2>
+        </div>
+      </section>
+
+      <section className="siemens-ban-cards">
+        <div className="siemens-ban-container siemens-ban-cards__grid">
+          <FeatureCard
+            title="Athena Opcenter Capabilities:"
+            text="Purpose-built accelerators, templatized multi-site rollouts, and scalable MES outcomes for Semiconductor, Medical Devices and Electronics."
+          />
+          <FeatureCard
+            title="Industry expertise that runs deep:"
+            text="Process-to-module mapping, end-to-end support, and Opcenter MES proficiency that helps you implement faster."
+          />
+         
+        </div>
+     <div className="siemens-ban-highlights">
+  <div className="siemens-ban-highlight siemens-ban-container">
+    <CheckCircle2 size={18} />
+    <p>
+      At the Knowledge Theatre, our leadership team will present
+      use case based scenarios for Medical Devices and Semiconductor
+      Industries.
+    </p>
+  </div>
+
+  <div className="siemens-ban-highlight siemens-ban-container">
+    <CheckCircle2 size={18} />
+    <p>
+      We&apos;ll demonstrate proprietary Athena MES-ready accelerators
+      that mitigate manual redlining risks, reduce effort and ensure
+      data consistency across platforms.
+    </p>
+  </div>
+</div>
+      </section>
+
+      <section className="siemens-ban-fab">
+        <div className="siemens-ban-container">
+          <div className="siemens-ban-fab__copy">
+            <h2>We&apos;re introducing FabOrchestrator.AI</h2>
+            <p>
+              Join us at the event to get an early understanding of
+              FabOrchestrator.AI: our next generation Agentic AI offering that
+              extends deep value to MES solutions through its five integrated
+              capabilities built on an Agentic AI Foundry.
+            </p>
+            <button
+              type="button"
+              className="siemens-ban-button siemens-ban-button--primary"
+              onClick={scrollToForm}
+            >
+              Book a meeting
+            </button>
+            <p>
+              FabInsight<sup>&trade;</sup>, AI Support Engineer, Modeling Agent,
+              Back-end Agent and FIS (Factory Information system), work as one
+              unified platform to orchestrate workflows, operations, decisions,
+              integrations, and real-time factory information across the entire
+              manufacturing enterprise.
+            </p>
+            <p>
+              From modeling agents and programming agents to AI-supported shop
+              floor intelligence, FabOrchestrator.AI is designed for real
+              manufacturing operations.
+            </p>
+          </div>
+
+          <div className="siemens-ban-diagram">
+            <Image
+              src="/assets/images/siemens-ban.webp"
+              alt="FabOrchestrator.AI and Athena Opcenter capabilities diagram"
+              width={900}
+              height={900}
+              sizes="(max-width: 900px) 100vw, 760px"
+              className="siemens-ban-diagram__image"
+            />
+          </div>
+
+          <div className="siemens-ban-fab__closing">
+            <Sparkles size={22} />
+            <p>
+              For all this and so much more, watch this space for more
+              information on our drilled down, value led information and
+              take-aways from our Realize Live booth. We are ready to share our
+              insights and introduce you to our industry-leading Agentic AI
+              Foundry, FabOrchestrator.AI. See you there!
+            </p>
+            <button
+              type="button"
+              className="siemens-ban-button siemens-ban-button--primary"
+              onClick={scrollToForm}
+            >
+              Book a meeting
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="siemens-ban-form-section"
+        id="book-a-meeting"
+        ref={formRef}
+      >
+        <div className="siemens-ban-container">
+          <div className="siemens-ban-meeting-card">
+            <aside className="siemens-ban-meeting-card__event">
+              <span className="siemens-ban-meeting-card__kicker">
+                Siemens Realize LIVE 2026
+              </span>
+              <h2>Book a Meeting with Athena</h2>
+              <p>
+                Book a meeting with our team at Booth P2 during Siemens Realize
+                LIVE 2026 to discuss Opcenter MES capabilities, Athena
+                accelerators, and FabOrchestrator.AI for modern manufacturing
+                operations.
+              </p>
+
+              <dl className="siemens-ban-meeting-card__details">
+                <div>
+                  <CalendarDays size={19} />
+                  <dd>June 1-4, 2026</dd>
+                </div>
+                <div>
+                  <MapPin size={19} />
+                  <dd>Huntington Place, Detroit</dd>
+                </div>
+                <div>
+                  <Building2 size={19} />
+                  <dd>Booth No: P2</dd>
+                </div>
+              </dl>
+            </aside>
+
+            <div className="siemens-ban-meeting-card__form-panel">
+              <span className="siemens-ban-form__kicker">Book a Meeting</span>
+              <h2>Save your spot with Athena</h2>
+              <MeetingForm />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function FeatureCard({ title, text }: { title?: string; text: string }) {
+  return (
+    <article className="siemens-ban-card">
+      <div className="siemens-ban-card__icon">
+        <CheckCircle2 size={21} />
+      </div>
+      {title && <h3>{title}</h3>}
+      <p>{text}</p>
+    </article>
+  );
+}
+
+function MeetingForm() {
+  const [formData, setFormData] = useState<MeetingFormData>(emptyForm);
+  const [errors, setErrors] = useState<MeetingErrors>({});
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const validate = () => {
+    const nextErrors: MeetingErrors = {};
+
+    if (!formData.name.trim()) nextErrors.name = "Full name is required.";
+    if (!formData.email.trim()) {
+      nextErrors.email = "Work email is required.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      nextErrors.email = "Enter a valid email address.";
+    }
+    if (!formData.companyName.trim()) {
+      nextErrors.companyName = "Company name is required.";
+    }
+    if (!formData.jobTitle.trim()) {
+      nextErrors.jobTitle = "Job title is required.";
+    }
+    if (!formData.industry) nextErrors.industry = "Select your industry.";
+    if (!formData.meetingFocus) {
+      nextErrors.meetingFocus = "Select a meeting focus.";
+    }
+    if (!formData.agreePolicy) {
+      nextErrors.agreePolicy = "Please agree before submitting.";
+    }
+
+    setErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
+  };
+
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const target = event.target;
+    const { name, value, type } = target;
+    const nextValue =
+      type === "checkbox" ? (target as HTMLInputElement).checked : value;
+
+    setFormData((current) => ({ ...current, [name]: nextValue }));
+    setErrors((current) => ({ ...current, [name]: undefined }));
+  };
+
+  const handleSelectChange = (
+    name: "industry" | "meetingFocus",
+    value: string,
+  ) => {
+    setFormData((current) => ({ ...current, [name]: value }));
+    setErrors((current) => ({ ...current, [name]: undefined }));
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitError("");
+
+    if (!validate()) return;
+
+    setSubmitting(true);
+
+    try {
+      const messageLines = [
+        `Meeting focus: ${formData.meetingFocus}`,
+        formData.message.trim()
+          ? `Message: ${formData.message.trim()}`
+          : "Message: Not provided",
+      ];
+
+      const fd = new FormData();
+      fd.append("full-name", formData.name.trim());
+      fd.append("work-email", formData.email.trim().toLowerCase());
+      fd.append("company-name", formData.companyName.trim());
+      fd.append("job-title", formData.jobTitle.trim());
+      fd.append("industry", formData.industry);
+      fd.append("meeting-focus", formData.meetingFocus);
+      fd.append("message", messageLines.join("\n"));
+      fd.append("topic", "Siemens Realize LIVE 2026 Book a Meeting");
+      fd.append("page-url", window.location.href);
+      fd.append("consent", "1");
+
+      if (formData.receiveUpdates) {
+        fd.append(
+          "receive",
+          "I would like to receive relevant updates and resources from Athena Technology Solutions.",
+        );
+      }
+
+      const response = await fetch(CF7_URL, { method: "POST", body: fd });
+      const result = (await response.json()) as Cf7Response;
+
+      if (result.status !== "mail_sent") {
+        if (
+          result.status === "validation_failed" &&
+          Array.isArray(result.invalid_fields)
+        ) {
+          const nextErrors: MeetingErrors = {};
+
+          for (const invalidField of result.invalid_fields) {
+            const fieldName = invalidField.field
+              ? cf7FieldMap[invalidField.field]
+              : undefined;
+
+            if (fieldName) {
+              nextErrors[fieldName] =
+                invalidField.message || "Please check this field.";
+            }
+          }
+
+          setErrors(nextErrors);
+        }
+
+        throw new Error(result.message || "Meeting request could not be sent.");
+      }
+
+      setSubmitted(true);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Meeting request could not be sent. Please try again.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (submitted) {
+    return (
+      <div className="siemens-ban-form siemens-ban-form--success">
+        <CheckCircle2 size={46} />
+        <h3>Meeting request sent.</h3>
+        <p>
+          Thank you, <strong>{formData.name}</strong>. We&apos;ll follow up at{" "}
+          <strong>{formData.email}</strong> to coordinate the next step.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <form className="siemens-ban-form" onSubmit={handleSubmit} noValidate>
+      <div className="siemens-ban-form__row">
+        <FormField label="Full Name" error={errors.name} required>
+          <FormControl icon={<User size={17} />}>
+            <input
+              name="name"
+              type="text"
+              placeholder="Full name"
+              autoComplete="name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+          </FormControl>
+        </FormField>
+
+        <FormField label="Work Email" error={errors.email} required>
+          <FormControl icon={<Mail size={17} />}>
+            <input
+              name="email"
+              type="email"
+              placeholder="name@company.com"
+              autoComplete="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </FormControl>
+        </FormField>
+      </div>
+
+      <div className="siemens-ban-form__row">
+        <FormField label="Company" error={errors.companyName} required>
+          <FormControl icon={<Building2 size={17} />}>
+            <input
+              name="companyName"
+              type="text"
+              placeholder="Company name"
+              autoComplete="organization"
+              value={formData.companyName}
+              onChange={handleChange}
+            />
+          </FormControl>
+        </FormField>
+
+        <FormField label="Job Title" error={errors.jobTitle} required>
+          <FormControl icon={<BriefcaseBusiness size={17} />}>
+            <input
+              name="jobTitle"
+              type="text"
+              placeholder="Your role"
+              autoComplete="organization-title"
+              value={formData.jobTitle}
+              onChange={handleChange}
+            />
+          </FormControl>
+        </FormField>
+      </div>
+
+      <div className="siemens-ban-form__row">
+        <FormField label="Industry" error={errors.industry} required>
+          <FormControl icon={<Building2 size={17} />}>
+            <StyledSelect
+              name="industry"
+              label="Industry"
+              value={formData.industry}
+              placeholder="Select your industry"
+              options={industryOptions}
+              onChange={handleSelectChange}
+            />
+          </FormControl>
+        </FormField>
+
+        <FormField label="Meeting Focus" error={errors.meetingFocus} required>
+          <FormControl icon={<Sparkles size={17} />}>
+            <StyledSelect
+              name="meetingFocus"
+              label="Meeting Focus"
+              value={formData.meetingFocus}
+              placeholder="Select a focus"
+              options={focusOptions}
+              onChange={handleSelectChange}
+            />
+          </FormControl>
+        </FormField>
+      </div>
+
+      <FormField label="Message" error={errors.message}>
+        <FormControl icon={<MessageSquare size={17} />} multiline>
+          <textarea
+            name="message"
+            rows={4}
+            placeholder="Share what you would like to discuss."
+            value={formData.message}
+            onChange={handleChange}
+          />
+        </FormControl>
+      </FormField>
+
+      {/* <label className="siemens-ban-form__checkbox">
+        <input
+          name="receiveUpdates"
+          type="checkbox"
+          checked={formData.receiveUpdates}
+          onChange={handleChange}
+        />
+        <span />
+        <em>
+          I&apos;d like to receive relevant updates and resources from Athena
+          Technology Solutions.
+        </em>
+      </label> */}
+
+      <label
+        className={`siemens-ban-form__checkbox ${
+          errors.agreePolicy ? "siemens-ban-form__checkbox--error" : ""
+        }`}
+      >
+        <input
+          name="agreePolicy"
+          type="checkbox"
+          checked={formData.agreePolicy}
+          onChange={handleChange}
+        />
+        <span />
+        <em>
+          I agree to receive communications about this event and related
+          content.
+        </em>
+      </label>
+      {errors.agreePolicy && (
+        <p className="siemens-ban-form__error">
+          <AlertCircle size={14} />
+          {errors.agreePolicy}
+        </p>
+      )}
+
+      {submitError && (
+        <p className="siemens-ban-form__submit-error">
+          <AlertCircle size={15} />
+          {submitError}
+        </p>
+      )}
+
+      <button
+        type="submit"
+        className="siemens-ban-form__submit"
+        disabled={submitting}
+      >
+        {submitting ? (
+          <>
+            <Loader2 size={18} />
+            Submitting
+          </>
+        ) : (
+          <>
+            <Send size={18} />
+            Submit Book Meeting Request
+          </>
+        )}
+      </button>
+    </form>
+  );
+}
+
+function StyledSelect({
+  name,
+  label,
+  value,
+  placeholder,
+  options,
+  onChange,
+}: {
+  name: "industry" | "meetingFocus";
+  label: string;
+  value: string;
+  placeholder: string;
+  options: string[];
+  onChange: (name: "industry" | "meetingFocus", value: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const selectRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const listboxId = useId();
+  const allOptions = [placeholder, ...options];
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (
+        selectRef.current &&
+        !selectRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        triggerRef.current?.focus();
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open]);
+
+  const chooseOption = (option: string) => {
+    onChange(name, option === placeholder ? "" : option);
+    setOpen(false);
+    triggerRef.current?.focus();
+  };
+
+  const handleTriggerKeyDown = (
+    event: ReactKeyboardEvent<HTMLButtonElement>,
+  ) => {
+    if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+
+    event.preventDefault();
+
+    const currentLabel = value || placeholder;
+    const currentIndex = allOptions.indexOf(currentLabel);
+    const nextIndex =
+      event.key === "ArrowDown"
+        ? Math.min(currentIndex + 1, allOptions.length - 1)
+        : Math.max(currentIndex - 1, 0);
+
+    if (!open) {
+      setOpen(true);
+      return;
+    }
+
+    chooseOption(allOptions[nextIndex]);
+  };
+
+  return (
+    <div
+      ref={selectRef}
+      className={`siemens-ban-form__select ${
+        open ? "siemens-ban-form__select--open" : ""
+      }`}
+    >
+      <input type="hidden" name={name} value={value} />
+      <button
+        ref={triggerRef}
+        type="button"
+        className="siemens-ban-form__select-trigger"
+        aria-label={label}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-controls={open ? listboxId : undefined}
+        onClick={() => setOpen((current) => !current)}
+        onKeyDown={handleTriggerKeyDown}
+      >
+        <span
+          className={
+            value
+              ? "siemens-ban-form__select-value"
+              : "siemens-ban-form__select-placeholder"
+          }
+        >
+          {value || placeholder}
+        </span>
+        <ChevronDown size={17} aria-hidden="true" />
+      </button>
+
+      {open && (
+        <div
+          id={listboxId}
+          className="siemens-ban-form__select-menu"
+          role="listbox"
+          aria-label={label}
+        >
+          {allOptions.map((option) => {
+            const selected = (value || placeholder) === option;
+
+            return (
+              <button
+                key={option}
+                type="button"
+                role="option"
+                aria-selected={selected}
+                className={`siemens-ban-form__select-option ${
+                  selected ? "siemens-ban-form__select-option--selected" : ""
+                }`}
+                onClick={() => chooseOption(option)}
+              >
+                <span>{option}</span>
+                {selected && <Check size={16} aria-hidden="true" />}
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function FormField({
+  label,
+  error,
+  required = false,
+  children,
+}: {
+  label: string;
+  error?: string;
+  required?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <label className="siemens-ban-form__field">
+      <span>
+        {label}
+        {required && <strong>*</strong>}
+      </span>
+      {children}
+      {error && (
+        <p className="siemens-ban-form__error">
+          <AlertCircle size={14} />
+          {error}
+        </p>
+      )}
+    </label>
+  );
+}
+
+function FormControl({
+  icon,
+  multiline = false,
+  children,
+}: {
+  icon: ReactNode;
+  multiline?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <div
+      className={`siemens-ban-form__control ${
+        multiline ? "siemens-ban-form__control--multiline" : ""
+      }`}
+    >
+      {icon}
+      {children}
+    </div>
+  );
+}

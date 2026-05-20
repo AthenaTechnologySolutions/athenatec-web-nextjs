@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import HeroSection from "@/app/components/HeroSection";
 import type { Metadata } from "next";
-import { LOGO_PATH, absoluteUrl, buildMetadata, stripHtml, truncate } from "@/lib/seo";
+import { LOGO_PATH, absoluteUrl, buildMetadata, canonicalUrl, stripHtml, truncate } from "@/lib/seo";
 import { getAllPosts, getPostImage, type WPPost } from "@/lib/wordpress";
 
 export const revalidate = 300;
@@ -54,7 +54,7 @@ export default async function NewsRoom() {
     name: "Newsroom",
     description:
       "Latest company news, partnerships and digital manufacturing updates from Athenatec.",
-    url: "https://athenatec.com/newsroom",
+    url: canonicalUrl("/newsroom"),
     publisher: {
       "@type": "Organization",
       name: "Athenatec",
@@ -68,8 +68,8 @@ export default async function NewsRoom() {
       itemListElement: posts.map((post, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        url: `https://athenatec.com/blog/${post.slug}`,
         name: stripHtml(post.title.rendered),
+        url: canonicalUrl(`/blog/${post.slug}`),
       })),
     },
   };
@@ -87,7 +87,7 @@ export default async function NewsRoom() {
         description="Latest announcements, partnerships and digital manufacturing updates from Athenatec"
         image={NEWSROOM_HERO_IMAGE}
         align="center"
-        buttonText="Contact Us"
+        buttonText="Discuss a manufacturing technology announcement"
         buttonLink="/contact"
       />
       <section className="py-20">

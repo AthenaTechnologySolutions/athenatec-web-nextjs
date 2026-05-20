@@ -1,10 +1,13 @@
 import { getPost, getAllPosts, getPostImage } from "@/lib/wordpress";
 import {
   buildArticleSchema,
+  buildBreadcrumbSchema,
+  buildFaqSchema,
   buildMetadata,
   stripHtml,
   truncate,
 } from "@/lib/seo";
+import StructuredData from "@/app/components/seo/StructuredData";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -19,6 +22,73 @@ function getPostDescription(post) {
   const excerpt = stripHtml(post.excerpt?.rendered || "");
   const content = stripHtml(post.content?.rendered || "");
   return truncate(excerpt || content, 160);
+}
+
+function getPostTitle(post) {
+  return stripHtml(post.title.rendered);
+}
+
+function slugifyHeading(input) {
+  return stripHtml(input)
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .slice(0, 80);
+}
+
+function getTableOfContents(html) {
+  const headings = [];
+  const seen = new Map();
+  const headingPattern = /<h([2-3])[^>]*>(.*?)<\/h\1>/gi;
+  let match;
+
+  while ((match = headingPattern.exec(html)) !== null) {
+    const text = stripHtml(match[2]);
+    if (!text) continue;
+
+    const baseId = slugifyHeading(text) || `section-${headings.length + 1}`;
+    const count = seen.get(baseId) ?? 0;
+    seen.set(baseId, count + 1);
+    headings.push({
+      id: count === 0 ? baseId : `${baseId}-${count + 1}`,
+      text,
+      level: Number(match[1]),
+    });
+  }
+
+  return headings.slice(0, 8);
+}
+
+function addHeadingIds(html, headings) {
+  let index = 0;
+
+  return html.replace(/<h([2-3])([^>]*)>(.*?)<\/h\1>/gi, (full, level, attrs, body) => {
+    const heading = headings[index];
+    index += 1;
+
+    if (!heading || /\sid=/.test(attrs)) return full;
+    return `<h${level}${attrs} id="${heading.id}">${body}</h${level}>`;
+  });
+}
+
+function buildBlogFaqs(title) {
+  return [
+    {
+      question: `How does this article relate to MES implementation?`,
+      answer: `${title} is part of Athenatec's manufacturing technology guidance for teams evaluating MES implementation, Industry 4.0, enterprise integrations, and operational improvement.`,
+    },
+    {
+      question: "Can Athenatec help apply these ideas in a real manufacturing environment?",
+      answer:
+        "Yes. Athenatec provides MES consulting services, Siemens Opcenter implementation, Critical Manufacturing MES implementation, Oracle Cloud ERP, Oracle Agile PLM, integration, testing, and support services.",
+    },
+    {
+      question: "Which teams should read this manufacturing technology article?",
+      answer:
+        "Manufacturing IT, operations, quality, engineering, supply chain, and executive teams can use this guidance when planning digital manufacturing, MES, ERP, PLM, AI, or smart factory initiatives.",
+    },
+  ];
 }
 
 export async function generateStaticParams() {
@@ -62,13 +132,15 @@ export default async function PostPage({ params }) {
   if (!post) notFound();
 
   const allPosts = await getAllPosts();
+  const title = getPostTitle(post);
+  const contentHtml = post.content?.rendered || "";
   const currentIndex = allPosts.findIndex((p) => p.slug === slug);
   const nextPost = allPosts[currentIndex - 1];
   const prevPost = allPosts[currentIndex + 1];
 
-const isNewsroomPost = NEWSROOM_SLUGS.has(post.slug);
+  const isNewsroomPost = NEWSROOM_SLUGS.has(post.slug);
 
-let relatedPosts = [];
+  let relatedPosts = [];
 
 if (isNewsroomPost) {
   // 👉 ONLY those 3 posts
@@ -96,9 +168,11 @@ if (isNewsroomPost) {
   });
 
   const readTime = Math.ceil(
-    (post.content?.rendered || "").replace(/<[^>]+>/g, "").split(" ").length /
-      200
+    contentHtml.replace(/<[^>]+>/g, "").split(" ").length / 200,
   );
+  const tocItems = getTableOfContents(contentHtml);
+  const contentWithHeadingIds = addHeadingIds(contentHtml, tocItems);
+  const articleFaqs = buildBlogFaqs(title);
 
   const articleSchema = buildArticleSchema({
     headline: stripHtml(post.title.rendered),
@@ -107,13 +181,19 @@ if (isNewsroomPost) {
     image: heroImage,
     datePublished: post.date,
   });
+  const seoSchema = [
+    articleSchema,
+    buildBreadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "MES Implementation Blog", path: "/blog" },
+      { name: title, path: `/blog/${slug}` },
+    ]),
+    buildFaqSchema(articleFaqs, `/blog/${slug}`),
+  ];
 
   return (
     <div className="post-wrapper">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
+      <StructuredData data={seoSchema} id="blog-post-seo-schema" />
       <header className="post-hero">
         {heroImage && (
           <div className="post-hero__bg">
@@ -158,10 +238,59 @@ if (isNewsroomPost) {
 
       <div className="post-layout">
         <article className="post-article">
+          <nav className="post-breadcrumbs" aria-label="Breadcrumb">
+            <Link href="/">Home</Link>
+            <span>/</span>
+            <Link href="/blog">MES Implementation Blog</Link>
+            <span>/</span>
+            <span>{title}</span>
+          </nav>
+
+          {/* <section className="post-author" aria-label="Article author">
+            <div>
+              <p className="post-author__label">Written by</p>
+              <h2>Athenatec Manufacturing Technology Experts</h2>
+              <p>
+                MES, PLM, ERP, integration, and smart manufacturing specialists
+                supporting Siemens Opcenter, Critical Manufacturing, Oracle
+                Cloud ERP, and Oracle Agile PLM programs.
+              </p>
+            </div>
+            <Link href="/about" className="post-author__link">
+              Meet Athenatec&apos;s manufacturing experts
+            </Link>
+          </section> */}
+
+          {tocItems.length > 0 && (
+            <nav className="post-toc" aria-label="Table of contents">
+              <h2>Table of Contents:</h2>
+              <ol>
+                {tocItems.map((item) => (
+                  <li
+                    className={item.level === 3 ? "post-toc__item--nested" : ""}
+                    key={item.id}
+                  >
+                    <a href={`#${item.id}`}>{item.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          )}
+
           <div
             className="post-content"
-            dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+            dangerouslySetInnerHTML={{ __html: contentWithHeadingIds }}
           />
+
+          <section className="post-faq" aria-labelledby="post-faq-title">
+            <h2 id="post-faq-title">Article FAQs</h2>
+            {articleFaqs.map((faq) => (
+              <details key={faq.question}>
+                <summary>{faq.question}</summary>
+                <p>{faq.answer}</p>
+              </details>
+            ))}
+          </section>
 
           <nav className="post-nav">
             {prevPost && (
@@ -244,7 +373,7 @@ if (isNewsroomPost) {
                       dangerouslySetInnerHTML={{ __html: item.title.rendered }}
               />
                     <span className="related-card__cta">
-                      Read Article
+                      Read related article
                       <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
                         <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>

@@ -7,7 +7,19 @@ import CaseStudiesSection from "@/app/components/CaseStudiesSection";
 import GallerySection from "@/app/components/events/GallerySection";
 import PracticeSection from "@/app/components/PracticeSection";
 import Link from "next/link";
-import { buildMetadata } from "@/lib/seo";
+// import FaqSection from "@/app/components/seo/FaqSection";
+import InternalLinkCluster, {
+  manufacturingSeoLinks,
+} from "@/app/components/seo/InternalLinkCluster";
+import StructuredData from "@/app/components/seo/StructuredData";
+import {
+  buildBreadcrumbSchema,
+  buildFaqSchema,
+  buildMetadata,
+  buildServiceSchema,
+  buildWebPageSchema,
+} from "@/lib/seo";
+import { priorityServiceOffers, siemensOpcenterFaqs } from "@/app/data/seoContent";
 
 export const metadata = buildMetadata({
   title: "Siemens Opcenter MES Implementation Partner | Athenatec",
@@ -15,6 +27,13 @@ export const metadata = buildMetadata({
     "Athenatec, a Siemens Alliance Partner, implements and upgrades Opcenter MES for semiconductor, medical device, and electronics manufacturers worldwide.",
   path: "/siemens-opcenter-mes",
   image: "/assets/images/siemens.webp",
+  keywords: [
+    "Siemens Opcenter MES implementation services",
+    "Opcenter MES partner",
+    "Camstar upgrade services",
+    "semiconductor MES implementation",
+    "medical device MES implementation",
+  ],
 });
 
 const practiceData = [
@@ -282,32 +301,47 @@ const galleryItems = [
   },
 ];
 export default function SiemensOpcenter() {
+  const seoSchema = [
+    buildWebPageSchema({
+      name: "Siemens Opcenter MES Implementation Services",
+      description:
+        "Siemens Opcenter MES implementation, upgrades, integration, testing, and support for complex manufacturers.",
+      path: "/siemens-opcenter-mes",
+      primaryImage: "/assets/images/siemens.webp",
+    }),
+    buildServiceSchema({
+      name: "Siemens Opcenter MES Implementation Services",
+      description:
+        "Athenatec implements, upgrades, integrates, validates, and supports Siemens Opcenter MES for semiconductor, electronics, medical device, and discrete manufacturers.",
+      path: "/siemens-opcenter-mes",
+      serviceType: "Siemens Opcenter MES Implementation",
+      keywords: [
+        "Siemens Opcenter MES implementation services",
+        "Camstar implementation partner",
+        "Opcenter MES upgrade",
+        "semiconductor MES implementation",
+        "medical device MES implementation",
+      ],
+      areaServed: ["United States", "North America", "APAC", "EMEA"],
+      offers: priorityServiceOffers,
+    }),
+    buildBreadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "MES Implementation Services", path: "/mes-implementation-services" },
+      { name: "Siemens Opcenter MES Implementation Services", path: "/siemens-opcenter-mes" },
+    ]),
+    buildFaqSchema(siemensOpcenterFaqs, "/siemens-opcenter-mes"),
+  ];
+
   return (
     <main>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            name: "Siemens Opcenter MES Implementation",
-            provider: {
-              "@type": "Organization",
-              name: "Athenatec",
-              url: "https://athenatec.com",
-            },
-            areaServed: "Worldwide",
-            description:
-              "Expert Siemens Opcenter MES implementation, upgrades, and Smart Factory integration for semiconductor, electronics, and medical device manufacturing.",
-          }),
-        }}
-      />
+      <StructuredData data={seoSchema} id="siemens-opcenter-seo-schema" />
 
       <HeroSection
-        title="Siemens Opcenter MES"
-        description="Experienced in implementing and upgrading Opcenter MES across versions."
+        title="Siemens Opcenter MES Implementation Services"
+        description="Implementation, upgrades, integrations, testing, training, and hypercare for Siemens Opcenter MES in complex manufacturing environments."
         image="/assets/images/siemens.webp"
-        buttonText="Contact Us"
+        buttonText="Discuss a Siemens Opcenter MES project"
         buttonLink="/contact"
       />
 
@@ -359,7 +393,7 @@ export default function SiemensOpcenter() {
                     href={`/siemens-opcenter-mes/${service.slug}`}
                     className="learn-more"
                   >
-                    Learn More →
+                    Explore {service.title} implementation
                   </Link>
                 </div>
               </div>
@@ -370,7 +404,7 @@ export default function SiemensOpcenter() {
       <section className="soc-expertise">
         <div className="soc-expertise__container">
           <div className="soc-expertise__content">
-            <h2>Athena Opcenter Siemens Expertise</h2>
+            <h2>Siemens Opcenter MES Implementation Expertise</h2>
 
             <p>
               Since 2011, Athena’s expertise in Camstar/Opcenter has expanded
@@ -402,7 +436,7 @@ export default function SiemensOpcenter() {
       <section className="soc-team">
         <div className="soc-team__container">
           <h2 className="soc-team__title">
-            Athena Opcenter Siemens Expertise Team
+            Siemens Opcenter MES Delivery Team and Center of Excellence
           </h2>
 
           <div className="soc-team__image">
@@ -422,7 +456,7 @@ export default function SiemensOpcenter() {
       <section className="soc-factory">
         <div className="soc-factory__container">
           <h2 className="soc-factory__title">
-            Factory System Overview and Integration
+            Siemens Opcenter Factory System Integration
           </h2>
 
           <div className="soc-factory__grid">
@@ -538,7 +572,7 @@ export default function SiemensOpcenter() {
       <section className="clients-section">
         <div className="container">
           <div className="clients-header">
-            <h2 className="clients-title">Our Customer</h2>
+            <h2 className="clients-title">Siemens Opcenter MES Customer Proof</h2>
           </div>
           <div className="logos-grid">
             {logos.map((logo, index) => (
@@ -560,7 +594,7 @@ export default function SiemensOpcenter() {
       <section className="siemens-testimonial-section">
         <div className="container">
           <ScrollReveal>
-            <h2 className="testimonial-title">Testimonial</h2>
+            <h2 className="testimonial-title">Manufacturing Client Testimonials</h2>
           </ScrollReveal>
 
           <div className="testimonial-grid">
@@ -603,6 +637,16 @@ export default function SiemensOpcenter() {
 
       <CaseStudiesSection title="Case Studies" data={caseStudies} bg="light" />
       <GallerySection title="Event Gallery" data={galleryItems} bg="light" />
+      {/* <FaqSection
+        title="Siemens Opcenter MES Implementation FAQs"
+        intro="Common questions from manufacturers evaluating Opcenter implementation, upgrades, integrations, and production support."
+        faqs={siemensOpcenterFaqs}
+      /> */}
+      <InternalLinkCluster
+        links={manufacturingSeoLinks}
+        title="Plan the connected factory around Siemens Opcenter"
+        description="Compare related MES, ERP, PLM, accelerators, case studies, and Industry 4.0 resources that support a Siemens Opcenter roadmap."
+      />
       <CTASection
         title={
           <>
@@ -610,8 +654,8 @@ export default function SiemensOpcenter() {
             Got an enquiry?
           </>
         }
-        description="At Athena, our team guides your Industry 4.0 journey with deep expertise in digital transformation and manufacturing solutions. "
-        buttonText="Contact Us"
+        description="Talk with Athenatec about Siemens Opcenter MES implementation, upgrades, enterprise integrations, and production support."
+        buttonText="Request Siemens Opcenter MES consulting"
         buttonLink="/contact"
         note="We typically respond within 24 hours."
         backgroundImage="/assets/images/new-req.webp"

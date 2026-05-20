@@ -4,7 +4,15 @@ import Image from "next/image";
 import "./blog.scss";
 import HeroSection from "@/app/components/HeroSection";
 import type { Metadata } from "next";
-import { buildMetadata, stripHtml, truncate } from "@/lib/seo";
+import type { CSSProperties } from "react";
+import StructuredData from "@/app/components/seo/StructuredData";
+import {
+  buildBreadcrumbSchema,
+  buildItemListSchema,
+  buildMetadata,
+  stripHtml,
+  truncate,
+} from "@/lib/seo";
 
 function formatDate(date: string) {
   return new Date(date).toLocaleDateString("en-US", {
@@ -45,15 +53,30 @@ export default async function BlogPage() {
 
   const getExcerpt = (post: WPPost, length = 160) =>
     truncate(stripHtml(post.excerpt?.rendered ?? ""), length);
+  const blogSchema = [
+    buildBreadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "MES Implementation Blog", path: "/blog" },
+    ]),
+    buildItemListSchema({
+      name: "MES implementation and Industry 4.0 articles",
+      path: "/blog",
+      items: posts.slice(0, 12).map((post) => ({
+        name: stripHtml(post.title.rendered),
+        path: `/blog/${post.slug}`,
+      })),
+    }),
+  ];
 
   return (
     <>
+      <StructuredData data={blogSchema} id="blog-collection-schema" />
       <HeroSection
-        title="Blog"
-        description="Leave us a little info, and we'll be in touch."
+        title="MES Implementation Blog and Industry 4.0 Insights"
+        description="Expert guidance on MES implementation, Siemens Opcenter, Critical Manufacturing, Oracle, PLM, AI, and smart manufacturing."
         image={BLOG_HERO_IMAGE}
         align="center"
-        buttonText="Contact Us"
+        buttonText="Discuss your MES roadmap"
         buttonLink="/contact"
       />
       <section className="blogs">
@@ -64,9 +87,9 @@ export default async function BlogPage() {
               <span className="eyebrow-text">Our Journal</span>
               <span className="eyebrow-line" />
             </div>
-            <h1 className="blog-header__title">Latest Insights</h1>
+            <h2 className="blog-header__title">Latest MES and Smart Manufacturing Insights</h2>
             <p className="blog-header__subtitle">
-              Perspectives, ideas, and stories worth reading
+              Practical perspectives for manufacturing IT, operations, quality, and executive teams
             </p>
           </div>
 

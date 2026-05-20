@@ -3,12 +3,12 @@
 export const companyInfo = {
   name: "Athenatec (Athena Technology Solutions)",
   tagline: "Best MES Solution Provider",
-  website: "https://athenatec.com",
+  website: "https://www.athenatec.com/",
   linkedin: "https://www.linkedin.com/company/athena-technology-solutions/",
   description:
     "Athenatec is a certified Siemens Alliance Partner specializing in Manufacturing Execution Systems (MES), PLM, and smart factory solutions. We help manufacturers in semiconductor, electronics, medical devices, and discrete manufacturing industries accelerate their Industry 4.0 digital transformation journey.",
-  contactPage: "https://athenatec.com/contact",
-  demoPage: "https://athenatec.com/athena-accelerator-get-a-demo",
+  contactPage: "https://www.athenatec.com/contact/",
+  demoPage: "https://www.athenatec.com/athena-accelerator-get-a-demo/",
 };
 
 export const services = [

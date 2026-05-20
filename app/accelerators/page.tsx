@@ -4,34 +4,25 @@ import Image from "next/image";
 import CTASection from "../components/CTASection";
 import type { Metadata } from "next";
 import Link from "next/link";
+import InternalLinkCluster, {
+  manufacturingSeoLinks,
+} from "@/app/components/seo/InternalLinkCluster";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Athena ECO Accelerators | Automate Engineering Change in MES",
-
   description:
     "Speed up engineering change workflows with Athena ECO Accelerators. Automate redlining, data migration, and testing in MES with full traceability.",
-
-  openGraph: {
-    locale: "en_US",
-    type: "website",
-    url: "https://www.athenatec.com/accelerators",
-    title: "Athena ECO Accelerators | Automate Engineering Change in MES",
-    description:
-      "Speed up engineering change workflows with Athena ECO Accelerators. Automate redlining, data migration, and testing in MES with full traceability.",
-    images: [
-      {
-        url: "/assets/images/eco-accelerators.webp",
-        width: 1200,
-        height: 630,
-        alt: "Athena ECO Accelerators",
-      },
-    ],
-  },
-
-  alternates: {
-    canonical: "https://www.athenatec.com/accelerators",
-  },
-};
+  path: "/accelerators",
+  image: "/assets/images/eco-accelerators.webp",
+  keywords: [
+    "MES accelerators",
+    "ECO automation",
+    "MES automated testing",
+    "master data migration",
+    "engineering change automation",
+  ],
+});
 
 const accelerators = [
   {
@@ -143,7 +134,7 @@ export default function EcoAccelerator() {
           </div>
           <div className="cta-row">
             <Link href="/athena-accelerator-get-a-demo" className="primary-btn">
-              Get a Demo
+              Get an MES accelerator demo
               <span className="arrow">→</span>
             </Link>
           </div>
@@ -165,6 +156,11 @@ export default function EcoAccelerator() {
           </ul>
         </div>
       </section>
+      <InternalLinkCluster
+        links={manufacturingSeoLinks}
+        title="Use accelerators inside a broader MES implementation roadmap"
+        description="Connect ECO automation with MES implementation services, Siemens Opcenter, Critical Manufacturing, Oracle Agile PLM, Oracle Cloud ERP, and manufacturing case studies."
+      />
       <CTASection
         title={
           <>

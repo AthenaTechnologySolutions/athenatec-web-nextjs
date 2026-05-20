@@ -25,7 +25,7 @@ export default function EyelitPage() {
             provider: {
               "@type": "Organization",
               name: "Athenatec",
-              url: "https://athenatec.com",
+              url: "https://www.athenatec.com/",
             },
             description:
               "Eyelit MES and Equipment Connect implementation, integration, and optimization services.",

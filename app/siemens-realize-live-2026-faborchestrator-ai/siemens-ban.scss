@@ -1,0 +1,958 @@
+.siemens-ban-page {
+  background: #f5f9fd;
+  color: #07152d;
+}
+
+.siemens-ban-container {
+  width: min(100% - 2rem, 1300px);
+  margin: 0 auto;
+}
+
+.siemens-ban-kicker {
+  margin: 0 0 0.8rem;
+  color: #1286c8;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.siemens-ban-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.siemens-ban-highlight {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px 22px;
+  border-radius: 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 40, 89, 0.03) 0%,
+    rgba(8, 40, 89, 0.06) 100%
+  );
+  border: 1px solid rgba(8, 40, 89, 0.08);
+  transition: all 0.25s ease;
+}
+
+.siemens-ban-highlight:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 132, 255, 0.18);
+  box-shadow: 0 10px 24px rgba(8, 40, 89, 0.08);
+}
+
+.siemens-ban-highlight svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #0ea5e9;
+}
+
+.siemens-ban-highlight p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #082859;
+  font-weight: 500;
+}
+.siemens-ban-hero {
+  position: relative;
+  display: flex;
+  min-height: 680px;
+  align-items: center;
+  overflow: hidden;
+  color: #fff;
+}
+
+.siemens-ban-hero__image {
+  object-fit: cover;
+  object-position: center;
+}
+
+.siemens-ban-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(2, 8, 30, 0.98) 0%,
+      rgba(4, 18, 56, 0.92) 38%,
+      rgba(4, 18, 56, 0.5) 64%,
+      rgba(4, 18, 56, 0.12) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.05) 0%,
+      rgba(1, 7, 24, 0.82) 100%
+    );
+}
+
+
+
+.siemens-ban-hero__content {
+  position: relative;
+  z-index: 3;
+  width: min(100% - 2rem, 1300px);
+  margin: 0 auto;
+  padding: 9rem 0 5rem;
+}
+
+.siemens-ban-hero h1 {
+  max-width: 760px;
+  margin: 0;
+  font-family: "OutfitBold", sans-serif;
+  font-size: clamp(2.45rem, 5.2vw, 3rem);
+  line-height: 0.98;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.siemens-ban-hero__content > p:not(.siemens-ban-kicker) {
+  max-width: 680px;
+  margin: 1.5rem 0 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1rem, 1.6vw, 1.22rem);
+  line-height: 1.7;
+}
+
+.siemens-ban-hero__actions,
+.siemens-ban-fab__closing {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.siemens-ban-hero__actions {
+  margin-top: 2rem;
+}
+
+.siemens-ban-button {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.78rem 1.35rem;
+  font-weight: 800;
+  line-height: 1;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.siemens-ban-button:hover {
+  transform: translateY(-2px);
+}
+
+.siemens-ban-button--primary {
+  background: #17ace4;
+  color: #fff;
+  box-shadow: 0 16px 30px rgba(23, 172, 228, 0.28);
+}
+
+.siemens-ban-button--primary:hover {
+  background: #0e8fc1;
+}
+
+.siemens-ban-button--secondary {
+  border-color: rgba(255, 255, 255, 0.36);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.siemens-ban-button--secondary:hover {
+  border-color: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.siemens-ban-hero__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.siemens-ban-hero__details span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(1, 10, 33, 0.5);
+  padding: 0.75rem 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+}
+
+.siemens-ban-hero__details svg {
+  color: #1cc6ff;
+  flex: 0 0 auto;
+}
+
+.siemens-ban-intro {
+  background: #fff;
+  padding: clamp(3.5rem, 7vw, 0rem) 0;
+}
+
+.siemens-ban-intro h2,
+.siemens-ban-fab h2,
+.siemens-ban-form-section h2 {
+  // max-width: 880px;
+  margin: 0;
+  font-family: "OutfitBold", sans-serif;
+  font-size: clamp(2rem, 3.2vw, 3.6rem);
+  line-height: 1.08;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.siemens-ban-intro p:not(.siemens-ban-kicker),
+.siemens-ban-fab p,
+.siemens-ban-form-section__copy p {
+  // max-width: 840px;
+  color: #40506a;
+  font-size: 1.06rem;
+  line-height: 1.78;
+}
+
+.siemens-ban-cards {
+  padding: 0 0 clamp(3.5rem, 7vw, 6rem);
+  background: #fff;
+}
+
+.siemens-ban-cards__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.siemens-ban-card {
+  min-height: 200px;
+  border: 1px solid #dbe9f3;
+  border-radius: 8px;
+  background: #f8fbfe;
+  padding: 1.35rem;
+  box-shadow: 0 18px 46px rgba(28, 69, 132, 0.08);
+}
+
+.siemens-ban-card__icon {
+  display: flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #e6f8ff;
+  color: #1286c8;
+}
+
+.siemens-ban-card h3 {
+  margin: 1.1rem 0 0.65rem;
+  color: #10233f;
+  font-size: 1.08rem;
+  line-height: 1.28;
+}
+
+.siemens-ban-card p {
+  margin: 0;
+  color: #526176;
+  line-height: 1.68;
+}
+
+.siemens-ban-fab {
+  padding: clamp(3.5rem, 7vw, 6.5rem) 0;
+  background:
+    linear-gradient(180deg, #eef7fc 0%, #fff 48%, #eef7fc 100%);
+}
+
+.siemens-ban-fab__copy {
+  // max-width: 940px;
+}
+
+.siemens-ban-fab__copy p {
+  margin: 1.25rem 0 15px;
+}
+
+.siemens-ban-fab sup {
+  font-size: 0.62em;
+}
+
+.siemens-ban-diagram {
+  margin: clamp(2rem, 5vw, 3.6rem) auto;
+  width: min(100%, 820px);
+}
+
+.siemens-ban-diagram__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 30px 75px rgba(28, 69, 132, 0.22);
+}
+
+.siemens-ban-fab__closing {
+  justify-content: space-between;
+  border: 1px solid #cde8f6;
+  border-radius: 8px;
+  background: #fff;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  box-shadow: 0 20px 55px rgba(28, 69, 132, 0.1);
+}
+
+.siemens-ban-fab__closing svg {
+  color: #17ace4;
+  flex: 0 0 auto;
+}
+
+.siemens-ban-fab__closing p {
+  flex: 1 1 520px;
+  margin: 0;
+}
+
+.siemens-ban-form-section {
+  position: relative;
+  scroll-margin-top: 92px;
+  padding: clamp(3.5rem, 7vw, 6rem) 0;
+  // background:
+  //   radial-gradient(circle at 12% 0%, rgba(23, 172, 228, 0.22), transparent 28%),
+  //   linear-gradient(135deg, #061121 0%, #0b1a2c 54%, #030d1b 100%);
+  color: #fff;
+}
+
+.siemens-ban-meeting-card {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.35);
+}
+
+.siemens-ban-meeting-card__event {
+  position: relative;
+  display: flex;
+  min-height: 640px;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding: clamp(2.25rem, 4.5vw, 3.9rem);
+  color: #fff;
+  background:
+    linear-gradient(135deg, rgba(2, 7, 28, 0.98), rgba(4, 17, 49, 0.76)),
+    url("/assets/images/siemens-realize-live-2026.webp") center / cover no-repeat;
+}
+
+.siemens-ban-meeting-card__event::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(1, 7, 24, 0.1) 0%,
+    rgba(1, 7, 24, 0.82) 100%
+  );
+  pointer-events: none;
+}
+
+.siemens-ban-meeting-card__event > * {
+  position: relative;
+  z-index: 1;
+}
+
+.siemens-ban-meeting-card__kicker,
+.siemens-ban-form__kicker {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  border-radius: 999px;
+  font-family: "OutfitBold", sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.siemens-ban-meeting-card__kicker {
+  margin-bottom: 1.15rem;
+  border: 1px solid rgba(23, 172, 228, 0.5);
+  background: rgba(23, 172, 228, 0.12);
+  color: #40d5ff;
+  padding: 0.45rem 0.85rem;
+}
+
+.siemens-ban-meeting-card__event h2 {
+  max-width: 8.7em;
+  color: #fff;
+  font-size: clamp(2.45rem, 5.2vw, 4.55rem);
+  line-height: 1.02;
+}
+
+.siemens-ban-meeting-card__event p {
+  max-width: 30rem;
+  margin: 1.2rem 0 0;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 1.08rem;
+  line-height: 1.68;
+}
+
+.siemens-ban-meeting-card__details {
+  display: grid;
+  gap: 0;
+  margin: clamp(1.8rem, 4vw, 3rem) 0 0;
+}
+
+.siemens-ban-meeting-card__details div {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 0.88rem 0;
+}
+
+.siemens-ban-meeting-card__details svg {
+  color: #2bd2ff;
+  flex: 0 0 auto;
+}
+
+.siemens-ban-meeting-card__details dd {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.94);
+  font-family: "OutfitMedium", sans-serif;
+  font-size: 1.05rem;
+}
+
+.siemens-ban-meeting-card__form-panel {
+  padding: clamp(2rem, 4.8vw, 4rem);
+  color: #0f172a;
+}
+
+.siemens-ban-form__kicker {
+  margin-bottom: 1rem;
+  border: 1px solid rgba(23, 172, 228, 0.3);
+  background: rgba(23, 172, 228, 0.08);
+  color: #1c4584;
+  padding: 0.42rem 0.78rem;
+}
+
+.siemens-ban-meeting-card__form-panel h2 {
+  margin-bottom: clamp(1.4rem, 2.6vw, 2rem);
+  color: #07152d;
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  line-height: 1.12;
+}
+
+.siemens-ban-form {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.95rem;
+  color: #07152d;
+}
+
+.siemens-ban-form__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.siemens-ban-form__field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.siemens-ban-form__field > span {
+  color: #334155;
+  font-family: "OutfitBold", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.siemens-ban-form__field strong {
+  margin-left: 0.18rem;
+  color: #db3a34;
+}
+
+.siemens-ban-form__control {
+  display: flex;
+  min-height: 56px;
+  align-items: center;
+  gap: 0.7rem;
+  border: 1.5px solid #dbe4ee;
+  border-radius: 8px;
+  background: #f8fafc;
+  padding: 0 1rem;
+  color: #64748b;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.siemens-ban-form__control:focus-within {
+  border-color: #17ace4;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(23, 172, 228, 0.12);
+}
+
+.siemens-ban-form__control svg {
+  color: #64748b;
+  flex: 0 0 auto;
+}
+
+.siemens-ban-form__control input,
+.siemens-ban-form__control select,
+.siemens-ban-form__control textarea {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: #10233f;
+  font: inherit;
+  outline: 0;
+}
+
+.siemens-ban-form__select {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-self: stretch;
+  align-items: center;
+}
+
+.siemens-ban-form__select input[type="hidden"] {
+  display: none;
+}
+
+.siemens-ban-form__select-trigger {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  min-height: 54px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border: 0;
+  background: transparent;
+  color: #10233f;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  outline: 0;
+}
+
+.siemens-ban-form__select-trigger svg {
+  color: #1c4584;
+  flex: 0 0 auto;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.siemens-ban-form__select--open .siemens-ban-form__select-trigger svg {
+  color: #17ace4;
+  transform: rotate(180deg);
+}
+
+.siemens-ban-form__select-value,
+.siemens-ban-form__select-placeholder {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.siemens-ban-form__select-placeholder {
+  color: #10233f;
+}
+
+.siemens-ban-form__select-menu {
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  left: -0.75rem;
+  right: -0.75rem;
+  z-index: 30;
+  display: grid;
+  gap: 0.2rem;
+  max-height: 18rem;
+  overflow-y: auto;
+  border: 1px solid rgba(23, 172, 228, 0.26);
+  border-radius: 8px;
+  background: #fff;
+  padding: 0.38rem;
+  box-shadow:
+    0 18px 42px rgba(28, 69, 132, 0.18),
+    0 0 0 4px rgba(23, 172, 228, 0.08);
+}
+
+.siemens-ban-form__select-option {
+  display: flex;
+  min-height: 42px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #10233f;
+  font: inherit;
+  line-height: 1.25;
+  padding: 0.68rem 0.74rem;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.siemens-ban-form__select-option:hover,
+.siemens-ban-form__select-option:focus-visible {
+  background: #eef8fd;
+  color: #0f3d76;
+  outline: 0;
+}
+
+.siemens-ban-form__select-option--selected {
+  background: linear-gradient(
+    135deg,
+    rgba(28, 69, 132, 0.1),
+    rgba(23, 172, 228, 0.14)
+  );
+  color: #0f3d76;
+  font-family: "OutfitMedium", sans-serif;
+}
+
+.siemens-ban-form__select-option--selected svg {
+  color: #17ace4;
+  flex: 0 0 auto;
+}
+
+.siemens-ban-form__control textarea {
+  resize: vertical;
+}
+
+.siemens-ban-form__control--multiline {
+  min-height: 136px;
+  align-items: flex-start;
+  padding-top: 1rem;
+}
+
+.siemens-ban-form__checkbox {
+  position: relative;
+  display: grid;
+  grid-template-columns: 21px minmax(0, 1fr);
+  gap: 0.65rem;
+  align-items: start;
+  color: #475569;
+  cursor: pointer;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.siemens-ban-form__checkbox input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.siemens-ban-form__checkbox span {
+  position: relative;
+  width: 21px;
+  height: 21px;
+  margin-top: 0.1rem;
+  border: 2px solid #cbd5e1;
+  border-radius: 5px;
+  background: #f8fafc;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.siemens-ban-form__checkbox input:focus-visible + span {
+  box-shadow: 0 0 0 4px rgba(23, 172, 228, 0.14);
+}
+
+.siemens-ban-form__checkbox input:checked + span {
+  border-color: #17ace4;
+  background: #17ace4;
+}
+
+.siemens-ban-form__checkbox input:checked + span::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 11px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.siemens-ban-form__checkbox em {
+  font-style: normal;
+  font-size: 0.9rem;
+}
+
+.siemens-ban-form__checkbox--error span {
+  border-color: #db3a34;
+}
+
+.siemens-ban-form__error,
+.siemens-ban-form__submit-error {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  color: #db3a34;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.siemens-ban-form__submit-error {
+  margin: 0;
+  border: 1px solid rgba(219, 58, 52, 0.22);
+  border-radius: 8px;
+  background: rgba(219, 58, 52, 0.08);
+  padding: 0.8rem;
+}
+
+.siemens-ban-form__submit {
+  display: inline-flex;
+  width: 100%;
+  min-height: 52px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border: 0;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1c4584, #17ace4);
+  color: #fff;
+  font-family: "OutfitBold", sans-serif;
+  font-weight: 900;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.siemens-ban-form__submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 28px rgba(23, 172, 228, 0.24);
+}
+
+.siemens-ban-form__submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.siemens-ban-form__submit:disabled svg {
+  animation: siemens-ban-spin 1s linear infinite;
+}
+
+.siemens-ban-form--success {
+  display: grid;
+  justify-items: center;
+  gap: 0.8rem;
+  border: 1px solid rgba(23, 172, 228, 0.24);
+  border-radius: 8px;
+  background: #f4fbff;
+  padding: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+}
+
+.siemens-ban-form--success svg {
+  color: #16a66a;
+}
+
+.siemens-ban-form--success h3 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.siemens-ban-form--success p {
+  // max-width: 480px;
+  margin: 0;
+  color: #526176;
+  line-height: 1.65;
+}
+
+@keyframes siemens-ban-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes siemens-ban-infinity-drift {
+  0%,
+  100% {
+    transform: translate3d(var(--loop-x), var(--loop-y), 0) rotate(var(--loop-rotate)) scale(1);
+    opacity: 0.48;
+  }
+
+  50% {
+    transform: translate3d(calc(var(--loop-x) - 18px), calc(var(--loop-y) - 10px), 0) rotate(var(--loop-rotate)) scale(1.035);
+    opacity: 0.72;
+  }
+}
+
+@keyframes siemens-ban-loop-pulse {
+  0%,
+  100% {
+    opacity: 0.38;
+    transform: scale(0.98);
+  }
+
+  50% {
+    opacity: 0.76;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes siemens-ban-loop-sweep {
+  0%,
+  22% {
+    background-position: -140% 0;
+    opacity: 0;
+  }
+
+  45%,
+  70% {
+    opacity: 0.78;
+  }
+
+  100% {
+    background-position: 140% 0;
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1024px) {
+  .siemens-ban-hero {
+    min-height: 620px;
+  }
+
+  .siemens-ban-hero__loop {
+    right: -15rem;
+    width: min(82vw, 820px);
+  }
+
+  .siemens-ban-hero__loop--secondary {
+    right: 34vw;
+    width: min(46vw, 440px);
+  }
+
+  .siemens-ban-cards__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .siemens-ban-meeting-card {
+    grid-template-columns: 1fr;
+  }
+
+  .siemens-ban-meeting-card__event {
+    min-height: 460px;
+  }
+}
+
+@media (max-width: 700px) {
+  .siemens-ban-hero {
+    min-height: 660px;
+  }
+
+  .siemens-ban-hero__overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(2, 8, 30, 0.98) 0%,
+        rgba(4, 18, 56, 0.86) 62%,
+        rgba(4, 18, 56, 0.62) 100%
+      );
+  }
+
+  .siemens-ban-hero__content {
+    padding: 7.5rem 0 3.5rem;
+  }
+
+  .siemens-ban-hero h1 {
+    font-size: clamp(2.3rem, 12vw, 3.5rem);
+  }
+
+  .siemens-ban-hero__loop {
+    top: 8.5rem;
+    right: -28rem;
+    width: 185vw;
+    opacity: 0.28;
+  }
+
+  .siemens-ban-hero__loop--secondary {
+    display: none;
+  }
+
+  .siemens-ban-hero__actions,
+  .siemens-ban-fab__closing {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .siemens-ban-button,
+  .siemens-ban-button--secondary {
+    width: 100%;
+  }
+
+  .siemens-ban-hero__details {
+    display: grid;
+  }
+
+  .siemens-ban-cards__grid,
+  .siemens-ban-form__row {
+    grid-template-columns: 1fr;
+  }
+
+  .siemens-ban-card {
+    min-height: auto;
+  }
+
+  .siemens-ban-form-section {
+    padding: 2.5rem 0;
+  }
+
+  .siemens-ban-meeting-card__event {
+    min-height: 420px;
+    padding: 1.6rem;
+  }
+
+  .siemens-ban-meeting-card__event h2 {
+    font-size: clamp(2.3rem, 12vw, 3.4rem);
+  }
+
+  .siemens-ban-meeting-card__event p {
+    font-size: 0.98rem;
+  }
+
+  .siemens-ban-meeting-card__form-panel {
+    padding: 1.45rem;
+  }
+
+  .siemens-ban-meeting-card__form-panel h2 {
+    font-size: clamp(1.85rem, 9vw, 2.55rem);
+  }
+
+  .siemens-ban-form__select-menu {
+    max-height: 15.5rem;
+  }
+}

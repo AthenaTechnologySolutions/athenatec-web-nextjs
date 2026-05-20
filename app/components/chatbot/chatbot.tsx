@@ -153,12 +153,21 @@ export default function AIChatbot() {
       } else {
         throw new Error("Submission failed");
       }
+
+      setMessages(
+        addBotMessage(
+          `Perfect. We've received your details and will reach out to you at **${finalUserData.email}** shortly.\n\nIn the meantime, feel free to explore [athenatec.com](https://www.athenatec.com/).`,
+          currentMessages,
+        ),
+      );
+      setSubmitted(true);
+      setStep("done");
     } catch {
       setMessages(
         addBotMessage(
-          "Hmm, something went wrong submitting your details. Please try again or reach us directly at [athenatec.com/contact](https://athenatec.com/contact).",
-          currentMessages
-        )
+          "Something went wrong submitting your details. Please try again or reach us directly at [athenatec.com/contact](https://www.athenatec.com/contact/).",
+          currentMessages,
+        ),
       );
     }
 

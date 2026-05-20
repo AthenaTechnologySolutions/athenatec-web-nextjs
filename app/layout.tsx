@@ -4,7 +4,7 @@ import Script from "next/script";
 import Header from "@/app/components/home/header";
 import Footer from "@/app/components/home/footer";
 import "./globals.css";
-import AIChatbot from "@/app/components/chatbot/chatbot";
+import DeferredChatbot from "@/app/components/DeferredChatbot";
 import ScrollToTop from "@/app/components/ScrollToTop";
 import SmoothScrollProvider from "@/app/components/providers/SmoothScrollProvider";
 import ScrollProgressBar from "@/app/components/ui/ScrollProgressBar";
@@ -38,6 +38,10 @@ const rootMetadata = buildMetadata({
   path: "/",
   keywords: [
     "MES implementation services",
+    "Siemens Opcenter partner",
+    "Critical Manufacturing MES implementation",
+    "Oracle Cloud ERP implementation",
+    "Oracle Agile PLM implementation",
     "Manufacturing execution systems",
     "Semiconductor MES solutions",
     "Manufacturing digital transformation",
@@ -71,9 +75,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
       <head>
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
         <Script
           id="google-tag-manager"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -110,7 +115,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
            
           <Header />
           {children}
-          <AIChatbot />
+          <DeferredChatbot />
           <ScrollToTop />
           <Footer />
         </SmoothScrollProvider>
