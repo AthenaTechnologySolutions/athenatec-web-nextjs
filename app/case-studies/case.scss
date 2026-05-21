@@ -1,3 +1,4 @@
+@use "../../styles/abstracts/mixins" as *;
  
 :root {
   --brand-blue: #1c4584;
@@ -82,7 +83,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: clamp(20px, 3vw, 36px);
 
-    @media (max-width: 900px) {
+    @include tablet {
       grid-template-columns: 1fr;
       max-width: 600px;
       margin: 0 auto;

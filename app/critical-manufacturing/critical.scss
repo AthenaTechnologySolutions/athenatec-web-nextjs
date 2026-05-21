@@ -1,3 +1,4 @@
+@use "../../styles/abstracts/mixins" as *;
 .section-title {
   text-align: center;
   font-size: clamp(24px, 4vw, 36px);
@@ -25,7 +26,7 @@
 
   .awards-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 40px;
   }
 
@@ -56,9 +57,9 @@
   }
 }
 
- @media (min-width: 768px) {
+ @include mobile {
   .awards-section .awards-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 }
 
@@ -68,7 +69,7 @@
 
   .cmf-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1.2fr 1fr;
     gap: 40px;
   }
 
@@ -91,9 +92,9 @@
   }
 }
 
- @media (min-width: 992px) {
+ @include tablet {
   .cmf-section .cmf-grid {
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -153,14 +154,14 @@
 
   .profile-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
     margin-top: 40px;
   }
 
-  @media (min-width: 768px) {
+  @include mobile {
     .profile-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;
     }
   }
 
@@ -214,14 +215,14 @@
   .capability-section {
     margin-top: 100px;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1.2fr 1fr;
     gap: 40px;
     align-items: center;
   }
 
-  @media (min-width: 992px) {
+  @include tablet {
     .capability-section {
-      grid-template-columns: 1.2fr 1fr;
+      grid-template-columns: 1fr;
     }
   }
 

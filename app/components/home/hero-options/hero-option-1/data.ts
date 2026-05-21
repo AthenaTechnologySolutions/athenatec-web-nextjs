@@ -110,24 +110,25 @@ export const heroData: HeroProps = {
         },
       ],
     },
-    {
-      id: "slide-7",
-      title: "Eyelit Implementation Partner",
-      subtitle:
-        "As an official Eyelit Technologies partner, Athena delivers expertise in deploying Eyelit MES and Equipment Connect across semiconductor, solar, LED/laser diode, and medical device industries.",
-      media: {
-        type: "image",
-        src: "/assets/images/eyelitsbanner.webp",
-        alt: "Eyelit Implementation Partner",
-      },
-      ctas: [
-        {
-          label: "Eyelit",
-          href: "/eyelit",
-          variant: "primary",
-        },
-      ],
-    },
+    // Eyelit route is disabled for now; keep this slide commented for future reuse.
+    // {
+    //   id: "slide-7",
+    //   title: "Eyelit Implementation Partner",
+    //   subtitle:
+    //     "As an official Eyelit Technologies partner, Athena delivers expertise in deploying Eyelit MES and Equipment Connect across semiconductor, solar, LED/laser diode, and medical device industries.",
+    //   media: {
+    //     type: "image",
+    //     src: "/assets/images/eyelitsbanner.webp",
+    //     alt: "Eyelit Implementation Partner",
+    //   },
+    //   ctas: [
+    //     {
+    //       label: "Eyelit",
+    //       href: "/eyelit",
+    //       variant: "primary",
+    //     },
+    //   ],
+    // },
     {
       id: "slide-8",
       title: "ECO Accelerators",

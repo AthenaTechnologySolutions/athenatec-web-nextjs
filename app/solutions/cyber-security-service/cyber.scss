@@ -1,3 +1,4 @@
+@use "../../../styles/abstracts/mixins" as *;
 .section-title {
   text-align: center;
   font-size: clamp(24px, 4vw, 36px);
@@ -16,8 +17,8 @@
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(16px, 2.5vw, 30px);
 
-  @media (max-width: 992px) { grid-template-columns: repeat(2, 1fr); }
-  @media (max-width: 600px) { grid-template-columns: 1fr; }
+  @include tablet { grid-template-columns: repeat(2, 1fr); }
+  @include mobile { grid-template-columns: 1fr; }
 }
 
 .grc-card {
@@ -74,7 +75,7 @@
   gap: clamp(32px, 5vw, 60px);
   align-items: center;
 
-  @media (max-width: 992px) { grid-template-columns: 1fr; }
+  @include tablet { grid-template-columns: 1fr; }
 }
 
 .grc-detail__visual img {
@@ -192,7 +193,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: clamp(16px, 2.5vw, 35px);
 
-    @media (max-width: 768px) { grid-template-columns: 1fr; }
+    @include mobile { grid-template-columns: 1fr; }
   }
 
   .why-card {
@@ -238,7 +239,7 @@
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
     }
 
-     @media (hover: none) {
+     @include hover-none {
       &:hover { transform: none; }
     }
   }
@@ -303,9 +304,9 @@
     grid-template-columns: repeat(6, 1fr);
     gap: clamp(12px, 2vw, 30px);
 
-    @media (max-width: 1200px) { grid-template-columns: repeat(4, 1fr); }
-    @media (max-width: 768px)  { grid-template-columns: repeat(3, 1fr); }
-    @media (max-width: 480px)  { grid-template-columns: repeat(2, 1fr); }
+    @include laptop { grid-template-columns: repeat(4, 1fr); }
+    @include mobile  { grid-template-columns: repeat(3, 1fr); }
+    @include mobile  { grid-template-columns: repeat(2, 1fr); }
   }
 
   .product-card {
@@ -338,7 +339,7 @@
       transform: scale(1.05);
     }
 
-    @media (hover: none) {
+    @include hover-none {
       &:hover { transform: none; }
     }
   }
@@ -351,7 +352,7 @@
   }
 }
 
- @media (max-width: 480px) {
+ @include mobile {
   .grc-section,
   .grc-detail,
   .cyber-overview,

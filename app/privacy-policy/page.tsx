@@ -351,7 +351,7 @@ export default function PrivacyPolicyPage() {
 
         {/* ── 11. Children's Privacy ───────────────────────────────────── */}
         <section className="legal-section" aria-labelledby="section-children">
-          <h2 id="section-children">11. Children's Privacy</h2>
+          <h2 id="section-children">11. Children&apos;s Privacy</h2>
           <p>
             Our website and services are directed exclusively at business
             professionals and are not intended for individuals under the age of{" "}
@@ -367,7 +367,7 @@ export default function PrivacyPolicyPage() {
           <p>
             We may update this Privacy Policy from time to time. When we make
             material changes, we will post the updated policy on this page with
-            a revised "Last Updated" date, send an email notification to active
+            a revised &quot;Last Updated&quot; date, send an email notification to active
             clients and registered contacts, and display a prominent notice on
             our website homepage. Your continued use of our website after the
             effective date constitutes your acceptance of the updated policy.

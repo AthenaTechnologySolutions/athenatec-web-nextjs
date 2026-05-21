@@ -1,3 +1,4 @@
+@use "../../styles/abstracts/mixins" as *;
 
 // ─── Design Tokens ────────────────────────────────────────────────────────────
 :root {
@@ -110,11 +111,11 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
 
-  @media (max-width: 1100px) {
+  @include laptop {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: 640px) {
+  @include mobile {
     grid-template-columns: 1fr;
     gap: 20px;
   }
@@ -331,7 +332,7 @@
 }
 
 // ─── Responsive Tweaks ────────────────────────────────────────────────────────
-@media (max-width: 768px) {
+@include mobile {
   .webinars-filter {
     .filter-inner {
       height: auto;

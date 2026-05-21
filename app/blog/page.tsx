@@ -114,12 +114,9 @@ export default async function BlogPage() {
                 <time className="post-date">
                   {formatDate(featuredPost.date)}
                 </time>
-                <h2
-                  className="featured-post__title"
-                  dangerouslySetInnerHTML={{
-                    __html: featuredPost.title.rendered,
-                  }}
-                />
+                <h2 className="featured-post__title">
+                  {stripHtml(featuredPost.title.rendered)}
+                </h2>
                 <p className="featured-post__excerpt">
                   {getExcerpt(featuredPost, 200)}
                 </p>
@@ -149,7 +146,7 @@ export default async function BlogPage() {
                   key={post.id}
                   href={`/blog/${post.slug}`}
                   className="blog-card"
-                  style={{ "--delay": `${i * 0.07}s` } as React.CSSProperties}
+                  style={{ "--delay": `${i * 0.07}s` } as CSSProperties}
                 >
                   <div className="blog-card__image-wrap">
                     {image && (
@@ -166,10 +163,9 @@ export default async function BlogPage() {
 
                   <div className="blog-card__body">
                     <time className="post-date">{formatDate(post.date)}</time>
-                    <h3
-                      className="blog-card__title"
-                      dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-                    />
+                    <h3 className="blog-card__title">
+                      {stripHtml(post.title.rendered)}
+                    </h3>
                     <p className="blog-card__excerpt">{excerpt}</p>
 
                     <span className="cta-link cta-link--sm">

@@ -1,3 +1,4 @@
+@use "../../../../styles/abstracts/mixins" as *;
 .services {
   background: #f6f9ff;
   padding: 6rem 0;
@@ -72,7 +73,7 @@
     margin-bottom: 0.4rem;
   }
 
-   @media (max-width: 1024px) {
+   @include tablet {
     .services-timeline {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -92,7 +93,7 @@
     }
   }
 
-  @media (max-width: 640px) {
+  @include mobile {
     .services-timeline {
       grid-template-columns: 1fr;
       gap: 2.25rem;
@@ -232,7 +233,7 @@
     color: #3b2db5;
     font-size: 1.2rem;
   }
-  @media (max-width: 1100px) {
+  @include laptop {
     .managed-tabs-wrapper {
       overflow-x: auto;
       overflow-y: hidden;
@@ -247,7 +248,7 @@
     }
   }
  
-  @media (max-width: 1024px) {
+  @include tablet {
     .managed-layout {
       grid-template-columns: 1fr;
       gap: 3rem;
@@ -271,7 +272,7 @@
   }
 
  
-  @media (max-width: 768px) {
+  @include mobile {
     padding: 4rem 0;
 
     .managed-tabs-wrapper {
@@ -361,7 +362,7 @@
     border: 2px solid #5172b0;
   }
 
-   @media (max-width: 900px) {
+   @include tablet {
     .why-us-grid {
       grid-template-columns: 1fr;
     }
@@ -373,7 +374,7 @@
 }
 
 .why-us-faq {
-  background: linear-gradient(180deg, #f7faff, #ffffff);
+  // background: linear-gradient(180deg, #f7faff, #ffffff);
   padding: 3rem 0;
 
   .faq-title {
@@ -393,11 +394,11 @@
   }
 
    .faq-item {
-    background: #ffffff;
+    background: rgb(245, 246, 248);
     border-radius: 20px;
     padding: 1.5rem 2rem;
     break-inside: avoid;
-    box-shadow: 0 14px 30px rgba(28, 69, 132, 0.08);
+    // box-shadow: 0 14px 30px rgba(28, 69, 132, 0.08);
     transition: all 0.35s ease;
   }
 
@@ -477,7 +478,7 @@
     }
   }
 
-   @media (max-width: 900px) {
+   @include tablet {
     .faq-grid {
       grid-template-columns: 1fr;
     }
@@ -491,6 +492,11 @@
   margin: 35px;
   text-align: center;
   position: relative;
+
+
+  @include mobile {
+    margin: 20px;
+  }
 
   .testimonial-section::before,
   .testimonial-section::after {
@@ -533,16 +539,11 @@
   }
 
   .embla__slide {
-    flex: 0 0 400px;
+    flex: 0 0 33.333%;
     pointer-events: auto;
     padding: 1rem;
     user-select: none;
     touch-action: pan-y;
-  }
-  @media (max-width: 768px) {
-    .embla__slide {
-      flex: 0 0 100%;
-    }
   }
 
  
@@ -550,9 +551,9 @@
   .testimonial-card {
     background: #ffffff;
     border-radius: 22px;
-    padding: 2.5rem;
+    padding: 1.5rem;
     height: 100%;
-
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -605,15 +606,15 @@
 
  
 
-  @media (min-width: 768px) {
+  @include tablet {
     .embla__slide {
       flex: 0 0 50%;
     }
   }
 
-  @media (min-width: 1024px) {
+  @include mobile {
     .embla__slide {
-      flex: 0 0 33.333%;
+      flex: 0 0 100%;
     }
   }
 }
@@ -695,7 +696,7 @@
 
  
 
-  @media (max-width: 768px) {
+  @include mobile {
     .cta-content h2 {
       font-size: 2rem;
     }
@@ -705,7 +706,7 @@
     }
   }
 
-  @media (max-width: 480px) {
+  @include mobile {
     .cta-container {
       border-radius: 24px;
     }

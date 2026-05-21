@@ -1,3 +1,4 @@
+@use "../../styles/abstracts/mixins" as *;
  
 .accelerator-intro {
   padding: 60px 0;
@@ -28,14 +29,14 @@
   }
 }
  
-@media (max-width: 1200px) {
+@include laptop {
 
   .accelerator-intro h2 {
     font-size: 40px;
   }
 }
 
-@media (max-width: 992px) {
+@include tablet {
  
 
   .accelerator-intro {
@@ -47,7 +48,7 @@
   }
 }
 
-@media (max-width: 576px) {
+@include mobile {
  
   .accelerator-intro {
     padding: 70px 0;
@@ -83,11 +84,11 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
 
-    @media (max-width: 1024px) {
+    @include tablet {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @media (max-width: 768px) {
+    @include mobile {
       grid-template-columns: 1fr;
     }
   }
@@ -132,7 +133,7 @@
     }
   }
 
-  @media (max-width: 768px) {
+  @include mobile {
     .cta-row {
       justify-content: center; 
     }
@@ -231,7 +232,7 @@
     }
   }
 
-  @media (max-width: 768px) {
+  @include mobile {
     .highlight-list {
       li {
         font-size: 15px;

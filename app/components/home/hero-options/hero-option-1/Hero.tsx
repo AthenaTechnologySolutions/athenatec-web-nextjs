@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "./hero-swiper.scss";
 
 import { HeroProps } from "./types";
 import HeroSlide from "./HeroSlide";
@@ -71,34 +72,6 @@ export default function Hero({ slides, bottomStats, bottomDescription }: HeroPro
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-[#1e2a37]/90 via-[#1e2a37]/60 to-transparent pt-12">
         <BottomCarousel stats={bottomStats} description={bottomDescription} />
       </div>
-
-      <style>{`
-        .hero-swiper .swiper-pagination-bullet {
-          background-color: rgba(255,255,255,0.35);
-          width: 8px; height: 8px;
-          transition: all 0.3s ease;
-          border-radius: 4px;
-        }
-        .hero-swiper .swiper-pagination-bullet-active {
-          background-color: #17ace4;
-          width: 32px;
-        }
-        /* Custom Nav arrows — hidden if swiper uses disabled class (i.e. if loop relies on arrows) but we just hide them on mobile via Tailwind as well */
-        .hero-swiper .swiper-button-disabled {
-          opacity: 0.3 !important;
-          cursor: not-allowed;
-          pointer-events: none;
-        }
-        /* Keep pagination above the bottom overlay so the bullets stay clickable */
-        .hero-swiper .swiper-pagination {
-          bottom: 175px !important;
-          z-index: 30 !important;
-          pointer-events: auto;
-        }
-        @media (min-width: 640px)  { .hero-swiper .swiper-pagination { bottom: 160px !important; } }
-        @media (min-width: 768px)  { .hero-swiper .swiper-pagination { bottom: 168px !important; } }
-        @media (min-width: 1024px) { .hero-swiper .swiper-pagination { bottom: 150px !important; } }
-      `}</style>
     </section>
   );
 }

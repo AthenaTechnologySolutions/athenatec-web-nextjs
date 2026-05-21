@@ -54,7 +54,7 @@ export default async function NewsRoom() {
     name: "Newsroom",
     description:
       "Latest company news, partnerships and digital manufacturing updates from Athenatec.",
-    url: canonicalUrl("/newsroom"),
+    url: "https://www.athenatec.com/newsroom",
     publisher: {
       "@type": "Organization",
       name: "Athenatec",
@@ -68,8 +68,9 @@ export default async function NewsRoom() {
       itemListElement: posts.map((post, index) => ({
         "@type": "ListItem",
         position: index + 1,
+        url: `https://www.athenatec.com/blog/${post.slug}`,
         name: stripHtml(post.title.rendered),
-        url: canonicalUrl(`/blog/${post.slug}`),
+        
       })),
     },
   };
@@ -128,16 +129,16 @@ export default async function NewsRoom() {
                     </div>
 
                     <div className="p-6">
-                      <h2
-                        className="text-xl font-semibold mb-3"
-                        dangerouslySetInnerHTML={{
-                          __html: post.title.rendered,
-                        }}
-                      />
+                      <h2 className="text-xl font-semibold mb-3">
+                        {stripHtml(post.title.rendered)}
+                      </h2>
 
-                      <p className="text-gray-600 text-sm mb-4">
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="block text-gray-600 text-sm mb-4 hover:text-[#1c4584]"
+                      >
                         {truncate(stripHtml(post.excerpt.rendered), 140)}
-                      </p>
+                      </Link>
 
                       <p className="text-xs text-gray-400 mb-4">
                         {new Date(post.date).toLocaleDateString("en-US")}

@@ -54,18 +54,35 @@ function getSiemensLiveCountdown(now = new Date()) {
   }
 
   if (currentTime >= SIEMENS_COUNTDOWN_END_TIME) {
-    return { value: "Live", label: "June 1-4, 2026" };
+   return {
+  value: "LIVE",
+  label: "HAPPENING NOW • DETROIT",
+};
   }
 
-  const daysUntilEvent = Math.max(
-    1,
-    Math.ceil((SIEMENS_COUNTDOWN_END_TIME - currentTime) / DAY_IN_MS),
-  );
+ const remainingTime = SIEMENS_COUNTDOWN_END_TIME - currentTime;
 
+const days = Math.floor(remainingTime / DAY_IN_MS);
+
+if (days >= 1) {
   return {
-    value: daysUntilEvent.toString(),
-    label: daysUntilEvent === 1 ? "day left to May 31" : "days left to May 31",
+    value: days.toString(),
+    label: days === 1 ? "DAY LEFT TO MAY 31" : "DAYS LEFT TO MAY 31",
   };
+}
+
+const hours = Math.floor(
+  (remainingTime % DAY_IN_MS) / (1000 * 60 * 60),
+);
+
+const minutes = Math.floor(
+  (remainingTime % (1000 * 60 * 60)) / (1000 * 60),
+);
+
+return {
+  value: `${hours}H ${minutes}M`,
+  label: "EVENT STARTING SOON",
+};
 }
 
 const slides: HeroSlide[] = [
@@ -255,8 +272,7 @@ export default function HeroCarousel() {
   useEffect(() => {
     const scheduleDeferredImages = () => {
       const requestIdle =
-        window.requestIdleCallback ??
-        ((callback) => window.setTimeout(callback, 1));
+        window.requestIdleCallback ?? ((callback) => window.setTimeout(callback, 1));
       const cancelIdle =
         window.cancelIdleCallback ?? ((id) => window.clearTimeout(id));
       const idleId = requestIdle(() => setRenderDeferredSlides(true));

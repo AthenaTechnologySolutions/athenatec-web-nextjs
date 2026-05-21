@@ -1,8 +1,12 @@
+@use "../../../../styles/abstracts/mixins" as *;
 .marquee-track {
   display: flex;
   align-items: center;
   gap: 50px;
   width: max-content;
+}
+
+.marquee-track.is-animated {
   animation: marquee 55s linear infinite;
 }
 
@@ -36,9 +40,9 @@
 }
 
 .hero-carousel__image--siemens-live {
-  object-position: center top;
-  filter: brightness(0.96) saturate(1.08) contrast(1.05);
-  transform: none;
+    object-position: center center;
+  filter: brightness(0.92) saturate(1.05) contrast(1.04);
+  transform: scale(1.02);
 }
 
 .hero-carousel__scrim {
@@ -94,8 +98,8 @@
   background: linear-gradient(
     96deg,
     rgba(2, 7, 33, 1) 4%,
-    rgba(2, 7, 33, 1) 28%,
-    rgba(5, 18, 54, 0.96) 48%,
+    rgba(2, 7, 33, 0.88) 28%,
+  rgba(5, 18, 54, 0.78) 48%,
     rgba(8, 29, 79, 0.42) 66%,
     rgba(8, 29, 79, 0.08) 82%,
     rgba(8, 29, 79, 0) 92%
@@ -175,7 +179,8 @@
 .hero-carousel__siemens-eyebrow {
   display: block;
   margin-bottom: 0.36rem;
-  color: #09b9ff;
+  color: #5ee7ff;
+  text-shadow: 0 0 18px rgba(94, 231, 255, 0.28);
   font-family: "OutfitBold", sans-serif;
   font-size: clamp(1rem, 0.72rem + 0.75vw, 1.45rem);
   line-height: 1.12;
@@ -184,17 +189,38 @@
 
 .hero-carousel__siemens-title {
   display: block;
-  color: #10adff;
+  color: #7be8ff;
+  text-shadow: 0 8px 24px rgba(0, 183, 255, 0.22);
   font-family: "OutfitBold", sans-serif;
   font-size: clamp(2.05rem, 1.25rem + 1.9vw, 3.4rem);
   line-height: 1.03;
 }
 
 .hero-carousel__siemens-title span {
-  color: #16bfff;
+   color: #ffffff;
   font-family: "OutfitMedium", sans-serif;
 }
 
+.hero-carousel__siemens-countdown-value {
+  animation: livePulse 1.8s infinite;
+}
+
+@keyframes livePulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.78;
+    transform: scale(1.04);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 .hero-carousel__desc {
   width: 100%;
   max-width: 34rem;
@@ -291,7 +317,7 @@
 .hero-carousel__siemens-countdown {
   position: absolute;
   right: clamp(2rem, 6vw, 7rem);
-  bottom: clamp(2.25rem, 4vw, 3.3rem);
+  bottom: clamp(1rem, 2vw, 1.8rem);
   z-index: 35;
   display: grid;
   min-width: clamp(10.5rem, 17vw, 16rem);
@@ -299,15 +325,18 @@
   gap: 0.18rem;
   border: 1px solid rgba(23, 172, 228, 0.42);
   border-radius: 8px;
-  background: linear-gradient(
-    135deg,
-    rgba(2, 12, 38, 0.74),
-    rgba(4, 30, 70, 0.58)
+background:
+  linear-gradient(
+    145deg,
+    rgba(4, 16, 42, 0.92),
+    rgba(3, 30, 72, 0.82)
   );
   padding: clamp(0.78rem, 1.35vw, 1.18rem) clamp(0.95rem, 1.75vw, 1.45rem);
-  box-shadow:
-    0 18px 38px rgba(1, 7, 24, 0.36),
-    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+ border: 1px solid rgba(91, 231, 255, 0.3);
+
+box-shadow:
+  0 20px 40px rgba(0, 0, 0, 0.34),
+  0 0 24px rgba(0, 183, 255, 0.12);
   text-align: right;
   text-shadow: 0 8px 20px rgba(3, 14, 38, 0.42);
   backdrop-filter: blur(8px);
@@ -414,384 +443,7 @@
   cursor: pointer;
 }
 
-.siemens-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(16px, 4vw, 48px);
-}
-
-.siemens-modal__backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(1, 7, 24, 0.76);
-  backdrop-filter: blur(14px);
-}
-
-.siemens-modal__panel {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  width: min(1120px, 100%);
-  max-height: calc(100vh - 32px);
-  grid-template-columns: minmax(285px, 0.86fr) minmax(0, 1.14fr);
-  overflow-y: auto;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
-}
-
-.siemens-modal__close {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  z-index: 3;
-  display: inline-flex;
-  width: 38px;
-  height: 38px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 999px;
-  background: rgba(4, 16, 45, 0.58);
-  color: #fff;
-  cursor: pointer;
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
-}
-
-.siemens-modal__close:hover {
-  background: rgba(23, 172, 228, 0.9);
-  transform: translateY(-1px);
-}
-
-.siemens-modal__event {
-  position: relative;
-  display: flex;
-  min-height: 100%;
-  flex-direction: column;
-  justify-content: flex-end;
-  overflow: hidden;
-  padding: clamp(28px, 4vw, 48px);
-  color: #fff;
-  background:
-    linear-gradient(135deg, rgba(2, 7, 33, 0.98), rgba(6, 21, 59, 0.74)),
-    url("/assets/images/siemens-live-banner.webp") center / cover no-repeat;
-}
-
-.siemens-modal__event::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(1, 7, 24, 0.18),
-    rgba(1, 7, 24, 0.82)
-  );
-  pointer-events: none;
-}
-
-.siemens-modal__event > * {
-  position: relative;
-  z-index: 1;
-}
-
-.siemens-modal__kicker,
-.siemens-modal__form-kicker {
-  display: inline-flex;
-  width: fit-content;
-  align-items: center;
-  border-radius: 999px;
-  font-family: "OutfitBold", sans-serif;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-}
-
-.siemens-modal__kicker {
-  margin-bottom: 1rem;
-  border: 1px solid rgba(23, 172, 228, 0.5);
-  background: rgba(23, 172, 228, 0.12);
-  color: #40d5ff;
-  padding: 0.45rem 0.8rem;
-}
-
-.siemens-modal__event h2 {
-  max-width: 8.5em;
-  margin: 0;
-  color: #fff;
-  font-family: "OutfitBold", sans-serif;
-  font-size: clamp(2rem, 1.4rem + 2.1vw, 3.7rem);
-  line-height: 1.02;
-}
-
-.siemens-modal__event p {
-  max-width: 28rem;
-  margin: 1rem 0 0;
-  color: rgba(255, 255, 255, 0.84);
-  font-size: 1rem;
-  line-height: 1.65;
-}
-
-.siemens-modal__details {
-  display: grid;
-  gap: 0;
-  margin: clamp(1.6rem, 4vw, 2.7rem) 0 0;
-}
-
-.siemens-modal__details div {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
-  padding: 0.82rem 0;
-}
-
-.siemens-modal__details svg {
-  flex: 0 0 auto;
-  color: #2bd2ff;
-}
-
-.siemens-modal__details dd {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.94);
-  font-family: "OutfitMedium", sans-serif;
-}
-
-.siemens-modal__form {
-  padding: clamp(30px, 4vw, 50px);
-  color: #0f172a;
-}
-
-.siemens-modal__form-kicker {
-  margin-bottom: 0.85rem;
-  border: 1px solid rgba(23, 172, 228, 0.3);
-  background: rgba(23, 172, 228, 0.08);
-  color: #1c4584;
-  padding: 0.42rem 0.74rem;
-}
-
-.siemens-modal__form h3 {
-  margin: 0 0 1.35rem;
-  color: #07152d;
-  font-family: "OutfitBold", sans-serif;
-  font-size: clamp(1.55rem, 1.2rem + 1vw, 2.15rem);
-  line-height: 1.14;
-}
-
-.siemens-register-form {
-  display: grid;
-  gap: 0.92rem;
-}
-
-.siemens-register-form__row {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.88rem;
-}
-
-.siemens-register-form__field {
-  display: grid;
-  gap: 0.42rem;
-}
-
-.siemens-register-form__field > span {
-  color: #334155;
-  font-family: "OutfitBold", sans-serif;
-  font-size: 0.82rem;
-}
-
-.siemens-register-form__field strong {
-  margin-left: 0.18rem;
-  color: #dc2626;
-}
-
-.siemens-register-form__control {
-  display: flex;
-  min-height: 46px;
-  align-items: center;
-  gap: 0.65rem;
-  border: 1.5px solid #dbe4ee;
-  border-radius: 8px;
-  background: #f8fafc;
-  padding: 0 0.82rem;
-  transition:
-    border-color 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.siemens-register-form__control:focus-within {
-  border-color: #17ace4;
-  background: #fff;
-  box-shadow: 0 0 0 4px rgba(23, 172, 228, 0.12);
-}
-
-.siemens-register-form__control svg {
-  flex: 0 0 auto;
-  color: #64748b;
-}
-
-.siemens-register-form__control input,
-.siemens-register-form__control select {
-  width: 100%;
-  min-width: 0;
-  border: 0;
-  background: transparent;
-  color: #0f172a;
-  font-size: 0.9rem;
-  outline: none;
-}
-
-.siemens-register-form__control input::placeholder {
-  color: #94a3b8;
-}
-
-.siemens-register-form__checkbox {
-  position: relative;
-  display: grid;
-  grid-template-columns: 19px minmax(0, 1fr);
-  gap: 0.66rem;
-  align-items: flex-start;
-  color: #475569;
-  cursor: pointer;
-}
-
-.siemens-register-form__checkbox input {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.siemens-register-form__checkbox span {
-  position: relative;
-  width: 19px;
-  height: 19px;
-  margin-top: 0.08rem;
-  border: 2px solid #cbd5e1;
-  border-radius: 5px;
-  background: #f8fafc;
-  transition:
-    border-color 0.2s ease,
-    background 0.2s ease;
-}
-
-.siemens-register-form__checkbox input:checked + span {
-  border-color: #17ace4;
-  background: #17ace4;
-}
-
-.siemens-register-form__checkbox input:checked + span::after {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid #fff;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
-.siemens-register-form__checkbox em {
-  font-style: normal;
-  font-size: 0.82rem;
-  line-height: 1.48;
-}
-
-.siemens-register-form__checkbox--error span {
-  border-color: #dc2626;
-}
-
-.siemens-register-form__error,
-.siemens-register-form__submit-error {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin: 0;
-  color: #dc2626;
-  font-size: 0.77rem;
-  line-height: 1.35;
-}
-
-.siemens-register-form__submit-error {
-  border: 1px solid #fecaca;
-  border-radius: 8px;
-  background: #fff5f5;
-  padding: 0.75rem 0.85rem;
-}
-
-.siemens-register-form__submit {
-  display: inline-flex;
-  min-height: 48px;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem;
-  border: 0;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #1c4584, #17ace4);
-  color: #fff;
-  cursor: pointer;
-  font-family: "OutfitBold", sans-serif;
-  font-size: 0.96rem;
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.siemens-register-form__submit:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 34px rgba(23, 172, 228, 0.28);
-}
-
-.siemens-register-form__submit:disabled {
-  cursor: not-allowed;
-  opacity: 0.72;
-}
-
-.siemens-register-form__submit:disabled svg {
-  animation: spin 0.75s linear infinite;
-}
-
-.siemens-register-success {
-  display: grid;
-  gap: 0.9rem;
-  justify-items: start;
-  border: 1px solid rgba(23, 172, 228, 0.24);
-  border-radius: 8px;
-  background: #f4fbff;
-  padding: clamp(1.4rem, 4vw, 2rem);
-}
-
-.siemens-register-success svg {
-  color: #17ace4;
-}
-
-.siemens-register-success h4 {
-  margin: 0;
-  color: #07152d;
-  font-family: "OutfitBold", sans-serif;
-  font-size: 1.45rem;
-}
-
-.siemens-register-success p {
-  margin: 0;
-  color: #475569;
-  line-height: 1.6;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (max-width: 1024px) {
+@include tablet {
   .hero-carousel__image--webinar {
     object-position: 70% center;
   }
@@ -859,9 +511,9 @@
   }
 }
 
-@media (max-width: 768px) {
-
-  .hero-carousel__scrim {
+ 
+@include mobile {
+   .hero-carousel__scrim {
     background: linear-gradient(
       180deg,
       rgba(5, 16, 46, 0.34) 100%

@@ -8,47 +8,7 @@ import Image from "next/image";
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-function NavLink({
-  href,
-  children,
-  ...props
-}: React.AnchorHTMLAttributes<HTMLAnchorElement> & {
-  href: string;
-  children: React.ReactNode;
-}) {
-  const isExternal = href.startsWith("http");
 
-  if (isExternal) {
-    return (
-      <a
-        href={href}
-        {...props}
-        className={`relative whitespace-nowrap px-2 min-[1180px]:px-3 py-2 rounded-lg text-gray-700 transition-colors duration-150
-        hover:text-[#1c4584] hover:bg-[#1c4584]/5
-        after:absolute after:bottom-1 after:left-2 after:right-2 after:h-[2px]
-        after:rounded-full after:bg-[#17ace4] after:scale-x-0 after:origin-left
-        after:transition-transform after:duration-200
-        hover:after:scale-x-100 ${props.className || ""}`}
-      >
-        {children}
-      </a>
-    );
-  }
-
-  return (
-    <Link
-      href={href}
-      className={`relative whitespace-nowrap px-2 min-[1180px]:px-3 py-2 rounded-lg text-gray-700 transition-colors duration-150
-      hover:text-[#1c4584] hover:bg-[#1c4584]/5
-      after:absolute after:bottom-1 after:left-2 after:right-2 after:h-[2px]
-      after:rounded-full after:bg-[#17ace4] after:scale-x-0 after:origin-left
-      after:transition-transform after:duration-200
-      hover:after:scale-x-100 ${props.className || ""}`}
-    >
-      {children}
-    </Link>
-  );
-}
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -95,9 +55,6 @@ function NavLink({
         </Link>
 
         <nav className="hidden min-[900px]:flex items-center gap-0 min-[1180px]:gap-1 text-[13px] min-[1180px]:text-[14.5px] font-medium text-gray-700">
-        <NavLink href="https://243988893.hs-sites-na2.com/faborchestratorai" target="_blank">
-            FabOrchestrator AI
-          </NavLink>
           <NavLink href="/about">About</NavLink>
           <NavLink href="/accelerators">
             <span className="min-[1180px]:hidden">Accelerators</span>
@@ -160,9 +117,6 @@ function NavLink({
           className="flex flex-col gap-0 px-5 py-4 text-[15px] text-gray-700
                         max-h-[calc(100dvh-72px)] overflow-y-auto overscroll-contain"
         >
-           <MobileNavLink href="https://243988893.hs-sites-na2.com/faborchestratorai" onClick={closeMobile}>
-            FabOrchestrator AI
-          </MobileNavLink>
           <MobileNavLink href="/about" onClick={closeMobile}>
             About
           </MobileNavLink>
@@ -196,19 +150,31 @@ function NavLink({
 function NavLink({
   href,
   children,
-}: {
+  className = "",
+  ...props
+}: React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   href: string;
   children: React.ReactNode;
 }) {
-  return (
-    <Link
-      href={href}
-      className="relative whitespace-nowrap px-2 min-[1180px]:px-3 py-2 rounded-lg text-gray-700 transition-colors duration-150
+  const classes = `relative whitespace-nowrap px-2 min-[1180px]:px-3 py-2 rounded-lg text-gray-700 transition-colors duration-150
                  hover:text-[#1c4584] hover:bg-[#1c4584]/5
                  after:absolute after:bottom-1 after:left-2 after:right-2 after:h-[2px]
                  after:rounded-full after:bg-[#17ace4] after:scale-x-0 after:origin-left
                  after:transition-transform after:duration-200
-                 hover:after:scale-x-100"
+                 hover:after:scale-x-100 ${className}`;
+
+  if (href.startsWith("http")) {
+    return (
+      <a href={href} className={classes} {...props}>
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link
+      href={href}
+      className={classes}
     >
       {children}
     </Link>

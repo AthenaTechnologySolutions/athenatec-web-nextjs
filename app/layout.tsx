@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import Header from "@/app/components/home/header";
 import Footer from "@/app/components/home/footer";
-import "./globals.css";
+import "../styles/globals.scss";
 import DeferredChatbot from "@/app/components/DeferredChatbot";
 import ScrollToTop from "@/app/components/ScrollToTop";
 import SmoothScrollProvider from "@/app/components/providers/SmoothScrollProvider";
@@ -55,6 +55,16 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   manifest: "/manifest.json",
   applicationName: SITE_NAME,
+  icons: {
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    shortcut: "/favicon-32x32.png",
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   title: {
     default: "Best MES Solution Provider | Athenatec",
     template: "%s",

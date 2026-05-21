@@ -1,5 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Thank You | Athenatec",
+  description: "Your submission has been received by Athenatec.",
+  path: "/thank-you",
+  noIndex: true,
+});
 
 export default function ThankYouPage() {
   return (
@@ -14,13 +22,11 @@ export default function ThankYouPage() {
           className="mx-auto"
         />
 
-        <h1 className="mt-6 text-4xl font-bold text-[#1c4584]">
-          Thank You for Applying
-        </h1>
+        <h1 className="mt-6 text-4xl font-bold text-[#1c4584]">Thank You</h1>
 
         <p className="mt-4 text-gray-600 leading-relaxed text-[20px]">
-          Your application has been successfully submitted.
-          Our recruitment team will review your profile and contact you shortly.
+          Your submission has been received. Our team will review it and contact
+          you shortly.
         </p>
 
         <Link

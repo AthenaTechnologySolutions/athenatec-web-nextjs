@@ -1,3 +1,8 @@
+import {
+  enforceSameOrigin,
+  rateLimit,
+  sanitizeText,
+} from "@/lib/request-guard";
 import { getWpApiUrl } from "@/lib/wp";
 
 const CF7_SITE_URL = process.env.WP_SITE_URL || "https://cms.athenatec.com";
@@ -43,25 +48,20 @@ const ALLOWED_CF7_FIELDS = new Set([
   "your-name",
 ]);
 
-function sanitizeText(value: FormDataEntryValue | null, maxLength: number) {
-  if (typeof value !== "string") return "";
-
-  return value
-    .replace(/\r\n/g, "\n")
-    .replace(/\r/g, "\n")
-    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "")
-    .trim()
-    .slice(0, maxLength);
-}
-
 export async function POST(
   req: Request,
   { params }: { params: Promise<{ formId: string }> },
 ) {
   try {
+    const originError = enforceSameOrigin(req);
+    if (originError) return originError;
+
+    const limitError = rateLimit(req, { keyPrefix: "cf7", limit: 8 });
+    if (limitError) return limitError;
+
     const { formId } = await params;
 
-    if (!/^\d+$/.test(formId)) {
+    if (!ALLOWED_CF7_FORM_IDS.has(formId)) {
       return Response.json(
         { status: "validation_failed", message: "Invalid form id." },
         { status: 400 },

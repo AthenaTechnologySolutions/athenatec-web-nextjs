@@ -13,7 +13,8 @@ type Props = {
 const partnerLinks = [
   { label: "Siemens Opcenter", href: "/siemens-opcenter-mes" },
   { label: "Critical Manufacturing", href: "/critical-manufacturing" },
-  { label: "Eyelit", href: "/eyelit" },
+  // Eyelit route is disabled for now; keep this entry commented for future reuse.
+  // { label: "Eyelit", href: "/eyelit" },
   {
     label: "Twinzo",
     href: "/blog/authorised-reseller-partnership-with-twinzo",
@@ -117,6 +118,13 @@ export default function HeaderMenu({ variant = "desktop", onNavigate }: Props) {
           ))}
         </MobileAccordion>
 
+        <MobileSubLink
+          href="https://243988893.hs-sites-na2.com/faborchestratorai"
+          onClick={onNavigate}
+        >
+          FabOrchestrator AI
+        </MobileSubLink>
+
         <MobileAccordion
           label="Resources"
           isOpen={open === "resources"}
@@ -211,6 +219,13 @@ export default function HeaderMenu({ variant = "desktop", onNavigate }: Props) {
           ))}
         </DropdownPanel>
       </DesktopDropdownWrapper>
+
+      <Link
+        href="https://243988893.hs-sites-na2.com/faborchestratorai"
+        className="relative whitespace-nowrap px-2 min-[1180px]:px-3 py-2 rounded-lg text-[13px] min-[1180px]:text-[14.5px] font-medium text-gray-700 transition-colors duration-150 hover:text-[#1c4584] hover:bg-[#1c4584]/5 after:absolute after:bottom-1 after:left-2 after:right-2 after:h-[2px] after:rounded-full after:bg-[#17ace4] after:scale-x-0 after:origin-left after:transition-transform after:duration-200 hover:after:scale-x-100"
+      >
+        FabOrchestrator AI
+      </Link>
 
       <DesktopDropdownWrapper
         label="Resources"

@@ -330,16 +330,13 @@ We will continue to work together with Athena to carry out continuous process im
 
           <div className="customers-grid">
             {logos
-              .filter(
-                (logo): logo is string =>
-                  typeof logo === "string" && logo.trim() !== "",
-              )
+              .filter((logo) => logo.src.trim() !== "")
               .map((logo, index) => (
                 <div key={index} className="customer-logo">
                   <div className="customer-logo-media">
                     <Image
-                      src={logo}
-                      alt="Client Logo"
+                      src={logo.src}
+                      alt={logo.name}
                       fill
                       sizes="130px"
                       className="object-contain"

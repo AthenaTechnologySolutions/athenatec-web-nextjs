@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import type { CSSProperties } from "react";
 import {
   advisoryBoard,
   leadershipTeam,
@@ -47,6 +48,11 @@ export default function Leadership() {
               href={`/leadership/${collab.slug}`}
               key={collab.id}
               aria-label={`Read more about ${collab.name}`}
+              style={
+                {
+                  "--leader-photo-position": collab.photoObjectPosition,
+                } as CSSProperties
+              }
             >
               <div className="advisory-profile-card__image">
                 <Image
@@ -82,7 +88,15 @@ export default function Leadership() {
 
         <div className="advisory-list">
           {advisoryBoard.map((advisor) => (
-            <article className="advisory-profile-card" key={advisor.id}>
+            <article
+              className="advisory-profile-card"
+              key={advisor.id}
+              style={
+                {
+                  "--leader-photo-position": advisor.photoObjectPosition,
+                } as CSSProperties
+              }
+            >
               <div className="advisory-profile-card__image">
                 <Image
                   src={advisor.profileImage}
