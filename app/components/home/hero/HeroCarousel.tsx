@@ -19,6 +19,8 @@ const SIEMENS_COUNTDOWN_END_TIME = new Date(
 ).getTime();
 const SIEMENS_LIVE_END_TIME = new Date("2026-06-05T00:00:00-04:00").getTime();
 const DAY_IN_MS = 24 * 60 * 60 * 1000;
+const DEFAULT_SLIDE_INTERVAL_MS = 5000;
+const FIRST_SLIDE_INTERVAL_MS = 13000;
 
 type HeroSlide = {
   id?: string;
@@ -263,10 +265,13 @@ export default function HeroCarousel() {
   };
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const slideInterval =
+      index === 0 ? FIRST_SLIDE_INTERVAL_MS : DEFAULT_SLIDE_INTERVAL_MS;
+
+    const timer = setTimeout(() => {
       changeSlide(index === total - 1 ? 0 : index + 1);
-    }, 5000);
-    return () => clearInterval(timer);
+    }, slideInterval);
+    return () => clearTimeout(timer);
   }, [index, total]);
 
   useEffect(() => {
