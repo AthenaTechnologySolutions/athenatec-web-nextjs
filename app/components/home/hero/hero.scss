@@ -321,10 +321,12 @@
   right: clamp(2rem, 6vw, 7rem);
   bottom: clamp(1rem, 2vw, 1.8rem);
   z-index: 35;
-  display: grid;
-  min-width: clamp(10.5rem, 17vw, 16rem);
-  justify-items: end;
-  gap: 0.18rem;
+  display: inline-flex;
+  width: fit-content;
+  max-width: calc(100vw - 2rem);
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.42rem;
   border: 1px solid rgba(23, 172, 228, 0.42);
   border-radius: 8px;
 background:
@@ -339,25 +341,26 @@ background:
 box-shadow:
   0 20px 40px rgba(0, 0, 0, 0.34),
   0 0 24px rgba(0, 183, 255, 0.12);
-  text-align: right;
+  text-align: center;
   text-shadow: 0 8px 20px rgba(3, 14, 38, 0.42);
   backdrop-filter: blur(8px);
+  white-space: nowrap;
 }
 
 .hero-carousel__siemens-countdown-value {
   color: #fff;
   font-family: "OutfitBold", sans-serif;
-  font-size: clamp(2.4rem, 1.62rem + 2.15vw, 4.45rem);
-  line-height: 0.92;
+  font-size: 2.2rem;
+  line-height: 1;
 }
 
 .hero-carousel__siemens-countdown-label {
   min-width: 0;
   color: #75dcff;
   font-family: "OutfitBold", sans-serif;
-  font-size: clamp(0.78rem, 0.62rem + 0.42vw, 1.12rem);
-  line-height: 1.12;
-  text-transform: uppercase;
+  font-size: 1rem;
+  line-height: 1.1;
+  text-transform: none;
 }
 
 .hero-carousel__siemens-event-list li,
@@ -613,25 +616,25 @@ box-shadow:
   }
 
   .hero-carousel__siemens-countdown {
-    left: auto;
+    left: 1rem;
     right: 1rem;
     bottom: 0.48rem;
-    width: 7.8rem;
-    min-width: 0;
+    width: fit-content;
     max-width: calc(100vw - 2rem);
-    justify-items: center;
-    padding: 0.52rem 0.62rem;
+    margin-inline: auto;
+    gap: 0.32rem;
+    padding: 0.56rem 0.72rem;
     text-align: center;
-    transform: translateX(-4.25rem);
+    transform: none;
   }
 
   .hero-carousel__siemens-countdown-value {
-    font-size: 1.72rem;
+    font-size: 1.38rem;
   }
 
   .hero-carousel__siemens-countdown-label {
-    max-width: 7.2rem;
-    font-size: 0.52rem;
+    max-width: none;
+    font-size: 0.72rem;
   }
 
   .hero-carousel--siemens-live .hero-carousel__dots {

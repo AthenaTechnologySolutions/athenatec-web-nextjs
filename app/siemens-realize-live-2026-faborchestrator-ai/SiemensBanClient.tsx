@@ -9,6 +9,7 @@ import {
   Check,
   CheckCircle2,
   ChevronDown,
+  Clock,
   Loader2,
   Mail,
   MapPin,
@@ -43,10 +44,11 @@ const industryOptions = [
 
 const focusOptions = [
   "Athena Opcenter Capabilities",
-  "Purpose-built Accelerators",
+  "Athena Accelerators",
   "FabOrchestrator.AI",
   "Realize LIVE Booth Meeting",
-  "Knowledge Theatre Session",
+  "Speaker Session",
+  "Knowledge Theatre K2",
 ];
 
 type MeetingFormData = {
@@ -95,6 +97,119 @@ const emptyForm: MeetingFormData = {
   receiveUpdates: false,
   agreePolicy: false,
 };
+
+const opcenterCapabilityItems = [
+  "Green Field/Brown Field implementation",
+  "Upgrades from older versions of Opcenter/Camstar",
+  "Templatized solutions",
+  "Multisite rollout strategy",
+  "Purpose built accelerators",
+];
+
+const industryExpertiseItems = [
+  "Process knowledge of Semiconductors, Medical Devices and Electronics",
+  "Process to Module mapping",
+  "Compliance and Validation Awareness",
+];
+
+const boothFocusItems = [
+  "Athena Accelerators",
+  "Athena Opcenter Capabilities",
+  "FabOrchestrator.AI",
+];
+
+type AgendaDetail = {
+  icon: "date" | "location" | "time";
+  text: string;
+};
+
+type AgendaSpeaker = {
+  name: string;
+  role: string;
+};
+
+type AgendaSession = {
+  kicker: string;
+  title: string;
+  speakers: AgendaSpeaker[];
+  details: AgendaDetail[];
+  points: string[];
+};
+
+const speakerSession: AgendaSession = {
+  kicker: "At the Speaker Session",
+  title:
+    "Accelerating Siemens Opcenter for Medical Device Manufacturing with Intelligent Automation",
+  speakers: [
+    {
+      name: "Senthil Ranganathan",
+      role: "CEO/Founder, Athenatec",
+    },
+    {
+      name: "Chaitra Raviprakash",
+      role: "Director of Manufacturing Systems (Opcenter COE) & Site Head, Athenatec",
+    },
+  ],
+  details: [
+    { icon: "location", text: "Room 251B" },
+    { icon: "time", text: "02:00 - 02:45 PM" },
+    { icon: "date", text: "Wed, June 3" },
+  ],
+  points: [
+    "Accelerate Siemens Opcenter deployments with proven accelerators",
+    "Reduce testing effort through automation driven validation",
+    "Enable faster engineering change and master data execution",
+  ],
+};
+
+const knowledgeTheatreSessions: AgendaSession[] = [
+  {
+    kicker: "Knowledge Theatre K2",
+    title:
+      "Accelerating Digital Manufacturing Transformation Through Scalable Siemens Opcenter MES Modernization Strategies",
+    speakers: [
+      {
+        name: "Chaitra Raviprakash",
+        role: "Director of Manufacturing Systems (Opcenter COE) & Site Head, Athenatec",
+      },
+    ],
+    details: [
+      { icon: "time", text: "10:30 - 11:00 AM" },
+      { icon: "date", text: "#1 Tues. June 2" },
+      { icon: "location", text: "KT 2" },
+    ],
+    points: [
+      "Accelerate Siemens Opcenter deployments with proven accelerators",
+      "Reduce testing effort through automation driven validation",
+      "Enable faster engineering change and master data execution",
+    ],
+  },
+  {
+    kicker: "Knowledge Theatre K2",
+    title:
+      "Transforming Manufacturing Operations with AI-Powered Orchestration and Connected Intelligence",
+    speakers: [
+      {
+        name: "Senthil Ranganathan",
+        role: "CEO/Founder, Athenatec",
+      },
+      {
+        name: "Jothi Periasamy",
+        role: "Chief Agentic AI Architect, Athenatec",
+      },
+    ],
+    details: [
+      { icon: "time", text: "04:30 - 05:00 PM" },
+      { icon: "date", text: "#1 Tues. June 2" },
+      { icon: "location", text: "KT 2" },
+    ],
+    points: [
+      "Intelligent Impact Analysis",
+      "Connected Manufacturing Intelligence",
+      "Proactive Operational Decisions",
+    ],
+  },
+];
 
 export default function SiemensBanClient() {
   const formRef = useRef<HTMLElement | null>(null);
@@ -158,41 +273,74 @@ export default function SiemensBanClient() {
 
       <section className="siemens-ban-intro">
         <div className="siemens-ban-container">
-          <h2>What we&apos;re bringing to Detroit:</h2>
+          <p className="siemens-ban-kicker">Realize LIVE 2026</p>
+          <h2>What we&apos;re bringing to Detroit</h2>
         </div>
       </section>
 
       <section className="siemens-ban-cards">
         <div className="siemens-ban-container siemens-ban-cards__grid">
-          <FeatureCard
-            title="Athena Opcenter Capabilities:"
-            text="Purpose-built accelerators, templatized multi-site rollouts, and scalable MES outcomes for Semiconductor, Medical Devices and Electronics."
-          />
-          <FeatureCard
-            title="Industry expertise that runs deep:"
-            text="Process-to-module mapping, end-to-end support, and Opcenter MES proficiency that helps you implement faster."
-          />
-         
-        </div>
-     <div className="siemens-ban-highlights">
-  <div className="siemens-ban-highlight siemens-ban-container">
-    <CheckCircle2 size={18} />
-    <p>
-      At the Knowledge Theatre, our leadership team will present
-      use case based scenarios for Medical Devices and Semiconductor
-      Industries.
-    </p>
-  </div>
+          <article className="siemens-ban-card">
+            <div className="siemens-ban-card__icon">
+              <CheckCircle2 size={21} />
+            </div>
+            <h3>Athena Opcenter Capabilities</h3>
+            <ul className="siemens-ban-check-list">
+              {opcenterCapabilityItems.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
 
-  <div className="siemens-ban-highlight siemens-ban-container">
-    <CheckCircle2 size={18} />
-    <p>
-      We&apos;ll demonstrate proprietary Athena MES-ready accelerators
-      that mitigate manual redlining risks, reduce effort and ensure
-      data consistency across platforms.
-    </p>
-  </div>
-</div>
+          <article className="siemens-ban-card">
+            <div className="siemens-ban-card__icon">
+              <CheckCircle2 size={21} />
+            </div>
+            <h3>Industry Expertise That Runs Deep</h3>
+            <ul className="siemens-ban-check-list">
+              {industryExpertiseItems.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
+        </div>
+
+        <div className="siemens-ban-booth siemens-ban-container">
+          <div className="siemens-ban-booth__content">
+            <div>
+              <span className="siemens-ban-kicker">At the Booth</span>
+              <h3>Meet Athena at Booth P2</h3>
+            </div>
+            <ul className="siemens-ban-booth__list">
+              {boothFocusItems.map((item) => (
+                <li key={item}>
+                  <CheckCircle2 size={18} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="siemens-ban-agenda siemens-ban-container">
+          <div className="siemens-ban-agenda__header">
+            <span className="siemens-ban-kicker"></span>
+            <h3>Speaker Session</h3>
+          </div>
+
+          <AgendaCard session={speakerSession} featured />
+
+          <div className="siemens-ban-agenda__header siemens-ban-agenda__header--spaced">
+            <span className="siemens-ban-kicker"></span>
+            <h3>Knowledge Theatre K2</h3>
+          </div>
+
+          <div className="siemens-ban-event-grid">
+            {knowledgeTheatreSessions.map((session) => (
+              <AgendaCard key={session.title} session={session} />
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="siemens-ban-fab">
@@ -205,13 +353,6 @@ export default function SiemensBanClient() {
               extends deep value to MES solutions through its five integrated
               capabilities built on an Agentic AI Foundry.
             </p>
-            <button
-              type="button"
-              className="siemens-ban-button siemens-ban-button--primary"
-              onClick={scrollToForm}
-            >
-              Book a meeting
-            </button>
             <p>
               FabInsight<sup>&trade;</sup>, AI Support Engineer, Modeling Agent,
               Back-end Agent and FIS (Factory Information system), work as one
@@ -226,15 +367,35 @@ export default function SiemensBanClient() {
             </p>
           </div>
 
-          <div className="siemens-ban-diagram">
-            <Image
-              src="/assets/images/siemens-ban.webp"
-              alt="FabOrchestrator.AI and Athena Opcenter capabilities diagram"
-              width={900}
-              height={900}
-              sizes="(max-width: 900px) 100vw, 760px"
-              className="siemens-ban-diagram__image"
-            />
+          <div className="siemens-ban-fab-unveil">
+            <div className="siemens-ban-fab-unveil__copy">
+              <p className="siemens-ban-kicker">Agentic AI Foundry</p>
+              <h3>Athena Unveils Faborchestrator</h3>
+              <p>
+                The manufacturing industry&apos;s first Agentic AI Foundry
+                designed to eliminate operational inefficiencies and unlock
+                unprecedented productivity. Stop chasing data across
+                disconnected systems and start commanding your factory with
+                intelligent AI agents that work alongside your team.
+              </p>
+              <a
+                className="siemens-ban-button siemens-ban-button--primary"
+                href="https://243988893.hs-sites-na2.com/faborchestratorai"
+              >
+                Explore FabOrchestrator.AI
+              </a>
+            </div>
+
+            <div className="siemens-ban-fab-unveil__media">
+              <Image
+                src="/assets/images/SRL.webp"
+                alt="FabOrchestrator.AI agentic AI foundry graphic"
+                width={900}
+                height={9000}
+                sizes="(max-width: 900px) 100vw, 760px"
+                className="siemens-ban-fab-unveil__image"
+              />
+            </div>
           </div>
 
           <div className="siemens-ban-fab__closing">
@@ -304,16 +465,63 @@ export default function SiemensBanClient() {
   );
 }
 
-function FeatureCard({ title, text }: { title?: string; text: string }) {
+function AgendaCard({
+  session,
+  featured = false,
+}: {
+  session: AgendaSession;
+  featured?: boolean;
+}) {
   return (
-    <article className="siemens-ban-card">
-      <div className="siemens-ban-card__icon">
-        <CheckCircle2 size={21} />
+    <article
+      className={`siemens-ban-event-card ${
+        featured ? "siemens-ban-event-card--featured" : ""
+      }`}
+    >
+      <div className="siemens-ban-event-card__topline">
+        <span>{session.kicker}</span>
+        <Sparkles size={17} />
       </div>
-      {title && <h3>{title}</h3>}
-      <p>{text}</p>
+
+      <div className="siemens-ban-event-card__content">
+        <div>
+          <h4>{session.title}</h4>
+          <dl className="siemens-ban-event-card__speakers">
+            {session.speakers.map((speaker) => (
+              <div key={speaker.name}>
+                <dt>{speaker.name}</dt>
+                <dd>{speaker.role}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <div className="siemens-ban-event-card__details">
+          {session.details.map((detail) => (
+            <span key={`${detail.icon}-${detail.text}`}>
+              <EventDetailIcon icon={detail.icon} />
+              {detail.text}
+            </span>
+          ))}
+        </div>
+
+        {/* <div className="siemens-ban-event-card__miss">
+          <span>Don&apos;t miss it</span>
+          <ul className="siemens-ban-check-list">
+            {session.points.map((point) => (
+              <li key={point}>{point}</li>
+            ))}
+          </ul>
+        </div> */}
+      </div>
     </article>
   );
+}
+
+function EventDetailIcon({ icon }: { icon: AgendaDetail["icon"] }) {
+  if (icon === "time") return <Clock size={17} />;
+  if (icon === "location") return <MapPin size={17} />;
+  return <CalendarDays size={17} />;
 }
 
 function MeetingForm() {

@@ -52,39 +52,39 @@ function getSiemensLiveCountdown(now = new Date()) {
   const currentTime = now.getTime();
 
   if (currentTime >= SIEMENS_LIVE_END_TIME) {
-    return { value: "0", label: "event complete" };
+    return { value: "0", label: "Days to Realize Live" };
   }
 
   if (currentTime >= SIEMENS_COUNTDOWN_END_TIME) {
-   return {
-  value: "LIVE",
-  label: "HAPPENING NOW • DETROIT",
-};
+    return {
+      value: "Live",
+      label: "at Realize Live",
+    };
   }
 
- const remainingTime = SIEMENS_COUNTDOWN_END_TIME - currentTime;
+  const remainingTime = SIEMENS_COUNTDOWN_END_TIME - currentTime;
 
-const days = Math.floor(remainingTime / DAY_IN_MS);
+  const days = Math.floor(remainingTime / DAY_IN_MS);
 
-if (days >= 1) {
+  if (days >= 1) {
+    return {
+      value: days.toString(),
+      label: days === 1 ? "Day to Realize Live" : "Days to Realize Live",
+    };
+  }
+
+  const hours = Math.floor(
+    (remainingTime % DAY_IN_MS) / (1000 * 60 * 60),
+  );
+
+  const minutes = Math.floor(
+    (remainingTime % (1000 * 60 * 60)) / (1000 * 60),
+  );
+
   return {
-    value: days.toString(),
-    label: days === 1 ? "DAY LEFT TO MAY 31" : "DAYS LEFT TO MAY 31",
+    value: `${hours}H ${minutes}M`,
+    label: "to Realize Live",
   };
-}
-
-const hours = Math.floor(
-  (remainingTime % DAY_IN_MS) / (1000 * 60 * 60),
-);
-
-const minutes = Math.floor(
-  (remainingTime % (1000 * 60 * 60)) / (1000 * 60),
-);
-
-return {
-  value: `${hours}H ${minutes}M`,
-  label: "EVENT STARTING SOON",
-};
 }
 
 const slides: HeroSlide[] = [
