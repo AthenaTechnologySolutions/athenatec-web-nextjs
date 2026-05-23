@@ -179,7 +179,7 @@ const knowledgeTheatreSessions: AgendaSession[] = [
       {
         name: "Jothi Periasamy",
         role: "Chief Agentic AI Architect, Athenatec",
-        image: "/assets/images/Jothi2.webp",
+        image: "/assets/images/Jothi.webp",
       },
     ],
     details: [
