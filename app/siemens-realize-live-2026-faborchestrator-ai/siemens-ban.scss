@@ -320,11 +320,11 @@
 }
 
 .siemens-ban-event-card--featured .siemens-ban-event-card__content {
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.42fr);
+  grid-template-columns: 1fr;
   grid-template-areas:
-    "title miss"
-    "details miss";
-  gap: 1.2rem 1.4rem;
+    "title"
+    "details";
+  gap: 1.2rem;
 }
 
 .siemens-ban-event-card__content h4 {
@@ -346,18 +346,43 @@
   margin: 1rem 0 0;
 }
 
-.siemens-ban-event-card__speakers div {
+.siemens-ban-event-card__speaker {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   border-left: 3px solid #17ace4;
   padding-left: 0.75rem;
 }
 
-.siemens-ban-event-card__speakers dt {
+.siemens-ban-event-card__speaker-image {
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #e6f8ff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.siemens-ban-event-card__speaker-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+}
+
+.siemens-ban-event-card__speaker-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.siemens-ban-event-card__speaker-info dt {
   color: #10233f;
   font-family: "OutfitBold", sans-serif;
   font-size: 0.98rem;
 }
 
-.siemens-ban-event-card__speakers dd {
+.siemens-ban-event-card__speaker-info dd {
   margin: 0.12rem 0 0;
   color: #526176;
   font-size: 0.92rem;

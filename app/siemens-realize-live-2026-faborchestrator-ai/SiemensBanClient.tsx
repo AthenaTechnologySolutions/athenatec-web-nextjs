@@ -126,6 +126,7 @@ type AgendaDetail = {
 type AgendaSpeaker = {
   name: string;
   role: string;
+  image?: string;
 };
 
 type AgendaSession = {
@@ -144,10 +145,12 @@ const speakerSession: AgendaSession = {
     {
       name: "Senthil Ranganathan",
       role: "CEO/Founder, Athenatec",
+      image: "/assets/images/Senthil.webp",
     },
     {
       name: "Chaitra Raviprakash",
       role: "Director of Manufacturing Systems (Opcenter COE) & Site Head, Athenatec",
+      image: "/assets/images/Media1.webp",
     },
   ],
   details: [
@@ -163,28 +166,7 @@ const speakerSession: AgendaSession = {
 };
 
 const knowledgeTheatreSessions: AgendaSession[] = [
-  {
-    kicker: "Knowledge Theatre K2",
-    title:
-      "Accelerating Digital Manufacturing Transformation Through Scalable Siemens Opcenter MES Modernization Strategies",
-    speakers: [
-      {
-        name: "Chaitra Raviprakash",
-        role: "Director of Manufacturing Systems (Opcenter COE) & Site Head, Athenatec",
-      },
-    ],
-    details: [
-      { icon: "time", text: "10:30 - 11:00 AM" },
-      { icon: "date", text: "#1 Tues. June 2" },
-      { icon: "location", text: "KT 2" },
-    ],
-    points: [
-      "Accelerate Siemens Opcenter deployments with proven accelerators",
-      "Reduce testing effort through automation driven validation",
-      "Enable faster engineering change and master data execution",
-    ],
-  },
-  {
+   {
     kicker: "Knowledge Theatre K2",
     title:
       "Transforming Manufacturing Operations with AI-Powered Orchestration and Connected Intelligence",
@@ -192,14 +174,16 @@ const knowledgeTheatreSessions: AgendaSession[] = [
       {
         name: "Senthil Ranganathan",
         role: "CEO/Founder, Athenatec",
+        image: "/assets/images/Senthil.webp",
       },
       {
         name: "Jothi Periasamy",
         role: "Chief Agentic AI Architect, Athenatec",
+        image: "/assets/images/Jothi2.webp",
       },
     ],
     details: [
-      { icon: "time", text: "04:30 - 05:00 PM" },
+      { icon: "time", text: "10:30 - 11:00 AM" },
       { icon: "date", text: "#1 Tues. June 2" },
       { icon: "location", text: "KT 2" },
     ],
@@ -209,6 +193,29 @@ const knowledgeTheatreSessions: AgendaSession[] = [
       "Proactive Operational Decisions",
     ],
   },
+  {
+    kicker: "Knowledge Theatre K2",
+    title:
+      "Accelerating Digital Manufacturing Transformation Through Scalable Siemens Opcenter MES Modernization Strategies",
+    speakers: [
+      {
+        name: "Chaitra Raviprakash",
+        role: "Director of Manufacturing Systems (Opcenter COE) & Site Head, Athenatec",
+        image: "/assets/images/Media1.webp",
+      },
+    ],
+    details: [
+      { icon: "time", text: "04:30 - 5:00 AM" },
+      { icon: "date", text: "#1 Tues. June 2" },
+      { icon: "location", text: "KT 2" },
+    ],
+    points: [
+      "Accelerate Siemens Opcenter deployments with proven accelerators",
+      "Reduce testing effort through automation driven validation",
+      "Enable faster engineering change and master data execution",
+    ],
+  },
+ 
 ];
 
 export default function SiemensBanClient() {
@@ -488,9 +495,22 @@ function AgendaCard({
           <h4>{session.title}</h4>
           <dl className="siemens-ban-event-card__speakers">
             {session.speakers.map((speaker) => (
-              <div key={speaker.name}>
-                <dt>{speaker.name}</dt>
-                <dd>{speaker.role}</dd>
+              <div key={speaker.name} className="siemens-ban-event-card__speaker">
+                {speaker.image && (
+                  <div className="siemens-ban-event-card__speaker-image">
+                    <Image
+                      src={speaker.image}
+                      alt={speaker.name}
+                      width={64}
+                      height={64}
+                      className="siemens-ban-event-card__speaker-img"
+                    />
+                  </div>
+                )}
+                <div className="siemens-ban-event-card__speaker-info">
+                  <dt>{speaker.name}</dt>
+                  <dd>{speaker.role}</dd>
+                </div>
               </div>
             ))}
           </dl>
