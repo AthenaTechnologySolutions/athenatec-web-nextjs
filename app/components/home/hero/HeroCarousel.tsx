@@ -477,7 +477,7 @@ function SiemensLiveEventInfo() {
         <ul className="hero-carousel__siemens-event-list">
           <li>
             <CalendarDays size={19} />
-            <span>June 1-4, 2026</span>
+            <span>June 1-4, 2026  |  7 AM - 9 PM</span>
           </li>
           <li>
             <MapPin size={20} />

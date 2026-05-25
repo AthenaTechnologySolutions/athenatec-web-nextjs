@@ -264,7 +264,7 @@ export default function SiemensBanClient() {
           <div className="siemens-ban-hero__details" aria-label="Event details">
             <span>
               <CalendarDays size={18} />
-              June 1 - 4, 2026
+              June 1 - 4, 2026 | 7 AM - 9 PM
             </span>
             <span>
               <Building2 size={18} />
@@ -447,7 +447,7 @@ export default function SiemensBanClient() {
               <dl className="siemens-ban-meeting-card__details">
                 <div>
                   <CalendarDays size={19} />
-                  <dd>June 1-4, 2026</dd>
+                  <dd>June 1-4, 2026 | 7 AM - 9 PM</dd>
                 </div>
                 <div>
                   <MapPin size={19} />
