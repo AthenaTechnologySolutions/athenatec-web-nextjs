@@ -89,6 +89,14 @@ function getSiemensLiveCountdown(now = new Date()) {
 
 const slides: HeroSlide[] = [
   {
+    id: "inaugural-agentic-ai",
+    title: "Inaugural Agentic AI Research Lab Invitation",
+    desc: "Join us for the inaugural launch of our Agentic AI Research Lab. Connect, learn, and explore what's next in agentic AI. We are launching our 12-week Claude Architect program.",
+    cta: "RSVP Now",
+    link: "/rsvp",
+    image: "/assets/images/FabOrchestratorAI.webp",
+  },
+  {
     id: SIEMENS_LIVE_SLIDE_ID,
     title: "Siemens Realize LIVE 2026",
     desc: "Infinite possibilities. Intelligent tomorrow. Join Athenatec at Realize LIVE 2026 to discover how Athena Opcenter, Opcenter Accelerators, and FabOrchestrator.AI drive innovation, efficiency, and intelligence across manufacturing enterprises.",
