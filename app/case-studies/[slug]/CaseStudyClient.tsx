@@ -30,7 +30,7 @@ export default function CaseStudyClient({ study }: { study: Study }) {
     <section className="case-detail py-20">
       <div className="container grid lg:grid-cols-3 gap-12">
          <div className="lg:col-span-2">
-          <h1 className="text-3xl font-bold mb-6">{study.fullTitle}</h1>
+          <h2 className="text-3xl font-bold mb-6">{study.fullTitle}</h2>
 
           {!isUnlocked &&
             study.summary.map((para, index) => (

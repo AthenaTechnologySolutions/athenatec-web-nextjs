@@ -5,6 +5,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
+  trailingSlash: true,
+  poweredByHeader: false,
+  compress: true,
   turbopack: {
     root: path.resolve(__dirname),
   },
@@ -17,7 +20,7 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 160, 256, 384],
-    qualities: [75, 80, 85, 88, 90, 92],
+    qualities: [75, 80, 85, 90],
     minimumCacheTTL: 60 * 60 * 24 * 30,
     dangerouslyAllowLocalIP: process.env.NODE_ENV !== "production",
     remotePatterns: [
@@ -36,6 +39,9 @@ const nextConfig = {
     maxInactiveAge: 25 * 1000,
     pagesBufferLength: 2,
   },
+
+   transpilePackages: [],
+
   async redirects() {
     return [
       {
@@ -66,7 +72,17 @@ const nextConfig = {
       },
       {
         source: "/solutions/mes/critical-manufacturing",
-        destination: "/mes/critical-manufacturing",
+        destination: "/critical-manufacturing",
+        permanent: true,
+      },
+      {
+        source: "/mes-implementation",
+        destination: "/mes-implementation-services",
+        permanent: true,
+      },
+      {
+        source: "/manufacturing-execution-system-implementation",
+        destination: "/mes-implementation-services",
         permanent: true,
       },
     ];

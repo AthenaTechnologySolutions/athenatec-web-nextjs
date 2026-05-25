@@ -3,14 +3,33 @@ import PracticeSection from "@/app/components/PracticeSection";
 import CTASection from "@/app/components/CTASection";
 import "./cloud.scss";
 import Image from "next/image";
-import { buildMetadata } from "@/lib/seo";
+// import FaqSection from "@/app/components/seo/FaqSection";
+import InternalLinkCluster, {
+  manufacturingSeoLinks,
+} from "@/app/components/seo/InternalLinkCluster";
+import StructuredData from "@/app/components/seo/StructuredData";
+import {
+  buildBreadcrumbSchema,
+  buildFaqSchema,
+  buildMetadata,
+  buildServiceSchema,
+  buildWebPageSchema,
+} from "@/lib/seo";
+import { oracleCloudFaqs } from "@/app/data/seoContent";
 
 export const metadata = buildMetadata({
-  title: "Oracle Cloud Implementation & Migration | Athenatec",
+  title: "Oracle Cloud ERP Implementation Services",
   description:
-    "Athenatec implements Oracle Cloud ERP, SCM, and HCM. Certified consultants manage net new implementations and cloud migrations for enterprise growth.",
+    "Implement Oracle Cloud ERP, SCM, and HCM with Athenatec. Align cloud applications with MES, PLM, finance, supply chain, and manufacturing.",
   path: "/solutions/oracle-cloud",
   image: "/assets/images/oracle-cloud.webp",
+  keywords: [
+    "Oracle Cloud ERP implementation services",
+    "Oracle Cloud implementation",
+    "Oracle ERP manufacturing integration",
+    "Oracle SCM Cloud implementation",
+    "Oracle Cloud MES integration",
+  ],
 });
 
 const practiceData = [
@@ -66,27 +85,56 @@ const pathData = [
 ];
 
 export default function OracleCloud() {
+  const seoSchema = [
+    buildWebPageSchema({
+      name: "Oracle Cloud ERP Implementation Services",
+      description:
+        "Oracle Cloud ERP, SCM, and HCM implementation services for manufacturers modernizing enterprise operations.",
+      path: "/solutions/oracle-cloud",
+      primaryImage: "/assets/images/oracle-cloud.webp",
+    }),
+    buildServiceSchema({
+      name: "Oracle Cloud ERP Implementation Services",
+      description:
+        "Athenatec implements Oracle Cloud ERP, SCM, and HCM and integrates Oracle Cloud with MES, PLM, supply chain, finance, and manufacturing systems.",
+      path: "/solutions/oracle-cloud",
+      serviceType: "Oracle Cloud ERP Implementation",
+      keywords: [
+        "Oracle Cloud ERP implementation services",
+        "Oracle Cloud ERP manufacturing",
+        "Oracle SCM Cloud implementation",
+        "Oracle Cloud MES integration",
+      ],
+      areaServed: ["United States", "North America", "APAC", "EMEA"],
+      offers: [
+        {
+          name: "Oracle Cloud ERP implementation",
+          description:
+            "Finance, procurement, inventory, project, and enterprise performance workflows.",
+        },
+        {
+          name: "Oracle Cloud SCM implementation",
+          description:
+            "Supply chain planning, order management, inventory, manufacturing, and digital logistics.",
+        },
+        {
+          name: "Oracle Cloud integrations",
+          description:
+            "Integration with MES, PLM, quality, analytics, and shop-floor applications.",
+        },
+      ],
+    }),
+    buildBreadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "Solutions", path: "/solutions/mes" },
+      { name: "Oracle Cloud ERP Implementation Services", path: "/solutions/oracle-cloud" },
+    ]),
+    buildFaqSchema(oracleCloudFaqs, "/solutions/oracle-cloud"),
+  ];
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            name: "Oracle Cloud Solutions",
-            provider: {
-              "@type": "Organization",
-              name: "Athenatec",
-              url: "https://athenatec.com",
-            },
-            description:
-              "Oracle Cloud ERP, SCM, and HCM implementation and managed services by Oracle Certified Consultants.",
-            serviceType: "Oracle Cloud Implementation",
-            areaServed: "Worldwide",
-          }),
-        }}
-      />
+      <StructuredData data={seoSchema} id="oracle-cloud-seo-schema" />
 
       <HeroSection
         title="Oracle Cloud"
@@ -132,7 +180,7 @@ export default function OracleCloud() {
 
       {/* ── Practice Cards ── */}
       <PracticeSection
-        title="Our Oracle Cloud Service Pillars"
+        title="Oracle Cloud ERP, SCM, and HCM Service Pillars"
         cards={practiceData}
       />
 
@@ -167,6 +215,17 @@ export default function OracleCloud() {
       </section>
 
       {/* ── CTA ── */}
+      {/* <FaqSection
+        title="Oracle Cloud ERP Implementation FAQs"
+        intro="Common questions about Oracle Cloud ERP, SCM, integrations, migration, and manufacturing transformation."
+        faqs={oracleCloudFaqs}
+      /> */}
+      <InternalLinkCluster
+        links={manufacturingSeoLinks}
+        title="Connect Oracle Cloud ERP with MES and PLM"
+        description="Explore the MES, Siemens Opcenter, Critical Manufacturing, PLM, accelerators, case studies, and blog resources that complete the digital manufacturing architecture."
+      />
+
       <CTASection
         title={
           <>

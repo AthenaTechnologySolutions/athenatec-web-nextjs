@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import HeroSection from "@/app/components/HeroSection";
 import type { Metadata } from "next";
-import { LOGO_PATH, absoluteUrl, buildMetadata, stripHtml, truncate } from "@/lib/seo";
+import { LOGO_PATH, absoluteUrl, buildMetadata, canonicalUrl, stripHtml, truncate } from "@/lib/seo";
 import { getAllPosts, getPostImage, type WPPost } from "@/lib/wordpress";
 
 export const revalidate = 300;
@@ -70,6 +70,7 @@ export default async function NewsRoom() {
         position: index + 1,
         url: `https://www.athenatec.com/blog/${post.slug}`,
         name: stripHtml(post.title.rendered),
+        
       })),
     },
   };
@@ -87,7 +88,7 @@ export default async function NewsRoom() {
         description="Latest announcements, partnerships and digital manufacturing updates from Athenatec"
         image={NEWSROOM_HERO_IMAGE}
         align="center"
-        buttonText="Contact Us"
+        buttonText="Discuss a manufacturing technology announcement"
         buttonLink="/contact"
       />
       <section className="py-20">

@@ -128,7 +128,7 @@ export default function WhoWeAre() {
             </p>
 
             <Link href="/about" className="wwa-btn">
-              <span>Explore Us</span>
+              <span>Meet our MES implementation experts</span>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -174,106 +174,51 @@ export default function WhoWeAre() {
           </motion.h3>
 
           <div className="partners-grid">
-            <div className="partner-card">
-              <Image
-                src="/assets/images/images-3.webp"
-                alt="Siemens"
-                width={180}
-                height={72}
-                className="partner-logo h-auto w-auto object-contain"
-                quality={80}
-              />
-
-              <h4>Siemens Alliance Partner</h4>
-
-              <p>
-                As a trusted Siemens Alliance Partner, Athena boasts an
-                excellent team specializing in the implementation and upgrade of
-                Opcenter solutions, driving innovation and operational
-                efficiency across industries including Semiconductor,
-                Electronics, Medical Devices, Discrete Manufacturing, and Clean
-                Energy.
-              </p>
-              <Link href="/siemens-opcenter-mes" className="partner-btn">
-                Know More
-              </Link>
-            </div>
-
-            <div className="partner-card">
-              <Image
-                src="/assets/images/critical_manufacturing_logo-e1727901256634-1.webp"
-                alt="Critical Manufacturing"
-                width={180}
-                height={72}
-                className="partner-logo h-auto w-auto object-contain"
-                quality={80}
-              />
-
-              <h4>Critical Manufacturing Premier Partner</h4>
-
-              <p>
-                As a Critical Manufacturing Premier Partner, our certified team
-                of experts specializes in implementing Critical Manufacturing
-                MES, delivering customized solutions that ensure seamless
-                integration and optimize performance throughout your entire
-                manufacturing process.
-              </p>
-
-              <Link href="/critical-manufacturing" className="partner-btn">
-                Know More
-              </Link>
-            </div>
-
-            {/* <div className="partner-card">
-              <Image
-                src="/assets/images/00.webp"
-                alt="Eyelit"
-                width={180}
-                height={72}
-                className="partner-logo h-auto w-auto object-contain"
-                quality={80}
-              />
-
-              <h4>Eyelit Implementation Partner</h4>
-
-              <p>
-                As an implementation partner of Eyelit Technologies, Athena
-                Technology Solutions brings extensive expertise in deploying
-                both Eyelit MES and Equipment Connect across various industries
-                such as semiconductor, solar, LED/laser diode, and medical
-                devices.
-              </p>
-
-              <Link href="/eyelit" className="partner-btn">
-                Know More
-              </Link>
-            </div> */}
-            <div className="partner-card">
-              <Image
-                src="/assets/Clients/twinzo-img.webp"
-                alt="Twinzo"
-                width={180}
-                height={72}
-                className="partner-logo h-auto w-auto object-contain"
-                quality={80}
-              />
-
-              <h4>Twinzo Authorized Reseller Partner</h4>
-
-              <p>
-                Authorized Twinzo reseller and implementation partner providing
-                industrial digital twin and smart factory solutions. We help
-                manufacturers adopt real-time visualization, performance
-                monitoring, and data-driven operations across sectors.
-              </p>
-
-              <Link
-                href="/blog/authorised-reseller-partnership-with-twinzo"
-                className="partner-btn"
+            {[
+              {
+                src: "/assets/images/images-3.webp",
+                alt: "Siemens",
+                title: "Siemens Alliance Partner",
+                desc: "As a trusted Siemens Alliance Partner, Athena boasts an excellent team specializing in the implementation and upgrade of Opcenter solutions, driving innovation and operational efficiency across Semiconductor, Electronics, Medical Devices, and Clean Energy.",
+                href: "/siemens-opcenter-mes",
+              },
+              {
+                src: "/assets/images/critical_manufacturing_logo-e1727901256634-1.webp",
+                alt: "Critical Manufacturing",
+                title: "Critical Manufacturing Premier Partner",
+                desc: "As a Critical Manufacturing Premier Partner, our certified team of experts specializes in implementing Critical Manufacturing MES, delivering customized solutions that ensure seamless integration and optimal performance.",
+                href: "/critical-manufacturing",
+              },
+              {
+                src: "/assets/Clients/twinzo-img.webp",
+                alt: "Twinzo",
+                title: "Twinzo Authorized Reseller",
+                desc: "Authorized Twinzo reseller and implementation partner providing industrial digital twin and smart factory solutions. We help manufacturers adopt real-time visualization, performance monitoring, and data-driven operations.",
+                href: "/blog/authorised-reseller-partnership-with-twinzo",
+              },
+            ].map((p, i) => (
+              <motion.div
+                key={p.title}
+                className="partner-card"
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.65, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -4, transition: { duration: 0.25 } }}
               >
-                Know More
-              </Link>
-            </div>
+                <Image
+                  src={p.src}
+                  alt={p.alt}
+                  width={180}
+                  height={72}
+                  className="partner-logo h-auto w-auto object-contain"
+                  quality={80}
+                />
+                <h4>{p.title}</h4>
+                <p>{p.desc}</p>
+                <Link href={p.href} className="partner-btn">Know More</Link>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -283,13 +228,23 @@ export default function WhoWeAre() {
       ═══════════════════════════════════════════════════ */}
       <section className="what-we-do" id="what-we-do">
         <div className="what-container">
-          <div className="what-media">
-            <div className="what-image-wrapper">
-              <VideoPlayer />
-            </div>
-          </div>
+          <motion.div
+            className="what-media"
+            initial={{ opacity: 0, x: -40, scale: 0.97 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <VideoPlayer />
+          </motion.div>
 
-          <motion.div className="what-content">
+          <motion.div
+            className="what-content"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          >
             <span className="section-eyebrow">WHAT WE DO</span>
 
             <h2 className="what-title">
@@ -321,7 +276,6 @@ export default function WhoWeAre() {
               </div>
             </div>
           </motion.div>
-          
         </div>
       </section>
     </>

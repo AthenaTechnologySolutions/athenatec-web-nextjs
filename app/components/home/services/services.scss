@@ -318,7 +318,9 @@
 
 .why-us {
   padding: 6rem 0;
-  background: #1c4584;
+   background:
+    radial-gradient(circle at 82% 10%, rgba(23, 172, 228, 0.08), transparent 28%),
+    linear-gradient(135deg, #1c4584 0%, #0b244c 68%, #071c3c 100%);
 
    .why-us-content {
     position: sticky;
@@ -523,7 +525,10 @@
     font-size: 2.2rem;
     font-weight: 500;
     margin-bottom: 4rem;
-    color: #000000;
+    color: #071c3c;
+    //  color:
+    // radial-gradient(circle at 82% 10%, rgba(23, 172, 228, 0.08), transparent 28%),
+    // linear-gradient(135deg, #1c4584 0%, #0b244c 68%, #071c3c 100%);
   }
 
  

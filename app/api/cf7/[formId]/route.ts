@@ -13,7 +13,10 @@ const ALLOWED_CF7_FORM_IDS = new Set([
   "230890",
   "231155",
   "231536",
+  "232878",
 ]);
+
+const ACCEPTANCE_VALIDATION_FORM_IDS = new Set(["232878"]);
 
 const RESERVED_CF7_FIELDS = new Set([
   "_wpcf7",
@@ -25,14 +28,21 @@ const RESERVED_CF7_FIELDS = new Set([
 
 const ALLOWED_CF7_FIELDS = new Set([
   "checkbox-649",
+  "consent",
   "company-name",
   "country",
+  "full-name",
+  "industry",
   "industries",
   "job",
+  "job-title",
+  "meeting-focus",
+  "message",
   "page-url",
   "receive",
   "support-needed",
   "textarea-11",
+  "work-email",
   "topic",
   "your-email",
   "your-name",
@@ -58,7 +68,34 @@ export async function POST(
       );
     }
 
+    if (!ALLOWED_CF7_FORM_IDS.has(formId)) {
+      return Response.json(
+        { status: "validation_failed", message: "Form id is not allowed." },
+        { status: 403 },
+      );
+    }
+
     const incoming = await req.formData();
+    const requiresAcceptanceValidation =
+      ACCEPTANCE_VALIDATION_FORM_IDS.has(formId);
+    const acceptanceField = formId === "232878" ? "consent" : "checkbox-649";
+    const hasAcceptedTerms =
+      sanitizeText(incoming.get(acceptanceField), 200).length > 0;
+
+    if (requiresAcceptanceValidation && !hasAcceptedTerms) {
+      return Response.json({
+        status: "validation_failed",
+        message: "One or more fields have an error. Please check and try again.",
+        invalid_fields: [
+          {
+            field: acceptanceField,
+            message:
+              "You must accept the terms and conditions before sending your message.",
+          },
+        ],
+      });
+    }
+
     const fd = new FormData();
 
     fd.append("_wpcf7", formId);
@@ -67,13 +104,19 @@ export async function POST(
     fd.append("_wpcf7_unit_tag", `wpcf7-f${formId}-o1`);
     fd.append("_wpcf7_container_post", "0");
 
+    if (requiresAcceptanceValidation) {
+      fd.append("_wpcf7_acceptance_as_validation", "1");
+    }
+
     for (const [key, value] of incoming.entries()) {
       if (
         !RESERVED_CF7_FIELDS.has(key) &&
         ALLOWED_CF7_FIELDS.has(key) &&
         typeof value === "string"
       ) {
-        fd.append(key, sanitizeText(value, key === "textarea-11" ? 2_000 : 500));
+        const maxLength =
+          key === "textarea-11" || key === "message" ? 2_000 : 500;
+        fd.append(key, sanitizeText(value, maxLength));
       }
     }
 

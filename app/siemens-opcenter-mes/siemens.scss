@@ -462,7 +462,7 @@
   }
 }
 
-@include mobile {
+@media (max-width: 480px) {
   .soc-description,
   .soc-services,
   .soc-expertise,

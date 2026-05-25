@@ -64,7 +64,7 @@ export default function EnterpriseErp() {
             provider: {
               "@type": "Organization",
               name: "Athenatec",
-              url: "https://athenatec.com",
+              url: "https://www.athenatec.com/",
             },
             description:
               "Oracle ERP implementation, integration with MES and PLM, and digital transformation services for manufacturing enterprises.",

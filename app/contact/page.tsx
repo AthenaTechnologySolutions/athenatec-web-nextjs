@@ -3,13 +3,15 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import HeroSection from "@/app/components/HeroSection";
 import Link from "next/link";
 import ContactForm from "@/app/components/forms/ContactForm";
-import { buildContactPageSchema } from "@/lib/seo";
+import { buildContactPageSchema, buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Contact Athenatec | MES, PLM & Smart Factory Experts",
   description:
     "Get in touch with Athenatec's team for MES, PLM, and smart manufacturing solutions, in Bangalore, Chennai, Hyderabad, and Trichy. We respond within 24 hours",
-};
+  path: "/contact",
+  image: "/assets/images/contactus.webp",
+});
 
 export default function ContactPage() {
   const contactPageSchema = buildContactPageSchema();
@@ -35,9 +37,9 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16">
           <div className="space-y-10">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">
                 Get in Touch
-              </h1>
+              </h2>
               <p className="text-gray-600 text-lg leading-relaxed">
                 Have questions or need support? Our team will get back to you
                 within 1–2 business days.

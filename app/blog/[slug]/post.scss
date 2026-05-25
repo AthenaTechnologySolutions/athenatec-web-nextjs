@@ -13,8 +13,8 @@
   --shadow-md: 0 8px 32px rgba(15, 17, 23, 0.1);
   --shadow-lg: 0 20px 60px rgba(15, 17, 23, 0.16);
   --radius: 14px;
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-body: "DM Sans", system-ui, sans-serif;
+  --font-display: "OutfitSemiBold", Georgia, serif;
+  --font-body: "OutfitRegular", system-ui, sans-serif;
 }
 
  .post-wrapper {
@@ -136,7 +136,7 @@
   }
 }
 
- .post-article {
+.post-article {
   background: var(--card-bg);
   border-radius: 20px;
   padding: 64px 72px;
@@ -151,6 +151,139 @@
   @include mobile {
     padding: 32px 24px;
     border-radius: 14px;
+  }
+}
+
+.post-breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+  color: var(--ink-light);
+  font-size: 13px;
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// .post-author,
+// .post-toc,
+// .post-faq {
+//   border: 1px solid var(--border);
+//   border-radius: 12px;
+//   background: #f8fbfd;
+//   padding: 24px;
+//   margin-bottom: 32px;
+// }
+
+// .post-author {
+//   display: flex;
+//   gap: 24px;
+//   align-items: flex-start;
+//   justify-content: space-between;
+
+//   @include mobile {
+//     flex-direction: column;
+//   }
+
+//   &__label {
+//     margin: 0 0 6px;
+//     color: var(--accent);
+//     font-size: 12px;
+//     font-weight: 700;
+//     letter-spacing: 0.12em;
+//     text-transform: uppercase;
+//   }
+
+//   h2 {
+//     margin: 0 0 10px;
+//     color: var(--ink);
+//     font-size: 22px;
+//   }
+
+//   p {
+//     margin: 0;
+//     color: var(--ink-light);
+//     line-height: 1.65;
+//   }
+
+//   &__link {
+//     flex: 0 0 auto;
+//     color: var(--accent);
+//     font-weight: 700;
+//     text-decoration: none;
+
+//     &:hover {
+//       text-decoration: underline;
+//     }
+//   }
+// }
+
+.post-toc {
+  h2 {
+    margin: 0 0 16px;
+    color: var(--ink);
+    font-size: 22px;
+  }
+
+  ol {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  li {
+    margin-bottom: 10px;
+  }
+
+  // &__item--nested {
+  //   margin-left: 18px;
+  // }
+
+  a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.post-faq {
+  margin-top: 48px;
+
+  h2 {
+    margin: 0 0 18px;
+    color: var(--ink);
+    font-size: 24px;
+  }
+
+  details {
+    border-top: 1px solid var(--border);
+    padding: 16px 0;
+
+    &:first-of-type {
+      border-top: 0;
+    }
+  }
+
+  summary {
+    cursor: pointer;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  p {
+    margin: 12px 0 0;
+    color: var(--ink-light);
+    line-height: 1.7;
   }
 }
 

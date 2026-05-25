@@ -3,8 +3,9 @@ import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import Image from "next/image";
 
 const mesSolutions = [
-  { name: "Siemens Opcenter MES", href: "/siemens-opcenter-mes" },
-  { name: "Critical Manufacturing", href: "/critical-manufacturing" },
+  // { name: "MES Implementation Services", href: "/mes-implementation-services" },
+  { name: "Siemens Opcenter MES Implementation", href: "/siemens-opcenter-mes" },
+  { name: "Critical Manufacturing MES Implementation", href: "/critical-manufacturing" },
   // { name: "Eyelit", href: "/eyelit" },
   // { name: "Twinzo", href: "/twinzo" },
 ];

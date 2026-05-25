@@ -835,7 +835,7 @@ function MedtechMESLayout() {
             />
           </div>
           <div className="mes-hero-content">
-            <h1>Is Manual Testing Holding Your MedTech Innovation Back?</h1>
+            <h2>Is Manual Testing Holding Your MedTech Innovation Back?</h2>
             <h3 className="sub-heading">
               Stop Letting Manual Processes Dictate Your Pace
             </h3>

@@ -4,10 +4,22 @@ import "./mes.scss";
 import CTASection from "@/app/components/CTASection";
 import PracticeSection from "@/app/components/PracticeSection";
 import Link from "next/link";
-import { buildMetadata } from "@/lib/seo";
+// import FaqSection from "@/app/components/seo/FaqSection";
+import InternalLinkCluster, {
+  manufacturingSeoLinks,
+} from "@/app/components/seo/InternalLinkCluster";
+import StructuredData from "@/app/components/seo/StructuredData";
+import {
+  buildBreadcrumbSchema,
+  buildFaqSchema,
+  buildMetadata,
+  buildServiceSchema,
+  buildWebPageSchema,
+} from "@/lib/seo";
+import { mesImplementationFaqs, priorityServiceOffers } from "@/app/data/seoContent";
 
 export const metadata = buildMetadata({
-  title: "MES Implementation & Integration Services | Athenatec",
+  title: "MES Implementation & Integration Services",
   description:
     "Athenatec integrates MES with ERP, PLM, and factory equipment. Gain real-time visibility, traceability, and control across your manufacturing process.",
   path: "/solutions/mes",
@@ -53,38 +65,57 @@ const practiceData = [
   },
 ];
 export default function MESPage() {
+  const seoSchema = [
+    buildWebPageSchema({
+      name: "MES Implementation & Integration Services",
+      description:
+        "Manufacturing execution system implementation and integration services connecting ERP, PLM, and factory systems.",
+      path: "/solutions/mes",
+      primaryImage: "/assets/images/Mes-solution.webp",
+    }),
+    buildServiceSchema({
+      name: "MES Implementation & Integration Services",
+      description:
+        "MES implementation and integration services for manufacturers connecting ERP, PLM, equipment, quality systems, and analytics.",
+      path: "/solutions/mes",
+      serviceType: "Manufacturing Execution System Implementation",
+      keywords: [
+        "MES implementation",
+        "MES integration services",
+        "manufacturing execution system implementation",
+        "Industry 4.0 MES",
+      ],
+      offers: priorityServiceOffers,
+    }),
+    buildBreadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "MES Implementation Services", path: "/mes-implementation-services" },
+      { name: "MES Implementation & Integration Services", path: "/solutions/mes" },
+    ]),
+    buildFaqSchema(mesImplementationFaqs, "/solutions/mes"),
+  ];
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            name: "MES Implementation Services",
-            description:
-              "Manufacturing Execution Systems (MES) implementation and integration services connecting ERP, PLM, and factory systems for Industry 4.0 transformation.",
-            provider: {
-              "@type": "Organization",
-              name: "Athenatec",
-              url: "https://athenatec.com",
-            },
-            areaServed: {
-              "@type": "Place",
-              name: "Worldwide",
-            },
-            serviceType: "Manufacturing Execution Systems Implementation",
-          }),
-        }}
-      />
+      <StructuredData data={seoSchema} id="mes-solution-seo-schema" />
       <HeroSection
-        title="MES Solutions"
-        description="Leave us a little info, and we’ll be in touch."
+        title="MES Implementation and Integration Services"
+        description="Manufacturing execution system implementation that connects ERP, PLM, equipment, quality, analytics, and shop-floor execution for Industry 4.0 programs."
         image="/assets/images/Mes-solution.webp"
         align="center"
-        buttonText="Contact Us"
-        buttonLink="/contact"
+        buttonText="Explore MES implementation services"
+        buttonLink="/mes-implementation-services"
       />
+      {/* <div className="bg-white py-6">
+        <div className="container">
+          <Link
+            href="/mes-implementation-services"
+            className="font-semibold text-[#1c4584] hover:text-[#17ace4]"
+          >
+            Read the complete MES implementation services guide
+          </Link>
+        </div>
+      </div> */}
       <section className="who-we-are">
         <div className="container">
            <div className="who-content">
@@ -102,7 +133,7 @@ export default function MESPage() {
               every stage of implementation.
             </p>
             <Link href="/about">
-              <button className="who-button">Explore Us</button>
+              <button className="who-button">Meet our MES implementation experts</button>
             </Link>
           </div>
 
@@ -120,7 +151,7 @@ export default function MESPage() {
       <section className="soc-factory">
         <div className="soc-factory__container">
           <h2 className="soc-factory__title">
-            Factory System Overview and Integration
+            MES Factory System Overview and Integration
           </h2>
 
           <div className="soc-factory__grid">
@@ -171,9 +202,19 @@ export default function MESPage() {
         </div>
       </section>
       <PracticeSection
-        title="Enterprise Systems Practice MES and Factory Systems"
+        title="Enterprise MES Implementation and Factory Systems Practice"
         cards={practiceData}
         bottomImage="/assets/images/07-4.webp"
+      />
+      {/* <FaqSection
+        title="MES Implementation and Integration FAQs"
+        intro="Common questions about MES consulting, implementation scope, integrations, validation, and support."
+        faqs={mesImplementationFaqs}
+      /> */}
+      <InternalLinkCluster
+        links={manufacturingSeoLinks}
+        title="Compare MES implementation paths and supporting systems"
+        description="Explore the MES services hub, Siemens Opcenter, Critical Manufacturing, Oracle Cloud ERP, Oracle Agile PLM, accelerators, and case studies."
       />
       <CTASection
         title={
@@ -182,8 +223,8 @@ export default function MESPage() {
             <br /> Got an enquiry?
           </>
         }
-        description="At Athena, our team guides your Industry 4.0 journey with deep expertise in digital transformation and manufacturing solutions. "
-        buttonText="Contact Us"
+        description="Talk with Athenatec about MES implementation, integration, validation, and long-term manufacturing application support."
+        buttonText="Request MES implementation consulting"
         buttonLink="/contact"
         note="We typically respond within 24 hours."
         backgroundImage="/assets/images/new-req.webp"

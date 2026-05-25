@@ -3,22 +3,15 @@ import Image from "next/image";
 import "./case.scss";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Industry Use Cases & Success Stories | Athenatec",
+export const metadata: Metadata = buildMetadata({
+  title: "MES Case Studies & Manufacturing Success Stories",
   description:
-    "See real-world success stories from Athenatec's MES, ERP, and digital transformation projects for medical device and semiconductor manufacturers.",
-  alternates: {
-    canonical: "https://athenatec.com/case-studies",
-  },
-  openGraph: {
-    title: "Industry Use Cases & Success Stories | Athenatec",
-    description:
-      "See real-world success stories from Athenatec's MES, ERP, and digital transformation projects for medical device and semiconductor manufacturers.",
-    url: "https://athenatec.com/case-studies",
-    type: "website",
-  },
-};
+    "See MES implementation, ERP, PLM, and smart manufacturing success stories for medical device, semiconductor, and high-tech manufacturers.",
+  path: "/case-studies",
+  image: "/assets/images/casestudie-banner.webp",
+});
 
 type CaseStudy = {
   slug: string;
@@ -52,11 +45,11 @@ export default function CaseStudies() {
   return (
     <>
       <HeroSection
-        title="Case Studies"
-        description="Leave us a little info, and we'll be in touch."
+        title="MES Case Studies and Manufacturing Success Stories"
+        description="Real-world MES implementation, paperless manufacturing, ERP, PLM, and smart factory transformation stories from complex manufacturers."
         image="/assets/images/casestudie-banner.webp"
         align="center"
-        buttonText="Contact Us"
+        buttonText="Discuss a similar MES implementation"
         buttonLink="/contact"
       />
 

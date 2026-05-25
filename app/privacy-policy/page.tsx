@@ -19,13 +19,13 @@ export const metadata: Metadata = {
     "GDPR manufacturing software",
   ],
   alternates: {
-    canonical: "https://athenatec.com/privacy-policy",
+    canonical: "https://www.athenatec.com/privacy-policy/",
   },
   openGraph: {
     title: "Privacy Policy | Athena Technology Solutions",
     description:
       "Learn how Athena Technology Solutions collects, uses, and safeguards your information across our Industry 4.0 manufacturing software and services.",
-    url: "https://athenatec.com/privacy-policy",
+    url: "https://www.athenatec.com/privacy-policy/",
     siteName: "Athena Technology Solutions",
     type: "website",
   },

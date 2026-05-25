@@ -22,9 +22,9 @@ const partnerLinks = [
 ];
 
 const mesSolutionLinks = [
-  // { label: "MES Solution", href: "/solutions/mes" },
-  { label: "Siemens Opcenter MES", href: "/siemens-opcenter-mes" },
-  { label: "Critical Manufacturing", href: "/critical-manufacturing" },
+  // { label: "MES Implementation Services", href: "/mes-implementation-services" },
+  { label: "Siemens Opcenter MES Implementation", href: "/siemens-opcenter-mes" },
+  { label: "Critical Manufacturing MES Implementation", href: "/critical-manufacturing" },
   // { label: "Eyelit MES", href: "/eyelit" },
   // { label: "Twinzo Digital Twin", href: "/twinzo" },
 ];
@@ -153,7 +153,7 @@ export default function HeaderMenu({ variant = "desktop", onNavigate }: Props) {
         <DropdownPanel onMouseEnter={cancelClose} onMouseLeave={scheduleClose}>
           {partnerLinks.map((l) => (
             <Link key={l.href} href={l.href} className={itemCls}>
-              <span className="h-1.5 w-1.5 rounded-full bg-[#17ace4] opacity-0 group-hover:opacity-100 transition-opacity" />
+              {/* <span className="h-1.5 w-1.5 rounded-full bg-[#17ace4] opacity-0 group-hover:opacity-100 transition-opacity" /> */}
               {l.label}
             </Link>
           ))}
@@ -182,7 +182,7 @@ export default function HeaderMenu({ variant = "desktop", onNavigate }: Props) {
               className={`${itemCls} justify-between`}
             >
               <span className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#17ace4] opacity-0 group-hover:opacity-100 transition-opacity" />
+                {/* <span className="h-1.5 w-1.5 rounded-full bg-[#17ace4] opacity-0 group-hover:opacity-100 transition-opacity" /> */}
                 MES Solutions
               </span>
               <ChevronRight
@@ -201,7 +201,7 @@ export default function HeaderMenu({ variant = "desktop", onNavigate }: Props) {
               >
                 {mesSolutionLinks.map((l) => (
                   <Link key={l.href} href={l.href} className={itemCls}>
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#17ace4] opacity-0 group-hover:opacity-100 transition-opacity" />
+                    {/* <span className="h-1.5 w-1.5 rounded-full bg-[#17ace4] opacity-0 group-hover:opacity-100 transition-opacity" /> */}
                     {l.label}
                   </Link>
                 ))}
@@ -213,7 +213,7 @@ export default function HeaderMenu({ variant = "desktop", onNavigate }: Props) {
 
           {otherSolutionLinks.map((l) => (
             <Link key={l.href} href={l.href} className={itemCls}>
-              <span className="h-1.5 w-1.5 rounded-full bg-[#17ace4] opacity-0 group-hover:opacity-100 transition-opacity" />
+              {/* <span className="h-1.5 w-1.5 rounded-full bg-[#17ace4] opacity-0 group-hover:opacity-100 transition-opacity" /> */}
               {l.label}
             </Link>
           ))}
@@ -237,7 +237,7 @@ export default function HeaderMenu({ variant = "desktop", onNavigate }: Props) {
         <DropdownPanel onMouseEnter={cancelClose} onMouseLeave={scheduleClose}>
           {resourceLinks.map((l) => (
             <Link key={l.href} href={l.href} className={itemCls}>
-              <span className="h-1.5 w-1.5 rounded-full bg-[#17ace4] opacity-0 group-hover:opacity-100 transition-opacity" />
+              {/* <span className="h-1.5 w-1.5 rounded-full bg-[#17ace4] opacity-0 group-hover:opacity-100 transition-opacity" /> */}
               {l.label}
             </Link>
           ))}
@@ -324,7 +324,7 @@ function DropdownPanel({
         "absolute left-0 top-[calc(100%+6px)] z-50 rounded-xl bg-white p-2",
         "shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-gray-100",
         "animate-fadeIn",
-        wide ? "w-64" : "w-56",
+        wide ? "w-80" : "w-60",
       ].join(" ")}
     >
       {children}

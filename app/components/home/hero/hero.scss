@@ -1,4 +1,6 @@
 @use "../../../../styles/abstracts/mixins" as *;
+
+
 .marquee-track {
   display: flex;
   align-items: center;
@@ -37,6 +39,12 @@
 
 .hero-carousel__image--webinar {
   object-position: 62% center;
+}
+
+.hero-carousel__image--siemens-live {
+    object-position: center center;
+  filter: brightness(0.92) saturate(1.05) contrast(1.04);
+  transform: scale(1.02);
 }
 
 .hero-carousel__scrim {
@@ -87,9 +95,42 @@
   pointer-events: none;
 }
 
+.hero-carousel--siemens-live .hero-carousel__scrim::before {
+  width: min(70vw, 1080px);
+  background: linear-gradient(
+    96deg,
+    rgba(2, 7, 33, 1) 4%,
+    rgba(2, 7, 33, 0.88) 28%,
+  rgba(5, 18, 54, 0.78) 48%,
+    rgba(8, 29, 79, 0.42) 66%,
+    rgba(8, 29, 79, 0.08) 82%,
+    rgba(8, 29, 79, 0) 92%
+  );
+  filter: blur(10px);
+  opacity: 1;
+}
+
+.hero-carousel--siemens-live .hero-carousel__scrim::after {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(1, 7, 24, 0) 0%,
+      rgba(1, 7, 24, 0) 58%,
+      rgba(1, 7, 24, 0.24) 82%,
+      rgba(1, 7, 24, 0.38) 100%
+    ),
+    radial-gradient(
+      circle at 76% 24%,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0) 22%
+    );
+}
+
 .hero-carousel__content-shell {
   position: relative;
   color: #fff;
+  width: 100%;
+  min-width: 0;
   max-width: min(100%, 650px);
   padding-inline-end: clamp(1rem, 0.8rem + 0.45vw, 1.3rem);
 }
@@ -102,12 +143,18 @@
   max-width: min(100%, 980px);
 }
 
+.hero-carousel__content-shell--siemens-live {
+  max-width: min(100%, 790px);
+  padding: clamp(1rem, 2vw, 1rem);
+  transform: none;
+}
+
 .hero-carousel__title {
   max-width: 15ch;
   font-family: "OutfitBold", sans-serif;
   font-size: clamp(2.2rem, 1.38rem + 1.8vw, 4rem);
   line-height: 1.08;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   text-wrap: balance;
   text-shadow: 0 12px 30px rgba(3, 14, 38, 0.42);
 }
@@ -122,16 +169,239 @@
   max-width: 28ch;
   font-size: clamp(1.75rem, 1.02rem + 1.12vw, 2.95rem);
   line-height: 1.08;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
 }
 
+.hero-carousel__title--siemens-live {
+  max-width: 15ch;
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+.hero-carousel__siemens-eyebrow {
+  display: block;
+  margin-bottom: 0.36rem;
+  color: #5ee7ff;
+  text-shadow: 0 0 18px rgba(94, 231, 255, 0.28);
+  font-family: "OutfitBold", sans-serif;
+  font-size: clamp(1rem, 0.72rem + 0.75vw, 1.45rem);
+  line-height: 1.12;
+  text-transform: uppercase;
+}
+
+.hero-carousel__siemens-title {
+  display: block;
+  color: #7be8ff;
+  text-shadow: 0 8px 24px rgba(0, 183, 255, 0.22);
+  font-family: "OutfitBold", sans-serif;
+  font-size: clamp(2.05rem, 1.25rem + 1.9vw, 3.4rem);
+  line-height: 1.03;
+}
+
+.hero-carousel__siemens-title span {
+   color: #ffffff;
+  font-family: "OutfitMedium", sans-serif;
+}
+
+.hero-carousel__siemens-countdown-value {
+  animation: livePulse 1.8s infinite;
+}
+
+@keyframes livePulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.78;
+    transform: scale(1.04);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 .hero-carousel__desc {
+  width: 100%;
   max-width: 34rem;
   font-family: "OutfitMedium", sans-serif;
   font-size: clamp(1rem, 0.88rem + 0.42vw, 1.3rem);
   line-height: 1.62;
   color: rgba(255, 255, 255, 0.92);
   text-shadow: 0 8px 20px rgba(3, 14, 38, 0.34);
+}
+
+.hero-carousel__desc--siemens {
+  max-width: 39rem;
+  font-size: clamp(0.96rem, 0.82rem + 0.32vw, 1rem);
+  line-height: 1.5;
+  overflow-wrap: break-word;
+}
+
+.hero-carousel__desc--siemens span {
+  display: block;
+  margin-bottom: 0.48rem;
+  color: #0bbcff;
+  font-family: "OutfitBold", sans-serif;
+  font-size: clamp(1.08rem, 0.9rem + 0.46vw, 1.36rem);
+  line-height: 1.22;
+  white-space: normal;
+}
+
+.hero-carousel__desc--siemens strong {
+  color: #18c7ff;
+  font-family: "OutfitBold", sans-serif;
+}
+
+.hero-carousel__siemens-event {
+  display: grid;
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 560px);
+  grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
+  gap: clamp(1rem, 2.4vw, 1.8rem);
+  align-items: start;
+  margin-top: clamp(0.78rem, 1.4vw, 1.1rem);
+  padding: 0.6rem 0.78rem 0.62rem;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 8px 20px rgba(3, 14, 38, 0.34);
+}
+
+.hero-carousel__siemens-event::before {
+  content: "";
+  position: absolute;
+  inset: -0.2rem -0.7rem -1.15rem -4.25rem;
+  z-index: -1;
+  border-radius: 8px;
+  // background: linear-gradient(
+  //   90deg,
+  //   rgba(1, 7, 24, 0.82),
+  //   rgba(3, 16, 48, 0.74) 62%,
+  //   rgba(3, 16, 48, 0.5)
+  // );
+  backdrop-filter: blur(2px);
+}
+
+.hero-carousel__siemens-event-column {
+  min-width: 0;
+}
+
+.hero-carousel__siemens-event-heading,
+.hero-carousel__siemens-talk-heading {
+  margin: 0 0 0.52rem;
+  font-family: "OutfitMedium", sans-serif;
+  font-size: clamp(0.95rem, 0.84rem + 0.26vw, 1.16rem);
+  line-height: 1.25;
+}
+
+.hero-carousel__siemens-event-heading strong {
+  color: #fff;
+  font-family: "OutfitBold", sans-serif;
+}
+
+.hero-carousel__siemens-event-heading span,
+.hero-carousel__siemens-talk-heading {
+  color: #10c2ff;
+  font-family: "OutfitBold", sans-serif;
+}
+
+.hero-carousel__siemens-event-list,
+.hero-carousel__siemens-talk-list {
+  display: grid;
+  gap: 0.46rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-carousel__siemens-countdown {
+  position: absolute;
+  right: clamp(2rem, 6vw, 7rem);
+  bottom: clamp(1rem, 2vw, 1.8rem);
+  z-index: 35;
+  display: inline-flex;
+  width: fit-content;
+  max-width: calc(100vw - 2rem);
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.42rem;
+  border: 1px solid rgba(23, 172, 228, 0.42);
+  border-radius: 8px;
+background:
+  linear-gradient(
+    145deg,
+    rgba(4, 16, 42, 0.92),
+    rgba(3, 30, 72, 0.82)
+  );
+  padding: clamp(0.78rem, 1.35vw, 1.18rem) clamp(0.95rem, 1.75vw, 1.45rem);
+ border: 1px solid rgba(91, 231, 255, 0.3);
+
+box-shadow:
+  0 20px 40px rgba(0, 0, 0, 0.34),
+  0 0 24px rgba(0, 183, 255, 0.12);
+  text-align: center;
+  text-shadow: 0 8px 20px rgba(3, 14, 38, 0.42);
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+
+.hero-carousel__siemens-countdown-value {
+  color: #fff;
+  font-family: "OutfitBold", sans-serif;
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.hero-carousel__siemens-countdown-label {
+  min-width: 0;
+  color: #75dcff;
+  font-family: "OutfitBold", sans-serif;
+  font-size: 1rem;
+  line-height: 1.1;
+  text-transform: none;
+}
+
+.hero-carousel__siemens-event-list li,
+.hero-carousel__siemens-talk-list li {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.72rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: "OutfitMedium", sans-serif;
+  font-size: clamp(0.86rem, 0.8rem + 0.18vw, 1.02rem);
+  line-height: 1.28;
+}
+
+.hero-carousel__siemens-event-list svg {
+  flex: 0 0 auto;
+  color: #10c2ff;
+}
+
+.hero-carousel__siemens-talk-list svg {
+  flex: 0 0 auto;
+  color: #fff;
+  fill: #74c7ff;
+  filter: drop-shadow(0 0 8px rgba(23, 172, 228, 0.28));
+}
+
+.hero-carousel__siemens-event-list span,
+.hero-carousel__siemens-talk-list span {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.hero-carousel__siemens-event-divider {
+  width: 1px;
+  min-height: 4.7rem;
+  background: linear-gradient(
+    180deg,
+    rgba(23, 172, 228, 0.15),
+    rgba(23, 172, 228, 0.95),
+    rgba(23, 172, 228, 0.15)
+  );
 }
 
 .hero-carousel__cta {
@@ -183,6 +453,10 @@
     object-position: 70% center;
   }
 
+  .hero-carousel__image--siemens-live {
+    object-position: 56% top;
+  }
+
   .hero-carousel__content-shell,
   .hero-carousel__content-shell--wide,
   .hero-carousel__content-shell--very-wide {
@@ -229,13 +503,24 @@
   .hero-carousel__title--very-long {
     max-width: 26ch;
   }
+
+  .hero-carousel__content-shell--siemens-live {
+    max-width: min(100%, 720px);
+    padding-top: clamp(0.8rem, 1.6vw, 1.25rem);
+    transform: none;
+  }
+
+  .hero-carousel__siemens-event {
+    width: min(100%, 680px);
+    gap: 0.9rem;
+  }
 }
 
+ 
 @include mobile {
-  .hero-carousel__scrim {
+   .hero-carousel__scrim {
     background: linear-gradient(
       180deg,
-      rgba(5, 16, 46, 0.22) 0%,
       rgba(5, 16, 46, 0.34) 100%
     );
   }
@@ -252,6 +537,15 @@
     padding-inline-end: 0;
   }
 
+  .hero-carousel__content-shell--siemens-live {
+    width: min(100%, calc(100vw - 32px));
+    max-width: 358px;
+    margin-left: 0;
+    margin-right: auto;
+    padding-block: 0.85rem 2.8rem;
+    transform: none;
+  }
+
   .hero-carousel__title,
   .hero-carousel__title--long,
   .hero-carousel__title--very-long {
@@ -260,5 +554,140 @@
 
   .hero-carousel__desc {
     max-width: 30rem;
+  }
+
+  .hero-carousel__title--siemens-live {
+    max-width: 12.5ch;
+    margin-bottom: 0.55rem;
+  }
+
+  .hero-carousel__siemens-eyebrow {
+    margin-bottom: 0.28rem;
+    font-size: clamp(1.05rem, 5.2vw, 1.45rem);
+  }
+
+  .hero-carousel__siemens-title {
+    font-size: clamp(2rem, 10.2vw, 3rem);
+  }
+
+  .hero-carousel__desc--siemens {
+    width: min(100%, calc(100vw - 32px));
+    max-width: 358px;
+    margin-bottom: 0.72rem;
+    font-size: 0.76rem;
+    line-height: 1.34;
+  }
+
+  .hero-carousel__desc--siemens span {
+    max-width: calc(100vw - 32px);
+    margin-bottom: 0.36rem;
+    font-size: clamp(0.9rem, 4.4vw, 1.05rem);
+  }
+
+  .hero-carousel__siemens-event {
+    width: min(100%, 358px);
+    grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
+    gap: 0.55rem;
+    margin-top: 0.68rem;
+  }
+
+  .hero-carousel__siemens-event-divider {
+    width: 1px;
+    min-height: 7rem;
+    height: auto;
+    background: linear-gradient(
+      180deg,
+      rgba(23, 172, 228, 0.1),
+      rgba(23, 172, 228, 0.85),
+      rgba(23, 172, 228, 0.1)
+    );
+  }
+
+  .hero-carousel__siemens-event-heading,
+  .hero-carousel__siemens-talk-heading {
+    margin-bottom: 0.4rem;
+    font-size: 0.74rem;
+    line-height: 1.25;
+  }
+
+  .hero-carousel__siemens-event-list,
+  .hero-carousel__siemens-talk-list {
+    gap: 0.32rem;
+  }
+
+  .hero-carousel__siemens-countdown {
+    left: 1rem;
+    right: 1rem;
+    bottom: 0.48rem;
+    width: fit-content;
+    max-width: calc(100vw - 2rem);
+    margin-inline: auto;
+    gap: 0.32rem;
+    padding: 0.56rem 0.72rem;
+    text-align: center;
+    transform: none;
+  }
+
+  .hero-carousel__siemens-countdown-value {
+    font-size: 1.38rem;
+  }
+
+  .hero-carousel__siemens-countdown-label {
+    max-width: none;
+    font-size: 0.72rem;
+  }
+
+  .hero-carousel--siemens-live .hero-carousel__dots {
+    left: 34%;
+  }
+
+  .hero-carousel__siemens-event-list li,
+  .hero-carousel__siemens-talk-list li {
+    gap: 0.38rem;
+    font-size: 0.66rem;
+    line-height: 1.25;
+  }
+
+  .hero-carousel__siemens-event-list svg,
+  .hero-carousel__siemens-talk-list svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .siemens-modal {
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .siemens-modal__panel {
+    max-height: calc(100vh - 20px);
+    grid-template-columns: 1fr;
+  }
+
+  .siemens-modal__event {
+    min-height: 270px;
+    padding: 24px 20px;
+    background-position: 54% center;
+  }
+
+  .siemens-modal__event h2 {
+    max-width: 10em;
+  }
+
+  .siemens-modal__event p {
+    font-size: 0.94rem;
+    line-height: 1.55;
+  }
+
+  .siemens-modal__details {
+    margin-top: 1.2rem;
+  }
+
+  .siemens-modal__form {
+    padding: 24px 18px 22px;
+  }
+
+  .siemens-register-form__row {
+    grid-template-columns: 1fr;
   }
 }

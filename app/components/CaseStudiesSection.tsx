@@ -71,7 +71,7 @@ export default function CaseStudiesSection({
                     href={item.link}
                     className="inline-flex items-center gap-2 mt-auto text-[clamp(14px,2vw,18px)] font-bold text-[#2a83d8] transition-all duration-300 hover:text-blue-600 "
                   >
-                    Download Now
+                    Download {item.title} case study
                     <ArrowUpRight
                       className="transition-transform duration-300 hover:rotate-44"
                       size={20}

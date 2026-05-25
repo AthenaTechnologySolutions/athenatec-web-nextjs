@@ -65,7 +65,7 @@ export default function OracleOnPrem() {
             provider: {
               "@type": "Organization",
               name: "Athenatec",
-              url: "https://athenatec.com",
+              url: "https://www.athenatec.com/",
             },
             description:
               "Oracle E-Business Suite and Agile PLM implementation, support, and managed services since 2012.",

@@ -84,7 +84,7 @@ export async function POST(req: Request) {
     console.error("OPENAI CHAT ERROR:", error);
 
     const fallbackMessage =
-      "I'm having trouble connecting right now. Please try again in a moment, or visit our contact page at https://athenatec.com/contact for immediate assistance.";
+      "I'm having trouble connecting right now. Please try again in a moment, or visit our contact page at https://www.athenatec.com/contact/ for immediate assistance.";
 
     return Response.json(
       { reply: fallbackMessage, error: true },

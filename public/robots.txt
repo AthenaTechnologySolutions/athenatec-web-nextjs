@@ -1,5 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /thank-you/
+Disallow: /hero-option-1/
+Disallow: /partners/twinzo/
 Disallow: /wp-admin/
 Disallow: /cgi-bin/
 

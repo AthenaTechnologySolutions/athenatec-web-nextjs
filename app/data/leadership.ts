@@ -18,7 +18,7 @@ export type LeaderProfile = {
   photoWidth?: string;
   photoAspect?: string;
   photoObjectPosition?: string;
-};
+ };
 
 export const leadershipProfiles: LeaderProfile[] = [
   {

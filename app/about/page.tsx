@@ -6,25 +6,21 @@ import CTASection from "@/app/components/CTASection";
 import HeroSection from "@/app/components/HeroSection";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "About Athenatec | MES, PLM & Smart Factory Experts",
-
   description:
     "Athenatec is a trusted MES implementation partner providing PLM, smart factory solutions, and digital transformation for global manufacturers since 2011.",
-  openGraph: {
-    locale: "en_US",
-    type: "website",
-    url: "https://athenatec.com/about/",
-    images: "https://athenatec.com/assets/img/favicon.webp",
-    title: "About Athenatec | MES, PLM & Smart Factory Experts",
-    description:
-      "Athenatec is a trusted MES implementation partner providing PLM, smart factory solutions, and digital transformation for global manufacturers since 2011.",
-  },
-  alternates: {
-    canonical: "https://athenatec.com/about/",
-  },
-};
+  path: "/about",
+  image: "/assets/images/aboutus.webp",
+  keywords: [
+    "MES implementation partner",
+    "smart factory experts",
+    "Industry 4.0 consulting",
+    "manufacturing technology experts",
+  ],
+});
 
 export default function AboutPage() {
   const journey = [
@@ -305,7 +301,7 @@ We will continue to work together with Athena to carry out continuous process im
                     <p className="card-desc">{item.desc}</p>
 
                     <div className="see-more">
-                      <span>See More</span>
+                      <span>View {item.title} MES expertise</span>
                       <svg
                         width="18"
                         height="18"

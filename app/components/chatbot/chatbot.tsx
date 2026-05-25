@@ -199,7 +199,7 @@ export default function AIChatbot() {
 
       setMessages(
         addBotMessage(
-          `Perfect. We've received your details and will reach out to you at **${finalUserData.email}** shortly.\n\nIn the meantime, feel free to explore [athenatec.com](https://athenatec.com).`,
+          `Perfect. We've received your details and will reach out to you at **${finalUserData.email}** shortly.\n\nIn the meantime, feel free to explore [athenatec.com](https://www.athenatec.com/).`,
           currentMessages,
         ),
       );
@@ -208,7 +208,7 @@ export default function AIChatbot() {
     } catch {
       setMessages(
         addBotMessage(
-          "Something went wrong submitting your details. Please try again or reach us directly at [athenatec.com/contact](https://athenatec.com/contact).",
+          "Something went wrong submitting your details. Please try again or reach us directly at [athenatec.com/contact](https://www.athenatec.com/contact/).",
           currentMessages,
         ),
       );
