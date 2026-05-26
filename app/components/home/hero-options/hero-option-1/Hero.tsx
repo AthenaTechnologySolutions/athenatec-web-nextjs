@@ -18,7 +18,7 @@ export default function Hero({ slides, bottomStats, bottomDescription }: HeroPro
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="relative h-[100vh] min-h-[680px] w-full overflow-hidden bg-[#1e2a37]">
+    <section className="relative h-[100vh] min-h-[680px] w-full overflow-hidden bg-[#15356e]">
       <Swiper
         modules={[Autoplay, EffectFade, Navigation, Pagination]}
         effect="fade"
@@ -69,7 +69,7 @@ export default function Hero({ slides, bottomStats, bottomDescription }: HeroPro
         </button>
       </Swiper>
 
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-[#1e2a37]/90 via-[#1e2a37]/60 to-transparent pt-12">
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-[#15356e]/90 via-[#15356e]/60 to-transparent pt-12">
         <BottomCarousel stats={bottomStats} description={bottomDescription} />
       </div>
     </section>

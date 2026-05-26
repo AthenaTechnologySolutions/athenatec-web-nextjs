@@ -205,7 +205,7 @@ const knowledgeTheatreSessions: AgendaSession[] = [
       },
     ],
     details: [
-      { icon: "time", text: "04:30 - 5:00 PM" },
+      { icon: "time", text: "4:30 - 5:00 PM" },
       { icon: "date", text: "#1 Tues. June 2" },
       { icon: "location", text: "KT 2" },
     ],

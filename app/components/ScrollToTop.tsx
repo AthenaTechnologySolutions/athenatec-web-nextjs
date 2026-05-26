@@ -38,7 +38,7 @@ export default function ScrollToTop() {
   w-14 h-14
   flex items-center justify-center
   rounded-full
-  bg-sky-600 hover:bg-sky-700
+  bg-[#1c4584] hover:bg-[#17ace4]
   text-white
   shadow-lg hover:shadow-xl
   transition-all duration-300 ease-in-out

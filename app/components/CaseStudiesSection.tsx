@@ -31,7 +31,7 @@ export default function CaseStudiesSection({
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-5">
-         <h2 className="text-[clamp(26px,4vw,48px)] font-extrabold text-center text-[#1f3b73] mb-[clamp(40px,6vw,70px)]">
+         <h2 className="text-[clamp(26px,4vw,48px)] font-extrabold text-center text-[#15356e] mb-[clamp(40px,6vw,70px)]">
           {title}
         </h2>
 
@@ -52,24 +52,24 @@ export default function CaseStudiesSection({
               </div>
 
                <div className="w-full lg:w-1/2 p-[clamp(20px,3vw,30px)] flex flex-col">
-                <h3 className="text-[clamp(18px,2.2vw,24px)] font-bold text-[#0f2f4f] mb-3 leading-snug">
+                <h3 className="text-[clamp(18px,2.2vw,24px)] font-bold text-[#15356e] mb-3 leading-snug">
                   {item.title}
                 </h3>
 
                 {item.tag && (
-                  <span className="text-[clamp(14px,1.8vw,18px)] font-semibold text-[#2a83d8] mb-2">
+                  <span className="text-[clamp(14px,1.8vw,18px)] font-semibold text-[#1c4584] mb-2">
                     {item.tag}
                   </span>
                 )}
 
-                <p className="text-sm leading-relaxed text-[#163d73] mb-4">
+                <p className="text-sm leading-relaxed text-[#15356e] mb-4">
                   {item.description}
                 </p>
 
                 {item.link && (
                   <Link
                     href={item.link}
-                    className="inline-flex items-center gap-2 mt-auto text-[clamp(14px,2vw,18px)] font-bold text-[#2a83d8] transition-all duration-300 hover:text-blue-600 "
+                    className="inline-flex items-center gap-2 mt-auto text-[clamp(14px,2vw,18px)] font-bold text-[#1c4584] transition-all duration-300 hover:text-[#17ace4] "
                   >
                     Download {item.title} case study
                     <ArrowUpRight

@@ -47,7 +47,7 @@ export default function CTASection({
 
         <Link
           href={buttonLink}
-          className="inline-block bg-sky-500 hover:bg-sky-600 transition-all duration-300 px-8 py-3 rounded-full font-semibold hover:-translate-y-1"
+          className="inline-block bg-[#17ace4] hover:bg-[#1c4584] transition-all duration-300 px-8 py-3 rounded-full font-semibold hover:-translate-y-1"
         >
           {buttonText}
         </Link>

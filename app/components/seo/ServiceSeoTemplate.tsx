@@ -61,9 +61,9 @@ export default function ServiceSeoTemplate({ data }: { data: ServiceSeoTemplateD
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,7,33,0.86),rgba(2,7,33,0.58)_48%,rgba(2,7,33,0.24))]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(21,53,110,0.86),rgba(21,53,110,0.58)_48%,rgba(21,53,110,0.24))]" />
         <div className="container relative z-10 py-20">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#9de7ff]">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#17ace4]">
             {data.hero.eyebrow}
           </p>
           <h1 className="mt-4 max-w-4xl text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
@@ -75,7 +75,7 @@ export default function ServiceSeoTemplate({ data }: { data: ServiceSeoTemplateD
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
               href={data.hero.primaryCta.href}
-              className="rounded-lg bg-[#17ace4] px-6 py-3 font-semibold text-white transition hover:bg-[#138fc4]"
+              className="rounded-lg bg-[#17ace4] px-6 py-3 font-semibold text-white transition hover:bg-[#1c4584]"
             >
               {data.hero.primaryCta.label}
             </Link>
@@ -97,7 +97,7 @@ export default function ServiceSeoTemplate({ data }: { data: ServiceSeoTemplateD
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#17ace4]">
               Keyword-focused implementation guide
             </p>
-            <h2 className="mt-3 text-3xl font-bold leading-tight text-[#10233f] sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-bold leading-tight text-[#15356e] sm:text-4xl">
               {data.intro.heading}
             </h2>
           </div>
@@ -128,7 +128,7 @@ export default function ServiceSeoTemplate({ data }: { data: ServiceSeoTemplateD
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#17ace4]">
               Delivery process
             </p>
-            <h2 className="mt-3 text-3xl font-bold leading-tight text-[#10233f] sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-bold leading-tight text-[#15356e] sm:text-4xl">
               A proven MES implementation process from blueprint to hypercare
             </h2>
           </div>
@@ -141,7 +141,7 @@ export default function ServiceSeoTemplate({ data }: { data: ServiceSeoTemplateD
                 <p className="text-sm font-semibold text-[#17ace4]">
                   {item.step}
                 </p>
-                <h3 className="mt-3 text-xl font-semibold text-[#10233f]">
+                <h3 className="mt-3 text-xl font-semibold text-[#15356e]">
                   {item.title}
                 </h3>
                 <p className="mt-3 text-sm leading-6 text-gray-600">
@@ -179,7 +179,7 @@ export default function ServiceSeoTemplate({ data }: { data: ServiceSeoTemplateD
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#17ace4]">
                 Case studies
               </p>
-              <h2 className="mt-3 text-3xl font-bold leading-tight text-[#10233f] sm:text-4xl">
+              <h2 className="mt-3 text-3xl font-bold leading-tight text-[#15356e] sm:text-4xl">
                 MES implementation case study CTAs for manufacturing leaders
               </h2>
             </div>
@@ -217,7 +217,7 @@ export default function ServiceSeoTemplate({ data }: { data: ServiceSeoTemplateD
 
       <InternalLinkCluster links={data.links ?? manufacturingSeoLinks} />
 
-      <section className="bg-[#10233f] py-16 text-white sm:py-20">
+      <section className="bg-[#15356e] py-16 text-white sm:py-20">
         <div className="container flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="max-w-3xl">
             <h2 className="text-3xl font-bold leading-tight sm:text-4xl">
@@ -229,7 +229,7 @@ export default function ServiceSeoTemplate({ data }: { data: ServiceSeoTemplateD
           </div>
           <Link
             href={data.cta.href}
-            className="inline-flex shrink-0 items-center justify-center rounded-lg bg-[#17ace4] px-6 py-3 font-semibold text-white transition hover:bg-[#138fc4]"
+            className="inline-flex shrink-0 items-center justify-center rounded-lg bg-[#17ace4] px-6 py-3 font-semibold text-white transition hover:bg-[#1c4584]"
           >
             {data.cta.label}
           </Link>
@@ -257,7 +257,7 @@ function SeoGrid({
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#17ace4]">
             {eyebrow}
           </p>
-          <h2 className="mt-3 text-3xl font-bold leading-tight text-[#10233f] sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold leading-tight text-[#15356e] sm:text-4xl">
             {title}
           </h2>
         </div>

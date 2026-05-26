@@ -1,18 +1,18 @@
 @use "../../styles/abstracts/mixins" as *;
 // ─── Variables ────────────────────────────────────────
-$primary: #1d6fe8;
-$primary-dark: #1558c0;
+$primary: #1c4584;
+$primary-dark: #1c4584;
 $primary-light: #e8f1fd;
 $success: #16a34a;
 $error: #dc2626;
-$text-dark: #0c1f3a;
+$text-dark: #15356e;
 $text-mid: #4a5e74;
 $text-light: #8496a9;
 $border: #dce6f0;
 $bg: #f0f5fb;
 $white: #ffffff;
 $radius: 16px;
-$shadow: 0 24px 60px rgba(15, 47, 79, 0.1);
+$shadow: 0 24px 60px rgba(21, 53, 110, 0.1);
 
 // ─── Section ──────────────────────────────────────────
 .case-study {
@@ -32,7 +32,7 @@ $shadow: 0 24px 60px rgba(15, 47, 79, 0.1);
   &--1 {
     width: 500px;
     height: 500px;
-    background: rgba(29, 111, 232, 0.08);
+    background: rgba(28, 69, 132, 0.08);
     top: -100px;
     right: -100px;
   }
@@ -40,7 +40,7 @@ $shadow: 0 24px 60px rgba(15, 47, 79, 0.1);
   &--2 {
     width: 400px;
     height: 400px;
-    background: rgba(29, 111, 232, 0.05);
+    background: rgba(28, 69, 132, 0.05);
     bottom: -80px;
     left: -80px;
   }
@@ -120,8 +120,8 @@ $shadow: 0 24px 60px rgba(15, 47, 79, 0.1);
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(12, 31, 58, 0.2) 0%,
-      rgba(12, 31, 58, 0.75) 100%
+      rgba(21, 53, 110, 0.2) 0%,
+      rgba(21, 53, 110, 0.75) 100%
     );
     display: flex;
     flex-direction: column;
@@ -251,7 +251,7 @@ $shadow: 0 24px 60px rgba(15, 47, 79, 0.1);
       outline: none;
       border-color: $primary;
       background: $white;
-      box-shadow: 0 0 0 3px rgba(29, 111, 232, 0.12);
+      box-shadow: 0 0 0 3px rgba(28, 69, 132, 0.12);
     }
   }
 
@@ -397,7 +397,7 @@ $shadow: 0 24px 60px rgba(15, 47, 79, 0.1);
   &:hover:not(:disabled) {
     background: $primary-dark;
     transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(29, 111, 232, 0.3);
+    box-shadow: 0 10px 24px rgba(28, 69, 132, 0.3);
   }
 
   &:active:not(:disabled) {

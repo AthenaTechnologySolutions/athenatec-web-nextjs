@@ -18,7 +18,7 @@
 //     <section className="bg-white py-16 sm:py-20" id="faqs">
 //       <div className="container">
 //         <div className="mx-auto max-w-3xl text-center">
-//           <h2 className="text-3xl font-bold text-[#10233f] sm:text-4xl">
+//           <h2 className="text-3xl font-bold text-[#15356e] sm:text-4xl">
 //             {title}
 //           </h2>
 //           {intro && (

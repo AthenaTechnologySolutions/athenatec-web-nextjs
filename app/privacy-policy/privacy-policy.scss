@@ -5,7 +5,7 @@
   padding-bottom: 80px;
 
   .legal-hero {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background: linear-gradient(135deg, #15356e 0%, #1c4584 100%);
     padding: 100px 0 60px 0;
     text-align: center;
     color: #ffffff;
@@ -67,7 +67,7 @@
 
     h2 {
       font-size: 1.75rem;
-      color: #0f172a;
+      color: #15356e;
       font-weight: 700;
       margin-bottom: 24px;
       padding-bottom: 12px;
@@ -100,24 +100,24 @@
         font-size: 1.0625rem;
 
         strong {
-          color: #0f172a;
+          color: #15356e;
           font-weight: 600;
         }
 
         &::marker {
-          color: #3b82f6;
+          color: #1c4584;
         }
       }
     }
     
     a {
-      color: #2563eb;
+      color: #1c4584;
       text-decoration: none;
       font-weight: 500;
       transition: color 0.2s ease;
       
       &:hover {
-        color: #1d4ed8;
+        color: #1c4584;
         text-decoration: underline;
       }
     }

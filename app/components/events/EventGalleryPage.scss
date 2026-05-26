@@ -1,8 +1,8 @@
 @use "../../../styles/abstracts/mixins" as *;
 // ── Variables ─────────────────────────────────────────────────────────
-$primary: #1d6fe8;
-$primary-dark: #1558c0;
-$navy: #1f3b73;
+$primary: #1c4584;
+$primary-dark: #1c4584;
+$navy: #15356e;
 $text-mid: #4a5e74;
 $text-light: #8a9db5;
 $white: #ffffff;
@@ -180,12 +180,12 @@ $trans: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     overflow: hidden;
     border-radius: $radius;
     background: #dce6f0;
-    box-shadow: 0 2px 12px rgba(15, 47, 79, 0.06);
+    box-shadow: 0 2px 12px rgba(21, 53, 110, 0.06);
     transition: box-shadow $trans, transform $trans;
   }
 
   &:hover &__inner {
-    box-shadow: 0 16px 40px rgba(15, 47, 79, 0.16);
+    box-shadow: 0 16px 40px rgba(21, 53, 110, 0.16);
     transform: translateY(-4px);
   }
 
@@ -204,8 +204,8 @@ $trans: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     inset: 0;
     background: linear-gradient(
       135deg,
-      rgba(29, 111, 232, 0.12) 0%,
-      rgba(15, 30, 58, 0.55) 100%
+      rgba(28, 69, 132, 0.12) 0%,
+      rgba(21, 53, 110, 0.55) 100%
     );
     opacity: 0;
     transition: opacity $trans;
@@ -281,7 +281,7 @@ $trans: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     &:hover:not(:disabled) {
       border-color: $primary;
       color: $primary;
-      background: rgba(29, 111, 232, 0.06);
+      background: rgba(28, 69, 132, 0.06);
     }
 
     &:disabled {
@@ -293,7 +293,7 @@ $trans: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       background: $primary !important;
       border-color: $primary !important;
       color: $white !important;
-      box-shadow: 0 4px 14px rgba(29, 111, 232, 0.35);
+      box-shadow: 0 4px 14px rgba(28, 69, 132, 0.35);
     }
 
     &--nav {
