@@ -46,7 +46,7 @@ const FORM_CONFIG: Record<Study["formType"], FormConfig> = {
       "Solar",
     ],
     privacyText: (
-      <>By submitting this form, you agree to receive communications with related content from Siemens Opcenter and can unsubscribe at any time. For more information on our <Link href="/privacy-policy" className="font-medium underline hover:text-blue-500">Privacy Policy</Link>, click here.</>
+      <>By submitting this form, you agree to receive communications with related content from Siemens Opcenter and can unsubscribe at any time. For more information on our <Link href="/privacy-policy" className="font-medium underline hover:text-[#17ace4]">Privacy Policy</Link>, click here.</>
     ),
     submitText: "Download Case Study",
   },
@@ -60,7 +60,7 @@ const FORM_CONFIG: Record<Study["formType"], FormConfig> = {
       "Solar",
     ],
     privacyText: (
-      <>By submitting this form, you agree to receive communications with related content from Critical Manufacturing and can unsubscribe at any time. For more information on our <Link href="/privacy-policy" className="font-medium underline hover:text-blue-500">Privacy Policy</Link>, click here.</>
+      <>By submitting this form, you agree to receive communications with related content from Critical Manufacturing and can unsubscribe at any time. For more information on our <Link href="/privacy-policy" className="font-medium underline hover:text-[#17ace4]">Privacy Policy</Link>, click here.</>
     ),
     submitText: "Download Case Study",
   },

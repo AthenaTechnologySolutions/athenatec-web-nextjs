@@ -45,7 +45,7 @@ const socials = [
     href: "https://www.facebook.com/athenatecindia/",
     icon: <Facebook size={16} strokeWidth={1.8} />,
     style:
-      "hover:bg-[#1877F2] hover:border-[#1877F2] hover:shadow-[0_0_18px_rgba(24,119,242,0.5)]",
+      "hover:bg-[#17ace4] hover:border-[#17ace4] hover:shadow-[0_0_18px_rgba(23,172,228,0.5)]",
   },
   {
     label: "Instagram",
@@ -53,7 +53,7 @@ const socials = [
     href: "https://www.instagram.com/athenatecofficial?igsh=MTN6eXFwYmdhNjdvNw==",
     icon: <Instagram size={16} strokeWidth={1.8} />,
     style:
-      "hover:border-transparent hover:shadow-[0_0_18px_rgba(225,48,108,0.5)] instagram-hover",
+      "hover:bg-[#17ace4] hover:border-[#17ace4] hover:shadow-[0_0_18px_rgba(23,172,228,0.5)]",
   },
   {
     label: "X",
@@ -61,7 +61,7 @@ const socials = [
     href: "https://x.com/athena_tec",
     icon: <XIcon />,
     style:
-      "hover:bg-[#0f0f0f] hover:border-[#0f0f0f] hover:shadow-[0_0_18px_rgba(0,0,0,0.5)]",
+      "hover:bg-[#15356e] hover:border-[#15356e] hover:shadow-[0_0_18px_rgba(21,53,110,0.5)]",
   },
   {
     label: "LinkedIn",
@@ -69,7 +69,7 @@ const socials = [
     href: "https://www.linkedin.com/company/athena-technology-solutions/",
     icon: <Linkedin size={16} strokeWidth={1.8} />,
     style:
-      "hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:shadow-[0_0_18px_rgba(10,102,194,0.5)]",
+      "hover:bg-[#17ace4] hover:border-[#17ace4] hover:shadow-[0_0_18px_rgba(23,172,228,0.5)]",
   },
   {
     label: "YouTube",
@@ -77,20 +77,14 @@ const socials = [
     href: "https://www.youtube.com/@AthenaTechnologySolutions/",
     icon: <Youtube size={16} strokeWidth={1.8} />,
     style:
-      "hover:bg-[#FF0000] hover:border-[#FF0000] hover:shadow-[0_0_18px_rgba(255,0,0,0.5)]",
+      "hover:bg-[#1c4584] hover:border-[#1c4584] hover:shadow-[0_0_18px_rgba(28,69,132,0.5)]",
   },
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1c4584] text-white">
-      <style>{`
-        .instagram-hover:hover {
-          background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-        }
-      `}</style>
-
-      <div className="mx-auto max-w-7xl px-6 py-16">
+<footer className="bg-[radial-gradient(circle_at_82%_10%,#17ace414,#0000_28%),linear-gradient(135deg,#1c4584_0%,#0b244c_68%,#071c3c_100%)] text-white">
+        <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-6">
           <div className="space-y-6 lg:col-span-2">
             <div className="relative h-12 w-[180px]">
@@ -142,13 +136,13 @@ export default function Footer() {
                   <span
                     className={[
                       "pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2",
-                      "whitespace-nowrap rounded-md bg-[#071428] px-2.5 py-1",
+                      "whitespace-nowrap rounded-md bg-[#15356e] px-2.5 py-1",
                       "text-[11px] font-medium text-white shadow-lg",
                       "opacity-0 transition-opacity duration-200 group-hover:opacity-100",
                     ].join(" ")}
                   >
                     {s.label}
-                    <span className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-[#071428]" />
+                    <span className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-[#15356e]" />
                   </span>
                 </Link>
               ))}
@@ -156,7 +150,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4 text-sm">
-            <h4 className="border-b border-[#5172b0]/40 pb-2 text-base font-semibold text-white">
+            <h4 className="border-b border-[#1c4584]/40 pb-2 text-base font-semibold text-white">
               MES Solutions
             </h4>
             {mesSolutions.map((item) => (
@@ -170,7 +164,7 @@ export default function Footer() {
             ))}
 
             <div className="space-y-4 pt-3">
-              <h4 className="border-b border-[#5172b0]/40 pb-2 text-base font-semibold text-white">
+              <h4 className="border-b border-[#1c4584]/40 pb-2 text-base font-semibold text-white">
                 Services
               </h4>
               {otherSolutions.map((item) => (
@@ -186,7 +180,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4 text-sm">
-            <h4 className="border-b border-[#5172b0]/40 pb-2 text-base font-semibold text-white">
+            <h4 className="border-b border-[#1c4584]/40 pb-2 text-base font-semibold text-white">
               Partners
             </h4>
             {partners.map((item) => (
@@ -201,7 +195,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4 text-sm">
-            <h4 className="border-b border-[#5172b0]/40 pb-2 text-base font-semibold text-white">
+            <h4 className="border-b border-[#1c4584]/40 pb-2 text-base font-semibold text-white">
               Company
             </h4>
             {resources.map((item) => (
@@ -216,7 +210,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-6 text-sm">
-            <h4 className="border-b border-[#5172b0]/40 pb-2 text-base font-semibold text-white">
+            <h4 className="border-b border-[#1c4584]/40 pb-2 text-base font-semibold text-white">
               Get In Touch
             </h4>
 
@@ -242,14 +236,14 @@ export default function Footer() {
 
             <Link
               href="/contact"
-              className="inline-block rounded-md bg-[#17ace4] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#138fc4]"
+              className="inline-block rounded-md bg-[#17ace4] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#1c4584]"
             >
               Get a Demo →
             </Link>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-[#5172b0]/40 pt-6 text-sm sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-4 border-t border-[#1c4584]/40 pt-6 text-sm sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[#c7d4f1]">
             © 2026 Athena Technologies. All rights reserved.
           </p>

@@ -33,15 +33,15 @@
     margin-top: 1.5rem;
     padding: 0.75rem 1.8rem;
     border-radius: 999px;
-    border: 2px solid #5172b0;
-    color: #5172b0;
+    border: 2px solid #1c4584;
+    color: #1c4584;
     background: transparent;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.25s ease;
 
     &:hover {
-      background: #5172b0;
+      background: #1c4584;
       color: #fff;
     }
   }
@@ -180,7 +180,7 @@
       left: 0;
       height: 4px;
       width: 0%;
-      background: #1f4b8f;
+      background: #1c4584;
       transition: width 0.3s ease;
     }
 

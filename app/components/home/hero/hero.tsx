@@ -73,7 +73,7 @@ export default function HeroSection() {
           <HeroCarousel />
         </div>
 
-        <div className="relative overflow-hidden border-t border-[#dbe9f3] bg-[#f5fafd] py-3 text-[#10233f] shadow-[0_-12px_34px_rgba(28,69,132,0.08)] sm:py-4">
+        <div className="relative overflow-hidden border-t border-[#dbe9f3] bg-[#f5fafd] py-3 text-[#15356e] shadow-[0_-12px_34px_rgba(28,69,132,0.08)] sm:py-4">
           <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(23,172,228,0.13),rgba(255,255,255,0.78)_42%,rgba(28,69,132,0.08))]" />
           <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[#17ace4]/60 to-transparent" />
 
@@ -82,12 +82,12 @@ export default function HeroSection() {
               {/* <span className="rounded-full border border-[#17ace4]/35 bg-white/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#1c4584] shadow-sm">
                 Athena at a glance
               </span> */}
-              <h2 className="max-w-[21rem] text-balance break-words text-lg font-semibold leading-tight text-[#07152d] sm:max-w-3xl sm:text-2xl">
+              <h2 className="max-w-[21rem] text-balance break-words text-lg font-semibold leading-tight text-[#15356e] sm:max-w-3xl sm:text-2xl">
                 A Decade of Delivering Manufacturing Excellence
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 gap-3 text-[#10233f] sm:grid-cols-2 md:grid-cols-4 md:gap-4">
+            <div className="grid grid-cols-1 gap-3 text-[#15356e] sm:grid-cols-2 md:grid-cols-4 md:gap-4">
               {statItems.map((item) =>
                 typeof item.value === "number" ? (
                   <StatCard
@@ -164,7 +164,7 @@ function InfoCard({
         <Icon size={18} strokeWidth={2.2} />
       </div>
       <p className="mb-1 text-sm font-medium text-[#5f6b7c]">{title}</p>
-      <p className="mb-1 text-2xl font-semibold text-[#07152d] sm:text-3xl">
+      <p className="mb-1 text-2xl font-semibold text-[#15356e] sm:text-3xl">
         {value}
       </p>
       <p className="mx-auto max-w-[15rem] text-xs leading-snug text-[#3f4f64] sm:text-sm">
@@ -236,7 +236,7 @@ function StatCard({
         <Icon size={18} strokeWidth={2.2} />
       </div>
       <p className="mb-1 text-sm font-medium text-[#5f6b7c]">{title}</p>
-      <p className="mb-1 text-2xl font-semibold text-[#07152d] sm:text-3xl">
+      <p className="mb-1 text-2xl font-semibold text-[#15356e] sm:text-3xl">
         {count}
         {suffix}
       </p>

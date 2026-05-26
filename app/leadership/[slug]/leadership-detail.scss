@@ -1,9 +1,9 @@
 .leader-detail {
-  --detail-navy: #07152d;
+  --detail-navy: #15356e;
   --detail-blue: #1c4584;
   --detail-cyan: #17ace4;
-  --detail-gold: #f4b400;
-  --detail-ink: #17233c;
+  --detail-gold: #17ace4;
+  --detail-ink: #15356e;
   --detail-muted: #667085;
 
   position: relative;
@@ -36,7 +36,7 @@
   background:
     radial-gradient(circle at 78% 18%, rgba(244, 180, 0, 0.18), transparent 25%),
     radial-gradient(circle at 12% 8%, rgba(23, 172, 228, 0.15), transparent 28%),
-    linear-gradient(135deg, #07152d 0%, #0d2f63 58%, #123f78 100%);
+    linear-gradient(135deg, #15356e 0%, #15356e 58%, #1c4584 100%);
   color: #ffffff;
 
   &::after {
@@ -107,7 +107,7 @@
 .leader-detail__designation {
   max-width: 680px;
   margin: 20px 0 0;
-  color: #ffe6a3;
+  color: #17ace4;
   font-size: clamp(18px, 2vw, 24px);
   font-weight: 800;
   line-height: 1.32;
@@ -165,7 +165,8 @@
 
 .leader-detail__profile {
   position: sticky;
-  top: 92px;
+  top: 0;
+  bottom: 0;
 }
 
 .leader-detail__image-wrap {
@@ -191,7 +192,7 @@
   padding: 20px;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 10px;
-  background: rgba(7, 21, 45, 0.88);
+  background: rgba(21, 53, 110, 0.88);
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.22);
   backdrop-filter: blur(18px);
 
@@ -258,7 +259,7 @@
   border: 1px solid rgba(28, 69, 132, 0.12);
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 18px 44px rgba(24, 43, 75, 0.09);
+  box-shadow: 0 18px 44px rgba(21, 53, 110, 0.09);
 }
 
 .leader-detail__section {
@@ -397,7 +398,7 @@
   padding: clamp(28px, 5vw, 54px);
   background:
     radial-gradient(circle at 12% 20%, rgba(244, 180, 0, 0.16), transparent 28%),
-    linear-gradient(135deg, var(--detail-navy), #0d2f63);
+    linear-gradient(135deg, var(--detail-navy), #15356e);
 
   blockquote {
     max-width: 780px;
@@ -421,12 +422,12 @@
     background: #ffffff;
     color: var(--detail-blue);
     text-decoration: none;
-    box-shadow: 0 16px 34px rgba(24, 43, 75, 0.08);
+    box-shadow: 0 16px 34px rgba(21, 53, 110, 0.08);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 
     &:hover {
       transform: translateY(-3px);
-      box-shadow: 0 22px 46px rgba(24, 43, 75, 0.13);
+      box-shadow: 0 22px 46px rgba(21, 53, 110, 0.13);
     }
   }
 

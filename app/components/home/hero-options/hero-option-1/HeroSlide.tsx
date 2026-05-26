@@ -13,7 +13,7 @@ export default function HeroSlide({ slide, isActive }: HeroSlideProps) {
     <div className="relative flex h-[100vh] w-full items-center pb-36 sm:pb-40 md:pb-44">
 
       {/* Background Media — fully visible, no dimming */}
-     <div className="absolute inset-0 bg-[#1e2a37]/80 md:bg-gradient-to-r md:from-[#1e2a37]/90 md:via-[#1e2a37]/40 md:to-transparent">
+     <div className="absolute inset-0 bg-[#15356e]/80 md:bg-gradient-to-r md:from-[#15356e]/90 md:via-[#15356e]/40 md:to-transparent">
 
         {slide.media.type === "video" ? (
           <video
@@ -40,7 +40,7 @@ export default function HeroSlide({ slide, isActive }: HeroSlideProps) {
           - Fades to transparent on the right so the image shows through clearly
           - No full-bleed dark overlay — background is visible on the right half
         */}
-        <div className="absolute inset-0 md:bg-gradient-to-r md:from-[#1e2a37]/95 md:via-[#1e2a37]/70 md:to-transparent" />
+        <div className="absolute inset-0 md:bg-gradient-to-r md:from-[#15356e]/95 md:via-[#15356e]/70 md:to-transparent" />
       </div>
 
       {/* Content — sits on the left over the gradient blind */}
@@ -60,7 +60,7 @@ export default function HeroSlide({ slide, isActive }: HeroSlideProps) {
           </h1>
 
           {/* ✅ Purple accent underline — matches AVEVA style */}
-          {/* <div className="mb-5 h-[3px] w-20 rounded-full bg-[#8b3fc8]" /> */}
+          {/* <div className="mb-5 h-[3px] w-20 rounded-full bg-[#1c4584]" /> */}
 
           <p 
             className="mb-6 max-w-xl text-base text-white/90 sm:text-lg md:text-xl font-medium"
