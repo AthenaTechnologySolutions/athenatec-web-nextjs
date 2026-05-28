@@ -89,7 +89,6 @@ function getSiemensLiveCountdown(now = new Date()) {
 
 const slides: HeroSlide[] = [
 
-
   {
     id: SIEMENS_LIVE_SLIDE_ID,
     title: "Siemens Realize LIVE 2026",
