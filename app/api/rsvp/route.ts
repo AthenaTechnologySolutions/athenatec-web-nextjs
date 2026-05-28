@@ -16,12 +16,15 @@ export async function POST(req: Request) {
     const limitError = rateLimit(req, { keyPrefix: "rsvp", limit: 8 });
     if (limitError) return limitError;
 
-    const body = await req.json();
+    const body = (await req.json()) as Record<string, unknown>;
+    const asString = (value: unknown) => typeof value === "string" ? value.trim() : "";
     const {
+      fullName,
       firstName,
       lastName,
       email,
       phone,
+      city,
       company,
       jobTitle,
       industry,
@@ -31,9 +34,34 @@ export async function POST(req: Request) {
       consent,
     } = body;
 
-    const name = `${firstName || ''} ${lastName || ''}`.trim();
+    const name = asString(fullName) || `${asString(firstName)} ${asString(lastName)}`.trim();
+    const emailValue = asString(email);
+    const phoneValue = asString(phone);
+    const cityValue = asString(city);
+    const companyValue = asString(company);
+    const jobTitleValue = asString(jobTitle);
+    const industryValue = asString(industry);
+    const sourceValue = asString(source);
+    const useCaseValue = asString(useCase);
+    const interestList = Array.isArray(interests)
+      ? interests
+          .filter((interest): interest is string => typeof interest === "string" && interest.trim().length > 0)
+          .map(interest => interest.trim())
+      : [];
 
-    if (!name || !isValidEmail(email) || !industry || !consent) {
+    if (
+      !name ||
+      !isValidEmail(emailValue) ||
+      !phoneValue ||
+      !cityValue ||
+      !companyValue ||
+      !jobTitleValue ||
+      !industryValue ||
+      interestList.length === 0 ||
+      !sourceValue ||
+      !useCaseValue ||
+      consent !== true
+    ) {
       return Response.json(
         {
           status: "validation_failed",
@@ -44,17 +72,19 @@ export async function POST(req: Request) {
     }
 
     const message = `
-Company: ${company || 'N/A'}
-Job Title: ${jobTitle || 'N/A'}
-Industry: ${industry}
+Phone: ${phoneValue}
+City: ${cityValue}
+Company: ${companyValue}
+Job Title: ${jobTitleValue}
+Industry: ${industryValue}
 
 Areas of Interest:
-${Array.isArray(interests) && interests.length > 0 ? interests.join(', ') : 'None specified'}
+${interestList.join(', ')}
 
-How did you hear about us: ${source || 'N/A'}
+How did you hear about us: ${sourceValue}
 
 Use Case:
-${useCase || 'N/A'}
+${useCaseValue}
     `.trim();
 
     const fd = new FormData();
@@ -64,8 +94,8 @@ ${useCase || 'N/A'}
     fd.append("_wpcf7_unit_tag", `wpcf7-f${CF7_FORM_ID}-o1`);
     fd.append("_wpcf7_container_post", "0");
     fd.append("your-name", name);
-    fd.append("your-email", email);
-    fd.append("your-phone", phone || 'N/A');
+    fd.append("your-email", emailValue);
+    fd.append("your-phone", phoneValue);
     fd.append("your-subject", "Inaugural Agentic AI Research Lab RSVP");
     fd.append("your-message", message);
     fd.append("your-page", "RSVP Page");

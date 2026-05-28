@@ -88,14 +88,8 @@ function getSiemensLiveCountdown(now = new Date()) {
 }
 
 const slides: HeroSlide[] = [
-  {
-    id: "inaugural-agentic-ai",
-    title: "Inaugural Agentic AI Research Lab Invitation",
-    desc: "Join us for the inaugural launch of our Agentic AI Research Lab. Connect, learn, and explore what's next in agentic AI. We are launching our 12-week Claude Architect program.",
-    cta: "RSVP Now",
-    link: "/rsvp",
-    image: "/assets/images/FabOrchestratorAI.webp",
-  },
+
+
   {
     id: SIEMENS_LIVE_SLIDE_ID,
     title: "Siemens Realize LIVE 2026",
@@ -104,6 +98,14 @@ const slides: HeroSlide[] = [
     link: "/siemens-realize-live-2026-faborchestrator-ai",
     image: "/assets/images/siemens-realize-live2026.webp",
     imageClassName: "hero-carousel__image--siemens-live",
+  },
+    {
+    id: "inaugural-agentic-ai",
+    title: "Inaugural Agentic AI Research Lab Invitation",
+    desc: "Join us for the inaugural launch of our Agentic AI Research Lab. Connect, learn, and explore what's next in agentic AI. We are launching our 12-week Claude Architect program.",
+    cta: "RSVP Now",
+    link: "/rsvp",
+    image: "/assets/images/Agentic-AI.webp",
   },
 
   {
