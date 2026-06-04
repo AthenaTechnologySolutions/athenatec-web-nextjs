@@ -1,4 +1,5 @@
 @use "../../../../styles/abstracts/mixins" as *;
+
 .services {
   background: #f6f9ff;
   padding: 6rem 0;
@@ -46,6 +47,7 @@
       transform: translateY(-6px);
       box-shadow: 0 20px 45px rgba(28, 69, 132, 0.4);
     }
+
     &:hover::after {
       opacity: 1;
       transform: scale(1);
@@ -92,6 +94,14 @@
   }
 
   @include mobile {
+    padding: 4rem 0;
+
+    .services-title {
+      margin-bottom: 2.75rem;
+      font-size: clamp(1.85rem, 8vw, 2.25rem);
+      line-height: 1.15;
+    }
+
     .services-timeline {
       grid-template-columns: 1fr;
       gap: 2.25rem;
@@ -228,6 +238,7 @@
     color: #1c4584;
     font-size: 1.2rem;
   }
+
   @include laptop {
     .managed-tabs-wrapper {
       overflow-x: auto;
@@ -268,6 +279,12 @@
 
   @include mobile {
     padding: 4rem 0;
+
+    .managed-title {
+      margin-bottom: 2rem;
+      font-size: clamp(1.75rem, 8vw, 2.2rem);
+      line-height: 1.15;
+    }
 
     .managed-tabs-wrapper {
       overflow-x: auto;
@@ -312,11 +329,9 @@
 .why-us {
   padding: 6rem 0;
   background:
-    radial-gradient(
-      circle at 82% 10%,
+    radial-gradient(circle at 82% 10%,
       rgba(23, 172, 228, 0.08),
-      transparent 28%
-    ),
+      transparent 28%),
     linear-gradient(135deg, #1c4584 0%, #0b244c 68%, #071c3c 100%);
 
   .why-us-content {
@@ -345,6 +360,9 @@
   }
 
   .why-us-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 0.7rem 1.6rem;
     border-radius: 999px;
     border: 2px solid #ffffff;
@@ -353,6 +371,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+
   }
 
   .why-us-btn:hover {
@@ -368,6 +387,33 @@
 
     .why-us-content {
       position: static;
+    }
+  }
+
+  @include mobile {
+    padding: 4rem 0;
+
+    .why-us-label {
+      font-size: 0.9rem;
+    }
+
+    .why-us-content h2 {
+      margin: 0.75rem 0 1rem;
+      font-size: clamp(2rem, 10vw, 2.6rem);
+      line-height: 1.08;
+    }
+
+    .why-us-content p {
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .why-us-btn {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      text-align: center;
+      line-height: 1.25;
     }
   }
 }
@@ -471,6 +517,7 @@
       opacity: 0;
       transform: translateY(6px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -480,6 +527,26 @@
   @include tablet {
     .faq-grid {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @include mobile {
+    .faq-title {
+      margin-bottom: 2.5rem;
+      font-size: 2rem;
+      line-height: 1.15;
+    }
+
+    .faq-item {
+      padding: 1.25rem 1rem;
+    }
+
+    .faq-left {
+      gap: 0.75rem;
+    }
+
+    .faq-text {
+      font-size: 0.95rem;
     }
   }
 }
@@ -493,7 +560,14 @@
   position: relative;
 
   @include mobile {
-    margin: 20px;
+    margin: 16px;
+    padding: 48px 8px;
+
+    .testimonial-title {
+      margin-bottom: 2.5rem;
+      font-size: 1.85rem;
+      line-height: 1.15;
+    }
   }
 
   .testimonial-section::before,
@@ -698,8 +772,16 @@
   }
 
   @include mobile {
+    padding: 3rem 1rem;
+
     .cta-container {
       border-radius: 24px;
+      min-height: 320px;
+    }
+
+    .cta-content {
+      min-height: 320px;
+      padding: 1.5rem 1rem;
     }
 
     .cta-content h2 {

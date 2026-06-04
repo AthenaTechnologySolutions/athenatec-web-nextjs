@@ -1,0 +1,638 @@
+"use client";
+
+import React, { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import {
+  Calendar, Clock, MapPin, CheckCircle, Mail, User, Phone,
+  Briefcase, Loader2, CheckCircle2, ArrowRight, ArrowLeft, Sparkles
+} from 'lucide-react';
+
+const STEPS = ["Personal Info", "Professional", "Interests & More"];
+
+const interests = [
+  "Document Intelligence",
+  "Agentic Workflows",
+  "Claude Code Solutions",
+  "MCP Integrations",
+  "Custom Pilot Project",
+  "RAG vs. Agentic Architecture",
+];
+
+type RsvpFormData = {
+  fullName: string;
+  email: string;
+  phone: string;
+  city: string;
+  company: string;
+  jobTitle: string;
+  industry: string;
+  interests: string[];
+  source: string;
+  useCase: string;
+  consent: boolean;
+  claudeArchitect: boolean;
+};
+
+type ErrorField = keyof RsvpFormData | "interests";
+type FormErrors = Partial<Record<ErrorField, string>>;
+
+export default function RsvpPage() {
+  const [step, setStep] = useState(0);
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<FormErrors>({});
+  const [formData, setFormData] = useState<RsvpFormData>({
+    fullName: "", email: "", phone: "", city: "",
+    company: "", jobTitle: "", industry: "",
+    interests: [],
+    source: "", useCase: "", consent: false,
+    claudeArchitect: false,
+  });
+
+  const update = <K extends keyof RsvpFormData>(field: K, value: RsvpFormData[K]) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    setFieldErrors(prev => {
+      if (!prev[field]) return prev;
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+    setErrorMessage("");
+    if (status === "error") setStatus("idle");
+  };
+
+  const toggleInterest = (val: string) => {
+    setFormData(prev => ({
+      ...prev,
+      interests: prev.interests.includes(val)
+        ? prev.interests.filter((i: string) => i !== val)
+        : [...prev.interests, val],
+    }));
+    setFieldErrors(prev => {
+      if (!prev.interests) return prev;
+      const next = { ...prev };
+      delete next.interests;
+      return next;
+    });
+    setErrorMessage("");
+  };
+
+  const validateEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+
+  const getStepErrors = (targetStep: number) => {
+    const errors: FormErrors = {};
+
+    if (targetStep === 0) {
+      if (!formData.fullName.trim()) errors.fullName = "Full name is required.";
+      if (!formData.email.trim()) {
+        errors.email = "Email is required.";
+      } else if (!validateEmail(formData.email)) {
+        errors.email = "Enter a valid email address.";
+      }
+      if (!formData.phone.trim()) errors.phone = "Phone is required.";
+      if (!formData.city.trim()) errors.city = "City is required.";
+    }
+
+    if (targetStep === 1) {
+      if (!formData.company.trim()) errors.company = "Company / Organization is required.";
+      if (!formData.jobTitle.trim()) errors.jobTitle = "Job Title is required.";
+      if (!formData.industry.trim()) errors.industry = "Industry / Sector is required.";
+    }
+
+    if (targetStep === 2) {
+      if (!formData.claudeArchitect && formData.interests.length === 0) {
+        errors.interests = "Select at least one area of interest.";
+      }
+      if (!formData.source.trim()) errors.source = "Please select how you heard about us.";
+      if (!formData.useCase.trim()) errors.useCase = "Use case is required.";
+      if (!formData.consent) errors.consent = "Consent is required.";
+    }
+
+    return errors;
+  };
+
+  const getAllErrors = () => ({
+    ...getStepErrors(0),
+    ...getStepErrors(1),
+    ...getStepErrors(2),
+  });
+
+  const goToFirstErrorStep = (errors: FormErrors) => {
+    if (errors.fullName || errors.email || errors.phone || errors.city) {
+      setStep(0);
+    } else if (errors.company || errors.jobTitle || errors.industry) {
+      setStep(1);
+    } else {
+      setStep(2);
+    }
+  };
+
+  const handleContinue = () => {
+    const errors = getStepErrors(step);
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      setErrorMessage("Please complete all required fields before continuing.");
+      return;
+    }
+
+    setFieldErrors({});
+    setErrorMessage("");
+    setStep(s => s + 1);
+  };
+
+  const renderError = (field: ErrorField) =>
+    fieldErrors[field] ? (
+      <p className="mt-1.5 text-xs font-semibold text-red-600">{fieldErrors[field]}</p>
+    ) : null;
+
+  const handleSubmit = async () => {
+    const errors = getAllErrors();
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      setErrorMessage("Please complete all required fields before submitting.");
+      goToFirstErrorStep(errors);
+      return;
+    }
+
+    setStatus("submitting");
+    setErrorMessage("");
+    try {
+      const allInterests = [
+        ...(formData.claudeArchitect ? ["12-week Claude Architect program"] : []),
+        ...formData.interests,
+      ];
+      const res = await fetch("/api/rsvp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          fullName: formData.fullName.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          city: formData.city.trim(),
+          company: formData.company.trim(),
+          jobTitle: formData.jobTitle.trim(),
+          industry: formData.industry.trim(),
+          source: formData.source.trim(),
+          useCase: formData.useCase.trim(),
+          interests: allInterests,
+        }),
+      });
+      const result = await res.json();
+      if (res.ok && result.status === "mail_sent") {
+        setStatus("success");
+      } else {
+        throw new Error(result.message || "Failed to submit RSVP");
+      }
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(error instanceof Error ? error.message : "An unexpected error occurred. Please try again.");
+    }
+  };
+
+  const inputCls =
+    "w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#1c4584]/20 focus:border-[#1c4584] outline-none transition-all text-gray-900 placeholder:text-gray-400 disabled:opacity-60";
+  const labelCls = "block text-sm font-semibold text-gray-700 mb-1.5";
+
+  return (
+    <div className="min-h-screen bg-[#f4f6fb] font-sans">
+      {/* Top nav bar */}
+      <header className="bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between sticky top-0 z-30 shadow-sm">
+        <Link href="/">
+          <Image
+            src="/assets/logo/Athenatec-Logo.png"
+            alt="Athenatec"
+            width={180}
+            height={45}
+            className="h-9 w-auto object-contain"
+            priority
+          />
+        </Link>
+        <span className="text-xs font-bold tracking-widest uppercase text-[#1c4584] bg-[#1c4584]/8 px-3 py-1.5 rounded-full">
+          FabOrchestrator.AI
+        </span>
+      </header>
+
+      <div className="max-w-6xl mx-auto px-4 py-10 lg:py-14 flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
+
+        {/* ── LEFT PANEL: Event Details ── */}
+        <aside className="w-full lg:w-80 xl:w-96 shrink-0 lg:sticky lg:top-24">
+          <div className="bg-[#1c4584] rounded-3xl overflow-hidden shadow-xl shadow-[#1c4584]/20">
+            {/* Hero band */}
+            <div className="px-7 pt-8 pb-6 border-b border-white/10">
+             <p className="text-xs font-bold tracking-widest uppercase text-blue-200 mb-2 mt-2 text-center">FabOrchestrator.AI</p>
+              <h1 className="text-2xl font-extrabold leading-snug text-amber-300 text-center">
+              Inaugural <br/> Agentic AI Research Lab
+              </h1>
+             
+
+            </div>
+
+            {/* Info rows */}
+            <div className="px-7 py-6 space-y-5">
+              {[
+                {
+                  icon: <Calendar className="w-6 h-6" />,
+                  label: "Date",
+                  value: "Saturday, June 13",
+                  sub: "RSVP by Wenesday, June 10",
+                  subClassName: "inline-block rounded-md bg-red-50 px-2 py-1 text-red-800",
+                },
+                {
+                  icon: <Clock className="w-6 h-6" />,
+                  label: "Time",
+                  value: "10:00 AM PST",
+                },
+                {
+                  icon: <MapPin className="w-6 h-6" />,
+                  label: "Location",
+                  value: "Fremont Downtown Event Center",
+                  valueClassName: "text-base md:text-[16px]",
+                  sub: "Event Room: Capitol Room",
+                  subClassName: "text-blue-100 text-base md:text-lg",
+                  address: "3500 Capitol Ave, Fremont, CA 94538",
+                  addressClassName: "text-blue-100 text-base md:text-lg",
+                  contentClassName: "flex-1",
+                },
+              ].map(({ icon, label, value, valueClassName, sub, subClassName, address, addressClassName, contentClassName }) => (
+                <div key={label} className="flex gap-4 items-start">
+                  <div className="bg-white/10 p-3 rounded-xl text-white shrink-0">{icon}</div>
+                  <div className={`${contentClassName ?? ""} min-w-0`}>
+                    <p className="text-xs font-extrabold text-blue-100 uppercase tracking-wider">{label}</p>
+                    <p className={`${valueClassName ?? "text-lg md:text-xl"} text-white font-extrabold mt-1 leading-snug`}>
+                      {value}
+                    </p>
+                    {sub && (
+                      <p className={`${subClassName ?? "text-blue-100 text-sm"} font-bold mt-1 leading-relaxed`}>
+                        {sub}
+                      </p>
+                    )}
+                    {address && (
+                      <p className={`${addressClassName ?? "text-blue-100 text-sm"} font-bold mt-1 leading-relaxed`}>
+                        {address}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Highlight */}
+            <div className="mx-5 mb-6 bg-amber-400/15 border border-amber-400/30 rounded-2xl p-4">
+              <div className="flex items-center gap-2 mb-1.5">
+                <Sparkles className="w-4 h-4 text-amber-300 shrink-0" />
+                <p className="text-[11px] font-bold text-amber-200 uppercase tracking-wider">Key Highlight</p>
+              </div>
+              <p className="text-white text-sm leading-relaxed">
+                Launching our{" "}
+                <span className="font-bold text-amber-300">12-week Claude Architect</span>{" "}
+                industry-driven, research-based learning program.
+              </p>
+            </div>
+
+            <div className="px-7 pb-6">
+              <p className="text-blue-200 text-xs leading-relaxed">
+                Lunch will be provided. Connect, learn, and explore what&apos;s next in agentic AI.
+              </p>
+            </div>
+          </div>
+        </aside>
+
+        {/* ── RIGHT PANEL: Form ── */}
+        <main className="flex-1 min-w-0">
+          <div className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
+
+            {status === "success" ? (
+              /* Success State */
+              <div className="text-center py-20 px-8">
+                <div className="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100 mb-6">
+                  <CheckCircle2 className="h-10 w-10 text-green-600" />
+                </div>
+                <h2 className="text-3xl font-extrabold text-gray-900 mb-3">You&apos;re In!</h2>
+                <p className="text-lg text-gray-500 mb-8 max-w-sm mx-auto">
+                  RSVP confirmed for the Inaugural Agentic AI Research Lab. See you on June 13!
+                </p>
+                <Link
+                  href="/"
+                  className="inline-block bg-[#1c4584] text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:bg-[#15356e] transition-colors"
+                >
+                  Return Home
+                </Link>
+              </div>
+            ) : (
+              <>
+                {/* Step Header */}
+                <div className="px-8 pt-8 pb-6 border-b border-gray-100">
+                  <div className="flex items-center justify-between mb-5">
+                    <div>
+                      <h2 className="text-xl font-extrabold text-gray-900">
+                        Confirm Your{" "}
+                        <span className="text-2xl font-black text-[#1c4584] underline decoration-amber-400 decoration-4 underline-offset-4">
+                          RSVP
+                        </span>
+                      </h2>
+                      <p className="text-sm text-gray-500 mt-0.5">Step {step + 1} of {STEPS.length}</p>
+                    </div>
+                    <span className="text-xs font-semibold text-[#1c4584] bg-[#1c4584]/8 px-3 py-1.5 rounded-full">
+                      {STEPS[step]}
+                    </span>
+                  </div>
+
+                  {/* Progress bar */}
+                  <div className="flex gap-2">
+                    {STEPS.map((s, i) => (
+                      <div key={s} className="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden">
+                        <div
+                          className="h-full bg-[#1c4584] rounded-full transition-all duration-500"
+                          style={{ width: i <= step ? "100%" : "0%" }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="px-8 py-7">
+                  {/* ── STEP 0: Personal Info ── */}
+                  {step === 0 && (
+                    <div className="space-y-5">
+                      <div className="flex gap-2 mb-1">
+                        <User className="w-5 h-5 text-[#1c4584]" />
+                        <h3 className="text-base font-bold text-gray-900">Personal Information</h3>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div className="sm:col-span-2">
+                          <label className={labelCls}>Full name <span className="text-red-500">*</span></label>
+                          <input
+                            type="text"
+                            className={inputCls}
+                            placeholder="Full name"
+                            value={formData.fullName}
+                            onChange={e => update("fullName", e.target.value)}
+                            required
+                          />
+                          {renderError("fullName")}
+                        </div>
+                        <div className="sm:col-span-2">
+                          <label className={labelCls}>Email <span className="text-red-500">*</span></label>
+                          <div className="relative">
+                            <Mail className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+                            <input
+                              type="email"
+                              className={`${inputCls} pl-11`}
+                              placeholder="Email"
+                              value={formData.email}
+                              onChange={e => update("email", e.target.value)}
+                              required
+                            />
+                          </div>
+                          {renderError("email")}
+                        </div>
+                        <div>
+                          <label className={labelCls}>Phone <span className="text-red-500">*</span></label>
+                          <div className="relative">
+                            <Phone className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+                            <input
+                              type="tel"
+                              className={`${inputCls} pl-11`}
+                              placeholder="Phone"
+                              value={formData.phone}
+                              onChange={e => update("phone", e.target.value)}
+                              required
+                            />
+                          </div>
+                          {renderError("phone")}
+                        </div>
+                        <div>
+                          <label className={labelCls}>City <span className="text-red-500">*</span></label>
+                          <input
+                            type="text"
+                            className={inputCls}
+                            placeholder="City"
+                            value={formData.city}
+                            onChange={e => update("city", e.target.value)}
+                            required
+                          />
+                          {renderError("city")}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* ── STEP 1: Professional Details ── */}
+                  {step === 1 && (
+                    <div className="space-y-5">
+                      <div className="flex gap-2 mb-1">
+                        <Briefcase className="w-5 h-5 text-[#1c4584]" />
+                        <h3 className="text-base font-bold text-gray-900">Professional Details</h3>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                          <label className={labelCls}>Company / Organization <span className="text-red-500">*</span></label>
+                          <input
+                            type="text"
+                            className={inputCls}
+                            placeholder="Company / Organization"
+                            value={formData.company}
+                            onChange={e => update("company", e.target.value)}
+                            required
+                          />
+                          {renderError("company")}
+                        </div>
+                        <div>
+                          <label className={labelCls}>Job Title <span className="text-red-500">*</span></label>
+                          <input
+                            type="text"
+                            className={inputCls}
+                            placeholder="Job Title"
+                            value={formData.jobTitle}
+                            onChange={e => update("jobTitle", e.target.value)}
+                            required
+                          />
+                          {renderError("jobTitle")}
+                        </div>
+                        <div className="sm:col-span-2">
+                          <label className={labelCls}>Industry / Sector <span className="text-red-500">*</span></label>
+                          <select
+                            className={inputCls}
+                            value={formData.industry}
+                            onChange={e => update("industry", e.target.value)}
+                            required
+                          >
+                            <option value="">Select an option</option>
+                            <option>Government / Public Sector</option>
+                            <option>Technology</option>
+                            <option>Healthcare</option>
+                            <option>Finance</option>
+                            <option>Education</option>
+                            <option>Other</option>
+                          </select>
+                          {renderError("industry")}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* ── STEP 2: Interests + More ── */}
+                  {step === 2 && (
+                    <div className="space-y-7">
+                      {/* Claude Architect highlight */}
+                      <label className="flex items-center gap-4 p-4 border-2 border-amber-300 bg-amber-50 rounded-2xl cursor-pointer hover:bg-amber-100/60 transition-colors group">
+                        <input
+                          type="checkbox"
+                          className="w-5 h-5 text-[#1c4584] rounded border-gray-300 focus:ring-[#1c4584] cursor-pointer shrink-0"
+                          checked={formData.claudeArchitect}
+                          onChange={e => update("claudeArchitect", e.target.checked)}
+                        />
+                        <span className="font-semibold text-gray-900 group-hover:text-[#1c4584] transition-colors flex-1">
+                          12-week Claude Architect program
+                        </span>
+                        <span className="bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider shrink-0">
+                          New
+                        </span>
+                      </label>
+
+                      {/* Other interests */}
+                      <div>
+                        <p className="text-sm font-bold text-gray-700 mb-3">
+                          Other Areas of Interest <span className="text-red-500">*</span>
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          {interests.map(interest => (
+                            <label
+                              key={interest}
+                              className={`flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer transition-all ${
+                                formData.interests.includes(interest)
+                                  ? "border-[#1c4584] bg-[#1c4584]/5"
+                                  : "border-gray-200 bg-gray-50 hover:border-gray-300"
+                              }`}
+                            >
+                              <input
+                                type="checkbox"
+                                className="w-4 h-4 text-[#1c4584] rounded border-gray-300 focus:ring-[#1c4584] cursor-pointer shrink-0"
+                                checked={formData.interests.includes(interest)}
+                                onChange={() => toggleInterest(interest)}
+                              />
+                              <span className="text-sm font-medium text-gray-700">{interest}</span>
+                            </label>
+                          ))}
+                        </div>
+                        {renderError("interests")}
+                      </div>
+
+                      <hr className="border-gray-100" />
+
+                      {/* Additional info */}
+                      <div className="space-y-5">
+                        <div>
+                          <label className={labelCls}>How did you hear about us? <span className="text-red-500">*</span></label>
+                          <select
+                            className={inputCls}
+                            value={formData.source}
+                            onChange={e => update("source", e.target.value)}
+                            required
+                          >
+                            <option value="">Select an option</option>
+                            <option>Personal invitation</option>
+                            <option>Referral</option>
+                            <option>LinkedIn</option>
+                            <option>Email</option>
+                            <option>Event / conference</option>
+                            <option>Other</option>
+                          </select>
+                          {renderError("source")}
+                        </div>
+                        <div>
+                          <label className={labelCls}>Tell us about your use case <span className="text-red-500">*</span></label>
+                          <textarea
+                            rows={3}
+                            className={`${inputCls} resize-y`}
+                            placeholder="Tell us about your use case"
+                            value={formData.useCase}
+                            onChange={e => update("useCase", e.target.value)}
+                            required
+                          />
+                          {renderError("useCase")}
+                        </div>
+                      </div>
+
+                      {/* Consent */}
+                      <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                        <label className="flex items-start gap-3 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            className="w-4 h-4 mt-0.5 text-[#1c4584] rounded border-gray-300 focus:ring-[#1c4584] cursor-pointer shrink-0"
+                            checked={formData.consent}
+                            onChange={e => update("consent", e.target.checked)}
+                            required
+                          />
+                          <span className="text-sm text-gray-600 leading-relaxed">
+                            <span className="text-red-500 font-semibold">*</span>{" "}
+                            I agree to be contacted by Athena Technology Solutions and FabOrchestrator.AI about programs, research updates, and opportunities relevant to my interests.
+                          </span>
+                        </label>
+                        {renderError("consent")}
+                      </div>
+                    </div>
+                  )}
+
+                  {errorMessage && (
+                    <div className="mt-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-r-xl text-sm font-semibold">
+                      {errorMessage}
+                    </div>
+                  )}
+                </div>
+
+                {/* Footer Nav */}
+                <div className="px-8 pb-8 flex items-center justify-between gap-4">
+                  {step > 0 ? (
+                    <button
+                      type="button"
+                      onClick={() => setStep(s => s - 1)}
+                      className="flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-gray-900 transition-colors px-4 py-2.5 rounded-xl hover:bg-gray-100"
+                    >
+                      <ArrowLeft className="w-4 h-4" />
+                      Back
+                    </button>
+                  ) : (
+                    <div />
+                  )}
+
+                  {step < STEPS.length - 1 ? (
+                    <button
+                      type="button"
+                      onClick={handleContinue}
+                      className="flex items-center gap-2 bg-[#1c4584] hover:bg-[#15356e] text-white font-bold py-3 px-7 rounded-xl shadow-md shadow-[#1c4584]/20 transition-all hover:-translate-y-0.5 active:translate-y-0"
+                    >
+                      Continue
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={handleSubmit}
+                      disabled={status === "submitting"}
+                      className="flex items-center gap-2 bg-[#1c4584] hover:bg-[#15356e] disabled:bg-[#1c4584]/60 disabled:cursor-not-allowed text-white font-bold py-3 px-7 rounded-xl shadow-md shadow-[#1c4584]/20 transition-all hover:-translate-y-0.5 active:translate-y-0 disabled:transform-none"
+                    >
+                      {status === "submitting" ? (
+                        <>
+                          <Loader2 className="animate-spin h-4 w-4" />
+                          Submitting…
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircle className="w-4 h-4" />
+                          Confirm RSVP
+                        </>
+                      )}
+                    </button>
+                  )}
+                </div>
+              </>
+            )}
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}
