@@ -34,7 +34,9 @@ export async function POST(req: Request) {
       consent,
     } = body;
 
-    const name = asString(fullName) || `${asString(firstName)} ${asString(lastName)}`.trim();
+    const firstNameValue = asString(firstName);
+    const lastNameValue = asString(lastName);
+    const name = `${firstNameValue} ${lastNameValue}`.trim() || asString(fullName);
     const emailValue = asString(email);
     const phoneValue = asString(phone);
     const cityValue = asString(city);
@@ -51,8 +53,10 @@ export async function POST(req: Request) {
 
     if (
       !name ||
+      !firstNameValue ||
+      !lastNameValue ||
       !isValidEmail(emailValue) ||
-      !phoneValue ||
+      !/^\d{10}$/.test(phoneValue) ||
       !cityValue ||
       !companyValue ||
       !jobTitleValue ||

@@ -20,7 +20,8 @@ const interests = [
 ];
 
 type RsvpFormData = {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string;
   city: string;
@@ -43,7 +44,7 @@ export default function RsvpPage() {
   const [errorMessage, setErrorMessage] = useState("");
   const [fieldErrors, setFieldErrors] = useState<FormErrors>({});
   const [formData, setFormData] = useState<RsvpFormData>({
-    fullName: "", email: "", phone: "", city: "",
+    firstName: "", lastName: "", email: "", phone: "", city: "",
     company: "", jobTitle: "", industry: "",
     interests: [],
     source: "", useCase: "", consent: false,
@@ -79,18 +80,24 @@ export default function RsvpPage() {
   };
 
   const validateEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+  const validatePhone = (value: string) => /^\d{10}$/.test(value.trim());
 
   const getStepErrors = (targetStep: number) => {
     const errors: FormErrors = {};
 
     if (targetStep === 0) {
-      if (!formData.fullName.trim()) errors.fullName = "Full name is required.";
+      if (!formData.firstName.trim()) errors.firstName = "First name is required.";
+      if (!formData.lastName.trim()) errors.lastName = "Last name is required.";
       if (!formData.email.trim()) {
         errors.email = "Email is required.";
       } else if (!validateEmail(formData.email)) {
         errors.email = "Enter a valid email address.";
       }
-      if (!formData.phone.trim()) errors.phone = "Phone is required.";
+      if (!formData.phone.trim()) {
+        errors.phone = "Phone is required.";
+      } else if (!validatePhone(formData.phone)) {
+        errors.phone = "Enter a 10-digit phone number.";
+      }
       if (!formData.city.trim()) errors.city = "City is required.";
     }
 
@@ -119,7 +126,7 @@ export default function RsvpPage() {
   });
 
   const goToFirstErrorStep = (errors: FormErrors) => {
-    if (errors.fullName || errors.email || errors.phone || errors.city) {
+    if (errors.firstName || errors.lastName || errors.email || errors.phone || errors.city) {
       setStep(0);
     } else if (errors.company || errors.jobTitle || errors.industry) {
       setStep(1);
@@ -167,7 +174,9 @@ export default function RsvpPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
-          fullName: formData.fullName.trim(),
+          firstName: formData.firstName.trim(),
+          lastName: formData.lastName.trim(),
+          fullName: `${formData.firstName.trim()} ${formData.lastName.trim()}`.trim(),
           email: formData.email.trim(),
           phone: formData.phone.trim(),
           city: formData.city.trim(),
@@ -361,17 +370,29 @@ export default function RsvpPage() {
                         <h3 className="text-base font-bold text-gray-900">Personal Information</h3>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                        <div className="sm:col-span-2">
-                          <label className={labelCls}>Full name <span className="text-red-500">*</span></label>
+                        <div>
+                          <label className={labelCls}>First name <span className="text-red-500">*</span></label>
                           <input
                             type="text"
                             className={inputCls}
-                            placeholder="Full name"
-                            value={formData.fullName}
-                            onChange={e => update("fullName", e.target.value)}
+                            placeholder="First name"
+                            value={formData.firstName}
+                            onChange={e => update("firstName", e.target.value)}
                             required
                           />
-                          {renderError("fullName")}
+                          {renderError("firstName")}
+                        </div>
+                        <div>
+                          <label className={labelCls}>Last name <span className="text-red-500">*</span></label>
+                          <input
+                            type="text"
+                            className={inputCls}
+                            placeholder="Last name"
+                            value={formData.lastName}
+                            onChange={e => update("lastName", e.target.value)}
+                            required
+                          />
+                          {renderError("lastName")}
                         </div>
                         <div className="sm:col-span-2">
                           <label className={labelCls}>Email <span className="text-red-500">*</span></label>
@@ -395,9 +416,12 @@ export default function RsvpPage() {
                             <input
                               type="tel"
                               className={`${inputCls} pl-11`}
-                              placeholder="Phone"
+                              placeholder="phone number"
                               value={formData.phone}
-                              onChange={e => update("phone", e.target.value)}
+                              onChange={e => update("phone", e.target.value.replace(/\D/g, "").slice(0, 10))}
+                              inputMode="numeric"
+                              maxLength={10}
+                              pattern="\d{10}"
                               required
                             />
                           </div>
