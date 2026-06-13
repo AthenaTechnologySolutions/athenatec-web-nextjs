@@ -318,9 +318,9 @@ export default function RsvpPage() {
                 <div className="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100 mb-6">
                   <CheckCircle2 className="h-10 w-10 text-green-600" />
                 </div>
-                <h2 className="text-3xl font-extrabold text-gray-900 mb-3">You&apos;re In!</h2>
+                <h2 className="text-3xl font-extrabold text-gray-900 mb-3">You&apos;re on the waitlist!</h2>
                 <p className="text-lg text-gray-500 mb-8 max-w-sm mx-auto">
-                  RSVP confirmed for the Inaugural Agentic AI Research Lab. See you on June 13!
+                  Thanks for submitting your RSVP. We&apos;ve added you to the waitlist and will contact you if a spot becomes available.
                 </p>
                 <Link
                   href="/"
