@@ -47,14 +47,15 @@ const slides: HeroSlide[] = [
   //   image: "/assets/images/siemens-realize-live2026.webp",
   //   imageClassName: "hero-carousel__image--siemens-live",
   // },
-  {
-    id: "inaugural-agentic-ai",
-    title: "Inaugural Agentic AI Research Lab Invitation",
-    desc: "Join us for the inaugural launch of our Agentic AI Research Lab. Connect, learn, and explore what's next in agentic AI. We are launching our 12-week Claude Architect program.",
-    cta: "RSVP Now",
-    link: "/rsvp",
-    image: "/assets/images/Agentic-AI.webp",
-  },
+  // Inaugural Agentic AI Research Lab RSVP is disabled; keep the old slide commented for reuse.
+  // {
+  //   id: "inaugural-agentic-ai",
+  //   title: "Inaugural Agentic AI Research Lab Invitation",
+  //   desc: "Join us for the inaugural launch of our Agentic AI Research Lab. Connect, learn, and explore what's next in agentic AI. We are launching our 12-week Claude Architect program.",
+  //   cta: "RSVP Now",
+  //   link: "/rsvp",
+  //   image: "/assets/images/Agentic-AI.webp",
+  // },
 
   {
     title:
