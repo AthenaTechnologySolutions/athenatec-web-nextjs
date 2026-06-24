@@ -14,6 +14,7 @@ const ALLOWED_CF7_FORM_IDS = new Set([
   "231155",
   "231536",
   "232878",
+  "233209",
 ]);
 
 const ACCEPTANCE_VALIDATION_FORM_IDS = new Set(["232878"]);
@@ -46,6 +47,27 @@ const ALLOWED_CF7_FIELDS = new Set([
   "topic",
   "your-email",
   "your-name",
+  "your-phone",
+  "first-name",
+  "last-name",
+  "city-state",
+  "employer",
+  "linkedin",
+  "years-experience",
+  "education",
+  "experience",
+  "other-experience",
+  "attendance-mode",
+  "heard-about",
+  "signature",
+  "resume",
+  "signature-file",
+  "your-subject",
+  "your-message",
+  "your-page",
+  "decl-resume",
+  "decl-interview",
+  "decl-lab-fee",
 ]);
 
 export async function POST(
@@ -68,19 +90,13 @@ export async function POST(
       );
     }
 
-    if (!ALLOWED_CF7_FORM_IDS.has(formId)) {
-      return Response.json(
-        { status: "validation_failed", message: "Form id is not allowed." },
-        { status: 403 },
-      );
-    }
-
     const incoming = await req.formData();
     const requiresAcceptanceValidation =
       ACCEPTANCE_VALIDATION_FORM_IDS.has(formId);
     const acceptanceField = formId === "232878" ? "consent" : "checkbox-649";
     const hasAcceptedTerms =
-      sanitizeText(incoming.get(acceptanceField), 200).length > 0;
+      typeof incoming.get(acceptanceField) === "string" &&
+      sanitizeText(incoming.get(acceptanceField) as string, 200).length > 0;
 
     if (requiresAcceptanceValidation && !hasAcceptedTerms) {
       return Response.json({
@@ -109,14 +125,20 @@ export async function POST(
     }
 
     for (const [key, value] of incoming.entries()) {
-      if (
-        !RESERVED_CF7_FIELDS.has(key) &&
-        ALLOWED_CF7_FIELDS.has(key) &&
-        typeof value === "string"
-      ) {
-        const maxLength =
-          key === "textarea-11" || key === "message" ? 2_000 : 500;
-        fd.append(key, sanitizeText(value, maxLength));
+      if (!RESERVED_CF7_FIELDS.has(key) && ALLOWED_CF7_FIELDS.has(key)) {
+        if (typeof value === "string") {
+          const maxLength =
+            key === "textarea-11" || key === "message" || key === "your-message" ? 4000 : 500;
+          fd.append(key, sanitizeText(value, maxLength));
+        } else if (
+          typeof value === "object" &&
+          value !== null &&
+          "name" in value &&
+          "size" in value &&
+          "type" in value
+        ) {
+          fd.append(key, value as File);
+        }
       }
     }
 
@@ -134,6 +156,7 @@ export async function POST(
         body: fd,
         headers: {
           Accept: "application/json",
+          "User-Agent": req.headers.get("user-agent") || "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         },
         cache: "no-store",
         redirect: "follow",
@@ -155,13 +178,18 @@ export async function POST(
         { status: 502 },
       );
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error("CF7 PROXY ERROR:", error);
 
+    let errorMessage = error instanceof Error ? error.message : String(error);
+    if (error && error.cause) {
+      const causeMessage = error.cause instanceof Error ? error.cause.message : String(error.cause);
+      errorMessage += ` (Cause: ${causeMessage})`;
+    }
     return Response.json(
       {
         status: "mail_failed",
-        message: "Message could not be sent. Please try again.",
+        message: `Message could not be sent. Error: ${errorMessage}`,
       },
       { status: 500 },
     );

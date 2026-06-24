@@ -56,7 +56,14 @@ const slides: HeroSlide[] = [
   //   link: "/rsvp",
   //   image: "/assets/images/Agentic-AI.webp",
   // },
-
+{
+  id: "agentic-ai-training",
+  title: "Agentic AI Architect Training Program",
+  desc: "Master AI Agents, LLMs, RAG, Multi-Agent Systems, and Enterprise AI Architecture through a 12–15 week industry-focused training program.",
+  cta: "Register Now",
+  link: "/agentic-ai-architect-training-program/",
+  image: "/assets/images/ai1.webp",
+},
   {
     title:
       "Building the Future of Manufacturing: Achieving Scalability and Compliance with Siemens and Athena.",
