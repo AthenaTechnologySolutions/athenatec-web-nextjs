@@ -96,7 +96,7 @@
   }
 
   &:hover {
-    background: #1f4b8f;
+    background: #1c4584;
     transform: translateY(-6px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
 
@@ -229,7 +229,7 @@
       left: 0;
       height: 4px;
       width: 0%;
-      background: #1f4b8f;
+      background: #1c4584;
       transition: width 0.3s ease;
     }
 
@@ -273,7 +273,7 @@
     .analytics-title {
       font-size: clamp(26px, 4.5vw, 52px);
       font-weight: 800;
-      color: #1f3b73;
+      color: #15356e;
       margin-bottom: clamp(24px, 3.5vw, 40px);
       letter-spacing: 0.5px;
       line-height: 1.15;
@@ -290,7 +290,7 @@
 .analytics-title {
   font-size: clamp(26px, 4.5vw, 52px);
   font-weight: 800;
-  color: #1f3b73;
+  color: #15356e;
   margin-bottom: clamp(24px, 3.5vw, 40px);
   letter-spacing: 0.5px;
   line-height: 1.15;
@@ -312,7 +312,7 @@
     .clients-title {
       font-size: clamp(24px, 4vw, 44px);
       font-weight: 800;
-      color: #1f3b73;
+      color: #15356e;
       margin-bottom: 15px;
       line-height: 1.2;
     }
@@ -367,7 +367,7 @@
   background: #f4f6f8;
 
   .testimonial-title {
-    color: #1f3b73;
+    color: #15356e;
     text-align: center;
     font-weight: 800;
     margin-bottom: clamp(24px, 4vw, 40px);
@@ -442,7 +442,7 @@
   }
 
   .card-footer {
-    background: #1e3a8a;
+    background: #15356e;
     color: #fff;
     padding: clamp(14px, 3vw, 30px) clamp(16px, 3.5vw, 30px);
     display: flex;

@@ -5,7 +5,7 @@ import {
 } from "@/lib/request-guard";
 import { getWpApiUrl } from "@/lib/wp";
 
-const CF7_FORM_ID = "232904";
+const CF7_FORM_ID = "233200";
 const CF7_SITE_URL = process.env.WP_SITE_URL || "https://cms.athenatec.com";
 
 export async function POST(req: Request) {
@@ -34,7 +34,9 @@ export async function POST(req: Request) {
       consent,
     } = body;
 
-    const name = asString(fullName) || `${asString(firstName)} ${asString(lastName)}`.trim();
+    const firstNameValue = asString(firstName);
+    const lastNameValue = asString(lastName);
+    const name = `${firstNameValue} ${lastNameValue}`.trim() || asString(fullName);
     const emailValue = asString(email);
     const phoneValue = asString(phone);
     const cityValue = asString(city);
@@ -45,14 +47,16 @@ export async function POST(req: Request) {
     const useCaseValue = asString(useCase);
     const interestList = Array.isArray(interests)
       ? interests
-          .filter((interest): interest is string => typeof interest === "string" && interest.trim().length > 0)
-          .map(interest => interest.trim())
+        .filter((interest): interest is string => typeof interest === "string" && interest.trim().length > 0)
+        .map(interest => interest.trim())
       : [];
 
     if (
       !name ||
+      !firstNameValue ||
+      !lastNameValue ||
       !isValidEmail(emailValue) ||
-      !phoneValue ||
+      !/^\d{10}$/.test(phoneValue) ||
       !cityValue ||
       !companyValue ||
       !jobTitleValue ||
@@ -93,7 +97,8 @@ ${useCaseValue}
     fd.append("_wpcf7_locale", "en_US");
     fd.append("_wpcf7_unit_tag", `wpcf7-f${CF7_FORM_ID}-o1`);
     fd.append("_wpcf7_container_post", "0");
-    fd.append("your-name", name);
+    fd.append("first-name", firstNameValue);
+    fd.append("last-name", lastNameValue);
     fd.append("your-email", emailValue);
     fd.append("your-phone", phoneValue);
     fd.append("your-subject", "Inaugural Agentic AI Research Lab RSVP");
@@ -134,7 +139,7 @@ ${useCaseValue}
 
     // WordPress CF7 returns status "mail_sent" if successful
     if (data.status !== "mail_sent" && data.status !== "validation_failed") {
-        console.error("CF7 Error:", data);
+      console.error("CF7 Error:", data);
     }
 
     return Response.json(data, { status: response.ok ? 200 : response.status });

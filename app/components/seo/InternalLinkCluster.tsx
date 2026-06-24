@@ -78,7 +78,7 @@ export default function InternalLinkCluster({
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#17ace4]">
             {eyebrow}
           </p>
-          <h2 className="mt-3 text-3xl font-bold leading-tight text-[#10233f] sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold leading-tight text-[#15356e] sm:text-4xl">
             {title}
           </h2>
           <p className="mt-4 text-base leading-7 text-gray-600">

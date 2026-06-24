@@ -29,7 +29,7 @@ export default function BottomCarousel({ stats, description }: BottomCarouselPro
               key={stat.id}
               className="rounded-lg border border-white/15 bg-white/10 px-4 py-3 text-center transition-colors hover:bg-white/15 sm:px-6 sm:py-4"
             >
-              <span className="mb-1 block text-[9px] font-semibold uppercase tracking-widest text-[#7dd8f8] sm:text-[10px]">
+              <span className="mb-1 block text-[9px] font-semibold uppercase tracking-widest text-[#17ace4] sm:text-[10px]">
                 {stat.label}
               </span>
               <span className="block text-2xl font-bold text-white sm:text-3xl">

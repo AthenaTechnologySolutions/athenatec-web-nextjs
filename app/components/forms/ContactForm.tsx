@@ -166,7 +166,7 @@ export default function ContactForm({ inquiryOptions, pageName }: ContactFormPro
               {inquiryOptions.map((option, i) => (
                 <div key={option}
                   onClick={() => { setSelectedInquiry(option); setValue("inquiryType", option); trigger("inquiryType"); setOpen(false); }}
-                  className={`px-4 py-3 cursor-pointer text-sm text-gray-700 hover:bg-blue-50 hover:text-[#1c4584]
+                  className={`px-4 py-3 cursor-pointer text-sm text-gray-700 hover:bg-[#e8f5fd] hover:text-[#1c4584]
                     transition-colors duration-150 ${i < inquiryOptions.length - 1 ? "border-b border-gray-50" : ""}`}>
                   {option}
                 </div>
@@ -204,7 +204,7 @@ export default function ContactForm({ inquiryOptions, pageName }: ContactFormPro
           transition-all duration-300 tracking-wide
           ${isSubmitting
             ? "bg-gray-400 cursor-not-allowed"
-            : "bg-[#1c4584] hover:bg-[#17ace4] hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"}`}>
+            : "bg-[#1c4584] hover:bg-[#17ace4] hover:shadow-[0_10px_24px_rgba(23,172,228,0.25)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"}`}>
         {isSubmitting ? (
           <>
             <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">

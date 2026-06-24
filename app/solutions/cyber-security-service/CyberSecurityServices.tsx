@@ -18,20 +18,20 @@ export default function CyberSecurityServices() {
       title: "GRC",
       description: "Governance, Risk & Compliance",
       icon: ShieldCheck,
-      color: "from-orange-400 to-orange-500",
+      color: "from-[#1c4584] to-[#17ace4]",
     },
     {
       title: "IT Security",
       description:
         "VAPT / Infrastructure / Cloud Applications / Secure SDLC / SecDevOps",
       icon: Lock,
-      color: "from-purple-500 to-indigo-500",
+      color: "from-[#15356e] to-[#1c4584]",
     },
     {
       title: "vCISO",
       description: "Strategic Advisory / Program Management / Cyber Training",
       icon: UserCheck,
-      color: "from-green-400 to-emerald-500",
+      color: "from-[#17ace4] to-[#1c4584]",
     },
   ];
   const products = [

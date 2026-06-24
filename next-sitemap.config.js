@@ -10,6 +10,8 @@ module.exports = {
     "/hero-option-1",
     "/thank-you",
     "/partners/twinzo",
+    "/rsvp",
+    "/siemens-realize-live-2026-faborchestrator-ai",
     "/api/*",
     "/icon.png",
   ],

@@ -35,7 +35,7 @@
   h3 {
     font-size: clamp(16px, 2vw, 20px);
     margin-bottom: clamp(12px, 2vw, 20px);
-    color: #2563eb;
+    color: #1c4584;
   }
 
   ul {
@@ -54,7 +54,7 @@
         content: "";
         width: 6px;
         height: 6px;
-        background: #2563eb;
+        background: #1c4584;
         border-radius: 50%;
         position: absolute;
         left: 0;
@@ -221,7 +221,7 @@
       padding: 1px;
       background:
         linear-gradient(#ffffff, #ffffff) padding-box,
-        linear-gradient(135deg, #2563eb, #60a5fa) border-box;
+        linear-gradient(135deg, #1c4584, #17ace4) border-box;
       border: 1px solid transparent;
       -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
@@ -250,7 +250,7 @@
     width: clamp(44px, 5vw, 60px);
     height: clamp(44px, 5vw, 60px);
     border-radius: 18px;
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    background: linear-gradient(135deg, #1c4584, #1c4584);
     display: flex;
     align-items: center;
     justify-content: center;

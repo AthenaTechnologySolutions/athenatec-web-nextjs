@@ -63,7 +63,7 @@ export default function HeroSection({
         {buttonText && buttonLink && (
           <Link
             href={buttonLink}
-            className="mt-2 inline-flex items-center justify-center rounded-lg bg-[#1c4584] px-8 py-3 font-semibold text-white transition-all duration-300 ease-in-out hover:-translate-y-1 hover:bg-[#17ACE4] hover:shadow-[0_4px_14px_#17ace466] active:translate-y-0"
+            className="mt-2 inline-flex items-center justify-center rounded-lg bg-[#1c4584] px-8 py-3 font-semibold text-white transition-all duration-300 ease-in-out hover:-translate-y-1 hover:bg-[#17ace4] hover:shadow-[0_4px_14px_#17ace466] active:translate-y-0"
           >
             {buttonText}
           </Link>

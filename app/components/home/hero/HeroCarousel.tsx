@@ -3,22 +3,11 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import {
-  Building2,
-  CalendarDays,
-  CheckCircle2,
   ChevronLeft,
   ChevronRight,
-  MapPin,
 } from "lucide-react";
 import Link from "next/link";
 
-const SIEMENS_LIVE_SLIDE_ID = "siemens-realize-live-2026";
-// Count through May 31 using Detroit/US Eastern daylight time.
-const SIEMENS_COUNTDOWN_END_TIME = new Date(
-  "2026-06-01T00:00:00-04:00",
-).getTime();
-const SIEMENS_LIVE_END_TIME = new Date("2026-06-05T00:00:00-04:00").getTime();
-const DAY_IN_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_SLIDE_INTERVAL_MS = 5000;
 const FIRST_SLIDE_INTERVAL_MS = 13000;
 
@@ -30,7 +19,6 @@ type HeroSlide = {
   link?: string;
   image: string;
   imageClassName?: string;
-  action?: "siemens-live-registration";
 };
 
 function getTitleVariant(title: string) {
@@ -48,65 +36,34 @@ function getTitleVariant(title: string) {
   return "default";
 }
 
-function getSiemensLiveCountdown(now = new Date()) {
-  const currentTime = now.getTime();
-
-  if (currentTime >= SIEMENS_LIVE_END_TIME) {
-    return { value: "0", label: "Days to Realize Live" };
-  }
-
-  if (currentTime >= SIEMENS_COUNTDOWN_END_TIME) {
-    return {
-      value: "Live",
-      label: "at Realize Live",
-    };
-  }
-
-  const remainingTime = SIEMENS_COUNTDOWN_END_TIME - currentTime;
-
-  const days = Math.floor(remainingTime / DAY_IN_MS);
-
-  if (days >= 1) {
-    return {
-      value: days.toString(),
-      label: days === 1 ? "Day to Realize Live" : "Days to Realize Live",
-    };
-  }
-
-  const hours = Math.floor(
-    (remainingTime % DAY_IN_MS) / (1000 * 60 * 60),
-  );
-
-  const minutes = Math.floor(
-    (remainingTime % (1000 * 60 * 60)) / (1000 * 60),
-  );
-
-  return {
-    value: `${hours}H ${minutes}M`,
-    label: "to Realize Live",
-  };
-}
-
 const slides: HeroSlide[] = [
-
-  {
-    id: SIEMENS_LIVE_SLIDE_ID,
-    title: "Siemens Realize LIVE 2026",
-    desc: "Infinite possibilities. Intelligent tomorrow. Join Athenatec at Realize LIVE 2026 to discover how Athena Opcenter, Opcenter Accelerators, and FabOrchestrator.AI drive innovation, efficiency, and intelligence across manufacturing enterprises.",
-    cta: "Book a meeting",
-    link: "/siemens-realize-live-2026-faborchestrator-ai",
-    image: "/assets/images/siemens-realize-live2026.webp",
-    imageClassName: "hero-carousel__image--siemens-live",
-  },
-    {
-    id: "inaugural-agentic-ai",
-    title: "Inaugural Agentic AI Research Lab Invitation",
-    desc: "Join us for the inaugural launch of our Agentic AI Research Lab. Connect, learn, and explore what's next in agentic AI. We are launching our 12-week Claude Architect program.",
-    cta: "RSVP Now",
-    link: "/rsvp",
-    image: "/assets/images/Agentic-AI.webp",
-  },
-
+  // Siemens Realize LIVE 2026 is over; keep the old slide commented for reuse.
+  // {
+  //   id: "siemens-realize-live-2026",
+  //   title: "Siemens Realize LIVE 2026",
+  //   desc: "Infinite possibilities. Intelligent tomorrow. Join Athenatec at Realize LIVE 2026 to discover how Athena Opcenter, Opcenter Accelerators, and FabOrchestrator.AI drive innovation, efficiency, and intelligence across manufacturing enterprises.",
+  //   cta: "Book a meeting",
+  //   link: "/siemens-realize-live-2026-faborchestrator-ai",
+  //   image: "/assets/images/siemens-realize-live2026.webp",
+  //   imageClassName: "hero-carousel__image--siemens-live",
+  // },
+  // Inaugural Agentic AI Research Lab RSVP is disabled; keep the old slide commented for reuse.
+  // {
+  //   id: "inaugural-agentic-ai",
+  //   title: "Inaugural Agentic AI Research Lab Invitation",
+  //   desc: "Join us for the inaugural launch of our Agentic AI Research Lab. Connect, learn, and explore what's next in agentic AI. We are launching our 12-week Claude Architect program.",
+  //   cta: "RSVP Now",
+  //   link: "/rsvp",
+  //   image: "/assets/images/Agentic-AI.webp",
+  // },
+{
+  id: "agentic-ai-training",
+  title: "Agentic AI Architect Training Program",
+  desc: "Master AI Agents, LLMs, RAG, Multi-Agent Systems, and Enterprise AI Architecture through a 12–15 week industry-focused training program.",
+  cta: "Register Now",
+  link: "/agentic-ai-architect-training-program/",
+  image: "/assets/images/ai1.webp",
+},
   {
     title:
       "Building the Future of Manufacturing: Achieving Scalability and Compliance with Siemens and Athena.",
@@ -202,21 +159,16 @@ export default function HeroCarousel() {
   const [renderDeferredSlides, setRenderDeferredSlides] = useState(false);
   const total = slides.length;
   const activeSlide = slides[index];
-  const isSiemensLiveSlide = activeSlide.id === SIEMENS_LIVE_SLIDE_ID;
   const titleVariant = getTitleVariant(activeSlide.title);
   const contentShellClassName = `hero-carousel__content-shell mx-auto sm:mx-0 ${
-    isSiemensLiveSlide
-      ? "hero-carousel__content-shell--siemens-live"
-      : titleVariant === "very-long"
+    titleVariant === "very-long"
         ? "hero-carousel__content-shell--very-wide"
         : titleVariant === "long"
           ? "hero-carousel__content-shell--wide"
           : ""
   }`;
   const titleClassName = `hero-carousel__title mb-3 sm:mb-5 ${
-    isSiemensLiveSlide
-      ? "hero-carousel__title--siemens-live"
-      : titleVariant === "very-long"
+    titleVariant === "very-long"
         ? "hero-carousel__title--very-long"
         : titleVariant === "long"
           ? "hero-carousel__title--long"
@@ -313,9 +265,7 @@ export default function HeroCarousel() {
   return (
     <>
       <section
-        className={`hero-carousel relative flex min-h-[51vh] w-full items-center overflow-hidden sm:min-h-[57vh] md:min-h-[62vh] lg:min-h-[57vh] ${
-          isSiemensLiveSlide ? "hero-carousel--siemens-live" : ""
-        }`}
+        className="hero-carousel relative flex min-h-[51vh] w-full items-center overflow-hidden sm:min-h-[57vh] md:min-h-[62vh] lg:min-h-[57vh]"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -366,12 +316,8 @@ export default function HeroCarousel() {
                 <span className="shine" />
               </Link>
             ) : null}
-
-            {isSiemensLiveSlide && <SiemensLiveEventInfo />}
           </div>
         </div>
-
-        {isSiemensLiveSlide && <SiemensLiveCountdownBadge />}
 
         <button
           onClick={prev}
@@ -409,17 +355,6 @@ export default function HeroCarousel() {
 }
 
 function renderSlideTitle(slide: HeroSlide) {
-  if (slide.id === SIEMENS_LIVE_SLIDE_ID) {
-    return (
-      <>
-        <span className="hero-carousel__siemens-eyebrow">SIEMENS</span>
-        <span className="hero-carousel__siemens-title">
-          Realize <span>LIVE 2026</span>
-        </span>
-      </>
-    );
-  }
-
   return slide.title.split(/(Faborchestrator)/gi).map((part, i) =>
     part.toLowerCase() === "faborchestrator" ? (
       <span key={i} style={{ color: "#f5c718" }}>
@@ -432,94 +367,7 @@ function renderSlideTitle(slide: HeroSlide) {
 }
 
 function renderSlideDescription(slide: HeroSlide) {
-  if (slide.id === SIEMENS_LIVE_SLIDE_ID) {
-    return (
-      <p className="hero-carousel__desc hero-carousel__desc--siemens mb-5 sm:mb-7">
-        <span>Infinite possibilities. Intelligent tomorrow.</span>
-        Join Athenatec at Realize LIVE 2026 to discover how{" "}
-        <strong>Athena Opcenter</strong>, <strong>Opcenter Accelerators</strong>
-        , and <strong>FabOrchestrator.AI &trade;</strong> drive innovation,
-        efficiency, and intelligence across manufacturing enterprises.
-      </p>
-    );
-  }
-
   if (!slide.desc) return null;
 
   return <p className="hero-carousel__desc mb-5 sm:mb-7">{slide.desc}</p>;
-}
-
-function SiemensLiveCountdownBadge() {
-  const [countdown, setCountdown] = useState(() => getSiemensLiveCountdown());
-
-  useEffect(() => {
-    const updateCountdown = () => setCountdown(getSiemensLiveCountdown());
-    const timer = window.setInterval(updateCountdown, 60 * 1000);
-
-    updateCountdown();
-
-    return () => window.clearInterval(timer);
-  }, []);
-
-  return (
-    <div className="hero-carousel__siemens-countdown" aria-live="polite">
-      <span className="hero-carousel__siemens-countdown-value">
-        {countdown.value}
-      </span>
-      <span className="hero-carousel__siemens-countdown-label">
-        {countdown.label}
-      </span>
-    </div>
-  );
-}
-
-function SiemensLiveEventInfo() {
-  return (
-    <div
-      className="hero-carousel__siemens-event"
-      aria-label="Siemens Realize LIVE 2026 event details"
-    >
-      <div className="hero-carousel__siemens-event-column">
-        <p className="hero-carousel__siemens-event-heading">
-          <strong>Athena</strong> is heading to <span>Detroit</span>
-        </p>
-        <ul className="hero-carousel__siemens-event-list">
-          <li>
-            <CalendarDays size={19} />
-            <span>June 1-4, 2026</span>
-          </li>
-          <li>
-            <MapPin size={20} />
-            <span>Huntington Place, Detroit</span>
-          </li>
-          <li>
-            <Building2 size={19} />
-            <span>Booth No: P2</span>
-          </li>
-        </ul>
-      </div>
-
-      <div className="hero-carousel__siemens-event-divider" />
-
-      <div className="hero-carousel__siemens-event-column">
-        <p className="hero-carousel__siemens-talk-heading">
-          What we will talk about
-        </p>
-        <ul className="hero-carousel__siemens-talk-list">
-          <li>
-            <CheckCircle2 size={20} />
-            <span>Athena Opcenter Capabilities</span>
-          </li>
-          <li>
-            <CheckCircle2 size={20} />
-            <span>Opcenter Accelerators</span>
-          </li>
-          <li>
-            <CheckCircle2 size={20} />
-            <span>FabOrchestrator.AI&trade;</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  );
 }
