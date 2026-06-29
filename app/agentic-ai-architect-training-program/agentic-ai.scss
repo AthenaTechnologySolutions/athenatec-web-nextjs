@@ -153,6 +153,36 @@ $focus: 0 0 0 3px rgba(8, 145, 178, .22);
     color: $gray-600;
 }
 
+.rf-hero-speakers {
+    margin-top: 10px;
+    font-size: 13px;
+    color: $gray-600;
+
+    strong {
+        color: $navy-dark;
+        font-weight: 700;
+    }
+}
+
+.rf-deadline-note {
+    margin: -18px 0 24px;
+    padding: 12px 14px;
+    border-left: 3px solid $teal;
+    background: rgba($teal, .08);
+    color: $gray-600;
+    font-size: 12.5px;
+    line-height: 1.5;
+
+    strong {
+        color: $navy-dark;
+    }
+
+    span {
+        display: block;
+        margin-top: 2px;
+    }
+}
+
 // ── Info chips ────────────────────────────────────────────────────────────────
 .rf-chips {
     display: flex;
