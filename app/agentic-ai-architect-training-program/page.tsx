@@ -519,8 +519,9 @@ export default function RegistrationForm() {
             if (!form.employer.trim()) e.employer = 'Required';
             if (!form.jobTitle.trim()) e.jobTitle = 'Required';
             if (!form.yearsExperience) e.yearsExperience = 'Required';
-            if (!form.linkedin.trim()) e.linkedin = 'Required';
-            else if (!validateLinkedInProfileUrl(form.linkedin)) e.linkedin = 'Enter a valid LinkedIn profile URL.';
+            if (form.linkedin.trim() && !validateLinkedInProfileUrl(form.linkedin)) {
+                e.linkedin = 'Enter a valid LinkedIn profile URL.';
+            }
         }
         if (s === 1) {
             if (!form.education) {
@@ -763,7 +764,7 @@ Date Signed: ${today}
                     <div className="rf-hero-left">
                         <div className="rf-eyebrow">2026 Cohort · Now Enrolling</div>
                         <h1>Agentic AI Architect Training Program</h1>
-                        <p className="rf-hero-sub">12–15 weeks · Fremont, CA (in-person weekends) · Remote permitted</p>
+                        <p className="rf-hero-sub">12 weeks · Fremont, CA (in-person weekends) · Remote permitted</p>
                         {/* <p className="rf-hero-speakers">
                             Speakers: <strong>Jothi Periasamy</strong> and <strong>Kumar Nallusamy</strong>
                         </p> */}
@@ -775,9 +776,9 @@ Date Signed: ${today}
                                 alt="Calendar"
                                 className="rf-chip-icon"
                             />
-                            <span className="rf-chip-label">July 17 &amp; 18</span>
+                            <span className="rf-chip-label">July 17 &amp; 19</span>
                             <span className="rf-chip-label">Fri &amp; Sat</span>
-                            <span className="rf-chip-sub">10 AM-2 PM</span>
+                            <span className="rf-chip-sub">10 AM-12 PM</span>
                         </div>
 
                         <div className="rf-chip">
@@ -878,7 +879,7 @@ Date Signed: ${today}
                                     <input className={cls('rf-input', errors.jobTitle)} type="text" placeholder="e.g. Senior Engineer" value={form.jobTitle} onChange={handleText('jobTitle')} />
                                 </Field>
                             </div>
-                            <Field label="LinkedIn Profile" required error={errors.linkedin}>
+                            <Field label="LinkedIn Profile" optional error={errors.linkedin}>
                                 <input className={cls('rf-input', errors.linkedin)} type="url" inputMode="url" autoComplete="url" pattern="https?://([a-z0-9-]+\.)*linkedin\.com/in/.+" placeholder="https://www.linkedin.com/in/your-name" value={form.linkedin} onChange={handleText('linkedin')} />
                             </Field>
                         </div>
@@ -1059,12 +1060,19 @@ Date Signed: ${today}
                                 {[
                                     { field: 'declResumeAttached' as keyof FormData, text: 'I have attached my resume for evaluation with this registration.' },
                                     { field: 'declInterviewRequired' as keyof FormData, text: 'I understand admission requires a 30-minute interview with the Program Director.' },
-                                    { field: 'declLabFee' as keyof FormData, text: 'I acknowledge the introductory fee of $3,000 (incl. $500 lab cost)' },
-                                ].map(({ field, text }) => (
+                                    { 
+                                        field: 'declLabFee' as keyof FormData, 
+                                        text: 'I acknowledge the introductory fee of $3,000 (incl. $500 lab cost)',
+                                        comment: 'After the July 18th Orientation (10 AM to 12 PM), you can decide to pay the fee.'
+                                    },
+                                ].map(({ field, text, comment }) => (
                                     <div key={field}>
                                         <label className={`rf-decl${form[field] ? ' checked' : ''}`} onClick={handleCheck(field)}>
                                             <input type="checkbox" checked={!!form[field]} onChange={handleCheck(field)} onClick={e => e.stopPropagation()} />
-                                            <span>{text}</span>
+                                            <div>
+                                                <span>{text}</span>
+                                                {comment && <div className="rf-decl-comment">{comment}</div>}
+                                            </div>
                                         </label>
                                         {errors[field] && <span className="rf-err">Please check this box to continue</span>}
                                     </div>
