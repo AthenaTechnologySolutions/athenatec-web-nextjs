@@ -672,6 +672,7 @@ Date Signed: ${today}
 
             if (data.status === 'mail_sent') {
                 setSubmitted(true);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 if (data.status === 'validation_failed' && Array.isArray(data.invalid_fields)) {
                     const fieldErrors: FormErrors = {};
