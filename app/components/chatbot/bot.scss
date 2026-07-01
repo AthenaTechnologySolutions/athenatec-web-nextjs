@@ -224,10 +224,10 @@ $radius-sm: 12px;
 // ============================================
 .chat-window {
   position: fixed;
-  bottom: 90px;
+  bottom: 50px;
   right: 20px;
   width: 380px;
-  height: 540px;
+  height: 500px;
   background: $bg-white;
   border-radius: $radius-lg;
   display: flex;

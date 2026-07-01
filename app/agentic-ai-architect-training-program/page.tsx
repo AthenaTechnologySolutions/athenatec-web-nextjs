@@ -45,8 +45,62 @@ const EDUCATION_OPTIONS = [
 
 const YEARS_OPTIONS = ['0–2 years', '3–5 years', '6–10 years', '10+ years'];
 
+const RESUME_MAX_SIZE_BYTES = 5 * 1024 * 1024;
+const RESUME_ALLOWED_EXTENSIONS = ['.pdf', '.doc', '.docx'];
+const CF7_FIELD_ERROR_MAP: Record<string, string> = {
+    linkedin: 'linkedin',
+    resume: 'resume',
+};
+const CF7_FIELD_STEP_MAP: Record<string, number> = {
+    linkedin: 0,
+    resume: 3,
+};
+
 function validateEmail(email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function getFileExtension(fileName: string) {
+    const dotIndex = fileName.lastIndexOf('.');
+    return dotIndex >= 0 ? fileName.slice(dotIndex).toLowerCase() : '';
+}
+
+function validateLinkedInProfileUrl(profileUrl: string) {
+    const trimmed = profileUrl.trim();
+    if (!trimmed) return false;
+
+    try {
+        const url = new URL(trimmed);
+        const hostname = url.hostname.toLowerCase();
+        const pathSegments = url.pathname.split('/').filter(Boolean);
+
+        return (
+            (url.protocol === 'https:' || url.protocol === 'http:') &&
+            (hostname === 'linkedin.com' || hostname.endsWith('.linkedin.com')) &&
+            pathSegments[0]?.toLowerCase() === 'in' &&
+            Boolean(pathSegments[1])
+        );
+    } catch {
+        return false;
+    }
+}
+
+function getResumeValidationError(file: File) {
+    const extension = getFileExtension(file.name);
+
+    if (!RESUME_ALLOWED_EXTENSIONS.includes(extension)) {
+        return 'Invalid format. Allowed formats: PDF, DOC, DOCX.';
+    }
+
+    if (file.size <= 0) {
+        return 'Resume file is empty.';
+    }
+
+    if (file.size > RESUME_MAX_SIZE_BYTES) {
+        return 'File size exceeds the 5MB limit.';
+    }
+
+    return '';
 }
 
 function dataURLtoFile(dataurl: string, filename: string): File {
@@ -70,7 +124,7 @@ function generateTypedSignatureImage(name: string): string | null {
     if (!ctx) return null;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     // Draw baseline
     ctx.strokeStyle = '#cbd5e1';
     ctx.lineWidth = 1.5;
@@ -99,31 +153,13 @@ interface SignatureModalProps {
 }
 
 function SignatureModal({ isOpen, onClose, onSave, initialType, initialData, initialTypedName }: SignatureModalProps) {
-    const [activeTab, setActiveTab] = useState<'draw' | 'type' | 'upload'>('draw');
+    const [activeTab, setActiveTab] = useState<'draw' | 'type' | 'upload'>(initialType || 'draw');
     const [strokeColor, setStrokeColor] = useState('#000000');
-    const [typedName, setTypedName] = useState('');
-    const [uploadData, setUploadData] = useState<string | null>(null);
+    const [typedName, setTypedName] = useState(initialType === 'type' ? initialTypedName || '' : '');
+    const [uploadData, setUploadData] = useState<string | null>(initialType === 'upload' ? initialData || null : null);
     const [uploadName, setUploadName] = useState('');
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const [isDrawing, setIsDrawing] = useState(false);
-    
-    useEffect(() => {
-        if (isOpen) {
-            if (initialType) {
-                setActiveTab(initialType);
-                if (initialType === 'type' && initialTypedName) {
-                    setTypedName(initialTypedName);
-                } else if (initialType === 'upload' && initialData) {
-                    setUploadData(initialData);
-                }
-            } else {
-                setActiveTab('draw');
-                setTypedName('');
-                setUploadData(null);
-                setUploadName('');
-            }
-        }
-    }, [isOpen, initialType, initialData, initialTypedName]);
 
     useEffect(() => {
         if (isOpen && activeTab === 'draw' && initialType === 'draw' && initialData && canvasRef.current) {
@@ -213,7 +249,7 @@ function SignatureModal({ isOpen, onClose, onSave, initialType, initialData, ini
                     <h3>Signature</h3>
                     <button type="button" className="sig-modal-close" onClick={onClose} aria-label="Close modal">&times;</button>
                 </div>
-                
+
                 <div className="sig-modal-tabs">
                     <button type="button" className={`sig-modal-tab ${activeTab === 'draw' ? 'active' : ''}`} onClick={() => setActiveTab('draw')}>Draw</button>
                     <button type="button" className={`sig-modal-tab ${activeTab === 'type' ? 'active' : ''}`} onClick={() => setActiveTab('type')}>Type</button>
@@ -228,7 +264,7 @@ function SignatureModal({ isOpen, onClose, onSave, initialType, initialData, ini
                                     const canvas = canvasRef.current;
                                     if (canvas) canvas.getContext('2d')?.clearRect(0, 0, canvas.width, canvas.height);
                                 }}>Clear</button>
-                                
+
                                 <div className="sig-colors">
                                     {[
                                         { color: '#000000', name: 'black' },
@@ -246,7 +282,7 @@ function SignatureModal({ isOpen, onClose, onSave, initialType, initialData, ini
                                     ))}
                                 </div>
                             </div>
-                            
+
                             <div className="canvas-wrap">
                                 <canvas
                                     ref={canvasRef}
@@ -335,7 +371,6 @@ function SignatureModal({ isOpen, onClose, onSave, initialType, initialData, ini
                         type="button"
                         className="sig-modal-btn-accept"
                         disabled={
-                            (activeTab === 'draw' && !canvasRef.current) ||
                             (activeTab === 'type' && !typedName.trim()) ||
                             (activeTab === 'upload' && !uploadData)
                         }
@@ -365,9 +400,10 @@ export default function RegistrationForm() {
     });
 
     const [errors, setErrors] = useState<FormErrors>({});
-    
+
     // Custom states for resume and signature
     const [resumeFile, setResumeFile] = useState<File | null>(null);
+    const resumeInputRef = useRef<HTMLInputElement | null>(null);
     const [isSigModalOpen, setIsSigModalOpen] = useState(false);
     const [signatureType, setSignatureType] = useState<'draw' | 'type' | 'upload' | null>(null);
     const [signatureData, setSignatureData] = useState<string | null>(null);
@@ -433,22 +469,22 @@ export default function RegistrationForm() {
         }));
     }, []);
 
+    const clearResumeFile = useCallback(() => {
+        setResumeFile(null);
+        if (resumeInputRef.current) {
+            resumeInputRef.current.value = '';
+        }
+    }, []);
+
     const handleResumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
 
-        const ext = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
-        const allowedExtensions = ['.pdf', '.doc', '.docx'];
-        if (!allowedExtensions.includes(ext)) {
-            setErrors(prev => ({ ...prev, resume: 'Invalid format. Allowed formats: PDF, DOC, DOCX.' }));
+        const resumeError = getResumeValidationError(file);
+        if (resumeError) {
+            setErrors(prev => ({ ...prev, resume: resumeError }));
             setResumeFile(null);
-            return;
-        }
-
-        const maxSize = 10 * 1024 * 1024; // 10MB
-        if (file.size > maxSize) {
-            setErrors(prev => ({ ...prev, resume: 'File size exceeds the 10MB limit.' }));
-            setResumeFile(null);
+            e.target.value = '';
             return;
         }
 
@@ -475,15 +511,17 @@ export default function RegistrationForm() {
             if (!form.lastName.trim()) e.lastName = 'Required';
             if (!form.email.trim()) e.email = 'Required';
             else if (!validateEmail(form.email)) e.email = 'Invalid email';
-            
+
             if (!form.phone.trim()) e.phone = 'Required';
             else if (form.phone.length < 10) e.phone = 'Must be at least 10 digits';
-            
+
             if (!form.cityState.trim()) e.cityState = 'Required';
             if (!form.employer.trim()) e.employer = 'Required';
             if (!form.jobTitle.trim()) e.jobTitle = 'Required';
             if (!form.yearsExperience) e.yearsExperience = 'Required';
-            if (!form.linkedin.trim()) e.linkedin = 'Required';
+            if (form.linkedin.trim() && !validateLinkedInProfileUrl(form.linkedin)) {
+                e.linkedin = 'Enter a valid LinkedIn profile URL.';
+            }
         }
         if (s === 1) {
             if (!form.education) {
@@ -510,7 +548,11 @@ export default function RegistrationForm() {
             if (!form.declInterviewRequired) e.declInterviewRequired = 'Required';
             if (!form.declLabFee) e.declLabFee = 'Required';
             if (!resumeFile) e.resume = 'Resume file is required';
-            
+            else {
+                const resumeError = getResumeValidationError(resumeFile);
+                if (resumeError) e.resume = resumeError;
+            }
+
             if (!signatureType) {
                 e.signature = 'Signature is required';
             } else if (signatureType === 'type' && !signatureTypedName.trim()) {
@@ -535,9 +577,16 @@ export default function RegistrationForm() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const errs = validateStep(3);
-        if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-        
+        const stepErrors = STEPS.map((_, index) => validateStep(index));
+        const errs: FormErrors = Object.assign({}, ...stepErrors);
+        if (Object.keys(errs).length > 0) {
+            setErrors(errs);
+            const firstInvalidStep = stepErrors.findIndex(stepError => Object.keys(stepError).length > 0);
+            if (firstInvalidStep >= 0) setStep(firstInvalidStep);
+            return;
+        }
+
+        setErrors({});
         setIsSubmitting(true);
         setSubmitError(null);
 
@@ -553,7 +602,7 @@ export default function RegistrationForm() {
             fd.append('linkedin', form.linkedin);
             fd.append('years-experience', form.yearsExperience);
             fd.append('education', form.education);
-            
+
             const formattedExp = form.experience
                 .map(id => {
                     const opt = EXPERIENCE_OPTIONS.find(x => x.id === id);
@@ -564,7 +613,7 @@ export default function RegistrationForm() {
             fd.append('other-experience', form.otherExperience);
             fd.append('attendance-mode', form.attendanceMode);
             fd.append('heard-about', form.heardAbout);
-            
+
             const signatureText = signatureType === 'type' ? signatureTypedName : `[${signatureType} signature]`;
             fd.append('signature', signatureText);
             fd.append('decl-resume', form.declResumeAttached ? 'Yes' : 'No');
@@ -615,11 +664,38 @@ Date Signed: ${today}
                 body: fd,
             });
 
-            const data = await res.json();
-            
-            if (data.status === 'mail_sent' || res.ok) {
+            const data = await res.json() as {
+                status?: string;
+                message?: string;
+                invalid_fields?: Array<{ field?: string; message?: string }>;
+            };
+
+            if (data.status === 'mail_sent') {
                 setSubmitted(true);
             } else {
+                if (data.status === 'validation_failed' && Array.isArray(data.invalid_fields)) {
+                    const fieldErrors: FormErrors = {};
+                    let firstInvalidStep: number | null = null;
+
+                    for (const invalidField of data.invalid_fields) {
+                        if (!invalidField.field) continue;
+
+                        const formField = CF7_FIELD_ERROR_MAP[invalidField.field];
+                        if (!formField) continue;
+
+                        fieldErrors[formField] = invalidField.message || 'Please check this field.';
+
+                        const invalidStep = CF7_FIELD_STEP_MAP[invalidField.field];
+                        if (invalidStep !== undefined && (firstInvalidStep === null || invalidStep < firstInvalidStep)) {
+                            firstInvalidStep = invalidStep;
+                        }
+                    }
+
+                    if (Object.keys(fieldErrors).length > 0) {
+                        setErrors(prev => ({ ...prev, ...fieldErrors }));
+                        if (firstInvalidStep !== null) setStep(firstInvalidStep);
+                    }
+                }
                 setSubmitError(data.message || 'Submission failed. Please check your fields and try again.');
             }
         } catch (error) {
@@ -658,7 +734,7 @@ Date Signed: ${today}
                                 width={18}
                                 height={18}
                             />
-                            <span>Deadline was July 16, 2026</span>
+                            <span>Registration deadline: July 17, 2026, 9:00 PM PST</span>
                         </span>
                     </div>
                 </div>
@@ -678,7 +754,7 @@ Date Signed: ${today}
                 </div> */}
                 <div className="rf-topbar-deadline">
                     <span className="rf-deadline-dot" />
-                    Closes Jul 16, 2026 · 9 PM PST
+                    Deadline for registration: July 16, 2026, at 9:00 PM PST
                 </div>
             </div>
 
@@ -688,7 +764,14 @@ Date Signed: ${today}
                     <div className="rf-hero-left">
                         <div className="rf-eyebrow">2026 Cohort · Now Enrolling</div>
                         <h1>Agentic AI Architect Training Program</h1>
-                        <p className="rf-hero-sub">12–15 weeks · Fremont, CA (in-person weekends) · Remote permitted</p>
+                        <p className="rf-hero-hd">Orientation: July 18, 11 AM - 1 PM on Saturday</p>
+                        <p className="rf-hero-address">Address: <a href="https://maps.google.com/?q=943+Corporate+Way+Fremont+CA" target="_blank" rel="noopener noreferrer">943 Corporate Way, Fremont, CA 94539</a></p>
+                        <p className="rf-hero-orientation">The training start week will be announced during the orientation session on July 18.</p>
+                        <p className="rf-hero-sub">15 weeks · Fremont, CA (in-person weekends) · Remote permitted</p>
+
+                        {/* <p className="rf-hero-speakers">
+                            Speakers: <strong>Jothi Periasamy</strong> and <strong>Kumar Nallusamy</strong>
+                        </p> */}
                     </div>
                     <div className="rf-chips">
                         <div className="rf-chip">
@@ -697,8 +780,13 @@ Date Signed: ${today}
                                 alt="Calendar"
                                 className="rf-chip-icon"
                             />
-                            <span className="rf-chip-label">Sat &amp; Sun</span>
-                            <span className="rf-chip-sub">10 AM–2 PM</span>
+                            <span className="rf-chip-label">July 18</span>
+                            <span className="rf-chip-label"> Saturday</span>
+                            <span className="rf-chip-sub">11 AM-1 PM</span>
+                            <span className="rf-chip-sub">orientation</span>
+
+
+                            
                         </div>
 
                         <div className="rf-chip">
@@ -722,10 +810,25 @@ Date Signed: ${today}
                         </div>
                         <div className="rf-chip rf-chip-fee">
                             <span className="rf-chip-fee-old">$4,500</span>
-                            <span className="rf-chip-fee-new">$3,000</span>
+                            <span className="rf-chip-fee-new">$2,999</span>
                             <span className="rf-chip-fee-note">intro offer · lab incl.</span>
                         </div>
+                        <div className="rf-chip">
+                            <img
+                                src="/assets/icons/users.svg"
+                                alt="Participants"
+                                className="rf-chip-icon"
+                            />
+                            <span className="rf-chip-label">Speakers</span>
+                            <span className="rf-chip-sub"> Jothi Periasamy</span>
+                            {/* <span className="rf-chip-sub"> Kumar Nallusamy</span> */}
+                        </div>
                     </div>
+                </div>
+
+                <div className="rf-deadline-note">
+                    <strong>Deadline for registration:</strong> July 17, 2026, at 9:00 PM PST.
+                    <span>Please note: Registration may close earlier if the maximum number of participants is reached before the deadline for the orientation session.</span>
                 </div>
 
                 {/* Stepper */}
@@ -784,8 +887,8 @@ Date Signed: ${today}
                                     <input className={cls('rf-input', errors.jobTitle)} type="text" placeholder="e.g. Senior Engineer" value={form.jobTitle} onChange={handleText('jobTitle')} />
                                 </Field>
                             </div>
-                            <Field label="LinkedIn Profile" required error={errors.linkedin}>
-                                <input className={cls('rf-input', errors.linkedin)} type="url" placeholder="https://linkedin.com/in/…" value={form.linkedin} onChange={handleText('linkedin')} />
+                            <Field label="LinkedIn Profile" optional error={errors.linkedin}>
+                                <input className={cls('rf-input', errors.linkedin)} type="url" inputMode="url" autoComplete="url" pattern="https?://([a-z0-9-]+\.)*linkedin\.com/in/.+" placeholder="https://www.linkedin.com/in/your-name" value={form.linkedin} onChange={handleText('linkedin')} />
                             </Field>
                         </div>
                     )}
@@ -906,7 +1009,7 @@ Date Signed: ${today}
                     {/* ── Step 3: Declaration ── */}
                     {step === 3 && (
                         <div className="rf-panel">
-                            <h3 className="rf-panel-title">Review &amp; declare</h3>
+                            <h3 className="rf-panel-title">Review &amp; Submit</h3>
 
                             {/* Fee card */}
                             <div className="rf-fee-card">
@@ -914,7 +1017,7 @@ Date Signed: ${today}
                                     <span className="rf-fee-tag">Introductory Offer</span>
                                     <div className="rf-fee-prices">
                                         <span className="rf-fee-old">$4,500</span>
-                                        <span className="rf-fee-new">$3,000</span>
+                                        <span className="rf-fee-new">$2,999</span>
                                     </div>
                                     <span className="rf-fee-note">Includes $500 lab cost · Onsite team support included</span>
                                 </div>
@@ -926,6 +1029,7 @@ Date Signed: ${today}
                                     <input
                                         type="file"
                                         id="resume-upload"
+                                        ref={resumeInputRef}
                                         className="rf-file-hidden"
                                         accept=".pdf,.doc,.docx"
                                         onChange={handleResumeChange}
@@ -947,7 +1051,7 @@ Date Signed: ${today}
                                             </svg>
                                             <span className="rf-file-name">{resumeFile.name}</span>
                                             <span className="rf-file-size">({(resumeFile.size / (1024 * 1024)).toFixed(2)} MB)</span>
-                                            <button type="button" className="rf-file-remove" onClick={() => setResumeFile(null)} aria-label="Remove resume">
+                                            <button type="button" className="rf-file-remove" onClick={clearResumeFile} aria-label="Remove resume">
                                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                                                     <line x1="18" y1="6" x2="6" y2="18" />
                                                     <line x1="6" y1="6" x2="18" y2="18" />
@@ -955,7 +1059,7 @@ Date Signed: ${today}
                                             </button>
                                         </div>
                                     )}
-                                    <span className="rf-upload-note">PDF, DOC, DOCX up to 10MB</span>
+                                    <span className="rf-upload-note">PDF, DOC, DOCX up to 5MB</span>
                                 </div>
                             </Field>
 
@@ -964,12 +1068,19 @@ Date Signed: ${today}
                                 {[
                                     { field: 'declResumeAttached' as keyof FormData, text: 'I have attached my resume for evaluation with this registration.' },
                                     { field: 'declInterviewRequired' as keyof FormData, text: 'I understand admission requires a 30-minute interview with the Program Director.' },
-                                    { field: 'declLabFee' as keyof FormData, text: 'I acknowledge the introductory fee of $3,000 (incl. $500 lab cost; regular $4,500).' },
-                                ].map(({ field, text }) => (
+                                    {
+                                        field: 'declLabFee' as keyof FormData,
+                                        text: 'I acknowledge the introductory fee of $3,000 (incl. $500 lab cost)',
+                                        comment: 'note: After the July 18th Orientation (11 AM to 1 PM), program fee can be paid.'
+                                    },
+                                ].map(({ field, text, comment }) => (
                                     <div key={field}>
                                         <label className={`rf-decl${form[field] ? ' checked' : ''}`} onClick={handleCheck(field)}>
                                             <input type="checkbox" checked={!!form[field]} onChange={handleCheck(field)} onClick={e => e.stopPropagation()} />
-                                            <span>{text}</span>
+                                            <div>
+                                                <span>{text}</span>
+                                                {comment && <div className="rf-decl-comment">{comment}</div>}
+                                            </div>
                                         </label>
                                         {errors[field] && <span className="rf-err">Please check this box to continue</span>}
                                     </div>
@@ -1030,14 +1141,16 @@ Date Signed: ${today}
                 </form>
 
                 {/* Signature Modal */}
-                <SignatureModal
-                    isOpen={isSigModalOpen}
-                    onClose={() => setIsSigModalOpen(false)}
-                    onSave={handleSaveSignature}
-                    initialType={signatureType}
-                    initialData={signatureData}
-                    initialTypedName={signatureTypedName}
-                />
+                {isSigModalOpen && (
+                    <SignatureModal
+                        isOpen={isSigModalOpen}
+                        onClose={() => setIsSigModalOpen(false)}
+                        onSave={handleSaveSignature}
+                        initialType={signatureType}
+                        initialData={signatureData}
+                        initialTypedName={signatureTypedName}
+                    />
+                )}
             </div>
         </div>
     );

@@ -152,6 +152,62 @@ $focus: 0 0 0 3px rgba(8, 145, 178, .22);
     font-size: 13px;
     color: $gray-600;
 }
+.rf-hero-hd {
+    font-size: 14px;
+    color: $gray-600;
+    // font-weight: 600;
+
+}
+.rf-hero-address {
+    // margin-top: 6px;
+    font-size: 13px;
+    color: $gray-600;
+
+    a {
+        color: $teal;
+        text-decoration: underline;
+
+        &:hover {
+            color: $navy;
+        }
+    }
+}
+
+.rf-hero-orientation {
+    // margin-top: 6px;
+    font-size: 13px;
+    color: $gray-600;
+}
+
+.rf-hero-speakers {
+    margin-top: 10px;
+    font-size: 13px;
+    color: $gray-600;
+
+    strong {
+        color: $navy-dark;
+        font-weight: 700;
+    }
+}
+
+.rf-deadline-note {
+    margin: -18px 0 24px;
+    padding: 12px 14px;
+    border-left: 3px solid $red;
+    background: $red-lt;
+    color: $red;
+    font-size: 12.5px;
+    line-height: 1.5;
+
+    strong {
+        color: $red;
+    }
+
+    span {
+        display: block;
+        margin-top: 2px;
+    }
+}
 
 // ── Info chips ────────────────────────────────────────────────────────────────
 .rf-chips {
@@ -579,9 +635,9 @@ $focus: 0 0 0 3px rgba(8, 145, 178, .22);
 }
 
 .rf-fee-old {
-    font-size: 16px;
     font-weight: 600;
-    color: $gray-400;
+    color: #687381;
+    font-size: 22px;
     text-decoration: line-through;
     text-decoration-color: $red;
 }
@@ -642,6 +698,12 @@ $focus: 0 0 0 3px rgba(8, 145, 178, .22);
     &.checked {
         border-color: $navy;
         background: rgba($navy, .04);
+    }
+
+    .rf-decl-comment {
+        font-size: 12px;
+        color: #DC2626;
+        margin-top: 4px;
     }
 }
 
