@@ -765,9 +765,9 @@ Date Signed: ${today}
                     <div className="rf-hero-left">
                         <div className="rf-eyebrow">2026 Cohort · Now Enrolling</div>
                         <h1>Agentic AI Architect Training Program</h1>
-                        <p className="rf-hero-hd">Orientation: July 18, 11 AM - 1 PM on Saturday</p>
+                        <p className="rf-hero-hd">Orientation: July 25, 11 AM - 1 PM on Saturday</p>
                         <p className="rf-hero-address">Address: <a href="https://maps.google.com/?q=943+Corporate+Way+Fremont+CA" target="_blank" rel="noopener noreferrer">943 Corporate Way, Fremont, CA 94539</a></p>
-                        <p className="rf-hero-orientation">The training start week will be announced during the orientation session on July 18.</p>
+                        <p className="rf-hero-orientation">The training start week will be announced during the orientation session on July 25.</p>
                         <p className="rf-hero-sub">15 weeks · Fremont, CA (in-person weekends) · Remote permitted</p>
 
                         {/* <p className="rf-hero-speakers">
@@ -781,7 +781,7 @@ Date Signed: ${today}
                                 alt="Calendar"
                                 className="rf-chip-icon"
                             />
-                            <span className="rf-chip-label">July 18</span>
+                            <span className="rf-chip-label">July 25</span>
                             <span className="rf-chip-label"> Saturday</span>
                             <span className="rf-chip-sub">11 AM-1 PM</span>
                             <span className="rf-chip-sub">orientation</span>
@@ -1072,7 +1072,7 @@ Date Signed: ${today}
                                     {
                                         field: 'declLabFee' as keyof FormData,
                                         text: 'I acknowledge the introductory fee of $2,999 (incl. $500 lab cost)',
-                                        comment: 'note: After the July 18th Orientation (11 AM to 1 PM), program fee can be paid.'
+                                        comment: 'note: After the July 25th Orientation (11 AM to 1 PM), program fee can be paid.'
                                     },
                                 ].map(({ field, text, comment }) => (
                                     <div key={field}>
