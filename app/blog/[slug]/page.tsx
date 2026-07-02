@@ -15,6 +15,10 @@ import Link from "next/link";
 import Image from "next/image";
 import "./post.scss";
 
+// Allow on-demand rendering for slugs not pre-built at build time.
+// Without this, posts added after the last build return 404.
+export const dynamicParams = true;
+
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
