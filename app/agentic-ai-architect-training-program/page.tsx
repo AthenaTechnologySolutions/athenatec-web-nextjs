@@ -1071,7 +1071,7 @@ Date Signed: ${today}
                                     { field: 'declInterviewRequired' as keyof FormData, text: 'I understand admission requires a 30-minute interview with the Program Director.' },
                                     {
                                         field: 'declLabFee' as keyof FormData,
-                                        text: 'I acknowledge the introductory fee of $3,000 (incl. $500 lab cost)',
+                                        text: 'I acknowledge the introductory fee of $2,999 (incl. $500 lab cost)',
                                         comment: 'note: After the July 18th Orientation (11 AM to 1 PM), program fee can be paid.'
                                     },
                                 ].map(({ field, text, comment }) => (
