@@ -755,7 +755,7 @@ Date Signed: ${today}
                 </div> */}
                 <div className="rf-topbar-deadline">
                     <span className="rf-deadline-dot" />
-                    Deadline for registration: July 16, 2026, at 9:00 PM PST
+                    Deadline for registration: July 24, 2026, at 9:00 PM PST
                 </div>
             </div>
 
