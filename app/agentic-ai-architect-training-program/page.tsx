@@ -828,7 +828,7 @@ Date Signed: ${today}
                 </div>
 
                 <div className="rf-deadline-note">
-                    <strong>Deadline for registration:</strong> July 17, 2026, at 9:00 PM PST.
+                    <strong>Deadline for registration:</strong> July 24, 2026, at 9:00 PM PST.
                     <span>Please note: Registration may close earlier if the maximum number of participants is reached before the deadline for the orientation session.</span>
                 </div>
 
