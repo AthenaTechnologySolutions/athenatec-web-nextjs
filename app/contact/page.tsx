@@ -70,8 +70,8 @@ export default function ContactPage() {
                   <div className="mt-2 space-y-1 text-gray-600">
                     <Link href="tel:+15106870900" className="block hover:text-[#17ace4] transition">USA: +1 510-687-0900</Link>
                     <Link href="tel:+917401411122" className="block hover:text-[#17ace4] transition">Chennai: +91 74014 11122 | 044-22650558</Link>
-                    <Link href="tel:+918023484120" className="block hover:text-[#17ace4] transition">Bengaluru: +91 80234 84120</Link>
-                    <Link href="tel:+914040044369" className="block hover:text-[#17ace4] transition">Hyderabad: +91 40400 44369</Link>
+                    <Link href="tel:+918023484120" className="block hover:text-[#17ace4] transition"> Bengaluru: 080-2348-4120</Link>
+                   <Link href="tel:+914040044369" className="block hover:text-[#17ace4] transition">Hyderabad: +91 40400 44369</Link>
                   </div>
                 </div>
               </div>
