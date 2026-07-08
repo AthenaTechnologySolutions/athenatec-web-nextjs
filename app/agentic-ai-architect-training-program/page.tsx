@@ -755,7 +755,7 @@ Date Signed: ${today}
                 </div> */}
                 <div className="rf-topbar-deadline">
                     <span className="rf-deadline-dot" />
-                    Deadline for registration: July 24, 2026, at 9:00 PM PST
+                    Deadline for registration: July 31st, 2026, at 9:00 PM PST
                 </div>
             </div>
 
@@ -765,9 +765,9 @@ Date Signed: ${today}
                     <div className="rf-hero-left">
                         <div className="rf-eyebrow">2026 Cohort · Now Enrolling</div>
                         <h1>Agentic AI Architect Training Program</h1>
-                        <p className="rf-hero-hd">Orientation: July 25, 11 AM - 1 PM on Saturday</p>
+                        <p className="rf-hero-hd">Orientation: August 1st, 11 AM - 1 PM on Saturday</p>
                         <p className="rf-hero-address">Address: <a href="https://maps.google.com/?q=943+Corporate+Way+Fremont+CA" target="_blank" rel="noopener noreferrer">943 Corporate Way, Fremont, CA 94539</a></p>
-                        <p className="rf-hero-orientation">The training start week will be announced during the orientation session on July 25.</p>
+                        <p className="rf-hero-orientation">The training start week will be announced during the orientation session on August 1st.</p>
                         <p className="rf-hero-sub">15 weeks · Fremont, CA (in-person weekends) · Remote permitted</p>
 
                         {/* <p className="rf-hero-speakers">
@@ -781,7 +781,7 @@ Date Signed: ${today}
                                 alt="Calendar"
                                 className="rf-chip-icon"
                             />
-                            <span className="rf-chip-label">July 25</span>
+                            <span className="rf-chip-label">August 1st</span>
                             <span className="rf-chip-label"> Saturday</span>
                             <span className="rf-chip-sub">11 AM-1 PM</span>
                             <span className="rf-chip-sub">orientation</span>
@@ -828,7 +828,7 @@ Date Signed: ${today}
                 </div>
 
                 <div className="rf-deadline-note">
-                    <strong>Deadline for registration:</strong> July 24, 2026, at 9:00 PM PST.
+                    <strong>Deadline for registration:</strong> July 31st, 2026, at 9:00 PM PST.
                     <span>Please note: Registration may close earlier if the maximum number of participants is reached before the deadline for the orientation session.</span>
                 </div>
 
@@ -1072,7 +1072,7 @@ Date Signed: ${today}
                                     {
                                         field: 'declLabFee' as keyof FormData,
                                         text: 'I acknowledge the introductory fee of $2,999 (incl. $500 lab cost)',
-                                        comment: 'note: After the July 25th Orientation (11 AM to 1 PM), program fee can be paid.'
+                                        comment: 'note: After the August 1st Orientation (11 AM to 1 PM), program fee can be paid.'
                                     },
                                 ].map(({ field, text, comment }) => (
                                     <div key={field}>
