@@ -23,6 +23,7 @@ interface FormData {
     declResumeAttached: boolean;
     declInterviewRequired: boolean;
     declLabFee: boolean;
+    applyDiscount: boolean;
 }
 
 interface FormErrors { [key: string]: string; }
@@ -397,6 +398,7 @@ export default function RegistrationForm() {
         yearsExperience: '', education: '', experience: [], otherExperience: '',
         attendanceMode: '', heardAbout: '', signature: '',
         declResumeAttached: false, declInterviewRequired: false, declLabFee: false,
+        applyDiscount: false,
     });
 
     const [errors, setErrors] = useState<FormErrors>({});
@@ -636,6 +638,8 @@ Experience: ${formattedExp}
 Attendance Mode: ${form.attendanceMode}
 Heard About: ${form.heardAbout || 'N/A'}
 
+Student / Unemployed Discount Applied: ${form.applyDiscount ? 'Yes (20% Off - Fee: $2,399)' : 'No'}
+
 Signature Type: ${signatureType}
 Signature Value: ${signatureText}
 Date Signed: ${today}
@@ -765,11 +769,22 @@ Date Signed: ${today}
                     <div className="rf-hero-left">
                         <div className="rf-eyebrow">2026 Cohort · Now Enrolling</div>
                         <h1>Agentic AI Architect Training Program</h1>
-                        <p className="rf-hero-hd">Orientation: August 1st, 11 AM - 1 PM on Saturday</p>
+                        <p className="rf-hero-hd">Orientation: August 8th, 11 AM - 1 PM on Saturday</p>
                         <p className="rf-hero-address">Address: <a href="https://maps.google.com/?q=943+Corporate+Way+Fremont+CA" target="_blank" rel="noopener noreferrer">943 Corporate Way, Fremont, CA 94539</a></p>
-                        <p className="rf-hero-orientation">The training start week will be announced during the orientation session on August 1st.</p>
+                        <p className="rf-hero-orientation">The training start week will be announced during the orientation session on August 8th.</p>
                         <p className="rf-hero-sub">15 weeks · Fremont, CA (in-person weekends) · Remote permitted</p>
-
+                        <div className="rf-special-offer">
+                            {/* <span className="rf-offer-icon">🎁</span> */}
+                            <div className="rf-offer-content">
+                               
+                                <span>
+                                     <strong>Note:</strong> 20% discount is available for Job Seekers (Unemployed), Students, and Fresh Graduates, reducing the tuition fee from $2,999 to $2,399 (includes the $500 lab fee).
+                                </span>
+                                <span>
+                                   
+                                </span>
+                            </div>
+                        </div>
                         {/* <p className="rf-hero-speakers">
                             Speakers: <strong>Jothi Periasamy</strong> and <strong>Kumar Nallusamy</strong>
                         </p> */}
@@ -781,13 +796,13 @@ Date Signed: ${today}
                                 alt="Calendar"
                                 className="rf-chip-icon"
                             />
-                            <span className="rf-chip-label">August 1st</span>
+                            <span className="rf-chip-label">August 8th</span>
                             <span className="rf-chip-label"> Saturday</span>
                             <span className="rf-chip-sub">11 AM-1 PM</span>
                             <span className="rf-chip-sub">orientation</span>
 
 
-                            
+
                         </div>
 
                         <div className="rf-chip">
@@ -831,6 +846,14 @@ Date Signed: ${today}
                     <strong>Deadline for registration:</strong> July 31st, 2026, at 9:00 PM PST.
                     <span>Please note: Registration may close earlier if the maximum number of participants is reached before the deadline for the orientation session.</span>
                 </div>
+
+                {/* <div className="rf-special-offer">
+                    <span className="rf-offer-icon">🎁</span>
+                    <div className="rf-offer-content">
+                        <strong>Academic &amp; Career Transition Support</strong>
+                        <span>To make our program accessible to all aspiring AI builders, currently enrolled students and professionals seeking new employment opportunities are eligible for an exclusive <strong>20% discount</strong>. This reduces the program tuition from <strong>$2,999 to $2,399</strong> (which includes the $500 lab fee). You can claim this discount on the final page of this registration.</span>
+                    </div>
+                </div> */}
 
                 {/* Stepper */}
                 <div className="rf-stepper">
@@ -1015,13 +1038,40 @@ Date Signed: ${today}
                             {/* Fee card */}
                             <div className="rf-fee-card">
                                 <div className="rf-fee-left">
-                                    <span className="rf-fee-tag">Introductory Offer</span>
+                                    <span className="rf-fee-tag">
+                                        {form.applyDiscount ? 'Student / Unemployment Discount' : 'Introductory Offer'}
+                                    </span>
                                     <div className="rf-fee-prices">
-                                        <span className="rf-fee-old">$4,500</span>
-                                        <span className="rf-fee-new">$2,999</span>
+                                        <span className="rf-fee-old">
+                                            {form.applyDiscount ? '$2,999' : '$4,500'}
+                                        </span>
+                                        <span className="rf-fee-new">
+                                            {form.applyDiscount ? '$2,399' : '$2,999'}
+                                        </span>
                                     </div>
-                                    <span className="rf-fee-note">Includes $500 lab cost · Onsite team support included</span>
+                                    <span className="rf-fee-note">
+                                        {form.applyDiscount
+                                            ? 'Includes $500 lab cost · 20% discount applied'
+                                            : 'Includes $500 lab cost · Onsite team support included'}
+                                    </span>
                                 </div>
+                            </div>
+
+                            {/* Discount Application Checkbox */}
+                            <div className="rf-discount-selection" style={{ marginTop: '16px', marginBottom: '8px' }}>
+                                <label className={`rf-decl${form.applyDiscount ? ' checked' : ''}`}>
+                                    <input
+                                        type="checkbox"
+                                        checked={form.applyDiscount}
+                                        onChange={handleCheck('applyDiscount')}
+                                    />
+                                    <div>
+                                        <strong>Apply Student / Job Seeker Discount (20% Off)</strong>
+                                        <div className="rf-decl-comment" style={{ color: '#475569', fontSize: '12.5px', marginTop: '2px' }}>
+                                            Note: 20% discount is available for Job Seekers (Unemployed), Students, and Fresh Graduates.
+                                        </div>
+                                    </div>
+                                </label>
                             </div>
 
                             {/* Resume Upload Field */}
@@ -1071,13 +1121,13 @@ Date Signed: ${today}
                                     { field: 'declInterviewRequired' as keyof FormData, text: 'I understand admission requires a 30-minute interview with the Program Director.' },
                                     {
                                         field: 'declLabFee' as keyof FormData,
-                                        text: 'I acknowledge the introductory fee of $2,999 (incl. $500 lab cost)',
-                                        comment: 'note: After the August 1st Orientation (11 AM to 1 PM), program fee can be paid.'
+                                        text: `I acknowledge the program fee of ${form.applyDiscount ? '$2,399' : '$2,999'} (incl. $500 lab cost)`,
+                                        comment: 'note: After the August 8th Orientation (11 AM to 1 PM), program fee can be paid.'
                                     },
                                 ].map(({ field, text, comment }) => (
                                     <div key={field}>
-                                        <label className={`rf-decl${form[field] ? ' checked' : ''}`} onClick={handleCheck(field)}>
-                                            <input type="checkbox" checked={!!form[field]} onChange={handleCheck(field)} onClick={e => e.stopPropagation()} />
+                                        <label className={`rf-decl${form[field] ? ' checked' : ''}`}>
+                                            <input type="checkbox" checked={!!form[field]} onChange={handleCheck(field)} />
                                             <div>
                                                 <span>{text}</span>
                                                 {comment && <div className="rf-decl-comment">{comment}</div>}

@@ -1415,3 +1415,43 @@ $focus: 0 0 0 3px rgba(8, 145, 178, .22);
         background: darken($green, 8%);
     }
 }
+
+// ── Special Offer Banner ──────────────────────────────────────────────────────
+.rf-special-offer {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 1.5px solid rgba($green, .25);
+    border-radius: $r-lg;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    padding: 10px 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    box-shadow: 0 4px 12px rgba($green, 0.05);
+
+    .rf-offer-icon {
+        font-size: 20px;
+        line-height: 1;
+        margin-top: 2px;
+    }
+
+    .rf-offer-content {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        strong {
+            color: $navy-dark;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        span {
+            font-size: 13px;
+            color: #166534;
+            line-height: 1.45;
+            text-align: left;
+        }
+    }
+}
+
