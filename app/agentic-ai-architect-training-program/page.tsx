@@ -621,6 +621,7 @@ export default function RegistrationForm() {
             fd.append('decl-resume', form.declResumeAttached ? 'Yes' : 'No');
             fd.append('decl-interview', form.declInterviewRequired ? 'Yes' : 'No');
             fd.append('decl-lab-fee', form.declLabFee ? 'Yes' : 'No');
+            fd.append('student-discount', form.applyDiscount ? 'Yes' : 'No');
 
             const emailBody = `
 First Name: ${form.firstName}
