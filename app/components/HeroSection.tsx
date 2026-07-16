@@ -7,6 +7,8 @@ type HeroSectionProps = {
   image?: string;
   buttonText?: string;
   buttonLink?: string;
+  secondaryButtonText?: string;
+  secondaryButtonLink?: string;
   align?: "center" | "left";
 };
 
@@ -16,6 +18,8 @@ export default function HeroSection({
   image,
   buttonText,
   buttonLink,
+  secondaryButtonText,
+  secondaryButtonLink,
   align = "center",
 }: HeroSectionProps) {
   const isLeft = align === "left";
@@ -60,14 +64,26 @@ export default function HeroSection({
           </p>
         )}
 
-        {buttonText && buttonLink && (
-          <Link
-            href={buttonLink}
-            className="mt-2 inline-flex items-center justify-center rounded-lg bg-[#1c4584] px-8 py-3 font-semibold text-white transition-all duration-300 ease-in-out hover:-translate-y-1 hover:bg-[#17ace4] hover:shadow-[0_4px_14px_#17ace466] active:translate-y-0"
-          >
-            {buttonText}
-          </Link>
-        )}
+        {(buttonText && buttonLink) || (secondaryButtonText && secondaryButtonLink) ? (
+          <div className="mt-4 flex flex-wrap items-center gap-4 justify-center sm:justify-start">
+            {buttonText && buttonLink && (
+              <Link
+                href={buttonLink}
+                className="inline-flex items-center justify-center rounded-lg bg-[#1c4584] px-8 py-3 font-semibold text-white transition-all duration-300 ease-in-out hover:-translate-y-1 hover:bg-[#17ace4] hover:shadow-[0_4px_14px_#17ace466] active:translate-y-0"
+              >
+                {buttonText}
+              </Link>
+            )}
+            {secondaryButtonText && secondaryButtonLink && (
+              <Link
+                href={secondaryButtonLink}
+                className="inline-flex items-center justify-center rounded-lg border-2 border-white bg-transparent px-8 py-3 font-semibold text-white transition-all duration-300 ease-in-out hover:-translate-y-1 hover:bg-white hover:text-[#1c4584] hover:shadow-[0_4px_14px_rgba(255,255,255,0.25)] active:translate-y-0"
+              >
+                {secondaryButtonText}
+              </Link>
+            )}
+          </div>
+        ) : null}
       </div>
     </section>
   );
