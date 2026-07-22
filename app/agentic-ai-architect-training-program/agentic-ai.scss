@@ -32,6 +32,7 @@ $focus: 0 0 0 3px rgba(8, 145, 178, .22);
     background: $white;
     display: flex;
     flex-direction: column;
+    padding-top: 60px;
 }
 
 // ── Top bar ───────────────────────────────────────────────────────────────────
@@ -209,7 +210,6 @@ $focus: 0 0 0 3px rgba(8, 145, 178, .22);
     }
 }
 
-// ── Info chips ────────────────────────────────────────────────────────────────
 .rf-chips {
     display: flex;
     gap: 10px;
@@ -489,6 +489,107 @@ $focus: 0 0 0 3px rgba(8, 145, 178, .22);
     background-position: right 10px center;
     padding-right: 32px;
     cursor: pointer;
+}
+
+// ── Custom React Select Dropdown ──────────────────────────────────────────────
+.rf-custom-select-container {
+    position: relative;
+    width: 100%;
+}
+
+.rf-custom-select-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: inherit;
+    font-size: 14px;
+    color: $gray-900;
+    background: $white;
+    border: 1.5px solid $gray-200;
+    border-radius: $r-md;
+    padding: 9px 12px;
+    outline: none;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color .15s, box-shadow .15s;
+
+    .placeholder-text {
+        color: $gray-400;
+        font-size: 13.5px;
+    }
+
+    .selected-text {
+        color: $gray-900;
+        font-weight: 500;
+    }
+
+    &:hover {
+        border-color: #cbd5e1;
+    }
+
+    &:focus, &.open {
+        border-color: $teal;
+        box-shadow: $focus;
+    }
+
+    &.rf-has-err {
+        border-color: $red;
+        background: $red-lt;
+    }
+
+    .rf-select-chevron {
+        color: #64748b;
+        transition: transform 0.2s ease;
+
+        &.rotated {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.rf-custom-select-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+    padding: 6px;
+    max-height: 220px;
+    overflow-y: auto;
+    animation: selectFadeIn 0.15s ease-out;
+
+    @keyframes selectFadeIn {
+        from { opacity: 0; transform: translateY(-4px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+}
+
+.rf-custom-select-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 12px;
+    font-size: 14px;
+    color: #334155;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.12s ease, color 0.12s ease;
+
+    &:hover {
+        background: #f1f5f9;
+        color: #0f172a;
+    }
+
+    &.active {
+        background: #e0f2fe;
+        color: #0369a1;
+        font-weight: 600;
+    }
 }
 
 .rf-err {
@@ -1489,7 +1590,7 @@ $focus: 0 0 0 3px rgba(8, 145, 178, .22);
 
 // ── Generic Program Landing Page Sections ──────────────────────────────────────
 .rf-program-section {
-    margin-top: 40px;
+    // margin-top: 40px;
     margin-bottom: 40px;
     padding-bottom: 20px;
 
@@ -1564,33 +1665,87 @@ $focus: 0 0 0 3px rgba(8, 145, 178, .22);
         color: $teal;
     }
 
-    .rf-pathway-badge {
-        display: inline-block;
-        font-size: 10px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        padding: 3px 8px;
-        border-radius: $r-full;
-
-        &.foundation {
-            color: $navy;
-            background: $teal-lt;
-            & ~ h3 { color: $navy; }
-        }
-        &.intermediate {
-            color: $green;
-            background: $green-lt;
-        }
-        &.advanced {
-            color: #7c3aed;
-            background: #f3e8ff;
-        }
-    }
-
     &:nth-child(1)::before { background: $teal; }
     &:nth-child(2)::before { background: $green; }
     &:nth-child(3)::before { background: #7c3aed; }
+}
+
+// ── Three-Level Certification Pathway Modern Grid ───────────────────────────
+.rf-pathway-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
+.rf-pathway-level-card {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $r-lg;
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+        border-color: $gray-400;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+    }
+
+    &.level-1::before { background: linear-gradient(90deg, #17ace4, #38bdf8); }
+    &.level-2::before { background: linear-gradient(90deg, #15803d, #22c55e); }
+    &.level-3::before { background: linear-gradient(90deg, #7c3aed, #a855f7); }
+
+    .rf-level-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .rf-level-badge {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding: 3px 10px;
+        border-radius: $r-full;
+
+        &.foundation { background: $teal-lt; color: #0369a1; }
+        &.intermediate { background: $green-lt; color: $green; }
+        &.advanced { background: #f3e8ff; color: #6b21a8; }
+    }
+
+
+    .rf-level-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: $gray-900;
+        margin-bottom: 6px;
+        line-height: 1.35;
+    }
+
+    .rf-level-desc {
+        font-size: 13px;
+        color: $gray-600;
+        line-height: 1.5;
+        margin: 0;
+    }
 }
 
 // ── Flexible Join Callout Card ────────────────────────────────────────────────
@@ -1601,8 +1756,6 @@ $focus: 0 0 0 3px rgba(8, 145, 178, .22);
     border: 1px solid $gray-200;
     border-radius: $r-lg;
     padding: 22px;
-    margin-top: 30px;
-    margin-bottom: 30px;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.02);
 
     @media (max-width: 600px) {

@@ -19,11 +19,6 @@ interface FormData {
     otherExperience: string;
     attendanceMode: string;
     heardAbout: string;
-    signature: string;
-    declResumeAttached: boolean;
-    declInterviewRequired: boolean;
-    declLabFee: boolean;
-    applyDiscount: boolean;
 }
 
 interface FormErrors { [key: string]: string; }
@@ -54,7 +49,7 @@ const CF7_FIELD_ERROR_MAP: Record<string, string> = {
 };
 const CF7_FIELD_STEP_MAP: Record<string, number> = {
     linkedin: 0,
-    resume: 3,
+    resume: 2,
 };
 
 function validateEmail(email: string) {
@@ -104,333 +99,30 @@ function getResumeValidationError(file: File) {
     return '';
 }
 
-function dataURLtoFile(dataurl: string, filename: string): File {
-    const arr = dataurl.split(',');
-    const mime = arr[0].match(/:(.*?);/)?.[1] || 'image/png';
-    const bstr = atob(arr[1]);
-    let n = bstr.length;
-    const u8arr = new Uint8Array(n);
-    while (n--) {
-        u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new File([u8arr], filename, { type: mime });
-}
-
-function generateTypedSignatureImage(name: string): string | null {
-    if (typeof window === 'undefined') return null;
-    const canvas = document.createElement('canvas');
-    canvas.width = 500;
-    canvas.height = 200;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return null;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Draw baseline
-    ctx.strokeStyle = '#cbd5e1';
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.moveTo(50, 150);
-    ctx.lineTo(450, 150);
-    ctx.stroke();
-
-    // Draw text with Caveat font
-    ctx.fillStyle = '#0f172a';
-    ctx.font = '700 48px Caveat, cursive';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(name, 250, 100);
-
-    return canvas.toDataURL('image/png');
-}
-
-interface SignatureModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    onSave: (type: 'draw' | 'type' | 'upload', data: string, typedName?: string) => void;
-    initialType?: 'draw' | 'type' | 'upload' | null;
-    initialData?: string | null;
-    initialTypedName?: string;
-}
-
-function SignatureModal({ isOpen, onClose, onSave, initialType, initialData, initialTypedName }: SignatureModalProps) {
-    const [activeTab, setActiveTab] = useState<'draw' | 'type' | 'upload'>(initialType || 'draw');
-    const [strokeColor, setStrokeColor] = useState('#000000');
-    const [typedName, setTypedName] = useState(initialType === 'type' ? initialTypedName || '' : '');
-    const [uploadData, setUploadData] = useState<string | null>(initialType === 'upload' ? initialData || null : null);
-    const [uploadName, setUploadName] = useState('');
-    const canvasRef = useRef<HTMLCanvasElement | null>(null);
-    const [isDrawing, setIsDrawing] = useState(false);
-
-    useEffect(() => {
-        if (isOpen && activeTab === 'draw' && initialType === 'draw' && initialData && canvasRef.current) {
-            const canvas = canvasRef.current;
-            const ctx = canvas.getContext('2d');
-            if (ctx) {
-                const img = new window.Image();
-                img.onload = () => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.drawImage(img, 0, 0);
-                };
-                img.src = initialData;
-            }
-        }
-    }, [isOpen, activeTab, initialType, initialData]);
-
-    const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-        const rect = canvas.getBoundingClientRect();
-        let x = 0, y = 0;
-        if ('touches' in e) {
-            if (e.touches.length === 0) return;
-            x = e.touches[0].clientX - rect.left;
-            y = e.touches[0].clientY - rect.top;
-        } else {
-            x = e.clientX - rect.left;
-            y = e.clientY - rect.top;
-        }
-        const ctx = canvas.getContext('2d');
-        if (ctx) {
-            ctx.strokeStyle = strokeColor;
-            ctx.lineWidth = 2.5;
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-            ctx.beginPath();
-            ctx.moveTo(x, y);
-            setIsDrawing(true);
-        }
-    };
-
-    const draw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
-        if (!isDrawing) return;
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-        const rect = canvas.getBoundingClientRect();
-        let x = 0, y = 0;
-        if ('touches' in e) {
-            if (e.touches.length === 0) return;
-            e.preventDefault();
-            x = e.touches[0].clientX - rect.left;
-            y = e.touches[0].clientY - rect.top;
-        } else {
-            x = e.clientX - rect.left;
-            y = e.clientY - rect.top;
-        }
-        const ctx = canvas.getContext('2d');
-        if (ctx) {
-            ctx.lineTo(x, y);
-            ctx.stroke();
-        }
-    };
-
-    const handleAccept = () => {
-        if (activeTab === 'draw') {
-            const canvas = canvasRef.current;
-            if (canvas) {
-                const dataUrl = canvas.toDataURL('image/png');
-                onSave('draw', dataUrl);
-            }
-        } else if (activeTab === 'type') {
-            if (!typedName.trim()) return;
-            onSave('type', '', typedName);
-        } else if (activeTab === 'upload') {
-            if (!uploadData) return;
-            onSave('upload', uploadData);
-        }
-        onClose();
-    };
-
-    if (!isOpen) return null;
-
-    return (
-        <div className="sig-modal-backdrop" onClick={onClose}>
-            <div className="sig-modal-container" onClick={e => e.stopPropagation()}>
-                <div className="sig-modal-header">
-                    <h3>Signature</h3>
-                    <button type="button" className="sig-modal-close" onClick={onClose} aria-label="Close modal">&times;</button>
-                </div>
-
-                <div className="sig-modal-tabs">
-                    <button type="button" className={`sig-modal-tab ${activeTab === 'draw' ? 'active' : ''}`} onClick={() => setActiveTab('draw')}>Draw</button>
-                    <button type="button" className={`sig-modal-tab ${activeTab === 'type' ? 'active' : ''}`} onClick={() => setActiveTab('type')}>Type</button>
-                    <button type="button" className={`sig-modal-tab ${activeTab === 'upload' ? 'active' : ''}`} onClick={() => setActiveTab('upload')}>Upload</button>
-                </div>
-
-                <div className="sig-modal-body">
-                    {activeTab === 'draw' && (
-                        <div className="sig-tab-draw">
-                            <div className="sig-canvas-header">
-                                <button type="button" className="sig-clear-btn" onClick={() => {
-                                    const canvas = canvasRef.current;
-                                    if (canvas) canvas.getContext('2d')?.clearRect(0, 0, canvas.width, canvas.height);
-                                }}>Clear</button>
-
-                                <div className="sig-colors">
-                                    {[
-                                        { color: '#000000', name: 'black' },
-                                        { color: '#0d47a1', name: 'blue' },
-                                        { color: '#d32f2f', name: 'red' },
-                                    ].map(item => (
-                                        <button
-                                            key={item.color}
-                                            type="button"
-                                            className={`sig-color-dot ${strokeColor === item.color ? 'active' : ''}`}
-                                            style={{ backgroundColor: item.color }}
-                                            onClick={() => setStrokeColor(item.color)}
-                                            aria-label={`Select ${item.name} color`}
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="canvas-wrap">
-                                <canvas
-                                    ref={canvasRef}
-                                    width={500}
-                                    height={200}
-                                    onMouseDown={startDrawing}
-                                    onMouseMove={draw}
-                                    onMouseUp={() => setIsDrawing(false)}
-                                    onMouseLeave={() => setIsDrawing(false)}
-                                    onTouchStart={startDrawing}
-                                    onTouchMove={draw}
-                                    onTouchEnd={() => setIsDrawing(false)}
-                                />
-                            </div>
-                        </div>
-                    )}
-
-                    {activeTab === 'type' && (
-                        <div className="sig-tab-type">
-                            <input
-                                type="text"
-                                className="sig-type-input"
-                                placeholder="Type your name"
-                                value={typedName}
-                                onChange={e => setTypedName(e.target.value)}
-                                maxLength={40}
-                            />
-                            <div className="sig-type-preview">
-                                <span className="sig-type-preview-text">{typedName || 'Your Signature'}</span>
-                            </div>
-                        </div>
-                    )}
-
-                    {activeTab === 'upload' && (
-                        <div className="sig-tab-upload">
-                            <div className="sig-upload-box">
-                                <input
-                                    type="file"
-                                    id="sig-file-upload"
-                                    accept="image/*"
-                                    onChange={e => {
-                                        const file = e.target.files?.[0];
-                                        if (file) {
-                                            const reader = new FileReader();
-                                            reader.onload = () => {
-                                                if (typeof reader.result === 'string') {
-                                                    setUploadData(reader.result);
-                                                    setUploadName(file.name);
-                                                }
-                                            };
-                                            reader.readAsDataURL(file);
-                                        }
-                                    }}
-                                    className="sig-upload-hidden"
-                                />
-                                {!uploadData ? (
-                                    <label htmlFor="sig-file-upload" className="sig-upload-label">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                            <polyline points="17 8 12 3 7 8" />
-                                            <line x1="12" y1="3" x2="12" y2="15" />
-                                        </svg>
-                                        <span>Choose an image file of your signature</span>
-                                    </label>
-                                ) : (
-                                    <div className="sig-upload-preview">
-                                        <img src={uploadData} alt="Uploaded Signature" />
-                                        <div className="sig-upload-info">
-                                            <span className="sig-upload-filename">{uploadName}</span>
-                                            <button type="button" className="sig-upload-remove" onClick={() => { setUploadData(null); setUploadName(''); }}>Remove</button>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    )}
-                </div>
-
-                <div className="sig-modal-disclaimer">
-                    By signing this document with an electronic signature, I agree that such signature will be as valid as handwritten signatures to the extent allowed by local law
-                </div>
-
-                <div className="sig-modal-footer">
-                    <button type="button" className="sig-modal-btn-cancel" onClick={onClose}>CANCEL</button>
-                    <button
-                        type="button"
-                        className="sig-modal-btn-accept"
-                        disabled={
-                            (activeTab === 'type' && !typedName.trim()) ||
-                            (activeTab === 'upload' && !uploadData)
-                        }
-                        onClick={handleAccept}
-                    >
-                        ACCEPT AND SIGN
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
-}
-
-const STEPS = ['About You', 'Background', 'Preferences', 'Declaration'];
+const STEPS = ['About You', 'Background', 'Preferences'];
 
 export default function RegistrationForm() {
     const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     const [step, setStep] = useState(0);
     const [submitted, setSubmitted] = useState(false);
 
-    // New state for tab selector, interactive program tabs and FAQ accordion
-    const [activeView, setActiveView] = useState<'register' | 'info'>('register');
-    const [activeDescTab, setActiveDescTab] = useState<'orientation' | 'objectives' | 'prerequisites' | 'labs' | 'careers' | 'benefits'>('orientation');
-    const [expandedFaqIndex, setExpandedFaqIndex] = useState<number | null>(null);
-
     const [form, setForm] = useState<FormData>({
         firstName: '', lastName: '', email: '', phone: '',
         cityState: '', employer: '', jobTitle: '', linkedin: '',
         yearsExperience: '', education: '', experience: [], otherExperience: '',
-        attendanceMode: '', heardAbout: '', signature: '',
-        declResumeAttached: false, declInterviewRequired: false, declLabFee: false,
-        applyDiscount: false,
+        attendanceMode: '', heardAbout: '',
     });
 
     const [errors, setErrors] = useState<FormErrors>({});
-
-    // Custom states for resume and signature
     const [resumeFile, setResumeFile] = useState<File | null>(null);
     const resumeInputRef = useRef<HTMLInputElement | null>(null);
-    const [isSigModalOpen, setIsSigModalOpen] = useState(false);
-    const [signatureType, setSignatureType] = useState<'draw' | 'type' | 'upload' | null>(null);
-    const [signatureData, setSignatureData] = useState<string | null>(null);
-    const [signatureTypedName, setSignatureTypedName] = useState<string>('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
 
-    // Dynamically load Google Fonts for the signature typed preview
+    // Always clear errors when entering a new step
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const fontId = 'google-fonts-caveat';
-            if (!document.getElementById(fontId)) {
-                const link = document.createElement('link');
-                link.id = fontId;
-                link.href = 'https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap';
-                link.rel = 'stylesheet';
-                document.head.appendChild(link);
-            }
-        }
-    }, []);
+        setErrors({});
+    }, [step]);
 
     const handleText = useCallback(
         (field: keyof FormData) =>
@@ -442,14 +134,9 @@ export default function RegistrationForm() {
     );
 
     const handlePhoneChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        const val = e.target.value.replace(/\D/g, ''); // strip non-digits
+        const val = e.target.value.replace(/\D/g, '');
         setForm(prev => ({ ...prev, phone: val }));
         setErrors(prev => ({ ...prev, phone: '' }));
-    }, []);
-
-    const handleCheck = useCallback((field: keyof FormData) => () => {
-        setForm(prev => ({ ...prev, [field]: !prev[field] }));
-        setErrors(prev => ({ ...prev, [field]: '' }));
     }, []);
 
     const handleExperience = useCallback((id: string) => {
@@ -499,18 +186,6 @@ export default function RegistrationForm() {
         setErrors(prev => ({ ...prev, resume: '' }));
     };
 
-    const handleSaveSignature = (type: 'draw' | 'type' | 'upload', data: string, typedName?: string) => {
-        setSignatureType(type);
-        if (type === 'draw' || type === 'upload') {
-            setSignatureData(data);
-            setSignatureTypedName('');
-        } else {
-            setSignatureData(null);
-            setSignatureTypedName(typedName || '');
-        }
-        setErrors(prev => ({ ...prev, signature: '' }));
-    };
-
     const validateStep = (s: number): FormErrors => {
         const e: FormErrors = {};
         if (s === 0) {
@@ -547,27 +222,11 @@ export default function RegistrationForm() {
             }
         }
         if (s === 2) {
-            if (!form.attendanceMode) e.attendanceMode = 'Select one';
+            if (!form.attendanceMode || form.attendanceMode === 'Select one') e.attendanceMode = 'Select one';
             if (!form.heardAbout.trim()) e.heardAbout = 'Required';
-        }
-        if (s === 3) {
-            if (!form.declResumeAttached) e.declResumeAttached = 'Required';
-            if (!form.declInterviewRequired) e.declInterviewRequired = 'Required';
-            if (!form.declLabFee) e.declLabFee = 'Required';
-            if (!resumeFile) e.resume = 'Resume file is required';
-            else {
+            if (resumeFile) {
                 const resumeError = getResumeValidationError(resumeFile);
                 if (resumeError) e.resume = resumeError;
-            }
-
-            if (!signatureType) {
-                e.signature = 'Signature is required';
-            } else if (signatureType === 'type' && !signatureTypedName.trim()) {
-                e.signature = 'Signature is required';
-            } else if (signatureType === 'draw' && !signatureData) {
-                e.signature = 'Signature is required';
-            } else if (signatureType === 'upload' && !signatureData) {
-                e.signature = 'Signature is required';
             }
         }
         return e;
@@ -580,10 +239,19 @@ export default function RegistrationForm() {
         setStep(s => s + 1);
     };
 
-    const back = () => { setErrors({}); setStep(s => s - 1); };
+    const back = () => {
+        setErrors({});
+        setStep(s => s - 1);
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (step < STEPS.length - 1) {
+            next();
+            return;
+        }
+
         const stepErrors = STEPS.map((_, index) => validateStep(index));
         const errs: FormErrors = Object.assign({}, ...stepErrors);
         if (Object.keys(errs).length > 0) {
@@ -621,13 +289,6 @@ export default function RegistrationForm() {
             fd.append('attendance-mode', form.attendanceMode);
             fd.append('heard-about', form.heardAbout);
 
-            const signatureText = signatureType === 'type' ? signatureTypedName : `[${signatureType} signature]`;
-            fd.append('signature', signatureText);
-            fd.append('decl-resume', form.declResumeAttached ? 'Yes' : 'No');
-            fd.append('decl-interview', form.declInterviewRequired ? 'Yes' : 'No');
-            fd.append('decl-lab-fee', form.declLabFee ? 'Yes' : 'No');
-            fd.append('student-discount', form.applyDiscount ? 'Yes' : 'No');
-
             const emailBody = `
 First Name: ${form.firstName}
 Last Name: ${form.lastName}
@@ -643,12 +304,8 @@ Education: ${form.education}
 Experience: ${formattedExp}
 Attendance Mode: ${form.attendanceMode}
 Heard About: ${form.heardAbout || 'N/A'}
-
-Student / Unemployed Discount Applied: ${form.applyDiscount ? 'Yes (20% Off - Fee: $2,399)' : 'No'}
-
-Signature Type: ${signatureType}
-Signature Value: ${signatureText}
-Date Signed: ${today}
+Resume Attached: ${resumeFile ? 'Yes' : 'No'}
+Date: ${today}
             `.trim();
             fd.append('your-message', emailBody);
             fd.append('your-subject', 'Agentic AI Architect Program Registration');
@@ -656,17 +313,6 @@ Date Signed: ${today}
 
             if (resumeFile) {
                 fd.append('resume', resumeFile);
-            }
-
-            if (signatureType && signatureData) {
-                const sigFile = dataURLtoFile(signatureData, 'signature.png');
-                fd.append('signature-file', sigFile);
-            } else if (signatureType === 'type' && signatureTypedName) {
-                const typedSigData = generateTypedSignatureImage(signatureTypedName);
-                if (typedSigData) {
-                    const sigFile = dataURLtoFile(typedSigData, 'signature.png');
-                    fd.append('signature-file', sigFile);
-                }
             }
 
             const res = await fetch('/api/cf7/233209', {
@@ -720,13 +366,12 @@ Date Signed: ${today}
     if (submitted) {
         return (
             <div className="rf-page">
-                <div className="rf-shell rf-success">
+                <div className="rf-shell rf-success" style={{ marginTop: '24px' }}>
                     <div className="rf-success-icon">✓</div>
                     <h2>You&rsquo;re registered!</h2>
                     <p>
                         Thank you, <strong>{form.firstName} {form.lastName}</strong>. We&rsquo;ve received
-                        your registration. The Program Director will review your resume and reach
-                        out to schedule your interview.
+                        your orientation registration.
                     </p>
                     <div className="rf-success-detail">
                         <span className="rf-success-item">
@@ -738,717 +383,478 @@ Date Signed: ${today}
                             />
                             <span>{form.email}</span>
                         </span>
-                        <span className="rf-success-item">
-                            <Image
-                                src="/assets/icons/calendar.svg"
-                                alt="Deadline"
-                                width={18}
-                                height={18}
-                            />
-                            <span>Registration deadline: August 14th, 2026, 9:00 PM PST</span>
-                        </span>
                     </div>
                 </div>
             </div>
         );
     }
 
-    const progress = ((step) / STEPS.length) * 100;
+    const progress = ((step + 1) / STEPS.length) * 100;
 
     return (
         <div className="rf-page">
-            {/* Top bar */}
-            <div className="rf-topbar">
-                {/* <div className="rf-topbar-brand">
-                    <span className="rf-topbar-logo">Ⓐ</span>
-                    <span>Athenatec <span className="rf-topbar-sep">·</span> LLM at Scale.AI</span>
-                </div> */}
-                <div className="rf-topbar-deadline">
-                    <span className="rf-deadline-dot" />
-                    Deadline for registration: August 14th, 2026, at 9:00 PM PST
-                </div>
-            </div>
-
-            <div className="rf-shell">
-                {/* Hero */}
-                <div className="rf-hero">
+            <div className="rf-shell" style={{ paddingTop: '32px' }}>
+                {/* Hero Header */}
+                <div className="rf-hero" style={{ marginBottom: '20px', paddingBottom: '16px' }}>
                     <div className="rf-hero-left">
-                        <div className="rf-eyebrow">2026 Cohort · Now Enrolling</div>
-                        <h1>Agentic AI Architect Training Program</h1>
-                        <p className="rf-hero-hd">Orientation: Saturday, August 22, 2026 · 10:30 AM – 1:00 PM (Pacific Time)</p>
-                        <p className="rf-hero-address">
-                            Venue: <strong>Athena Technology</strong>, <a href="https://maps.google.com/?q=943+Corporate+Way+Fremont+CA" target="_blank" rel="noopener noreferrer">943 Corporate Way, Fremont, CA 94539</a>
+                        <div className="rf-eyebrow" style={{ marginBottom: '6px' }}>You&apos;re Invited</div>
+                        <h1 style={{ fontSize: '24px', lineHeight: '1.3', marginBottom: '12px' }}>
+                            You&apos;re Invited: Agentic AI Architect Training Program Orientation &ndash; August 22, 2026
+                        </h1>
+                        <p style={{ fontSize: '14.5px', color: '#334155', lineHeight: '1.5', marginBottom: '16px' }}>
+                            <strong>Dear Professionals, Students, and AI Enthusiasts,</strong><br />
+                            We are pleased to invite you to the Agentic AI Architect Training Program Orientation.
                         </p>
-                        <p className="rf-hero-orientation">The training start week will be announced during the orientation session on August 22nd.</p>
-                        <p className="rf-hero-sub">15 weeks · Fremont, CA (in-person weekends) · Remote permitted</p>
-                        <div className="rf-lunch-info">
-                            <span className="rf-lunch-badge">Lunch Included</span>
-                            <span className="rf-lunch-text">Complimentary lunch provided to all registered attendees.</span>
-                        </div>
-                        <div className="rf-special-offer">
-                            {/* <span className="rf-offer-icon">🎁</span> */}
-                            <div className="rf-offer-content">
-                               
-                                <span>
-                                     <strong>Note:</strong> 20% discount is available for Job Seekers (Unemployed), Students, and Fresh Graduates, reducing the tuition fee from $2,999 to $2,399 (includes the $500 lab fee).
-                                </span>
-                                <span>
-                                   
+
+                        <div className="rf-event-details-card" style={{
+                            background: '#f8fafc',
+                            border: '1px solid #e2e8f0',
+                            borderRadius: '10px',
+                            padding: '14px 18px',
+                            marginBottom: '16px',
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                            gap: '12px'
+                        }}>
+                            <div>
+                                <strong style={{ color: '#0f172a', display: 'block', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '2px' }}>Date</strong>
+                                <span style={{ color: '#334155', fontSize: '14px' }}>Saturday, August 22, 2026</span>
+                            </div>
+                            <div>
+                                <strong style={{ color: '#0f172a', display: 'block', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '2px' }}>Time</strong>
+                                <span style={{ color: '#334155', fontSize: '14px' }}>10:30 AM to 1:00 PM (Pacific Time)</span>
+                            </div>
+                            <div>
+                                <strong style={{ color: '#0f172a', display: 'block', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '2px' }}>Venue</strong>
+                                <span style={{ color: '#334155', fontSize: '14px' }}>
+                                    Athena Technology, <a href="https://maps.google.com/?q=943+Corporate+Way+Fremont+CA" target="_blank" rel="noopener noreferrer" style={{ color: '#0284c7', textDecoration: 'underline' }}>943 Corporate Way, Fremont, CA 94539</a>
                                 </span>
                             </div>
-                        </div>
-                        {/* <p className="rf-hero-speakers">
-                            Speakers: <strong>Jothi Periasamy</strong> and <strong>Kumar Nallusamy</strong>
-                        </p> */}
-                    </div>
-                    <div className="rf-chips">
-                        <div className="rf-chip">
-                            <img
-                                src="/assets/icons/calender.svg"
-                                alt="Calendar"
-                                className="rf-chip-icon"
-                            />
-                            <span className="rf-chip-label">August 22nd</span>
-                            <span className="rf-chip-label"> Saturday</span>
-                            <span className="rf-chip-sub">10:30 AM - 1:00 PM</span>
-                            <span className="rf-chip-sub">Orientation</span>
-                        </div>
-
-                        <div className="rf-chip">
-                            <img
-                                src="/assets/icons/users.svg"
-                                alt="Participants"
-                                className="rf-chip-icon"
-                            />
-                            <span className="rf-chip-label">Max 50</span>
-                            <span className="rf-chip-sub">Seats</span>
-                        </div>
-
-                        <div className="rf-chip">
-                            <img
-                                src="/assets/icons/support.svg"
-                                alt="Support"
-                                className="rf-chip-icon"
-                            />
-                            <span className="rf-chip-label">24hr SLA</span>
-                            <span className="rf-chip-sub">Onsite Support</span>
-                        </div>
-                        <div className="rf-chip rf-chip-fee">
-                            <span className="rf-chip-fee-old">$4,500</span>
-                            <span className="rf-chip-fee-new">$2,999</span>
-                            <span className="rf-chip-fee-note">intro offer · lab incl.</span>
-                        </div>
-                        <div className="rf-chip">
-                            <img
-                                src="/assets/icons/users.svg"
-                                alt="Participants"
-                                className="rf-chip-icon"
-                            />
-                            <span className="rf-chip-label">Speakers</span>
-                            <span className="rf-chip-sub"> Jothi Periasamy</span>
+                            <div>
+                                <strong style={{ color: '#0f172a', display: 'block', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '2px' }}>Lunch</strong>
+                                <span style={{ color: '#334155', fontSize: '14px' }}>Complimentary lunch provided to all registered attendees</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="rf-deadline-note">
-                    <strong>Deadline for registration:</strong> August 14th, 2026, at 9:00 PM PST.
-                    <span>Please note: Registration may close earlier if the maximum number of participants is reached before the deadline for the orientation session.</span>
-                </div>
+                {/* Program Information Content */}
+                <div className="rf-view-info-container" style={{ marginBottom: '28px' }}>
+                    {/* Three-Level Certification Pathway */}
+                    <div className="rf-program-section" style={{ marginBottom: '24px' }}>
+                        <h2 className="rf-section-title" style={{ fontSize: '19px', marginBottom: '14px', color: '#0f172a', fontWeight: 700 }}>
+                            Three-Level Certification Pathway
+                        </h2>
+                        <div className="rf-pathway-cards-grid">
+                            <div className="rf-pathway-level-card level-1">
+                                <div className="rf-level-card-header">
+                                    <span className="rf-level-badge foundation">Level 1</span>
+                                </div>
+                                <h3 className="rf-level-title">Foundation Certificate Course</h3>
+                                {/* <p className="rf-level-desc">
+                                    Core LLM concepts, prompt engineering, semantic search, and building your first autonomous AI agents.
+                                </p> */}
+                            </div>
 
-                {/* Main View Selector */}
-                <div className="rf-view-selector">
-                    <button
-                        type="button"
-                        className={`rf-view-btn ${activeView === 'register' ? 'active' : ''}`}
-                        onClick={() => setActiveView('register')}
-                    >
-                        Register for Cohort
-                    </button>
-                    <button
-                        type="button"
-                        className={`rf-view-btn ${activeView === 'info' ? 'active' : ''}`}
-                        onClick={() => setActiveView('info')}
-                    >
-                        Program Information
-                    </button>
-                </div>
+                            <div className="rf-pathway-level-card level-2">
+                                <div className="rf-level-card-header">
+                                    <span className="rf-level-badge intermediate">Level 2</span>
+                                </div>
+                                <h3 className="rf-level-title">Intermediate Certificate Course</h3>
+                                {/* <p className="rf-level-desc">
+                                    Advanced RAG systems, multi-agent orchestration frameworks, external tool integration, and stateful flows.
+                                </p> */}
+                            </div>
 
-                {/* Tab 1: Program Information */}
-                {activeView === 'info' && (
-                    <div className="rf-view-info-container">
-                        {/* Three-Level Certification Pathway */}
-                        <div className="rf-program-section">
-                            <h2 className="rf-section-title">Three-Level Certification Pathway</h2>
-                            <p className="rf-section-intro">
-                                Our curriculum is structured as a progressive pathway, designed to take you from foundational concepts to advanced enterprise architecture.
+                            <div className="rf-pathway-level-card level-3">
+                                <div className="rf-level-card-header">
+                                    <span className="rf-level-badge advanced">Level 3</span>
+                                </div>
+                                <h3 className="rf-level-title">Advanced Certificate Course</h3>
+                                {/* <p className="rf-level-desc">
+                                    Enterprise agentic architectures, multi-agent collaboration, LLMOps, model evaluations, fine-tuning, and robust security.
+                                </p> */}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* What the Orientation Covers */}
+                    <div className="rf-program-section" style={{ marginBottom: '20px' }}>
+                        <h2 className="rf-section-title" style={{ fontSize: '18px', marginBottom: '8px' }}>What the Orientation Covers</h2>
+                        <div className="rf-flexible-join-card" style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '14px 18px' }}>
+                            <p style={{ fontSize: '14px', color: '#334155', lineHeight: '1.6', margin: 0 }}>
+                                We will cover course objectives and learning outcomes, prerequisites and qualification criteria, hands-on projects and AI labs, duration and schedule, and career opportunities and certification benefits, along with a recommended learning path based on your background and experience.
                             </p>
-                            <div className="rf-pathways-grid">
-                                <div className="rf-pathway-card">
-                                    <div className="rf-pathway-badge foundation">Level 1</div>
-                                    <h3>Foundation Certificate Course</h3>
-                                    <p className="rf-pathway-desc">
-                                        Focuses on core LLM concepts, prompt engineering, semantic search, and building your first autonomous AI agents.
-                                    </p>
-                                    <div className="rf-pathway-meta">Duration: 4 Weeks · Beginner to Intermediate</div>
-                                </div>
-                                <div className="rf-pathway-card">
-                                    <div className="rf-pathway-badge intermediate">Level 2</div>
-                                    <h3>Intermediate Certificate Course</h3>
-                                    <p className="rf-pathway-desc">
-                                        Covers advanced Retrieval-Augmented Generation (RAG), multi-agent orchestration frameworks, external tool integration, and stateful flows.
-                                    </p>
-                                    <div className="rf-pathway-meta">Duration: 5 Weeks · Intermediate to Advanced</div>
-                                </div>
-                                <div className="rf-pathway-card">
-                                    <div className="rf-pathway-badge advanced">Level 3</div>
-                                    <h3>Advanced Certificate Course</h3>
-                                    <p className="rf-pathway-desc">
-                                        Deep dive into enterprise agentic architectures, multi-agent collaboration, LLMOps, model evaluations, fine-tuning, and robust security.
-                                    </p>
-                                    <div className="rf-pathway-meta">Duration: 6 Weeks · Senior / Architect level</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Flexible Way to Join */}
-                        <div className="rf-flexible-join-card">
-                            <div className="rf-flex-icon">
-                                <Image
-                                    src="/assets/icons/support.svg"
-                                    alt="Flexible Options"
-                                    width={24}
-                                    height={24}
-                                />
-                            </div>
-                            <div className="rf-flex-content">
-                                <h3>Flexible Way to Join</h3>
-                                <p>
-                                    Choose the enrollment option that fits your career goals:
-                                </p>
-                                <ul>
-                                    <li><strong>Enroll in the full pathway:</strong> Follow the complete 15-week curriculum to transition into a certified Enterprise AI Architect.</li>
-                                    <li><strong>Direct course registration:</strong> Register directly for the Foundation, Intermediate, or Advanced course based on your current technical background and experience.</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        {/* Program Description Tabs */}
-                        <div className="rf-program-section">
-                            <h2 className="rf-section-title">Program Details</h2>
-                            <div className="rf-tabs-container">
-                                <div className="rf-tabs-header">
-                                    {(['orientation', 'objectives', 'prerequisites', 'labs', 'careers', 'benefits'] as const).map((tab) => {
-                                        const labels: Record<string, string> = {
-                                            orientation: 'Orientation',
-                                            objectives: 'Objectives',
-                                            prerequisites: 'Prerequisites',
-                                            labs: 'AI Labs & Projects',
-                                            careers: 'Careers',
-                                            benefits: 'Benefits',
-                                        };
-                                        return (
-                                            <button
-                                                key={tab}
-                                                type="button"
-                                                className={`rf-tab-btn ${activeDescTab === tab ? 'active' : ''}`}
-                                                onClick={() => setActiveDescTab(tab)}
-                                            >
-                                                {labels[tab]}
-                                            </button>
-                                        );
-                                    })}
-                                </div>
-                                <div className="rf-tab-body">
-                                    {activeDescTab === 'orientation' && (
-                                        <div className="rf-tab-content animate-fade-in">
-                                            <h4>What the Orientation Covers</h4>
-                                            <p>The orientation session is designed to set you up for success and answer all program-related questions:</p>
-                                            <ul>
-                                                <li>Detailed walk-through of the Three-Level Certification Pathway and schedules.</li>
-                                                <li>Introduction to the teaching faculty and curriculum directors.</li>
-                                                <li>Step-by-step setup of your GPU cloud lab environment.</li>
-                                                <li>Assessment guidelines and quiz info for proper level placement.</li>
-                                                <li>Official announcement of the training start week and calendar.</li>
-                                            </ul>
-                                        </div>
-                                    )}
-                                    {activeDescTab === 'objectives' && (
-                                        <div className="rf-tab-content animate-fade-in">
-                                            <h4>Course Objectives</h4>
-                                            <p>Upon completing this comprehensive pathway, you will be equipped to:</p>
-                                            <ul>
-                                                <li>Design and architect complex multi-agent systems from the ground up.</li>
-                                                <li>Build state-of-the-art context-aware search solutions using advanced RAG.</li>
-                                                <li>Integrate LLMs with external systems, tools, APIs, and enterprise databases.</li>
-                                                <li>Optimize agent latency, cost, and reliability in production environments.</li>
-                                            </ul>
-                                        </div>
-                                    )}
-                                    {activeDescTab === 'prerequisites' && (
-                                        <div className="rf-tab-content animate-fade-in">
-                                            <h4>Course Prerequisites</h4>
-                                            <p>Requirements vary by entry level. We offer direct placement assessments during orientation:</p>
-                                            <ul>
-                                                <li><strong>Foundation:</strong> Basic familiarity with software engineering and Python programming.</li>
-                                                <li><strong>Intermediate:</strong> Understanding of API integrations, JSON data, and basic vector database concepts.</li>
-                                                <li><strong>Advanced:</strong> Prior experience building AI models or RAG systems, and senior-level software design experience.</li>
-                                            </ul>
-                                        </div>
-                                    )}
-                                    {activeDescTab === 'labs' && (
-                                        <div className="rf-tab-content animate-fade-in">
-                                            <h4>Hands-on AI Labs and Projects</h4>
-                                            <p>Gain practical expertise through intensive, guided lab projects built on top-tier frameworks:</p>
-                                            <ul>
-                                                <li><strong>Lab Environment:</strong> Dedicated personal GPU cloud instance provided for the duration of the program.</li>
-                                                <li><strong>Major Projects:</strong>
-                                                    <ul>
-                                                        <li>Build a collaborative multi-agent customer support desk using CrewAI and AutoGen.</li>
-                                                        <li>Develop a semantic search engine using hybrid retrieval (vector + keyword) and Reranking.</li>
-                                                        <li>Design an autonomous code-generation pipeline with real-time test execution.</li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    )}
-                                    {activeDescTab === 'careers' && (
-                                        <div className="rf-tab-content animate-fade-in">
-                                            <h4>Career Opportunities</h4>
-                                            <p>We bridge the gap between building AI in sandbox environments and deploying them at scale:</p>
-                                            <ul>
-                                                <li>Prepare for top roles: <em>Agentic AI Architect, Senior AI Engineer, ML Engineer</em>.</li>
-                                                <li>1-on-1 career coaching and resume reviews tailored to the AI ecosystem.</li>
-                                                <li>Direct connections with hiring managers in our partner network.</li>
-                                            </ul>
-                                        </div>
-                                    )}
-                                    {activeDescTab === 'benefits' && (
-                                        <div className="rf-tab-content animate-fade-in">
-                                            <h4>Certification Benefits</h4>
-                                            <p>Differentiate yourself with industry-validated proof of skill:</p>
-                                            <ul>
-                                                <li>Receive individual certificates for each completed level, and the master Architect credential for the full pathway.</li>
-                                                <li>Verifiable digital credentials optimized for sharing on LinkedIn and professional profiles.</li>
-                                                <li>Lifetime access to alumni channels, code repositories, and networking events.</li>
-                                            </ul>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* FAQ Section */}
-                        <div className="rf-program-section rf-faq-section">
-                            <h2 className="rf-section-title">Bring Your Questions</h2>
-                            <p className="rf-section-intro">Here are answers to the most common questions. Still have questions? We cover them in detail during the orientation.</p>
-                            <div className="rf-faq-accordion">
-                                {[
-                                    {
-                                        q: 'Which course is right for me?',
-                                        a: 'If you are starting your AI journey, the Foundation Course is ideal. If you already build AI tools or write complex Python apps, you can take a placement assessment to start at the Intermediate or Advanced level.',
-                                    },
-                                    {
-                                        q: 'Do I qualify for Intermediate or Advanced?',
-                                        a: 'Yes! If you have background in software development and API integrations, you qualify. We will schedule a quick placement chat and share assessment quizzes during the August 22nd orientation.',
-                                    },
-                                    {
-                                        q: 'What technical background is required?',
-                                        a: 'Basic programming skills (ideally Python) and general knowledge of APIs are required. Deep mathematical AI background is not needed as this course focuses on systems engineering and application architecture.',
-                                    },
-                                    {
-                                        q: 'What projects will I build?',
-                                        a: 'You will build multiple real-world systems: from a simple command-line assistant, to multi-agent task managers, and culminating in an enterprise-grade agentic data analyzer in our GPU labs.',
-                                    },
-                                    {
-                                        q: 'How will this certification help my career?',
-                                        a: 'Enterprises are rapidly moving from simple chat widgets to complex agentic workflows. Having a verified certification shows employers that you understand security, scalability, and multi-agent design patterns.',
-                                    },
-                                ].map((faq, idx) => {
-                                    const isOpen = expandedFaqIndex === idx;
-                                    return (
-                                        <div key={idx} className={`rf-faq-item ${isOpen ? 'open' : ''}`}>
-                                            <button
-                                                type="button"
-                                                className="rf-faq-question"
-                                                onClick={() => setExpandedFaqIndex(isOpen ? null : idx)}
-                                            >
-                                                <span>{faq.q}</span>
-                                                <span className="rf-faq-icon">{isOpen ? '−' : '+'}</span>
-                                            </button>
-                                            <div className="rf-faq-answer">
-                                                <p>{faq.a}</p>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
-
-                        {/* CTA to Registration */}
-                        <div className="rf-info-footer" style={{ marginTop: '30px', textAlign: 'center' }}>
-                            <button
-                                type="button"
-                                className="rf-btn-primary rf-cta-register"
-                                onClick={() => {
-                                    setActiveView('register');
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                }}
-                            >
-                                Proceed to Registration Form →
-                            </button>
                         </div>
                     </div>
-                )}
 
-                {/* Tab 2: Registration Form */}
-                {activeView === 'register' && (
-                    <div className="rf-view-register-container">
-                        <div className="rf-form-divider" />
-                        <div className="rf-form-header">
-                            <h2>Register for the Cohort</h2>
-                            <p>Complete the form below to secure your spot for the orientation.</p>
+                    {/* Flexible Way to Join */}
+                    <div className="rf-flexible-join-card" style={{ marginBottom: '20px', padding: '14px 18px', borderRadius: '10px' }}>
+                        <div className="rf-flex-content">
+                            <h3 style={{ fontSize: '16px', marginBottom: '6px' }}>A Flexible Way to Join</h3>
+                            <p style={{ fontSize: '14px', color: '#334155', lineHeight: '1.6', margin: 0 }}>
+                                You may enroll in the complete certification pathway or register for the specific course that matches your qualifications and career goals. Based on feedback from prospective participants, we redesigned the program so you can join at the level that fits your experience, following a tiered model proven in AI and technology programs delivered through various educational institutions.
+                            </p>
                         </div>
+                    </div>
 
-                        {/* Stepper */}
-                        <div className="rf-stepper">
-                            {STEPS.map((label, i) => (
-                                <div key={i} className={`rf-step ${i < step ? 'done' : ''} ${i === step ? 'active' : ''}`}>
-                                    <div className="rf-step-circle">
-                                        {i < step ? '✓' : i + 1}
-                                    </div>
-                                    <span className="rf-step-label">{label}</span>
-                                    {i < STEPS.length - 1 && <div className="rf-step-line" />}
+                    {/* Bring Your Questions */}
+                    <div className="rf-program-section" style={{ marginBottom: '20px' }}>
+                        <h2 className="rf-section-title" style={{ fontSize: '18px', marginBottom: '8px', color: '#0f172a', fontWeight: 700 }}>
+                            Bring Your Questions
+                        </h2>
+                        <div style={{
+                            background: '#ffffff',
+                            border: '1px solid #e2e8f0',
+                            borderRadius: '10px',
+                            padding: '14px 18px',
+                        }}>
+                            <p style={{ fontSize: '14px', color: '#334155', lineHeight: '1.6', margin: '0 0 10px 0' }}>
+                                Our instructors will be available throughout the session to answer your questions:
+                            </p>
+                            <ul style={{
+                                margin: 0,
+                                paddingLeft: '20px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '6px',
+                                color: '#1e293b',
+                                fontSize: '14px',
+                                lineHeight: '1.5'
+                            }}>
+                                <li>1. Which course is right for me?</li>
+                                <li>2. Do I qualify for the Intermediate or Advanced level?</li>
+                                <li>3. What technical background is required?</li>
+                                <li>4. What projects will I build?</li>
+                                <li>5. How will this certification help my career?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Section 2: Registration Form (Placed AFTER Program Content) */}
+                <div className="rf-view-register-container" style={{ borderTop: '1px solid #e2e8f0', paddingTop: '28px' }}>
+                    <div className="rf-form-header" style={{ marginBottom: '20px' }}>
+                        <h2>Register for the Cohort</h2>
+                        <p>Complete the form below to secure your spot for the orientation.</p>
+                    </div>
+
+                    {/* Stepper */}
+                    <div className="rf-stepper">
+                        {STEPS.map((label, i) => (
+                            <div key={i} className={`rf-step ${i < step ? 'done' : ''} ${i === step ? 'active' : ''}`}>
+                                <div className="rf-step-circle">
+                                    {i < step ? '✓' : i + 1}
                                 </div>
-                            ))}
-                        </div>
-                        <div className="rf-progress-bar"><div className="rf-progress-fill" style={{ width: `${progress}%` }} /></div>
+                                <span className="rf-step-label">{label}</span>
+                                {i < STEPS.length - 1 && <div className="rf-step-line" />}
+                            </div>
+                        ))}
+                    </div>
+                    <div className="rf-progress-bar"><div className="rf-progress-fill" style={{ width: `${progress}%` }} /></div>
 
-                        {/* Form */}
-                        <form className="rf-form" onSubmit={handleSubmit} noValidate>
+                    {/* Form */}
+                    <form className="rf-form" onSubmit={handleSubmit} noValidate>
 
-                            {/* ── Step 0: About You ── */}
-                            {step === 0 && (
-                                <div className="rf-panel">
-                                    <h3 className="rf-panel-title">Tell us about yourself</h3>
-                                    <div className="rf-row-2">
-                                        <Field label="First Name" required error={errors.firstName}>
-                                            <input className={cls('rf-input', errors.firstName)} type="text" placeholder="First name" value={form.firstName} onChange={handleText('firstName')} autoComplete="given-name" />
-                                        </Field>
-                                        <Field label="Last Name" required error={errors.lastName}>
-                                            <input className={cls('rf-input', errors.lastName)} type="text" placeholder="Last name" value={form.lastName} onChange={handleText('lastName')} autoComplete="family-name" />
-                                        </Field>
-                                    </div>
-                                    <div className="rf-row-2">
-                                        <Field label="Email Address" required error={errors.email}>
-                                            <input className={cls('rf-input', errors.email)} type="email" placeholder="Your email" value={form.email} onChange={handleText('email')} autoComplete="email" />
-                                        </Field>
-                                        <Field label="Phone Number" required error={errors.phone}>
-                                            <input className={cls('rf-input', errors.phone)} type="tel" placeholder="Phone number" value={form.phone} onChange={handlePhoneChange} autoComplete="tel" />
-                                        </Field>
-                                    </div>
-                                    <div className="rf-row-2">
-                                        <Field label="City / State" required error={errors.cityState}>
-                                            <input className={cls('rf-input', errors.cityState)} type="text" placeholder="e.g. Fremont, CA" value={form.cityState} onChange={handleText('cityState')} />
-                                        </Field>
-                                        <Field label="Years of Experience" required error={errors.yearsExperience}>
-                                            <select className={cls('rf-select', errors.yearsExperience)} value={form.yearsExperience} onChange={handleText('yearsExperience')}>
-                                                <option value="">Select…</option>
-                                                {YEARS_OPTIONS.map(y => <option key={y} value={y}>{y}</option>)}
-                                            </select>
-                                        </Field>
-                                    </div>
-                                    <div className="rf-row-2">
-                                        <Field label="Current Employer / Organization" required error={errors.employer}>
-                                            <input className={cls('rf-input', errors.employer)} type="text" placeholder="Company name" value={form.employer} onChange={handleText('employer')} />
-                                        </Field>
-                                        <Field label="Job Title / Role" required error={errors.jobTitle}>
-                                            <input className={cls('rf-input', errors.jobTitle)} type="text" placeholder="e.g. Senior Engineer" value={form.jobTitle} onChange={handleText('jobTitle')} />
-                                        </Field>
-                                    </div>
-                                    <Field label="LinkedIn Profile" optional error={errors.linkedin}>
-                                        <input className={cls('rf-input', errors.linkedin)} type="url" inputMode="url" autoComplete="url" pattern="https?://([a-z0-9-]+\.)*linkedin\.com/in/.+" placeholder="https://www.linkedin.com/in/your-name" value={form.linkedin} onChange={handleText('linkedin')} />
+                        {/* ── Step 0: About You ── */}
+                        {step === 0 && (
+                            <div className="rf-panel">
+                                <h3 className="rf-panel-title">Tell us about yourself</h3>
+                                <div className="rf-row-2">
+                                    <Field label="First Name" required error={errors.firstName}>
+                                        <input className={cls('rf-input', errors.firstName)} type="text" placeholder="First name" value={form.firstName} onChange={handleText('firstName')} autoComplete="given-name" />
+                                    </Field>
+                                    <Field label="Last Name" required error={errors.lastName}>
+                                        <input className={cls('rf-input', errors.lastName)} type="text" placeholder="Last name" value={form.lastName} onChange={handleText('lastName')} autoComplete="family-name" />
                                     </Field>
                                 </div>
-                            )}
-
-                            {/* ── Step 1: Background ── */}
-                            {step === 1 && (
-                                <div className="rf-panel">
-                                    <h3 className="rf-panel-title">Your background</h3>
-                                    <Field label="Highest level of education" required error={errors.education}>
-                                        <div className="rf-pill-group">
-                                            {EDUCATION_OPTIONS.map(opt => (
-                                                <label key={opt.value} className={`rf-pill${form.education === opt.value ? ' selected' : ''}`}>
-                                                    <input type="radio" name="education" value={opt.value} checked={form.education === opt.value} onChange={handleText('education')} />
-                                                    {opt.label}
-                                                </label>
-                                            ))}
-                                        </div>
+                                <div className="rf-row-2">
+                                    <Field label="Email Address" required error={errors.email}>
+                                        <input className={cls('rf-input', errors.email)} type="email" placeholder="Your email" value={form.email} onChange={handleText('email')} autoComplete="email" />
                                     </Field>
-                                    <Field
-                                        label="Relevant experience — select all that apply"
-                                        required
-                                        error={errors.experience}
-                                    >
-                                        <div className="rf-pill-group rf-pill-wrap">
-                                            {EXPERIENCE_OPTIONS.map(opt => (
-                                                <label
-                                                    key={opt.id}
-                                                    className={`rf-pill ${form.experience.includes(opt.id) ? 'selected' : ''
-                                                        }`}
-                                                >
-                                                    <input
-                                                        type="checkbox"
-                                                        checked={form.experience.includes(opt.id)}
-                                                        onChange={() => handleExperience(opt.id)}
-                                                    />
-                                                    {opt.label}
-                                                </label>
-                                            ))}
-                                        </div>
+                                    <Field label="Phone Number" required error={errors.phone}>
+                                        <input className={cls('rf-input', errors.phone)} type="tel" placeholder="Phone number" value={form.phone} onChange={handlePhoneChange} autoComplete="tel" />
+                                    </Field>
+                                </div>
+                                <div className="rf-row-2">
+                                    <Field label="City / State" required error={errors.cityState}>
+                                        <input className={cls('rf-input', errors.cityState)} type="text" placeholder="e.g. Fremont, CA" value={form.cityState} onChange={handleText('cityState')} />
+                                    </Field>
+                                    <Field label="Years of Experience" required error={errors.yearsExperience}>
+                                        <CustomSelect
+                                            options={YEARS_OPTIONS}
+                                            value={form.yearsExperience}
+                                            placeholder="Select…"
+                                            onChange={(val) => {
+                                                setForm(prev => ({ ...prev, yearsExperience: val }));
+                                                setErrors(prev => ({ ...prev, yearsExperience: '' }));
+                                            }}
+                                            hasError={Boolean(errors.yearsExperience)}
+                                        />
+                                    </Field>
+                                </div>
+                                <div className="rf-row-2">
+                                    <Field label="Current Employer / Organization" required error={errors.employer}>
+                                        <input className={cls('rf-input', errors.employer)} type="text" placeholder="Company name" value={form.employer} onChange={handleText('employer')} />
+                                    </Field>
+                                    <Field label="Job Title / Role" required error={errors.jobTitle}>
+                                        <input className={cls('rf-input', errors.jobTitle)} type="text" placeholder="e.g. Senior Engineer" value={form.jobTitle} onChange={handleText('jobTitle')} />
+                                    </Field>
+                                </div>
+                                <Field label="LinkedIn Profile" optional error={errors.linkedin}>
+                                    <input className={cls('rf-input', errors.linkedin)} type="url" inputMode="url" autoComplete="url" pattern="https?://([a-z0-9-]+\.)*linkedin\.com/in/.+" placeholder="https://www.linkedin.com/in/your-name" value={form.linkedin} onChange={handleText('linkedin')} />
+                                </Field>
+                            </div>
+                        )}
 
-                                        {form.experience.includes('other') && (
-                                            <div className="rf-other-field">
+                        {/* ── Step 1: Background ── */}
+                        {step === 1 && (
+                            <div className="rf-panel">
+                                <h3 className="rf-panel-title">Your background</h3>
+                                <Field label="Highest level of education" required error={errors.education}>
+                                    <div className="rf-pill-group">
+                                        {EDUCATION_OPTIONS.map(opt => (
+                                            <label key={opt.value} className={`rf-pill${form.education === opt.value ? ' selected' : ''}`}>
+                                                <input type="radio" name="education" value={opt.value} checked={form.education === opt.value} onChange={handleText('education')} />
+                                                {opt.label}
+                                            </label>
+                                        ))}
+                                    </div>
+                                </Field>
+                                <Field
+                                    label="Relevant experience — select all that apply"
+                                    required
+                                    error={errors.experience}
+                                >
+                                    <div className="rf-pill-group rf-pill-wrap">
+                                        {EXPERIENCE_OPTIONS.map(opt => (
+                                            <label
+                                                key={opt.id}
+                                                className={`rf-pill ${form.experience.includes(opt.id) ? 'selected' : ''
+                                                    }`}
+                                            >
                                                 <input
-                                                    className={cls('rf-input', errors.otherExperience)}
-                                                    type="text"
-                                                    placeholder="Please specify your experience"
-                                                    value={form.otherExperience}
-                                                    onChange={(e) =>
-                                                        setForm((prev) => ({
-                                                            ...prev,
-                                                            otherExperience: e.target.value,
-                                                        }))
-                                                    }
+                                                    type="checkbox"
+                                                    checked={form.experience.includes(opt.id)}
+                                                    onChange={() => handleExperience(opt.id)}
                                                 />
-
-                                                {errors.otherExperience && (
-                                                    <span className="rf-err">
-                                                        {errors.otherExperience}
-                                                    </span>
-                                                )}
-                                            </div>
-                                        )}
-                                    </Field>
-                                </div>
-                            )}
-
-                            {/* ── Step 2: Preferences ── */}
-                            {step === 2 && (
-                                <div className="rf-panel">
-                                    <h3 className="rf-panel-title">Program preferences</h3>
-                                    <Field label="Preferred attendance mode" required error={errors.attendanceMode}>
-                                        <div className="rf-attend-group">
-                                            <label className={`rf-attend-card${form.attendanceMode === 'in-person' ? ' selected' : ''}`}>
-                                                <input type="radio" name="attendanceMode" value="in-person" checked={form.attendanceMode === 'in-person'} onChange={handleText('attendanceMode')} />
-                                                <span className="rf-attend-icon">
-                                                    <Image
-                                                        src="/assets/icons/arrow.svg"
-                                                        alt="In Person"
-                                                        width={32}
-                                                        height={32}
-                                                    />
-
-                                                </span>
-                                                <span className="rf-attend-title">In-Person</span>
-                                                <span className="rf-attend-sub">Fremont, CA</span>
+                                                {opt.label}
                                             </label>
-                                            <label className={`rf-attend-card${form.attendanceMode === 'remote' ? ' selected' : ''}`}>
-                                                <input type="radio" name="attendanceMode" value="remote" checked={form.attendanceMode === 'remote'} onChange={handleText('attendanceMode')} />
-                                                <span className="rf-attend-icon">
-                                                    <Image
-                                                        src="/assets/icons/remote-work.svg"
-                                                        alt="Remote"
-                                                        width={32}
-                                                        height={32}
-                                                    />
-                                                </span>
-                                                <span className="rf-attend-title">Remote</span>
-                                                <span className="rf-attend-sub">Case by case</span>
-                                            </label>
-                                        </div>
-                                    </Field>
-                                    <Field label="How did you hear about this program?" required error={errors.heardAbout}>
-                                        <input className={cls('rf-input', errors.heardAbout)} type="text" placeholder="LinkedIn, colleague, event…" value={form.heardAbout} onChange={handleText('heardAbout')} />
-                                    </Field>
-                                </div>
-                            )}
-
-                            {/* ── Step 3: Declaration ── */}
-                            {step === 3 && (
-                                <div className="rf-panel">
-                                    <h3 className="rf-panel-title">Review &amp; Submit</h3>
-
-                                    {/* Fee card */}
-                                    <div className="rf-fee-card">
-                                        <div className="rf-fee-left">
-                                            <span className="rf-fee-tag">
-                                                {form.applyDiscount ? 'Student / Unemployment Discount' : 'Introductory Offer'}
-                                            </span>
-                                            <div className="rf-fee-prices">
-                                                <span className="rf-fee-old">
-                                                    {form.applyDiscount ? '$2,999' : '$4,500'}
-                                                </span>
-                                                <span className="rf-fee-new">
-                                                    {form.applyDiscount ? '$2,399' : '$2,999'}
-                                                </span>
-                                            </div>
-                                            <span className="rf-fee-note">
-                                                {form.applyDiscount
-                                                    ? 'Includes $500 lab cost · 20% discount applied'
-                                                    : 'Includes $500 lab cost · Onsite team support included'}
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    {/* Discount Application Checkbox */}
-                                    <div className="rf-discount-selection" style={{ marginTop: '16px', marginBottom: '8px' }}>
-                                        <label className={`rf-decl${form.applyDiscount ? ' checked' : ''}`}>
-                                            <input
-                                                type="checkbox"
-                                                checked={form.applyDiscount}
-                                                onChange={handleCheck('applyDiscount')}
-                                            />
-                                            <div>
-                                                <strong>Apply Student / Job Seeker Discount (20% Off)</strong>
-                                                <div className="rf-decl-comment" style={{ color: '#475569', fontSize: '12.5px', marginTop: '2px' }}>
-                                                    Note: 20% discount is available for Job Seekers (Unemployed), Students, and Fresh Graduates.
-                                                </div>
-                                            </div>
-                                        </label>
-                                    </div>
-
-                                    {/* Resume Upload Field */}
-                                    <Field label="Upload Resume" required error={errors.resume}>
-                                        <div className={`rf-upload-field ${resumeFile ? 'has-file' : ''} ${errors.resume ? 'has-error' : ''}`}>
-                                            <input
-                                                type="file"
-                                                id="resume-upload"
-                                                ref={resumeInputRef}
-                                                className="rf-file-hidden"
-                                                accept=".pdf,.doc,.docx"
-                                                onChange={handleResumeChange}
-                                            />
-                                            {!resumeFile ? (
-                                                <label htmlFor="resume-upload" className="rf-upload-btn">
-                                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginRight: '6px' }}>
-                                                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-                                                        <polyline points="17 8 12 3 7 8" />
-                                                        <line x1="12" y1="3" x2="12" y2="15" />
-                                                    </svg>
-                                                    Choose Resume File
-                                                </label>
-                                            ) : (
-                                                <div className="rf-file-preview">
-                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a3264" strokeWidth="2">
-                                                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-                                                        <polyline points="14 2 14 8 20 8" />
-                                                    </svg>
-                                                    <span className="rf-file-name">{resumeFile.name}</span>
-                                                    <span className="rf-file-size">({(resumeFile.size / (1024 * 1024)).toFixed(2)} MB)</span>
-                                                    <button type="button" className="rf-file-remove" onClick={clearResumeFile} aria-label="Remove resume">
-                                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                                            <line x1="18" y1="6" x2="6" y2="18" />
-                                                            <line x1="6" y1="6" x2="18" y2="18" />
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            )}
-                                            <span className="rf-upload-note">PDF, DOC, DOCX up to 5MB</span>
-                                        </div>
-                                    </Field>
-
-                                    {/* Declarations */}
-                                    <div className="rf-decl-list" style={{ marginTop: '24px' }}>
-                                        {[
-                                            { field: 'declResumeAttached' as keyof FormData, text: 'I have attached my resume for evaluation with this registration.' },
-                                            { field: 'declInterviewRequired' as keyof FormData, text: 'I understand admission requires a 30-minute interview with the Program Director.' },
-                                            {
-                                                field: 'declLabFee' as keyof FormData,
-                                                text: `I acknowledge the program fee of ${form.applyDiscount ? '$2,399' : '$2,999'} (incl. $500 lab cost)`,
-                                                comment: 'note: After the August 22nd Orientation (10:30 AM to 1:00 PM), program fee can be paid.'
-                                            },
-                                        ].map(({ field, text, comment }) => (
-                                            <div key={field}>
-                                                <label className={`rf-decl${form[field] ? ' checked' : ''}`}>
-                                                    <input type="checkbox" checked={!!form[field]} onChange={handleCheck(field)} />
-                                                    <div>
-                                                        <span>{text}</span>
-                                                        {comment && <div className="rf-decl-comment">{comment}</div>}
-                                                    </div>
-                                                </label>
-                                                {errors[field] && <span className="rf-err">Please check this box to continue</span>}
-                                            </div>
                                         ))}
                                     </div>
 
-                                    {/* Signature Box */}
-                                    <div className="rf-sig-row" style={{ marginTop: '24px' }}>
-                                        <div className="rf-sig-field">
-                                            <label className="rf-sig-label">Signature *</label>
-                                            <div className={`rf-sig-trigger-box ${errors.signature ? 'rf-has-err' : ''}`} onClick={() => setIsSigModalOpen(true)}>
-                                                {signatureType === 'draw' && signatureData && (
-                                                    <img src={signatureData} alt="Drawn Signature" className="rf-sig-preview-img" />
-                                                )}
-                                                {signatureType === 'type' && signatureTypedName && (
-                                                    <span className="rf-sig-preview-text-cursive">{signatureTypedName}</span>
-                                                )}
-                                                {signatureType === 'upload' && signatureData && (
-                                                    <img src={signatureData} alt="Uploaded Signature" className="rf-sig-preview-img" />
-                                                )}
-                                                {!signatureType && (
-                                                    <span className="rf-sig-placeholder">Click to Sign (Draw, Type or Upload)</span>
-                                                )}
-                                            </div>
-                                            {errors.signature && <span className="rf-err">{errors.signature}</span>}
-                                        </div>
-                                        <div className="rf-sig-date">
-                                            <span className="rf-sig-date-label">Date</span>
-                                            <span className="rf-sig-date-val">{today}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
+                                    {form.experience.includes('other') && (
+                                        <div className="rf-other-field">
+                                            <input
+                                                className={cls('rf-input', errors.otherExperience)}
+                                                type="text"
+                                                placeholder="Please specify your experience"
+                                                value={form.otherExperience}
+                                                onChange={(e) =>
+                                                    setForm((prev) => ({
+                                                        ...prev,
+                                                        otherExperience: e.target.value,
+                                                    }))
+                                                }
+                                            />
 
-                            {submitError && (
-                                <div className="rf-submit-error" style={{ color: '#dc2626', fontSize: '13px', marginTop: '16px', fontWeight: 600 }}>
-                                    {submitError}
-                                </div>
-                            )}
-
-                            {/* Nav buttons */}
-                            <div className="rf-nav">
-                                {step > 0 && (
-                                    <button type="button" className="rf-btn-back" onClick={back} disabled={isSubmitting}>← Back</button>
-                                )}
-                                <div className="rf-nav-right">
-                                    {step < STEPS.length - 1 ? (
-                                        <button type="button" className="rf-btn-next" onClick={next}>
-                                            Continue →
-                                        </button>
-                                    ) : (
-                                        <button type="submit" className="rf-btn-submit" disabled={isSubmitting}>
-                                            {isSubmitting ? 'Submitting...' : 'Submit Registration'}
-                                        </button>
+                                            {errors.otherExperience && (
+                                                <span className="rf-err">
+                                                    {errors.otherExperience}
+                                                </span>
+                                            )}
+                                        </div>
                                     )}
-                                </div>
+                                </Field>
                             </div>
-                        </form>
-                    </div>
-                )}
+                        )}
 
-                {/* Signature Modal */}
-                {isSigModalOpen && (
-                    <SignatureModal
-                        isOpen={isSigModalOpen}
-                        onClose={() => setIsSigModalOpen(false)}
-                        onSave={handleSaveSignature}
-                        initialType={signatureType}
-                        initialData={signatureData}
-                        initialTypedName={signatureTypedName}
-                    />
-                )}
+                        {/* ── Step 2: Preferences (includes optional Resume upload) ── */}
+                        {step === 2 && (
+                            <div className="rf-panel">
+                                <h3 className="rf-panel-title">Program preferences</h3>
+                                <Field label="Preferred attendance mode" required error={errors.attendanceMode}>
+                                    <div className="rf-attend-group">
+                                        <label className={`rf-attend-card${form.attendanceMode === 'in-person' ? ' selected' : ''}`}>
+                                            <input type="radio" name="attendanceMode" value="in-person" checked={form.attendanceMode === 'in-person'} onChange={handleText('attendanceMode')} />
+                                            <span className="rf-attend-icon">
+                                                <Image
+                                                    src="/assets/icons/arrow.svg"
+                                                    alt="In Person"
+                                                    width={32}
+                                                    height={32}
+                                                />
+                                            </span>
+                                            <span className="rf-attend-title">In-Person</span>
+                                            <span className="rf-attend-sub">Fremont, CA</span>
+                                        </label>
+                                        <label className={`rf-attend-card${form.attendanceMode === 'remote' ? ' selected' : ''}`}>
+                                            <input type="radio" name="attendanceMode" value="remote" checked={form.attendanceMode === 'remote'} onChange={handleText('attendanceMode')} />
+                                            <span className="rf-attend-icon">
+                                                <Image
+                                                    src="/assets/icons/remote-work.svg"
+                                                    alt="Remote"
+                                                    width={32}
+                                                    height={32}
+                                                />
+                                            </span>
+                                            <span className="rf-attend-title">Remote</span>
+                                            <span className="rf-attend-sub">Case by case</span>
+                                        </label>
+                                    </div>
+                                </Field>
+                                <Field label="How did you hear about this program?" required error={errors.heardAbout}>
+                                    <input className={cls('rf-input', errors.heardAbout)} type="text" placeholder="LinkedIn, colleague, event…" value={form.heardAbout} onChange={handleText('heardAbout')} />
+                                </Field>
+
+                                {/* Resume Upload Field (Optional) inside Preferences */}
+                                <Field label="Upload Resume" optional error={errors.resume}>
+                                    <div className={`rf-upload-field ${resumeFile ? 'has-file' : ''} ${errors.resume ? 'has-error' : ''}`}>
+                                        <input
+                                            type="file"
+                                            id="resume-upload"
+                                            ref={resumeInputRef}
+                                            className="rf-file-hidden"
+                                            accept=".pdf,.doc,.docx"
+                                            onChange={handleResumeChange}
+                                        />
+                                        {!resumeFile ? (
+                                            <label htmlFor="resume-upload" className="rf-upload-btn">
+                                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginRight: '6px' }}>
+                                                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                                                    <polyline points="17 8 12 3 7 8" />
+                                                    <line x1="12" y1="3" x2="12" y2="15" />
+                                                </svg>
+                                                Choose Resume File
+                                            </label>
+                                        ) : (
+                                            <div className="rf-file-preview">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a3264" strokeWidth="2">
+                                                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                                                    <polyline points="14 2 14 8 20 8" />
+                                                </svg>
+                                                <span className="rf-file-name">{resumeFile.name}</span>
+                                                <span className="rf-file-size">({(resumeFile.size / (1024 * 1024)).toFixed(2)} MB)</span>
+                                                <button type="button" className="rf-file-remove" onClick={clearResumeFile} aria-label="Remove resume">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                                        <line x1="18" y1="6" x2="6" y2="18" />
+                                                        <line x1="6" y1="6" x2="18" y2="18" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        )}
+                                        <span className="rf-upload-note">PDF, DOC, DOCX up to 5MB (Optional)</span>
+                                    </div>
+                                </Field>
+                            </div>
+                        )}
+
+                        {submitError && (
+                            <div className="rf-submit-error" style={{ color: '#dc2626', fontSize: '13px', marginTop: '16px', fontWeight: 600 }}>
+                                {submitError}
+                            </div>
+                        )}
+
+                        {/* Nav buttons */}
+                        <div className="rf-nav">
+                            {step > 0 && (
+                                <button type="button" className="rf-btn-back" onClick={back} disabled={isSubmitting}>← Back</button>
+                            )}
+                            <div className="rf-nav-right">
+                                {step < STEPS.length - 1 ? (
+                                    <button type="button" className="rf-btn-next" onClick={next}>
+                                        Continue →
+                                    </button>
+                                ) : (
+                                    <button type="submit" className="rf-btn-submit" disabled={isSubmitting}>
+                                        {isSubmitting ? 'Submitting...' : 'Submit Registration'}
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
+        </div>
+    );
+}
+
+// ── Custom React Select Dropdown Component ──
+function CustomSelect({ options, value, placeholder = 'Select…', onChange, hasError }: {
+    options: string[];
+    value: string;
+    placeholder?: string;
+    onChange: (val: string) => void;
+    hasError?: boolean;
+}) {
+    const [isOpen, setIsOpen] = useState(false);
+    const containerRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+                setIsOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    return (
+        <div className="rf-custom-select-container" ref={containerRef}>
+            <button
+                type="button"
+                className={`rf-custom-select-trigger ${hasError ? 'rf-has-err' : ''} ${isOpen ? 'open' : ''}`}
+                onClick={() => setIsOpen(prev => !prev)}
+            >
+                <span className={value ? 'selected-text' : 'placeholder-text'}>
+                    {value || placeholder}
+                </span>
+                <svg
+                    className={`rf-select-chevron ${isOpen ? 'rotated' : ''}`}
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                >
+                    <polyline points="6 9 12 15 18 9" />
+                </svg>
+            </button>
+
+            {isOpen && (
+                <div className="rf-custom-select-dropdown">
+                    <div
+                        className={`rf-custom-select-option ${value === '' ? 'active' : ''}`}
+                        onClick={() => {
+                            onChange('');
+                            setIsOpen(false);
+                        }}
+                    >
+                        <span>{placeholder}</span>
+                    </div>
+                    {options.map(opt => (
+                        <div
+                            key={opt}
+                            className={`rf-custom-select-option ${value === opt ? 'active' : ''}`}
+                            onClick={() => {
+                                onChange(opt);
+                                setIsOpen(false);
+                            }}
+                        >
+                            <span>{opt}</span>
+                            {value === opt && (
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0369a1" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }
