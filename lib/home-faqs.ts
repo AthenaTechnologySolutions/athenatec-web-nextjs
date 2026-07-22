@@ -17,7 +17,7 @@ export const homeFaqs = [
   },
   {
     q: "How many staff members does Athena have?",
-    a: "As of 2026, Athena employs over 150+ full-time staff across four domestic and international offices.",
+    a: "As of 2026, Athena employs over 200+ full-time staff across four domestic and international offices.",
   },
   {
     q: "What sets Athena apart from other service providers?",

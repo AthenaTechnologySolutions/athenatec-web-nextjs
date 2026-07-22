@@ -159,7 +159,7 @@ export const heroData: HeroProps = {
     {
       id: "stat-2",
       label: "Team Strength",
-      value: "150+",
+      value: "200+",
       description: "Industry experts",
     },
     {

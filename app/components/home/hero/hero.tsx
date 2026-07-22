@@ -15,7 +15,7 @@ const statItems = [
   },
   {
     title: "Team Strength",
-    value: 150,
+    value: 200,
     suffix: "+",
     subtitle: "Industry experts",
     icon: UsersRound,

@@ -56,6 +56,13 @@ const slides: HeroSlide[] = [
   //   link: "/rsvp",
   //   image: "/assets/images/Agentic-AI.webp",
   // },
+    {
+    title: "Purpose Built Manufacturing Accelerators",
+    desc: "Extend your MES beyond standard functionality with purpose-built accelerators that improve engineering change management, Shopfloor productivity, quality validation, and operational efficiency—without replacing your existing MES.",
+    cta: "Explore Our Accelerators",
+    link: "/accelerators",
+    image: "/assets/images/AMA.webp",
+  },
 {
   id: "agentic-ai-training",
   title: "Agentic AI Architect Training Program",
@@ -64,14 +71,14 @@ const slides: HeroSlide[] = [
   link: "/agentic-ai-architect-training-program/",
   image: "/assets/images/ai1.webp",
 },
-  {
-    title:
-      "Building the Future of Manufacturing: Achieving Scalability and Compliance with Siemens and Athena.",
-    cta: "Download Now",
-    link: "/webinars/building-future-manufacturing-siemens-athena",
-    image: "/assets/images/webiner-banner.webp",
-    imageClassName: "hero-carousel__image--webinar",
-  },
+  // {
+  //   title:
+  //     "Building the Future of Manufacturing: Achieving Scalability and Compliance with Siemens and Athena.",
+  //   cta: "Download Now",
+  //   link: "/webinars/building-future-manufacturing-siemens-athena",
+  //   image: "/assets/images/webiner-banner.webp",
+  //   imageClassName: "hero-carousel__image--webinar",
+  // },
   {
     title: "Digitizing the Manufacturing Enterprise Since 2011",
     desc: "Leveraging deep expertise to enhance partnerships and drive long-term manufacturing success.",
@@ -115,13 +122,7 @@ const slides: HeroSlide[] = [
     image: "/assets/images/twinzobanners.webp",
   },
   // Eyelit route is disabled for now; keep this slide commented for future reuse.
-  {
-    title: "ECO Accelerators",
-    desc: "Speed up engineering change workflows with intelligent automation. ECO Accelerators handle tracking, approvals, execution, and traceability while ensuring compliance.",
-    cta: "MES accelerators for ECO automation",
-    link: "/accelerators",
-    image: "/assets/images/eco-accelerators.webp",
-  },
+
   {
     title: "Athena Unveils Faborchestrator",
     desc: "The manufacturing industry's first Agentic AI Foundry designed to eliminate operational inefficiencies and unlock unprecedented productivity. Stop chasing data across disconnected systems and start commanding your factory with intelligent AI agents that work alongside your team.",

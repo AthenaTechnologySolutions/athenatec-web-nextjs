@@ -13,7 +13,7 @@ export const metadata: Metadata = buildMetadata({
   title:
     "Manufacturing Accelerators | Extend Your MES Investment | Athena",
   description:
-    "Purpose-built manufacturing accelerators that extend MES capabilities—engineering change management, quality validation, and shop floor mobility—without replacing your existing MES.",
+    "Purpose-built manufacturing accelerators that extend MES capabilities—engineering change management, quality validation, and Shop Floor mobility—without replacing your existing MES.",
   path: "/accelerators",
   image: "/assets/images/AMA.webp",
   keywords: [
@@ -21,7 +21,7 @@ export const metadata: Metadata = buildMetadata({
     "extend MES capabilities",
     "engineering change management software",
     "MES automated testing",
-    "shop floor mobility",
+    "Shop Floor mobility",
     "manufacturing execution system add-ons",
   ],
 });
@@ -180,7 +180,7 @@ export default function EcoAccelerator() {
     <>
       <HeroSection
         title="Purpose Built Manufacturing Accelerators"
-        description="Extend your MES beyond standard functionality with purpose-built accelerators that improve engineering change management, shop floor productivity, quality validation, and operational efficiency—without replacing your existing MES."
+        description="Extend your MES beyond standard functionality with purpose-built accelerators that improve engineering change management, Shop Floor productivity, quality validation, and operational efficiency—without replacing your existing MES."
         image="/assets/images/AMA.webp"
         align="center"
         buttonText="Explore Our Accelerators"
@@ -206,54 +206,10 @@ export default function EcoAccelerator() {
 
       <section className="accelerator-portfolio" id="accelerator-portfolio">
         <div className="container">
+
           <h2 className="section-title">Athena Accelerator Portfolio</h2>
 
-      
-
-          {portfolioGroups.map((group) => (
-            <div className="portfolio-group" key={group.category}>
-              <h3 className="group-title">{group.category}</h3>
-              <div className="card-grid">
-                {group.accelerators.map((item) => (
-                  <div className="accelerator-card" key={item.title}>
-                    <div className="image-wrapper">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="card-image"
-                      />
-                    </div>
-                    <div className="card-content">
-                      <h4>{item.title}</h4>
-                      {typeof item.description === "string" ? (
-                        <p>{item.description}</p>
-                      ) : (
-                        <div className="space-y-4 mt-3">
-                          <div>
-                            <strong className="block font-bold mb-0.5">What it does:</strong>
-                            <p>{item.description.what}</p>
-                          </div>
-                          <div>
-                            <strong className="block font-bold mb-0.5">Why it matters:</strong>
-                            <p>{item.description.why}</p>
-                          </div>
-                          {item.description.impact && (
-                            <div>
-                              <strong className="block font-bold mb-0.5">Impact analysis:</strong>
-                              <p>{item.description.impact}</p>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-              <div className="portfolio-group">
+             <div className="portfolio-group">
             <h3 className="group-title">
               Shop Floor Productivity
               <span className="group-badge">Featured</span>
@@ -298,6 +254,51 @@ export default function EcoAccelerator() {
               </div>
             </div>
           </div>
+
+          {portfolioGroups.map((group) => (
+            <div className="portfolio-group" key={group.category}>
+              <h3 className="group-title">{group.category}</h3>
+              <div className="card-grid">
+                {group.accelerators.map((item) => (
+                  <div className="accelerator-card" key={item.title}>
+                    <div className="image-wrapper">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="card-image"
+                      />
+                    </div>
+                    <div className="card-content">
+                      <h4>{item.title}</h4>
+                      {typeof item.description === "string" ? (
+                        <p>{item.description}</p>
+                      ) : (
+                        <div className="space-y-4 mt-3">
+                          <div>
+                            <strong className="block font-bold mb-0.5">What it does:</strong>
+                            <p>{item.description.what}</p>
+                          </div>
+                          <div>
+                            <strong className="block font-bold mb-0.5">Why it matters:</strong>
+                            <p>{item.description.why}</p>
+                          </div>
+                          {item.description.impact && (
+                            <div>
+                              <strong className="block font-bold mb-0.5">Impact analysis:</strong>
+                              <p>{item.description.impact}</p>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+       
         </div>
       </section>
 

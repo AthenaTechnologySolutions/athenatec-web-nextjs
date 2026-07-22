@@ -399,7 +399,7 @@ Date: ${today}
                     <div className="rf-hero-left">
                         <div className="rf-eyebrow" style={{ marginBottom: '6px' }}>You&apos;re Invited</div>
                         <h1 style={{ fontSize: '24px', lineHeight: '1.3', marginBottom: '12px' }}>
-                            You&apos;re Invited: Agentic AI Architect Training Program Orientation &ndash; August 22, 2026
+                            You&apos;re Invited: Agentic AI Architect Training Program Orientation
                         </h1>
                         <p style={{ fontSize: '14.5px', color: '#334155', lineHeight: '1.5', marginBottom: '16px' }}>
                             <strong>Dear Professionals, Students, and AI Enthusiasts,</strong><br />
@@ -451,9 +451,7 @@ Date: ${today}
                                     <span className="rf-level-badge foundation">Level 1</span>
                                 </div>
                                 <h3 className="rf-level-title">Foundation Certificate Course</h3>
-                                {/* <p className="rf-level-desc">
-                                    Core LLM concepts, prompt engineering, semantic search, and building your first autonomous AI agents.
-                                </p> */}
+                                 
                             </div>
 
                             <div className="rf-pathway-level-card level-2">
@@ -461,9 +459,7 @@ Date: ${today}
                                     <span className="rf-level-badge intermediate">Level 2</span>
                                 </div>
                                 <h3 className="rf-level-title">Intermediate Certificate Course</h3>
-                                {/* <p className="rf-level-desc">
-                                    Advanced RAG systems, multi-agent orchestration frameworks, external tool integration, and stateful flows.
-                                </p> */}
+                                 
                             </div>
 
                             <div className="rf-pathway-level-card level-3">
@@ -471,14 +467,12 @@ Date: ${today}
                                     <span className="rf-level-badge advanced">Level 3</span>
                                 </div>
                                 <h3 className="rf-level-title">Advanced Certificate Course</h3>
-                                {/* <p className="rf-level-desc">
-                                    Enterprise agentic architectures, multi-agent collaboration, LLMOps, model evaluations, fine-tuning, and robust security.
-                                </p> */}
+                               
                             </div>
                         </div>
                     </div>
 
-                    {/* What the Orientation Covers */}
+                     
                     <div className="rf-program-section" style={{ marginBottom: '20px' }}>
                         <h2 className="rf-section-title" style={{ fontSize: '18px', marginBottom: '8px' }}>What the Orientation Covers</h2>
                         <div className="rf-flexible-join-card" style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '14px 18px' }}>
@@ -488,7 +482,7 @@ Date: ${today}
                         </div>
                     </div>
 
-                    {/* Flexible Way to Join */}
+                
                     <div className="rf-flexible-join-card" style={{ marginBottom: '20px', padding: '14px 18px', borderRadius: '10px' }}>
                         <div className="rf-flex-content">
                             <h3 style={{ fontSize: '16px', marginBottom: '6px' }}>A Flexible Way to Join</h3>
@@ -498,7 +492,7 @@ Date: ${today}
                         </div>
                     </div>
 
-                    {/* Bring Your Questions */}
+                     
                     <div className="rf-program-section" style={{ marginBottom: '20px' }}>
                         <h2 className="rf-section-title" style={{ fontSize: '18px', marginBottom: '8px', color: '#0f172a', fontWeight: 700 }}>
                             Bring Your Questions
@@ -532,15 +526,13 @@ Date: ${today}
                     </div>
                 </div>
 
-                {/* Section 2: Registration Form (Placed AFTER Program Content) */}
-                <div className="rf-view-register-container" style={{ borderTop: '1px solid #e2e8f0', paddingTop: '28px' }}>
+                 <div className="rf-view-register-container" style={{ borderTop: '1px solid #e2e8f0', paddingTop: '28px' }}>
                     <div className="rf-form-header" style={{ marginBottom: '20px' }}>
                         <h2>Register for the Cohort</h2>
                         <p>Complete the form below to secure your spot for the orientation.</p>
                     </div>
 
-                    {/* Stepper */}
-                    <div className="rf-stepper">
+                     <div className="rf-stepper">
                         {STEPS.map((label, i) => (
                             <div key={i} className={`rf-step ${i < step ? 'done' : ''} ${i === step ? 'active' : ''}`}>
                                 <div className="rf-step-circle">
@@ -553,10 +545,9 @@ Date: ${today}
                     </div>
                     <div className="rf-progress-bar"><div className="rf-progress-fill" style={{ width: `${progress}%` }} /></div>
 
-                    {/* Form */}
                     <form className="rf-form" onSubmit={handleSubmit} noValidate>
 
-                        {/* ── Step 0: About You ── */}
+                         
                         {step === 0 && (
                             <div className="rf-panel">
                                 <h3 className="rf-panel-title">Tell us about yourself</h3>
@@ -607,7 +598,7 @@ Date: ${today}
                             </div>
                         )}
 
-                        {/* ── Step 1: Background ── */}
+                         
                         {step === 1 && (
                             <div className="rf-panel">
                                 <h3 className="rf-panel-title">Your background</h3>
