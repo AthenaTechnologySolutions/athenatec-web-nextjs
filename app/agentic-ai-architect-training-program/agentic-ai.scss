@@ -1590,8 +1590,7 @@ $focus: 0 0 0 3px rgba(8, 145, 178, .22);
 
 // ── Generic Program Landing Page Sections ──────────────────────────────────────
 .rf-program-section {
-    // margin-top: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     padding-bottom: 20px;
 
     .rf-section-title {
@@ -2084,6 +2083,162 @@ $focus: 0 0 0 3px rgba(8, 145, 178, .22);
         transform: translateY(0);
     }
 }
+
+// ── Three-Level Certification Pathway & Capstone Project ─────────────────────
+.rf-pathway-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+
+    @media (max-width: 640px) {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
+.rf-pathway-card {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: 16px;
+    padding: 24px 20px 20px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+    }
+
+    &.level-1 {
+        &::before {
+            background: #00aeef;
+        }
+        .rf-level-badge {
+            background: #e0f2fe;
+            color: #0284c7;
+        }
+    }
+
+    &.level-2 {
+        &::before {
+            background: #22c55e;
+        }
+        .rf-level-badge {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+    }
+
+    &.level-3 {
+        &::before {
+            background: #a855f7;
+        }
+        .rf-level-badge {
+            background: #f3e8ff;
+            color: #9333ea;
+        }
+    }
+
+    .rf-level-badge {
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 5px 14px;
+        border-radius: 20px;
+        margin-bottom: 16px;
+    }
+
+    .rf-level-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: $gray-900;
+        line-height: 1.35;
+        margin: 0 0 10px 0;
+    }
+
+    .rf-level-duration {
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #64748b;
+        margin-top: auto;
+    }
+}
+
+.rf-capstone-banner {
+    background: #0077b6;
+    background: linear-gradient(135deg, #0077b6 0%, #0284c7 100%);
+    border-radius: 16px;
+    padding: 22px 24px;
+    color: $white;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
+
+    .rf-capstone-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 4px;
+        gap: 12px;
+
+        .rf-capstone-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: $white;
+            letter-spacing: -0.01em;
+        }
+
+        .rf-capstone-duration {
+            background: $white;
+            color: #0077b6;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            white-space: nowrap;
+        }
+    }
+
+    .rf-capstone-sub {
+        font-size: 13.5px;
+        color: rgba(255, 255, 255, 0.88);
+        margin-bottom: 16px;
+    }
+
+    .rf-capstone-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        .rf-tag {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: $white;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: 8px;
+        }
+    }
+}
+
+
 
 
 

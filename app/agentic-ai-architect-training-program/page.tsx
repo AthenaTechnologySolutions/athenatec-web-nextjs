@@ -422,7 +422,7 @@ Date: ${today}
                             </div>
                             <div>
                                 <strong style={{ color: '#0f172a', display: 'block', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '2px' }}>Time</strong>
-                                <span style={{ color: '#334155', fontSize: '14px' }}>10:30 AM to 1:00 PM (Pacific Time)</span>
+                                <span style={{ color: '#334155', fontSize: '14px' }}>11:00 AM to 1:00 PM (Pacific Time)</span>
                             </div>
                             <div>
                                 <strong style={{ color: '#0f172a', display: 'block', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '2px' }}>Venue</strong>
@@ -442,38 +442,47 @@ Date: ${today}
                 <div className="rf-view-info-container" style={{ marginBottom: '28px' }}>
                     {/* Three-Level Certification Pathway */}
                     <div className="rf-program-section" style={{ marginBottom: '24px' }}>
-                        <h2 className="rf-section-title" style={{ fontSize: '19px', marginBottom: '14px', color: '#0f172a', fontWeight: 700 }}>
-                            Three-Level Certification Pathway
+                        <h2 className="rf-section-title" style={{ fontSize: '20px', marginBottom: '16px', color: '#0f172a', fontWeight: 700 }}>
+                            Three-Level Certification &amp; Project Pathway
                         </h2>
+
                         <div className="rf-pathway-cards-grid">
-                            <div className="rf-pathway-level-card level-1">
-                                <div className="rf-level-card-header">
-                                    <span className="rf-level-badge foundation">Level 1</span>
-                                </div>
+                            <div className="rf-pathway-card level-1">
+                                <span className="rf-level-badge">LEVEL 1</span>
                                 <h3 className="rf-level-title">Foundation Certificate Course</h3>
-
                             </div>
 
-                            <div className="rf-pathway-level-card level-2">
-                                <div className="rf-level-card-header">
-                                    <span className="rf-level-badge intermediate">Level 2</span>
-                                </div>
+                            <div className="rf-pathway-card level-2">
+                                <span className="rf-level-badge">LEVEL 2</span>
                                 <h3 className="rf-level-title">Intermediate Certificate Course</h3>
-
                             </div>
 
-                            <div className="rf-pathway-level-card level-3">
-                                <div className="rf-level-card-header">
-                                    <span className="rf-level-badge advanced">Level 3</span>
-                                </div>
+                            <div className="rf-pathway-card level-3">
+                                <span className="rf-level-badge">LEVEL 3</span>
                                 <h3 className="rf-level-title">Advanced Certificate Course</h3>
+                            </div>
+                        </div>
 
+                        <div className="rf-capstone-banner">
+                            <div className="rf-capstone-header">
+                                <div className="rf-capstone-title">
+                                    Industrial Capstone Project
+                                </div>
+                                <span className="rf-capstone-duration">3 Weeks</span>
+                            </div>
+                            <div className="rf-capstone-sub">Applies to all tracks</div>
+                            <div className="rf-capstone-tags">
+                                <span className="rf-tag">Public Service</span>
+                                <span className="rf-tag">Manufacturing</span>
+                                <span className="rf-tag">Healthcare</span>
+                                <span className="rf-tag">Commercial Real Estate</span>
+                                <span className="rf-tag">Energy</span>
                             </div>
                         </div>
                     </div>
 
 
-                    <div className="rf-program-section" style={{ marginBottom: '20px' }}>
+                    <div className="rf-program-section">
                         <h2 className="rf-section-title" style={{ fontSize: '18px', marginBottom: '8px', color: '#0f172a', fontWeight: 700 }}>What the Orientation Covers</h2>
                         <div className="rf-flexible-join-card" style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '14px 18px' }}>
                             <p style={{ fontSize: '14px', color: '#334155', lineHeight: '1.6', margin: 0 }}>
@@ -483,7 +492,7 @@ Date: ${today}
                     </div>
 
 
-                    <div className="rf-program-section" style={{ marginBottom: '20px' }}>
+                    <div className="rf-program-section">
                         <h2 className="rf-section-title" style={{ fontSize: '18px', marginBottom: '8px', color: '#0f172a', fontWeight: 700 }}>
                             A Flexible Way to Learn
                         </h2>
@@ -495,7 +504,7 @@ Date: ${today}
                     </div>
 
 
-                    <div className="rf-program-section" style={{ marginBottom: '20px' }}>
+                    <div className="rf-program-section">
                         <h2 className="rf-section-title" style={{ fontSize: '18px', marginBottom: '8px', color: '#0f172a', fontWeight: 700 }}>
                             Bring Your Questions
                         </h2>
