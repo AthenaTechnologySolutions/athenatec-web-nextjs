@@ -437,10 +437,8 @@ Date: ${today}
                         </div>
                     </div>
                 </div>
-
-                {/* Program Information Content */}
+               
                 <div className="rf-view-info-container" style={{ marginBottom: '28px' }}>
-                    {/* Three-Level Certification Pathway */}
                     <div className="rf-program-section" style={{ marginBottom: '24px' }}>
                         <h2 className="rf-section-title" style={{ fontSize: '20px', marginBottom: '16px', color: '#0f172a', fontWeight: 700 }}>
                             Three-Level Certification &amp; Project Pathway

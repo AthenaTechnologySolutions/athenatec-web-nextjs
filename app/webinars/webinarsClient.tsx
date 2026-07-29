@@ -16,9 +16,24 @@ interface Webinar {
   date: string;
   time: string;
   description: string;
+  externalUrl?: string;
+  ctaText?: string;
 }
 
 const webinarData: Webinar[] = [
+  {
+    title: "Athena introduces its Shop Floor Mobility Accelerator",
+    slug: "shop-floor-mobility-accelerator-webinar",
+    image: "/assets/images/shopfloor.webp",
+    type: "live",
+    date: "July 30, 2026",
+    time: "9:00 AM PST",
+    description:
+      "Join our webinar on the 30th of July, 9 a.m. PST to unlock real dollar and Productivity benefits!",
+    externalUrl:
+      "https://zoom.us/webinar/register/WN_vxoyFwkmRXmlK8mAbtDKNA#/registration",
+    ctaText: "Register Now",
+  },
   {
     title:
       "Building the Future of Manufacturing: Achieving Scalability and Compliance with Siemens and Athena",
@@ -76,13 +91,17 @@ export default function Webinars() {
           <div className="filter-inner">
             <p className="filter-label">Browse by:</p>
             <div className="filter-tabs">
-              {["all", "ondemand"].map((tab) => (
+              {["all", "live", "ondemand"].map((tab) => (
                 <button
                   key={tab}
                   className={`filter-btn ${filter === tab ? "active" : ""}`}
                   onClick={() => setFilter(tab as "all" | WebinarType)}
                 >
-                  {tab === "all" ? "All Sessions" : "On-Demand"}
+                  {tab === "all"
+                    ? "All Sessions"
+                    : tab === "live"
+                      ? "Upcoming Live"
+                      : "On-Demand"}
                 </button>
               ))}
             </div>
@@ -150,29 +169,53 @@ export default function Webinars() {
                 <p className="card-description">{webinar.description}</p>
 
                 <div className="card-footer">
-                  <Link
-                    href={`/webinars/${webinar.slug}`}
-                    className="card-btn"
-                  >
-                    <span>
-                      Download Now
-                    </span>
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      aria-hidden="true"
+                  {webinar.externalUrl ? (
+                    <a
+                      href={webinar.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="card-btn"
                     >
-                      <path
-                        d="M3 8h10M9 4l4 4-4 4"
-                        stroke="currentColor"
-                        strokeWidth="1.6"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </Link>
+                      <span>{webinar.ctaText || "Register Now"}</span>
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M3 8h10M9 4l4 4-4 4"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </a>
+                  ) : (
+                    <Link
+                      href={`/webinars/${webinar.slug}`}
+                      className="card-btn"
+                    >
+                      <span>Download Now</span>
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M3 8h10M9 4l4 4-4 4"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </Link>
+                  )}
                 </div>
               </div>
             </article>
