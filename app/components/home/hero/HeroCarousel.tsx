@@ -55,30 +55,7 @@ const slides: HeroSlide[] = [
   //   image: "/assets/images/siemens-realize-live2026.webp",
   //   imageClassName: "hero-carousel__image--siemens-live",
   // },
-  // Inaugural Agentic AI Research Lab RSVP is disabled; keep the old slide commented for reuse.
-  // {
-  //   id: "inaugural-agentic-ai",
-  //   title: "Inaugural Agentic AI Research Lab Invitation",
-  //   desc: "Join us for the inaugural launch of our Agentic AI Research Lab. Connect, learn, and explore what's next in agentic AI. We are launching our 12-week Claude Architect program.",
-  //   cta: "RSVP Now",
-  //   link: "/rsvp",
-  //   image: "/assets/images/Agentic-AI.webp",
-  // },
-    {
-    title: "Purpose Built Manufacturing Accelerators",
-    desc: "Extend your MES beyond standard functionality with purpose-built accelerators that improve engineering change management, Shopfloor productivity, quality validation, and operational efficiency—without replacing your existing MES.",
-    cta: "Explore Our Accelerators",
-    link: "/accelerators",
-    image: "/assets/images/AMA.webp",
-  },
-{
-  id: "agentic-ai-training",
-  title: "Agentic AI Architect Training Program",
-  desc: "Master AI Agents, LLMs, RAG, Multi-Agent Systems, and Enterprise AI Architecture through a 15 week industry-focused training program.",
-  cta: "Register Now",
-  link: "/agentic-ai-architect-training-program/",
-  image: "/assets/images/ai1.webp",
-},
+
   // {
   //   title:
   //     "Building the Future of Manufacturing: Achieving Scalability and Compliance with Siemens and Athena.",
@@ -129,8 +106,22 @@ const slides: HeroSlide[] = [
     link: "/critical-manufacturing",
     image: "/assets/images/twinzobanners.webp",
   },
-  // Eyelit route is disabled for now; keep this slide commented for future reuse.
 
+{
+  id: "agentic-ai-training",
+  title: "Agentic AI Architect Training Program",
+  desc: "Master AI Agents, LLMs, RAG, Multi-Agent Systems, and Enterprise AI Architecture through a 15 week industry-focused training program.",
+  cta: "Register Now",
+  link: "/agentic-ai-architect-training-program/",
+  image: "/assets/images/ai1.webp",
+},
+    {
+    title: "Purpose Built Manufacturing Accelerators",
+    desc: "Extend your MES beyond standard functionality with purpose-built accelerators that improve engineering change management, Shopfloor productivity, quality validation, and operational efficiency—without replacing your existing MES.",
+    cta: "Explore Our Accelerators",
+    link: "/accelerators",
+    image: "/assets/images/AMA.webp",
+  },
   {
     title: "Athena Unveils Faborchestrator",
     desc: "The manufacturing industry's first Agentic AI Foundry designed to eliminate operational inefficiencies and unlock unprecedented productivity. Stop chasing data across disconnected systems and start commanding your factory with intelligent AI agents that work alongside your team.",
@@ -153,13 +144,7 @@ const slides: HeroSlide[] = [
   //   link: "/eyelit",
   //   image: "/assets/images/eyelitsbanner.webp",
   // },
-  // {
-  //   title:
-  //     "Athena and Tech Mahindra Announce Partnership to Accelerate Smart Manufacturing",
-  //   desc: "Driving AI-enabled MES solutions to accelerate smart manufacturing adoption and digital transformation.",
-  //   cta: "Tech Mahindra",
-  //   image: "/assets/images/tech-mahindra.webp",
-  // },
+ 
 ];
 
 export default function HeroCarousel() {
