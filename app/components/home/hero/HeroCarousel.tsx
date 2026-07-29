@@ -37,6 +37,14 @@ function getTitleVariant(title: string) {
 }
 
 const slides: HeroSlide[] = [
+  {
+    id: "shop-floor-mobility-webinar",
+    title: "Athena introduces its Shop Floor Mobility Accelerator",
+    desc: "Join our webinar on the 30th of July, 9 a.m. PST to unlock real dollar and Productivity benefits!",
+    cta: "Register for Webinar",
+    link: "https://zoom.us/webinar/register/WN_vxoyFwkmRXmlK8mAbtDKNA#/registration",
+    image: "/assets/images/shopfloor.webp",
+  },
   // Siemens Realize LIVE 2026 is over; keep the old slide commented for reuse.
   // {
   //   id: "siemens-realize-live-2026",
@@ -309,13 +317,25 @@ export default function HeroCarousel() {
             {renderSlideDescription(activeSlide)}
 
             {activeSlide.link ? (
-              <Link
-                href={activeSlide.link}
-                className="hero-carousel__cta cta-btn relative inline-flex cursor-pointer overflow-hidden rounded-xl px-5 py-2.5 text-sm font-semibold text-white sm:px-7 sm:py-3 sm:text-base md:px-8"
-              >
-                <span className="relative z-10">{activeSlide.cta}</span>
-                <span className="shine" />
-              </Link>
+              activeSlide.link.startsWith("http") ? (
+                <a
+                  href={activeSlide.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hero-carousel__cta cta-btn relative inline-flex cursor-pointer overflow-hidden rounded-xl px-5 py-2.5 text-sm font-semibold text-white sm:px-7 sm:py-3 sm:text-base md:px-8"
+                >
+                  <span className="relative z-10">{activeSlide.cta}</span>
+                  <span className="shine" />
+                </a>
+              ) : (
+                <Link
+                  href={activeSlide.link}
+                  className="hero-carousel__cta cta-btn relative inline-flex cursor-pointer overflow-hidden rounded-xl px-5 py-2.5 text-sm font-semibold text-white sm:px-7 sm:py-3 sm:text-base md:px-8"
+                >
+                  <span className="relative z-10">{activeSlide.cta}</span>
+                  <span className="shine" />
+                </Link>
+              )
             ) : null}
           </div>
         </div>
