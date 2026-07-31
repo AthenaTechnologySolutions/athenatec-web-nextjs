@@ -26,6 +26,7 @@ const partners = [
 ];
 
 const resources = [
+  { name: "Articles", href: "/articles" },
   { name: "About Us", href: "/about" },
   { name: "Athena Accelerators", href: "/accelerators" },
   { name: "Careers", href: "/careers" },

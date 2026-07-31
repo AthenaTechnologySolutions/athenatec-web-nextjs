@@ -5,8 +5,7 @@ import Link from "next/link";
 import HeaderMenu from "./HeaderMenu";
 import Image from "next/image";
 
-import WebinarTopBanner from "@/app/components/WebinarTopBanner";
-
+ 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -41,7 +40,7 @@ export default function Header() {
           : "shadow-sm",
       ].join(" ")}
     >
-      <WebinarTopBanner />
+       
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex shrink-0 items-center">
           <div className="relative h-11 w-[220px] sm:h-12 sm:w-[240px] min-[1180px]:h-14 min-[1180px]:w-[290px]">

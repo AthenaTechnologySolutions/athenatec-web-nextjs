@@ -37,10 +37,11 @@ const otherSolutionLinks = [
 ];
 
 const resourceLinks = [
+  { label: "Articles", href: "/articles" },
   { label: "Blog", href: "/blog" },
   { label: "Case Studies", href: "/case-studies" },
-  { label: "News Room", href: "/newsroom" },
   { label: "Webinars", href: "/webinars" },
+  { label: "News Room", href: "/newsroom" },
 ];
   
 const itemCls =
