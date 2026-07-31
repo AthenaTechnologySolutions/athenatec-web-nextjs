@@ -57,7 +57,7 @@ export default function ArticlesPage() {
             <div className="eyebrow">
               <span>Featured Article</span>
             </div>
-            <h2>Shop Floor Innovations</h2>
+            <h2>Shop Floor Mobility Accelerator</h2>
           </div>
 
           {featuredArticle && (

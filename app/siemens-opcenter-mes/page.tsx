@@ -112,6 +112,18 @@ const services = [
     desc: `Low Code and Analytics features of Mendix helps to design KPIs and Dashboards for better visibility of the Data.`,
     video: "/assets/videos/mendix.mp4",
   },
+  {
+    title: "Siemens Opcenter Execution – LED / Battery Manufacturing",
+    slug: "led-battery-manufacturing",
+    desc: `Athena excels in addressing complex manufacturing challenges in LED and Battery manufacturing with rapid implementation, delivering a robust, integrated, and scalable data-centric enterprise.`,
+    video: "/assets/videos/electronics.mp4",
+  },
+  {
+    title: "Siemens Opcenter Execution – Solar",
+    slug: "solar",
+    desc: `Solar manufacturing's complexities, such as Applied Materials and SPC, demand advanced analytics and continuous experimentation.`,
+    video: "/assets/videos/electronics.mp4",
+  },
 ];
 const testimonials = [
   {

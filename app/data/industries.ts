@@ -148,5 +148,41 @@ discrete: {
       ]
     }
   ]
+},
+
+"led-battery-manufacturing": {
+  title: "Siemens Opcenter Execution – LED / Battery Manufacturing",
+  heroImage: "/assets/images/futuristic-time-machine-scaled-e1724923036586.webp",
+  intro:
+    "Athena excels in addressing complex manufacturing challenges in LED and Battery manufacturing with rapid implementation, delivering a robust, integrated, and scalable data-centric enterprise. Siemens Opcenter MES provides end-to-end traceability, quality management, and operational efficiency across automated production lines.",
+  showContact: true,
+  contactLabel: "Contact Us",
+  sections: [
+    {
+      heading: "LED & Battery Manufacturing MES Solutions",
+      content: [
+        "Athena is well-versed in implementing Siemens Opcenter for LED and Battery Manufacturing operations. Leveraging deep domain expertise, we enable manufacturers to accelerate their digital initiatives, optimize yield, ensure full traceability, and meet stringent quality standards.",
+        "From high-volume cell production to battery module assembly and LED packaging, Siemens Opcenter MES delivers real-time visibility, automated quality controls, and seamless shop-floor equipment integration."
+      ]
+    }
+  ]
+},
+
+solar: {
+  title: "Siemens Opcenter Execution – Solar",
+  heroImage: "/assets/images/beautiful-alternative-energy-plant-with-solar-panels-scaled-e1724923416271.webp",
+  intro:
+    "Solar manufacturing's complexities, such as Applied Materials and Statistical Process Control (SPC), demand advanced analytics, continuous experimentation, and precise operational control. Athena's expertise and passion position us to effectively tackle these challenges using Siemens Opcenter MES.",
+  showContact: true,
+  contactLabel: "Contact Us",
+  sections: [
+    {
+      heading: "Solar Manufacturing MES Solutions",
+      content: [
+        "Athena delivers tailored Siemens Opcenter MES solutions for the solar industry, helping solar cell and module manufacturers achieve higher efficiency, real-time shop-floor tracking, and seamless equipment integration.",
+        "By implementing advanced analytics, automated SPC, and wafer-to-panel traceability, solar manufacturers can maximize output, reduce scrap, and optimize factory utilization."
+      ]
+    }
+  ]
 }
-}
+}
