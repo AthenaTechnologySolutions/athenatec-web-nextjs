@@ -11,9 +11,9 @@ import "./articles.scss";
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
-    title: "Articles & Manufacturing Technology Insights | Athena Technology",
+    title: "The Shop Floor Mobility Accelerator",
     description:
-      "Explore in-depth articles on shop floor mobility, MES data capture, digital manufacturing, Industry 4.0, and shop floor automation.",
+      "Eliminate fixed workstation delays and manual errors. Athena's Mobility Accelerator puts real-time data capture in operators' hands, syncing instantly with your MES.",
     path: "/articles",
     image: "/assets/images/shopfloor-mobility.webp",
   });
