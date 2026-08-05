@@ -8,6 +8,21 @@ export type WebinarSeo = {
 
 export const webinarSeoItems: WebinarSeo[] = [
   {
+    slug: "shop-floor-mobility-accelerator-webinar",
+    title:
+      "Real-Time MES Data Capture: The Shop Floor Mobility Accelerator | Athenatec",
+    description:
+      "Watch Chaitra Raviprakash, Naveen Sedhuraman and Maryanne Steidinger break down how leading manufacturers close the gap between the factory floor and the MES.",
+    image: "/assets/images/shopfloor.webp",
+    keywords: [
+      "Shop Floor Mobility Accelerator",
+      "Real-Time MES Data Capture",
+      "MES mobility",
+      "Zebra manufacturing",
+      "factory floor automation",
+    ],
+  },
+  {
     slug: "building-future-manufacturing-siemens-athena",
     title: "Future Manufacturing Scalability Webinar | Athenatec",
     description:

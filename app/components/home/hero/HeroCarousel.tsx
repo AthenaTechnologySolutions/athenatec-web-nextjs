@@ -37,14 +37,14 @@ function getTitleVariant(title: string) {
 }
 
 const slides: HeroSlide[] = [
-  {
-    id: "shop-floor-mobility-webinar",
-    title: "Athena introduces its Shop Floor Mobility Accelerator",
-    desc: "Join our webinar on the 30th of July, 9 a.m. PST to unlock real dollar and Productivity benefits!",
-    cta: "Register for Webinar",
-    link: "https://zoom.us/webinar/register/WN_vxoyFwkmRXmlK8mAbtDKNA#/registration",
-    image: "/assets/images/shopfloor.webp",
-  },
+  // {
+  //   id: "shop-floor-mobility-webinar",
+  //   title: "Athena introduces its Shop Floor Mobility Accelerator",
+  //   desc: "Watch our webinar to unlock real dollar and productivity benefits!",
+  //   cta: "Download",
+  //   link: "/webinars",
+  //   image: "/assets/images/shopfloor.webp",
+  // },
   // Siemens Realize LIVE 2026 is over; keep the old slide commented for reuse.
   // {
   //   id: "siemens-realize-live-2026",

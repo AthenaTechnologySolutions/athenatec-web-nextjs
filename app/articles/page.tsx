@@ -44,7 +44,7 @@ export default function ArticlesPage() {
 
       <HeroSection
         title="Articles & Manufacturing Technology Insights"
-        description="In-depth analysis, technical perspectives, and operational guides for manufacturing IT, MES implementation, and shop floor mobility."
+        description="Eliminate fixed workstation delays and manual errors. Athena's Mobility Accelerator puts real-time data capture in operators' hands, syncing instantly with your MES. Contact Us."
         image="/assets/images/shopfloor.webp"
         align="center"
         buttonText="Discuss Your Project"

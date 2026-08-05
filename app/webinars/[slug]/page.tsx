@@ -430,6 +430,8 @@ export default function WebinarSinglePage() {
   const params = useParams();
   const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug;
 
+  if (slug === "shop-floor-mobility-accelerator-webinar")
+    return <ShopFloorMobilityLayout />;
   if (slug === "building-future-manufacturing-siemens-athena")
     return <FutureManufacturingLayout />;
   if (slug === "medical-device-visibility") return <MedicalVisibilityLayout />;
@@ -439,6 +441,324 @@ export default function WebinarSinglePage() {
     <div style={{ padding: "140px 20px", textAlign: "center" }}>
       <h1 style={{ fontSize: 32 }}>404 — Page not found</h1>
     </div>
+  );
+}
+
+const SHOP_FLOOR_RECORDING_URL =
+  "https://zoom.us/rec/share/y6Ui13CpwzzKD8OylANK0nCXgwg11W_yUGS_h3-B_k7mE41u31Xizw-vY7gCk6xF.O28Z1Ror_FLK0Wlm?startTime=1785426013000";
+
+function ShopFloorMobilityLayout() {
+  return (
+    <>
+      <section className="single-hero webinar-siemens-hero">
+        <Image
+          src="/assets/images/shopfloor.webp"
+          alt="Real-Time MES Data Capture: The Shop Floor Mobility Accelerator"
+          fill
+          priority
+          className="hero-img"
+        />
+        <div className="overlay" />
+        <div className="hero-content">
+          <span
+            className="solution-tag"
+            style={{ color: "#17ace4", letterSpacing: "1.5px", fontWeight: 700 }}
+          >
+            GET THE ON-DEMAND WEBINAR
+          </span>
+          <h1>
+            Real-Time MES Data Capture: The Shop Floor Mobility Accelerator
+          </h1>
+          <p
+            style={{
+              color: "#e2e8f0",
+              fontSize: "18px",
+              maxWidth: "800px",
+              lineHeight: "1.6",
+              marginTop: "10px",
+            }}
+          >
+            Watch Chaitra Raviprakash, Naveen Sedhuraman and Maryanne Steidinger
+            break down how leading manufacturers are closing the gap between the
+            factory floor and the MES—without replacing the systems they already
+            run.
+          </p>
+          <a
+            href="#watch-webinar"
+            className="solution-btn"
+            style={{ marginTop: "15px" }}
+          >
+            Watch the Webinar Now
+          </a>
+        </div>
+      </section>
+
+      {/* Section 1: The Cost of Fixed Workstations */}
+      <section className="sfm-costs-section">
+        <div className="sfm-costs-container">
+          <div className="sfm-costs-header">
+            <span className="sfm-badge-pill">Operational Reality</span>
+            <h2>The Cost of Fixed Workstations</h2>
+            <p className="sfm-costs-subtitle">
+              Why <span>“Five Minutes Here”</span> Adds Up to Millions in Lost Labor
+            </p>
+            <p className="sfm-costs-desc">
+              Walk any factory floor and you’ll see the same pattern: operators
+              walking to fixed PC workstations to log transactions. This lag in
+              data entry means your MES reflects yesterday’s operations, not
+              today’s reality.
+            </p>
+          </div>
+
+          <div className="sfm-costs-grid">
+            <div className="sfm-cost-card sfm-cost-card--danger">
+              <div className="sfm-cost-icon-wrap">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <div className="sfm-cost-content">
+                <span className="sfm-cost-tag">Efficiency Impact</span>
+                <h3>Lost Labor</h3>
+                <p>
+                  Operators waste valuable time walking back and forth to terminals instead of adding value on the floor.
+                </p>
+              </div>
+            </div>
+
+            <div className="sfm-cost-card sfm-cost-card--warning">
+              <div className="sfm-cost-icon-wrap">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                </svg>
+              </div>
+              <div className="sfm-cost-content">
+                <span className="sfm-cost-tag">Decision Bottleneck</span>
+                <h3>Data Lag</h3>
+                <p>
+                  Stale, delayed data leads to slow exception handling, out-of-date reports, and reactive decisions.
+                </p>
+              </div>
+            </div>
+
+            <div className="sfm-cost-card sfm-cost-card--info">
+              <div className="sfm-cost-icon-wrap">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                  <line x1="8" y1="21" x2="16" y2="21" />
+                  <line x1="12" y1="17" x2="12" y2="21" />
+                </svg>
+              </div>
+              <div className="sfm-cost-content">
+                <span className="sfm-cost-tag">Maintenance Burden</span>
+                <h3>Hardware Sprawl</h3>
+                <p>
+                  PCs, keyboards, wired scanners, and cables create maintenance headaches and line clutter.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="sfm-impact-quote-box">
+            <div className="sfm-quote-mark">“</div>
+            <p>
+              A floor full of operators making that same walk dozens of times
+              a day translates into real cost, and a real lag between when
+              transactions happen and when the MES knows about it.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 2: Athena's Approach */}
+      <section className="solution-section">
+        <div className="solution-container">
+          <div className="solution-content">
+            <span className="solution-tag">Athena&apos;s Approach</span>
+            <h2>One Handheld. One Interface. Real-Time MES Sync.</h2>
+            <p>
+              Athena Technology’s Shop Floor Mobility Accelerator puts the entire
+              workstation in the operator’s hand. Running on rugged Zebra
+              devices, it replaces four pieces of fixed hardware with a single,
+              travel-friendly tool.
+            </p>
+
+            <h4
+              style={{
+                fontSize: "20px",
+                fontWeight: 700,
+                color: "#111",
+                marginTop: "10px",
+              }}
+            >
+              What It Delivers:
+            </h4>
+            <ul className="sfm-delivers-list">
+              <li>
+                <strong>Immediate MES Sync:</strong> Transactions post in
+                real-time via the API layer.
+              </li>
+              <li>
+                <strong>Error Reduction:</strong> Barcode-driven entry eliminates
+                manual keying errors.
+              </li>
+              <li>
+                <strong>Unrestricted Coverage:</strong> Scan at the equipment, the
+                WIP cart, or the staging area.
+              </li>
+            </ul>
+
+            <blockquote className="sfm-quote-card sfm-quote-card--light">
+              <p>
+                “The integration happens at the API layer... the Accelerator
+                adapts to the MES a manufacturer already has, rather than
+                requiring the manufacturer to adapt to it.”
+              </p>
+            </blockquote>
+          </div>
+          <div className="solution-image">
+            <Image
+              src="/assets/images/shopfloor.webp"
+              alt="Athena Shop Floor Mobility Accelerator"
+              width={600}
+              height={450}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Section 3: Key Takeaways */}
+      <section className="learn-section">
+        <div className="learn-container">
+          <div className="learn-header">
+            <h2>Key Takeaways for Plant and IT Leaders</h2>
+            <p>
+              The Athena team will walk you through the real-world impact of
+              mobile data capture, including:
+            </p>
+          </div>
+          <div className="learn-grid">
+            {[
+              {
+                title: "Financial Impact",
+                body: "How removing double-entry and paper workflows affects the P&L.",
+              },
+              {
+                title: "The Staged Rollout",
+                body: "Moving from a successful pilot to a floor-wide standard without disrupting operations.",
+              },
+              {
+                title: "Integration Simplicity",
+                body: "Adding real-time data capture without a “rip-and-replace” MES project.",
+              },
+            ].map((item, i) => (
+              <div className="learn-item" key={i}>
+                <span>{String(i + 1).padStart(2, "0")}</span>
+                <p>
+                  <strong>{item.title}:</strong> {item.body}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p
+            style={{
+              textAlign: "center",
+              marginTop: "30px",
+              fontSize: "18px",
+              color: "#15356e",
+              fontWeight: 600,
+            }}
+          >
+            Access the recording and resources below.
+          </p>
+        </div>
+      </section>
+
+      {/* Form Section */}
+      <section id="watch-webinar" className="webinar-form-split">
+        <div className="split-container">
+          <div className="split-image">
+            <Image
+              src="/assets/images/form-img.webp"
+              alt="Watch Webinar"
+              fill
+              className="split-img"
+            />
+          </div>
+
+          <div className="split-form">
+            <div className="form-inner">
+              <div className="form-badge">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                >
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                On-Demand Access
+              </div>
+
+              <h2>Fill out the form below to watch the webinar</h2>
+
+              <WebinarForm recordingUrl={SHOP_FLOOR_RECORDING_URL} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer Text Banner */}
+      <section
+        style={{
+          background: "#f8fafc",
+          padding: "40px 20px",
+          borderTop: "1px solid #e2e8f0",
+        }}
+      >
+        <div className="sfm-footer-banner">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#17ace4"
+            strokeWidth="2.5"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+            <polyline points="22 4 12 14.01 9 11.01" />
+          </svg>
+          <p>
+            The Athena Shop Floor Mobility Accelerator has been piloted and
+            deployed in live production environments with validated results.
+          </p>
+        </div>
+      </section>
+    </>
   );
 }
 

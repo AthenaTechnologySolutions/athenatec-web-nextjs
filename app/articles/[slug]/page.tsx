@@ -193,12 +193,23 @@ export default async function ArticleDetailPage({ params }: PageProps) {
                       {article.content.webinarCallout.speakers.join(", ")}
                     </span>
                   </div>
-                  <Link
-                    href={article.content.webinarCallout.link}
-                    className="btn-webinar"
-                  >
-                    Register for Webinar
-                  </Link>
+                  {article.content.webinarCallout.link.startsWith("http") ? (
+                    <a
+                      href={article.content.webinarCallout.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-webinar"
+                    >
+                      Download
+                    </a>
+                  ) : (
+                    <Link
+                      href={article.content.webinarCallout.link}
+                      className="btn-webinar"
+                    >
+                      Download
+                    </Link>
+                  )}
                 </div>
               </div>
             )}

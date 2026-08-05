@@ -25,14 +25,12 @@ const webinarData: Webinar[] = [
     title: "Athena introduces its Shop Floor Mobility Accelerator",
     slug: "shop-floor-mobility-accelerator-webinar",
     image: "/assets/images/shopfloor.webp",
-    type: "live",
+    type: "ondemand",
     date: "July 30, 2026",
-    time: "9:00 AM PST",
+    time: "",
     description:
-      "Join our webinar on the 30th of July, 9 a.m. PST to unlock real dollar and Productivity benefits!",
-    externalUrl:
-      "https://zoom.us/webinar/register/WN_vxoyFwkmRXmlK8mAbtDKNA#/registration",
-    ctaText: "Register Now",
+      "Watch our webinar on how the Shop Floor Mobility Accelerator unlocks real dollar and productivity benefits.",
+    ctaText: "Download Now",
   },
   {
     title:
@@ -198,7 +196,7 @@ export default function Webinars() {
                       href={`/webinars/${webinar.slug}`}
                       className="card-btn"
                     >
-                      <span>Download Now</span>
+                      <span>{webinar.ctaText || "Download Now"}</span>
                       <svg
                         width="16"
                         height="16"
