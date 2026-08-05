@@ -14,10 +14,20 @@ export interface Article {
   heroImage: string;
   content: {
     intro: string[];
+    introImage?: {
+      src: string;
+      alt: string;
+      caption?: string;
+    };
     sections: {
       id: string;
       title: string;
       paragraphs: string[];
+      image?: {
+        src: string;
+        alt: string;
+        caption?: string;
+      };
       bullets?: string[];
       highlightBox?: {
         title: string;
@@ -68,8 +78,13 @@ export const articles: Article[] = [
     content: {
       intro: [
         "Walk any manufacturing floor and you'll notice the same pattern repeating itself. An operator finishes a task, walks across the room to a fixed PC workstation to log what just happened, then walks back. Multiply that trip by every lot, every shift, every operator on the floor, and the amount of time spent moving to and from a terminal, rather than doing the work itself, becomes significant.",
-        "This is the problem Athena addresses through its Shop Floor Mobility Accelerator. Manufacturers have invested years and real budget into their MES platforms, expecting those systems to deliver the visibility that drives faster, better-informed decisions. But an MES is only as good as the data feeding it. When that data arrives late, gets entered twice, or picks up errors along the way, the system ends up reflecting yesterday's operations instead of today's."
+        "This is the problem Athena addresses through its Shop Floor Mobility Accelerator. Manufacturers have invested years and real budget into their MES platforms, expecting those systems to deliver the visibility that drives faster, better-informed decisions. But an MES is only as good as the data feeding it. When that data arrives late or picks up errors along the way, the system ends up reflecting yesterday's operations instead of today's."
       ],
+      introImage: {
+        src: "/assets/images/mes-transaction-time.webp",
+        alt: "How much time does one MES transaction really take?",
+        caption: "Figure 1: The hidden operational cost of fixed MES workstations—operator travel time vs. value-add production time."
+      },
       sections: [
         {
           id: "the-problem",
@@ -82,6 +97,11 @@ export const articles: Article[] = [
         {
           id: "the-solution",
           title: "The Solution: One Handheld Device Instead of Four Fixed Assets",
+          image: {
+            src: "/assets/images/shopfloor-operator-handheld.webp",
+            alt: "Shop Floor Mobility Accelerator running on a Zebra handheld device with MES, ERP, and Digital Twin connectivity",
+            caption: "Figure 2: The Shop Floor Mobility Accelerator replaces desktop PCs, wired scanners, and paper logs with a single connected handheld interface."
+          },
           paragraphs: [
             "Athena Technology's approach is to put the entire workstation in the operator's hand. The Shopfloor Mobility Accelerator runs on rugged Zebra devices already common on manufacturing floors, so there's no unfamiliar hardware to introduce and no retraining operators on equipment they haven't used before.",
             "The Accelerator is built on a purpose-built React web application that gives operators a focused, task-oriented interface designed for gloved hands and fast decisions on the floor. That interface connects to a .NET (C#) API layer, which handles the business logic and transaction processing, and that layer connects directly into the MES. One integrated device, with its own scanner, screen, and input, replaces the desktop PC, the wired scanner, the keyboard, and the mouse. Four pieces of equipment per station become one device that travels with the person doing the work.",
@@ -96,6 +116,11 @@ export const articles: Article[] = [
         {
           id: "financial-case",
           title: "The Financial Case: Why This Affects the P&L, Not Just the Floor",
+          image: {
+            src: "/assets/images/mes-financial-case-pnl.webp",
+            alt: "Financial impact of mobile MES data capture on P&L and labor ROI",
+            caption: "Figure 3: Converting travel time into value-add production time drives measurable bottom-line P&L improvements."
+          },
           paragraphs: [
             "It's easy to file mobile data collection under 'IT modernization' and move on, but the dollar impact is broader than that framing suggests. Removing paper-based or double-entry workflows cuts printing, storage, and re-keying costs that accumulate across teams and locations.",
             "Faster data turnaround means managers can act on a problem the day it occurs instead of a week later, which matters when the issue is a stalled line or a quality exception that is still cost-effective to fix. Operators freed from paperwork and station trips spend more of their shift on work that actually adds value, and none of this requires proportionally more infrastructure as the operation scales. A plant adding a second shift or a new line doesn't need to buy, cable, and mount a full new set of workstations to keep pace.",

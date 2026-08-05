@@ -64,6 +64,14 @@ const slides: HeroSlide[] = [
   //   image: "/assets/images/webiner-banner.webp",
   //   imageClassName: "hero-carousel__image--webinar",
   // },
+    {
+    id: "shop-floor-mobility-webinar",
+    title: "Athena introduces its Shop Floor Mobility Accelerator",
+    desc: "Watch our webinar to unlock real dollar and productivity benefits!",
+    cta: "Download",
+    link: "/webinars",
+    image: "/assets/images/shopfloor.webp",
+  },
   {
     title: "Digitizing the Manufacturing Enterprise Since 2011",
     desc: "Leveraging deep expertise to enhance partnerships and drive long-term manufacturing success.",

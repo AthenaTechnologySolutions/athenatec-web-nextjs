@@ -81,6 +81,14 @@ export default async function ArticleDetailPage({ params }: PageProps) {
       <article className="article-detail-view">
         {/* Header Banner */}
         <header className="article-header">
+          <Image
+            src="/assets/images/shopfloor.webp"
+            alt={article.title}
+            fill
+            priority
+            className="header-bg-img"
+          />
+          <div className="overlay" />
           <div className="header-container">
             <nav className="breadcrumbs" aria-label="Breadcrumb">
               <Link href="/">Home</Link>
@@ -143,15 +151,46 @@ export default async function ArticleDetailPage({ params }: PageProps) {
           <div className="main-article-content">
             {/* Intro Paragraphs */}
             {article.content.intro.map((p, idx) => (
-              <p key={idx} className="intro-paragraph">
-                {p}
-              </p>
+              <div key={idx}>
+                <p className="intro-paragraph">{p}</p>
+                {idx === 0 && article.content.introImage && (
+                  <figure className="article-inline-figure">
+                    <Image
+                      src={article.content.introImage.src}
+                      alt={article.content.introImage.alt}
+                      width={1200}
+                      height={675}
+                      className="article-img"
+                      priority
+                    />
+                    {article.content.introImage.caption && (
+                      <figcaption>{article.content.introImage.caption}</figcaption>
+                    )}
+                  </figure>
+                )}
+              </div>
             ))}
 
             {/* Sections */}
             {article.content.sections.map((section) => (
               <section key={section.id} id={section.id}>
                 <h2>{section.title}</h2>
+
+                {section.image && (
+                  <figure className="article-inline-figure">
+                    <Image
+                      src={section.image.src}
+                      alt={section.image.alt}
+                      width={1200}
+                      height={675}
+                      className="article-img"
+                    />
+                    {section.image.caption && (
+                      <figcaption>{section.image.caption}</figcaption>
+                    )}
+                  </figure>
+                )}
+
                 {section.paragraphs.map((p, pIdx) => (
                   <p key={pIdx}>{p}</p>
                 ))}

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
@@ -14,12 +15,15 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "The Shop Floor Mobility Accelerator",
     description:
       "Eliminate fixed workstation delays and manual errors. Athena's Mobility Accelerator puts real-time data capture in operators' hands, syncing instantly with your MES.",
-    path: "/articles",
+    path: "/articles/shop-floor-mobility-accelerator-real-time-data-capture",
     image: "/assets/images/shopfloor-mobility.webp",
   });
 }
 
 export default function ArticlesPage() {
+  redirect("/articles/shop-floor-mobility-accelerator-real-time-data-capture");
+
+  /*
   const featuredArticle = articles[0];
   const otherArticles = articles.slice(1);
 
@@ -146,4 +150,5 @@ export default function ArticlesPage() {
       </main>
     </>
   );
+  */
 }
