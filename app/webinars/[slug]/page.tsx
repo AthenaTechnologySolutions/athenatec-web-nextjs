@@ -445,7 +445,7 @@ export default function WebinarSinglePage() {
 }
 
 const SHOP_FLOOR_RECORDING_URL =
-  "https://zoom.us/rec/share/y6Ui13CpwzzKD8OylANK0nCXgwg11W_yUGS_h3-B_k7mE41u31Xizw-vY7gCk6xF.O28Z1Ror_FLK0Wlm?startTime=1785426013000";
+  "https://zoom.us/rec/share/KdPap4rzDmfyoSxXw3CCXnWcHHq6SrjmJOzYZmdzGfiDlT5pXmQsSCchzCE1-iBJ.3jH7vyZbCHDYRK1L";
 
 function ShopFloorMobilityLayout() {
   return (

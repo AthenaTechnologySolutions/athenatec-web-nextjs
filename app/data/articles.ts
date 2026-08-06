@@ -150,7 +150,7 @@ export const articles: Article[] = [
         description: "Watch Naveen Sedhuraman and Maryanne Steidinger as they walk through how connected handheld technology helps manufacturers modernize production data capture and derive maximum value from existing MES platforms.",
         date: "July 30 at 9:00 AM PST",
         speakers: ["Naveen Sedhuraman", "Maryanne Steidinger"],
-        link: "https://zoom.us/rec/share/y6Ui13CpwzzKD8OylANK0nCXgwg11W_yUGS_h3-B_k7mE41u31Xizw-vY7gCk6xF.O28Z1Ror_FLK0Wlm?startTime=1785426013000"
+        link: "https://zoom.us/rec/share/KdPap4rzDmfyoSxXw3CCXnWcHHq6SrjmJOzYZmdzGfiDlT5pXmQsSCchzCE1-iBJ.3jH7vyZbCHDYRK1L"
       },
       conclusion: [
         // "Athena Technology has already piloted and deployed this setup with factory floor operators using Zebra handhelds, and the validation took place in a live production environment."
