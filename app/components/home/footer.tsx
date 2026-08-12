@@ -3,7 +3,7 @@ import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import Image from "next/image";
 
 const mesSolutions = [
-  // { name: "MES Implementation Services", href: "/mes-implementation-services" },
+  { name: "MES Implementation Services", href: "/mes-implementation-services" },
   { name: "Siemens Opcenter MES Implementation", href: "/siemens-opcenter-mes" },
   { name: "Critical Manufacturing MES Implementation", href: "/critical-manufacturing" },
   // { name: "Eyelit", href: "/eyelit" },
@@ -14,7 +14,7 @@ const otherSolutions = [
   { name: "Oracle On-Prem", href: "/solutions/oracle-on-prem" },  
   { name: "Oracle Cloud", href: "/solutions/oracle-cloud" }, 
   { name: "PLM", href: "/solutions/plm" }, 
-  {name: "Cyber Security Services", href: "/solutions/cyber-security-service",},
+  { name: "Cyber Security Services", href: "/solutions/cyber-security-service" },
 ];
 
 const partners = [
@@ -26,9 +26,14 @@ const partners = [
 ];
 
 const resources = [
-  { name: "Articles", href: "/articles" },
   { name: "About Us", href: "/about" },
   { name: "Athena Accelerators", href: "/accelerators" },
+  { name: "Articles", href: "/articles" },
+  { name: "Blog", href: "/blog" },
+  { name: "Case Studies", href: "/case-studies" },
+  { name: "Webinars", href: "/webinars" },
+  { name: "Event Gallery", href: "/gallery" },
+  { name: "Agentic AI Training", href: "/agentic-ai-architect-training-program" },
   { name: "Careers", href: "/careers" },
   { name: "Contact Us", href: "/contact" },
 ];

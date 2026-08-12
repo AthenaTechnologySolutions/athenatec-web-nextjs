@@ -37,5 +37,5 @@ const EVENTS: GalleryItem[] = [
 ];
 
 export default function GalleryPage() {
-  return <GallerySection title="Event Gallery" data={EVENTS} bg="light" />;
+  return <GallerySection title="Event Gallery" data={EVENTS} bg="light" asH1 />;
 }

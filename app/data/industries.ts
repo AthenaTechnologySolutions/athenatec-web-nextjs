@@ -1,5 +1,6 @@
 export type IndustryPage = {
   title: string;
+  seoTitle?: string;
   heroImage: string;
   intro: string;
   videoUrl?: string;
@@ -91,6 +92,7 @@ discrete: {
 
 "advance-planning-scheduling": {
   title: "Siemens Opcenter – Advance Planning & Scheduling",
+  seoTitle: "Siemens Opcenter APS | Athenatec",
   heroImage: "/assets/images/digital-tablet-with-annual-strategy-background-scaled.webp",
 
   intro:
@@ -152,6 +154,7 @@ discrete: {
 
 "led-battery-manufacturing": {
   title: "Siemens Opcenter Execution – LED / Battery Manufacturing",
+  seoTitle: "Siemens Opcenter LED & Battery MES | Athenatec",
   heroImage: "/assets/images/futuristic-time-machine-scaled-e1724923036586.webp",
   intro:
     "Athena excels in addressing complex manufacturing challenges in LED and Battery manufacturing with rapid implementation, delivering a robust, integrated, and scalable data-centric enterprise. Siemens Opcenter MES provides end-to-end traceability, quality management, and operational efficiency across automated production lines.",

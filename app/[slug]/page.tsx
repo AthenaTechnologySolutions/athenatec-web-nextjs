@@ -30,9 +30,17 @@ export async function generateMetadata({
     });
   }
 
+  const metaTitle =
+    study.seoTitle ||
+    (study.fullTitle.length > 50
+      ? `${truncate(study.fullTitle, 45)} | Athenatec`
+      : `${study.fullTitle} | Athenatec`);
+
+  const metaDesc = study.seoDescription || truncate(stripHtml(study.description), 155);
+
   return buildMetadata({
-    title: study.fullTitle,
-    description: truncate(stripHtml(study.description), 160),
+    title: metaTitle,
+    description: metaDesc,
     path: `/${study.slug}`,
     image: study.image,
     keywords: ["case study", "manufacturing", "MES", "Athenatec"],

@@ -6,9 +6,9 @@ import ContactForm from "@/app/components/forms/ContactForm";
 import { buildContactPageSchema, buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Contact Athenatec | MES, PLM & Smart Factory Experts",
+  title: "Contact Athenatec | MES & Smart Factory Experts",
   description:
-    "Get in touch with Athenatec's team for MES, PLM, and smart manufacturing solutions, in Bangalore, Chennai, Hyderabad, and Trichy. We respond within 24 hours",
+    "Get in touch with Athenatec for MES, PLM, and smart manufacturing solutions. Contact our global teams in the US and India for rapid response.",
   path: "/contact",
   image: "/assets/images/contactus.webp",
 });

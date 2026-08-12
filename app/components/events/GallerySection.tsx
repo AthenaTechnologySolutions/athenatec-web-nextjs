@@ -14,12 +14,14 @@ type Props = {
   title?: string;
   data: GalleryItem[];
   bg?: "light" | "white";
+  asH1?: boolean;
 };
 
 export default function GallerySection({
   title = "Event Gallery",
   data,
   bg = "light",
+  asH1 = false,
 }: Props) {
   return (
     <section className={`gallery-section gallery-section--${bg}`}>
@@ -29,7 +31,11 @@ export default function GallerySection({
       <div className="gallery-section__container">
          <div className="gallery-section__heading">
        
-          <h2 className="gallery-section__title">{title}</h2>
+          {asH1 ? (
+            <h1 className="gallery-section__title">{title}</h1>
+          ) : (
+            <h2 className="gallery-section__title">{title}</h2>
+          )}
           <p className="gallery-section__subtitle">
             Explore moments from our global events and conferences
           </p>

@@ -32,7 +32,7 @@ export async function generateMetadata({
   }
 
   return buildMetadata({
-    title: `${data.title} | Athenatec`,
+    title: data.seoTitle || `${data.title} | Athenatec`,
     description: truncate(data.intro, 155),
     path: `/siemens-opcenter-mes/${industry}`,
     image: data.heroImage,

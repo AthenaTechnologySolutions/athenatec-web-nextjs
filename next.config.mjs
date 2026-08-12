@@ -76,12 +76,22 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/mes-implementation",
+        source: "/solutions/enterprise-erp",
+        destination: "/solutions/oracle-cloud",
+        permanent: true,
+      },
+      {
+        source: "/enterprise-erp",
+        destination: "/solutions/oracle-cloud",
+        permanent: true,
+      },
+      {
+        source: "/eyelet",
         destination: "/mes-implementation-services",
         permanent: true,
       },
       {
-        source: "/manufacturing-execution-system-implementation",
+        source: "/eyelit",
         destination: "/mes-implementation-services",
         permanent: true,
       },

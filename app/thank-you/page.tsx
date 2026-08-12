@@ -4,7 +4,8 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Thank You | Athenatec",
-  description: "Your submission has been received by Athenatec.",
+  description:
+    "Thank you for reaching out. Your submission has been received and our team will get back to you shortly.",
   path: "/thank-you",
   noIndex: true,
 });

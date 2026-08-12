@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return buildMetadata({
-    title: `${leader.name} - ${leader.designation} | Athenatec Leadership`,
+    title: `${leader.name} | Athenatec Leadership`,
     description: truncate(leader.shortBio, 155),
     path: `/leadership/${leader.slug}`,
     image: leader.profileImage,

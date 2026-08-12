@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./privacy-policy.scss";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | Athena Technology Solutions – Data Protection & Security",
+export const metadata: Metadata = buildMetadata({
+  title: "Privacy Policy | Athena Technology Solutions",
   description:
-    "Athena Technology Solutions' Privacy Policy explains how we collect, use, and protect your personal data across our MES, PLM, ERP, CMMS, and Smart Factory Analytics services. ISO 9001 certified data security.",
+    "Learn how Athena Technology Solutions collects, uses, and protects personal data across our MES, PLM, ERP, and smart factory solutions.",
+  path: "/privacy-policy",
   keywords: [
     "Athena Technology Solutions privacy policy",
     "manufacturing software data privacy",
@@ -15,25 +17,8 @@ export const metadata: Metadata = {
     "smart factory data policy",
     "ISO 9001 data security",
     "enterprise manufacturing solutions privacy",
-    "athenatec.com privacy",
-    "GDPR manufacturing software",
   ],
-  alternates: {
-    canonical: "https://www.athenatec.com/privacy-policy/",
-  },
-  openGraph: {
-    title: "Privacy Policy | Athena Technology Solutions",
-    description:
-      "Learn how Athena Technology Solutions collects, uses, and safeguards your information across our Industry 4.0 manufacturing software and services.",
-    url: "https://www.athenatec.com/privacy-policy/",
-    siteName: "Athena Technology Solutions",
-    type: "website",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+});
 
 export default function PrivacyPolicyPage() {
   return (

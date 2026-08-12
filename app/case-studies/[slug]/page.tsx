@@ -31,9 +31,10 @@ export async function generateMetadata({
   }
 
   const descriptionSource = study.summary.join(" ");
+  const metaTitle = `${study.title} | Athenatec Case Study`;
 
   return buildMetadata({
-    title: study.fullTitle,
+    title: metaTitle,
     description: truncate(stripHtml(descriptionSource), 160),
     path: `/case-studies/${study.slug}`,
     image: study.image,

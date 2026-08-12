@@ -52,12 +52,21 @@ export default function HeroSlide({ slide, isActive }: HeroSlideProps) {
               : "translate-y-8 opacity-0"
           }`}
         >
-          <h1 
-            className="mb-3 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
-            style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5), 0 4px 20px rgba(0,0,0,0.3)" }}
-          >
-            {slide.title}
-          </h1>
+          {slide.id === "1" ? (
+            <h1 
+              className="mb-3 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
+              style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5), 0 4px 20px rgba(0,0,0,0.3)" }}
+            >
+              {slide.title}
+            </h1>
+          ) : (
+            <h2 
+              className="mb-3 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
+              style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5), 0 4px 20px rgba(0,0,0,0.3)" }}
+            >
+              {slide.title}
+            </h2>
+          )}
 
           {/* ✅ Purple accent underline — matches AVEVA style */}
           {/* <div className="mb-5 h-[3px] w-20 rounded-full bg-[#1c4584]" /> */}

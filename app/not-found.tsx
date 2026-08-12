@@ -2,15 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Home, Search, Wrench } from "lucide-react";
 import styles from "./not-found.module.scss";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "404: Page Escaped | Athenatec",
-  description: "The page you were looking for has rolled off the line.",
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
+export const metadata: Metadata = buildMetadata({
+  title: "404: Page Not Found | Athenatec",
+  description: "The page you were looking for could not be found or has been moved.",
+  noIndex: true,
+});
 
 export default function NotFound() {
   return (

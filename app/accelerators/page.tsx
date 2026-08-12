@@ -11,7 +11,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title:
-    "Manufacturing Accelerators | Extend Your MES Investment | Athena",
+    "Manufacturing Accelerators | Extend Your MES Investment | Athenatec",
   description:
     "Purpose-built manufacturing accelerators that extend MES capabilities—engineering change management, quality validation, and Shop Floor mobility—without replacing your existing MES.",
   path: "/accelerators",

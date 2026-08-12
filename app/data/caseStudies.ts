@@ -73,8 +73,7 @@ export const caseStudies: CaseStudy[] = [
       ]
     }
   ],
-    image:
-      "/assets/images/form-img.webp",
+    image: "/assets/images/case-study.webp",
   },
 {
   slug: "nevro-paperless-mes",

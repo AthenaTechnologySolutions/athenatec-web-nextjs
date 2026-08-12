@@ -38,8 +38,13 @@ export async function generateMetadata({
     });
   }
 
+  const metaTitle =
+    article.title.length > 45
+      ? "Shop Floor Mobility Accelerator | Athenatec"
+      : `${article.title} | Athenatec Articles`;
+
   return buildMetadata({
-    title: `${article.title} | Athena Technology Articles`,
+    title: metaTitle,
     description: article.excerpt,
     path: `/articles/${article.slug}`,
     image: article.heroImage,

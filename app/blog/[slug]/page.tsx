@@ -45,6 +45,15 @@ function getPostTitle(post: WPPost) {
   return stripHtml(post.title.rendered);
 }
 
+function sanitizePostHtml(html: string): string {
+  if (!html) return "";
+  return html
+    .replace(/http:\/\/www\.athenatec\.com/g, "https://www.athenatec.com")
+    .replace(/http:\/\/athenatec\.com/g, "https://www.athenatec.com")
+    .replace(/<h1(\s|>)/gi, "<h2$1")
+    .replace(/<\/h1>/gi, "</h2>");
+}
+
 function slugifyHeading(input: string) {
   return stripHtml(input)
     .toLowerCase()
@@ -121,7 +130,7 @@ export async function generateMetadata({
 
   if (!post) {
     return buildMetadata({
-      title: "Blog",
+      title: "Blog | Athenatec",
       description: "Insights, updates, and articles from Athenatec.",
       path: `/blog/${slug}`,
       type: "article",
@@ -129,8 +138,12 @@ export async function generateMetadata({
     });
   }
 
+  const rawTitle = getPostTitle(post);
+  const metaTitle =
+    rawTitle.length > 40 ? `${truncate(rawTitle, 40)} | Athenatec` : `${rawTitle} | Athenatec`;
+
   return buildMetadata({
-    title: getPostTitle(post),
+    title: metaTitle,
     description: getPostDescription(post),
     path: `/blog/${slug}`,
     image: getPostImage(post) ?? undefined,
@@ -148,7 +161,8 @@ export default async function PostPage({ params }: PageProps) {
 
   const allPosts = await getAllPosts();
   const title = getPostTitle(post);
-  const contentHtml = post.content?.rendered || "";
+  const rawContentHtml = post.content?.rendered || "";
+  const contentHtml = sanitizePostHtml(rawContentHtml);
   const currentIndex = allPosts.findIndex((p) => p.slug === slug);
   const nextPost = allPosts[currentIndex - 1];
   const prevPost = allPosts[currentIndex + 1];
