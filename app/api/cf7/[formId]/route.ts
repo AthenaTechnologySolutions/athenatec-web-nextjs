@@ -15,6 +15,7 @@ const ALLOWED_CF7_FORM_IDS = new Set([
   "231536",
   "232878",
   "233209",
+  "233708",
 ]);
 
 const ACCEPTANCE_VALIDATION_FORM_IDS = new Set(["232878"]);

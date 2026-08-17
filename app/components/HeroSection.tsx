@@ -48,11 +48,10 @@ export default function HeroSection({
       />
 
       <div
-        className={`relative z-20 flex w-full max-w-5xl flex-col gap-4 overflow-hidden px-5 py-16 sm:px-10 lg:px-16 ${
-          isLeft
+        className={`relative z-20 flex w-full max-w-5xl flex-col gap-4 overflow-hidden px-5 py-16 sm:px-10 lg:px-16 ${isLeft
             ? "items-center text-center sm:ml-0 sm:items-start sm:text-left lg:ml-12"
             : "items-center text-center sm:items-start sm:text-left"
-        }`}
+          }`}
       >
         <h1 className="max-w-full text-balance break-words text-3xl font-bold leading-tight sm:text-5xl md:text-6xl">
           {title}

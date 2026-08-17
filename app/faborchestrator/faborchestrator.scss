@@ -1,0 +1,306 @@
+/* FabOrchestrator.AI Stylesheet - Modern High-Tech Industrial AI Theme */
+
+.fab-page-light {
+  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #ffffff;
+  color: #0f172a;
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.6;
+
+  /* Theme Tokens */
+  --fab-athena-blue: #1c4584;
+  --fab-athena-hover: #153566;
+  --fab-cyan: #0284c7;
+  --fab-cyan-light: #e0f2fe;
+  --fab-cyan-dark: #0369a1;
+  --fab-emerald: #059669;
+  --fab-amber: #d97706;
+  --fab-navy: #1c4584;
+  --fab-dark: #0f172a;
+}
+
+/* Animations */
+@keyframes pulseLightGlow {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(2, 132, 199, 0.15), inset 0 0 15px rgba(2, 132, 199, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 50px rgba(2, 132, 199, 0.35), inset 0 0 25px rgba(2, 132, 199, 0.2);
+  }
+}
+
+@keyframes radarSpinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pingSlow {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes streamFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Light Glass & Card Utility Classes */
+.light-panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 25px -2px rgba(0, 0, 0, 0.05);
+}
+
+.light-panel-interactive {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    border-color: #38bdf8;
+    transform: translateY(-4px);
+    box-shadow: 0 20px 35px -10px rgba(2, 132, 199, 0.15);
+  }
+}
+
+.text-gradient-athena {
+  background: linear-gradient(135deg, #1c4584 0%, #0284c7 60%, #2563eb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-cyan {
+  background: linear-gradient(135deg, #38bdf8 0%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.badge-tag-light {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.1rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: #e0f2fe;
+  border: 1px solid #bae6fd;
+  color: #0369a1;
+}
+
+/* Dark Terminal Sandbox */
+.dark-terminal-box {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 1.25rem;
+  color: #f8fafc;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  overflow: hidden;
+}
+
+.terminal-header {
+  background: #1e293b;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-b: 1px solid #334155;
+}
+
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+
+  &.red { background: #ef4444; }
+  &.yellow { background: #f59e0b; }
+  &.green { background: #10b981; }
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background: #38bdf8;
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: blinkCursor 1s infinite;
+}
+
+/* Hero Section */
+.hero-hero-bg {
+  position: relative;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.94) 0%, rgba(15, 23, 42, 0.88) 60%, rgba(28, 69, 132, 0.9) 100%),
+              url('/assets/images/abstract-futuristic-machine-architecture-render-scaled.webp') center/cover no-repeat;
+}
+
+.hero-control-box {
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+/* Product Introduction Diagram */
+.diagram-core-light {
+  background: linear-gradient(135deg, #1c4584 0%, #0f172a 100%);
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 40px rgba(2, 132, 199, 0.25);
+  animation: pulseLightGlow 4s infinite ease-in-out;
+}
+
+.diagram-orbit-card-light {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+
+  &:hover, &.active {
+    transform: scale(1.04);
+    border-color: #0284c7;
+    box-shadow: 0 12px 30px rgba(2, 132, 199, 0.18);
+    background: #f0f9ff;
+  }
+}
+
+/* Quadrant & Capability Tabs */
+.quadrant-tab-light {
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  &:hover {
+    border-color: #0284c7;
+    background: #f0f9ff;
+  }
+
+  &.active {
+    border-color: #1c4584;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    box-shadow: 0 8px 25px rgba(28, 69, 132, 0.15);
+  }
+}
+
+/* ROI Calculator & Range Sliders */
+.range-slider-light {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: #cbd5e1;
+  outline: none;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #1c4584;
+    cursor: pointer;
+    box-shadow: 0 0 14px rgba(28, 69, 132, 0.5);
+    transition: transform 0.15s ease;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.preset-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    border-color: #1c4584;
+    color: #1c4584;
+    background: #f0f9ff;
+  }
+
+  &.preset-active {
+    border-color: #1c4584;
+    background: #1c4584;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(28, 69, 132, 0.25);
+  }
+}
+
+/* Proof Wheel & Radar Disc */
+.radar-disc-light {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 1px border #cbd5e1;
+  background: radial-gradient(circle, #f8fafc 0%, #f1f5f9 100%);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, rgba(2, 132, 199, 0.15), transparent 60deg);
+    animation: radarSpinSlow 8s linear infinite;
+  }
+}
+
+/* Sticky Navigation Bar */
+.sticky-nav-bar {
+  position: sticky;
+  top: 72px;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .hero-hero-bg {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .radar-disc-light {
+    width: 260px;
+    height: 260px;
+  }
+  .sticky-nav-bar {
+    top: 60px;
+  }
+}

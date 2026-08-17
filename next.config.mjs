@@ -45,6 +45,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/faborchestrator-ai",
+        destination: "/faborchestrator/",
+        permanent: true,
+      },
+      {
         source: "/:path*",
         has: [
           {
