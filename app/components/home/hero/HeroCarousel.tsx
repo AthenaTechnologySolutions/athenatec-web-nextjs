@@ -45,6 +45,7 @@ const slides: HeroSlide[] = [
   //   link: "/webinars",
   //   image: "/assets/images/shopfloor.webp",
   // },
+  
   // Siemens Realize LIVE 2026 is over; keep the old slide commented for reuse.
   // {
   //   id: "siemens-realize-live-2026",
