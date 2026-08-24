@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import Image from "next/image";
@@ -50,40 +52,41 @@ const socials = [
     ariaLabel: "Follow us on Facebook",
     href: "https://www.facebook.com/athenatecindia/",
     icon: <Facebook size={16} strokeWidth={1.8} />,
-    style:
-      "hover:bg-[#17ace4] hover:border-[#17ace4] hover:shadow-[0_0_18px_rgba(23,172,228,0.5)]",
+    hoverBg: "#1877F2",
+    hoverShadow: "rgba(24,119,242,0.55)",
   },
   {
     label: "Instagram",
     ariaLabel: "Follow us on Instagram",
     href: "https://www.instagram.com/athenatecofficial?igsh=MTN6eXFwYmdhNjdvNw==",
     icon: <Instagram size={16} strokeWidth={1.8} />,
-    style:
-      "hover:bg-[#17ace4] hover:border-[#17ace4] hover:shadow-[0_0_18px_rgba(23,172,228,0.5)]",
+    hoverBg: "linear-gradient(45deg, #FCB045, #FD1D1D, #E1306C, #833AB4)",
+    hoverShadow: "rgba(225,48,108,0.55)",
+    isGradient: true,
   },
   {
     label: "X",
     ariaLabel: "Follow us on X",
     href: "https://x.com/athena_tec",
     icon: <XIcon />,
-    style:
-      "hover:bg-[#15356e] hover:border-[#15356e] hover:shadow-[0_0_18px_rgba(21,53,110,0.5)]",
+    hoverBg: "#000000",
+    hoverShadow: "rgba(255,255,255,0.2)",
   },
   {
     label: "LinkedIn",
     ariaLabel: "Follow us on LinkedIn",
     href: "https://www.linkedin.com/company/athena-technology-solutions/",
     icon: <Linkedin size={16} strokeWidth={1.8} />,
-    style:
-      "hover:bg-[#17ace4] hover:border-[#17ace4] hover:shadow-[0_0_18px_rgba(23,172,228,0.5)]",
+    hoverBg: "#0A66C2",
+    hoverShadow: "rgba(10,102,194,0.55)",
   },
   {
     label: "YouTube",
     ariaLabel: "Follow us on YouTube",
-    href: "https://www.youtube.com/@AthenaTechnologySolutions/",
+    href: "https://www.youtube.com/@Athena-tec",
     icon: <Youtube size={16} strokeWidth={1.8} />,
-    style:
-      "hover:bg-[#1c4584] hover:border-[#1c4584] hover:shadow-[0_0_18px_rgba(28,69,132,0.5)]",
+    hoverBg: "#FF0000",
+    hoverShadow: "rgba(255,0,0,0.55)",
   },
 ];
 
@@ -122,33 +125,62 @@ export default function Footer() {
               </Link>
             </div>
 
-            <div className="flex flex-wrap gap-2.5">
+            <div className="flex flex-wrap gap-3">
               {socials.map((s) => (
                 <Link
                   key={s.label}
                   href={s.href}
                   aria-label={s.ariaLabel}
-                  className={[
-                    "group relative flex h-9 w-9 items-center justify-center",
-                    "rounded-xl border border-white/15 bg-white/5",
-                    "text-[#c7d4f1]",
-                    "transition-all duration-300 ease-out",
-                    "hover:-translate-y-1 hover:scale-110 hover:text-white",
-                    s.style,
-                  ].join(" ")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-[#c7d4f1] transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-1.5 hover:scale-110 hover:text-white"
+                  style={
+                    {
+                      "--hover-bg": s.hoverBg,
+                      "--hover-shadow": s.hoverShadow,
+                    } as React.CSSProperties
+                  }
+                  onMouseEnter={(e) => {
+                    const el = e.currentTarget;
+                    if ("isGradient" in s && s.isGradient) {
+                      el.style.backgroundImage = s.hoverBg;
+                      el.style.borderColor = "transparent";
+                    } else {
+                      el.style.backgroundColor = s.hoverBg;
+                      el.style.borderColor = s.hoverBg;
+                    }
+                    el.style.boxShadow = `0 4px 20px ${s.hoverShadow}, 0 0 30px ${s.hoverShadow}`;
+                  }}
+                  onMouseLeave={(e) => {
+                    const el = e.currentTarget;
+                    el.style.backgroundColor = "";
+                    el.style.backgroundImage = "";
+                    el.style.borderColor = "";
+                    el.style.boxShadow = "";
+                  }}
                 >
-                  {s.icon}
+                  <span className="transition-transform duration-300 group-hover:scale-110">
+                    {s.icon}
+                  </span>
 
                   <span
                     className={[
-                      "pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2",
-                      "whitespace-nowrap rounded-md bg-[#15356e] px-2.5 py-1",
+                      "pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2",
+                      "whitespace-nowrap rounded-md px-2.5 py-1",
                       "text-[11px] font-medium text-white shadow-lg",
-                      "opacity-0 transition-opacity duration-200 group-hover:opacity-100",
+                      "opacity-0 scale-90 transition-all duration-200 group-hover:opacity-100 group-hover:scale-100",
                     ].join(" ")}
+                    style={
+                      "isGradient" in s && s.isGradient
+                        ? { backgroundImage: s.hoverBg }
+                        : { backgroundColor: s.hoverBg }
+                    }
                   >
                     {s.label}
-                    <span className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-[#15356e]" />
+                    <span
+                      className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent"
+                      style={{ borderTopColor: "isGradient" in s && s.isGradient ? "#E1306C" : s.hoverBg }}
+                    />
                   </span>
                 </Link>
               ))}

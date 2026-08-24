@@ -312,7 +312,7 @@ export function buildOrganizationSchema() {
       "https://www.instagram.com/athenatecofficial",
       "https://x.com/athena_tec",
       "https://www.linkedin.com/company/athena-technology-solutions/",
-      "https://www.youtube.com/@AthenaTechnologySolutions/",
+      "https://www.youtube.com/@Athena-tec",
     ],
   };
 }
