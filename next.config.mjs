@@ -69,6 +69,11 @@ const nextConfig = {
         source: "/solutions/mes/siemens-opcenter-mes-mes",
         destination: "/siemens-opcenter-mes",
         permanent: true,
+      }, 
+        {
+        source: "/agentic-ai-architect-training-program/",
+        destination: "/",
+        permanent: true,
       },
       {
         source: "/mes/critical-manufacturing",

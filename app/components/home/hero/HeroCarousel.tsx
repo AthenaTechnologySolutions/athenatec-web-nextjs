@@ -108,14 +108,14 @@ const slides: HeroSlide[] = [
     image: "/assets/images/twinzobanners.webp",
   },
 
-{
-  id: "agentic-ai-training",
-  title: "Agentic AI Architect Training Program",
-  desc: "Master AI Agents, LLMs, RAG, Multi-Agent Systems, and Enterprise AI Architecture through a 15 week industry-focused training program.",
-  cta: "Register Now",
-  link: "/agentic-ai-architect-training-program/",
-  image: "/assets/images/ai1.webp",
-},
+// {
+//   id: "agentic-ai-training",
+//   title: "Agentic AI Architect Training Program",
+//   desc: "Master AI Agents, LLMs, RAG, Multi-Agent Systems, and Enterprise AI Architecture through a 15 week industry-focused training program.",
+//   cta: "Register Now",
+//   link: "/agentic-ai-architect-training-program/",
+//   image: "/assets/images/ai1.webp",
+// },
     {
     title: "Purpose Built Manufacturing Accelerators",
     desc: "Extend your MES beyond standard functionality with purpose-built accelerators that improve engineering change management, Shopfloor productivity, quality validation, and operational efficiency—without replacing your existing MES.",
