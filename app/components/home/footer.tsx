@@ -35,7 +35,7 @@ const resources = [
   { name: "Case Studies", href: "/case-studies" },
   { name: "Webinars", href: "/webinars" },
   { name: "Event Gallery", href: "/gallery" },
-  { name: "Agentic AI Training", href: "/agentic-ai-architect-training-program" },
+  // { name: "Agentic AI Training", href: "/agentic-ai-architect-training-program" },
   { name: "Careers", href: "/careers" },
   { name: "Contact Us", href: "/contact" },
 ];
