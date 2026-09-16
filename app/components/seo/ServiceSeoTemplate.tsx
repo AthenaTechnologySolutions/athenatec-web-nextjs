@@ -52,7 +52,7 @@ export type ServiceSeoTemplateData = {
 export default function ServiceSeoTemplate({ data }: { data: ServiceSeoTemplateData }) {
   return (
     <main>
-      <section className="relative flex min-h-[72vh] items-center overflow-hidden pt-[72px] text-white">
+      <section className="relative flex min-h-[72vh] items-center overflow-hidden text-white" style={{ paddingTop: "calc(72px + var(--banner-h, 0px))" }}>
         <Image
           src={data.hero.image}
           alt={data.hero.title}
