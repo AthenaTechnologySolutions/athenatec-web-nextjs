@@ -68,7 +68,7 @@ export default function HeroSection() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-[#f5fafd]" style={{ paddingTop: "calc(72px + var(--banner-h, 0px))" }}>
+      <section className="relative overflow-hidden bg-[#f5fafd] pt-[72px]">
         <div className="relative">
           <HeroCarousel />
         </div>

@@ -66,14 +66,6 @@ const slides: HeroSlide[] = [
   //   imageClassName: "hero-carousel__image--webinar",
   // },
   {
-    id: "semicon-india-2026",
-    title: "SEMICON India 2026",
-    desc: "Meet us at the Critical Manufacturing ASMPT Booth #1346 between the 17th – 19th of September at Yashobhoomi, Delhi.",
-    cta: "Know more",
-    link: "https://www.criticalmanufacturing.com/campaign/semicon-india-2026/",
-    image: "/assets/images/semi-2026.png",
-  },
-  {
     title: "Digitizing the Manufacturing Enterprise Since 2011",
     desc: "Leveraging deep expertise to enhance partnerships and drive long-term manufacturing success.",
     cta: "Discuss your manufacturing roadmap",
@@ -383,24 +375,6 @@ function renderSlideTitle(slide: HeroSlide) {
 
 function renderSlideDescription(slide: HeroSlide) {
   if (!slide.desc) return null;
-
-  if (slide.id === "semicon-india-2026" && slide.desc.includes("Yashobhoomi, Delhi")) {
-    const parts = slide.desc.split("Yashobhoomi, Delhi");
-    return (
-      <p className="hero-carousel__desc mb-5 sm:mb-7">
-        {parts[0]}
-        <a
-          href="https://www.criticalmanufacturing.com/campaign/semicon-india-2026/"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ textDecoration: "underline", fontWeight: 600 }}
-        >
-          Yashobhoomi, Delhi
-        </a>
-        {parts[1]}
-      </p>
-    );
-  }
 
   return <p className="hero-carousel__desc mb-5 sm:mb-7">{slide.desc}</p>;
 }
