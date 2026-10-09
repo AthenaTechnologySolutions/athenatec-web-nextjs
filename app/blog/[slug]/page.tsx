@@ -241,6 +241,7 @@ export default async function PostPage({ params }: PageProps) {
               sizes="100vw"
               className="post-hero__img"
               priority
+              unoptimized
             />
             <div className="post-hero__overlay" />
           </div>

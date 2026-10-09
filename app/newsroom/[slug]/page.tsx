@@ -148,7 +148,7 @@ export async function generateMetadata({
     slug === "athena-announces-the-opening-of-its-new-office-in-portugal" &&
     (!heroImage || heroImage.includes("demo6"))
   ) {
-    heroImage = "/assets/images/Expanding-to-Portugal_-Porto-Panorama.png";
+    heroImage = "/assets/images/Porto-River-Digital-Panorama.webp";
   }
 
   return buildMetadata({
@@ -182,7 +182,7 @@ export default async function NewsroomPostPage({ params }: PageProps) {
     slug === "athena-announces-the-opening-of-its-new-office-in-portugal" &&
     (!heroImage || heroImage.includes("demo6"))
   ) {
-    heroImage = "/assets/images/Expanding-to-Portugal_-Porto-Panorama.png";
+    heroImage = "/assets/images/portugal-announcement.png";
   }
 
   const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
@@ -229,6 +229,7 @@ export default async function NewsroomPostPage({ params }: PageProps) {
               sizes="100vw"
               className="post-hero__img"
               priority
+              unoptimized
             />
             <div className="post-hero__overlay" />
           </div>
