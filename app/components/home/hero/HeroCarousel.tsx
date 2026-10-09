@@ -66,6 +66,15 @@ const slides: HeroSlide[] = [
   //   imageClassName: "hero-carousel__image--webinar",
   // },
   {
+    id: "portugal-expansion",
+    title: "Athena Announces European Expansion into Portugal",
+    desc: "Expanding our European presence with a strategic hub in Maia, Portugal to accelerate smart manufacturing, Critical Manufacturing MES, Siemens Opcenter, and Industry 4.0 innovation.",
+    cta: "More details",
+    link: "/newsroom/athena-announces-the-opening-of-its-new-office-in-portugal",
+    image: "/assets/images/portugal-announcement.png",
+    imageClassName: "hero-carousel__image--portugal",
+  },
+  {
     title: "Digitizing the Manufacturing Enterprise Since 2011",
     desc: "Leveraging deep expertise to enhance partnerships and drive long-term manufacturing success.",
     cta: "Discuss your manufacturing roadmap",
@@ -260,7 +269,9 @@ export default function HeroCarousel() {
   return (
     <>
       <section
-        className="hero-carousel relative flex min-h-[51vh] w-full items-center overflow-hidden sm:min-h-[57vh] md:min-h-[62vh] lg:min-h-[57vh]"
+        className={`hero-carousel relative flex min-h-[51vh] w-full items-center overflow-hidden sm:min-h-[57vh] md:min-h-[62vh] lg:min-h-[57vh] ${
+          activeSlide.id === "portugal-expansion" ? "hero-carousel--portugal" : ""
+        }`}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -282,7 +293,8 @@ export default function HeroCarousel() {
                 loading={i === 0 ? "eager" : "lazy"}
                 fetchPriority={i === 0 ? "high" : "low"}
                 sizes="100vw"
-                quality={75}
+                quality={95}
+                unoptimized={slide.id === "portugal-expansion"}
                 className={`hero-carousel__image ${slide.imageClassName ?? ""} object-cover transition-opacity duration-700 ease-in-out ${
                   i === index ? "opacity-100 z-10" : "opacity-0 z-0"
                 }`}
@@ -362,6 +374,17 @@ export default function HeroCarousel() {
 }
 
 function renderSlideTitle(slide: HeroSlide) {
+  if (slide.id === "portugal-expansion") {
+    return (
+      <span className="flex flex-col items-start">
+        <span className="hero-carousel__portugal-badge mb-2">
+          Strategic European Hub &bull; Maia, Portugal
+        </span>
+        <span>{slide.title}</span>
+      </span>
+    );
+  }
+
   return slide.title.split(/(Faborchestrator)/gi).map((part, i) =>
     part.toLowerCase() === "faborchestrator" ? (
       <span key={i} style={{ color: "#f5c718" }}>

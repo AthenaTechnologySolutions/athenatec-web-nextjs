@@ -324,8 +324,9 @@ export default function PrivacyPolicyPage() {
         <section className="legal-section" aria-labelledby="section-international">
           <h2 id="section-international">10. International Data Transfers</h2>
           <p>
-            Athena operates from offices in the <strong>United States</strong>{" "}
-            and internationally, including <strong>India (Chennai and Bengaluru)</strong>.
+            Athena operates from offices in the <strong>United States</strong>,{" "}
+            <strong>Portugal</strong>, and internationally, including{" "}
+            <strong>India (Chennai and Bengaluru)</strong>.
             Data collected from users in different regions may be transferred to
             and processed in countries that may not have equivalent data
             protection laws to your home jurisdiction. When transferring data

@@ -142,10 +142,36 @@ export default function ContactPage() {
             <h2 className="text-3xl font-bold text-gray-900">Other Locations</h2>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition flex flex-col border-t-4 border-[#17ace4]">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-semibold text-lg text-gray-900">European Office (Portugal):</h3>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#17ace4] bg-[#17ace4]/10 px-2.5 py-1 rounded-full">
+                  Europe Hub
+                </span>
+              </div>
+              <p className="font-medium text-gray-900 mb-1 text-sm">
+                Athena Technology, Unipessoal, Lda.
+              </p>
+              <p className="text-gray-600 leading-relaxed text-sm">
+                Rua Engenheiro Frederico Ulrich, 2650, lote 8 <br />
+                (Edifício Evolutis, piso 3) <br />
+                4470-605 Moreira, Maia, Portugal <br />
+                <span className="text-xs text-gray-400 mt-1 inline-block">NIPC n.º 519497619</span>
+              </p>
+              <a
+                href="https://maps.google.com/?q=Edif%C3%ADcio+Evolutis,+Rua+Engenheiro+Frederico+Ulrich+2650,+4470-605+Moreira,+Maia,+Portugal"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-auto pt-6 inline-flex items-center gap-2 text-[#1c4584] font-medium hover:text-[#17ace4] transition"
+              >
+                → View Map
+              </a>
+            </div>
+
             <div className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition flex flex-col">
               <h3 className="font-semibold text-lg text-gray-900 mb-4">Opcenter Excellence Center:</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 leading-relaxed text-sm">
                 Edifice, 2nd Floor, F186 BEL Layout, Bharath Nagar, 1st Main Road,
                 East West College Road, Anjana Nagar, Magadi Road, Bangalore 560091
               </p>
@@ -157,7 +183,7 @@ export default function ContactPage() {
 
             <div className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition flex flex-col">
               <h3 className="font-semibold text-lg text-gray-900 mb-4">CMF Excellence Center:</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 leading-relaxed text-sm">
                 SR Towers, 186, 2nd Cross St, Lakshmi Nagar, Shanthi Nagar,
                 Chromepet, Chennai, Tamil Nadu 600044
               </p>
@@ -169,7 +195,7 @@ export default function ContactPage() {
 
             <div className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition flex flex-col">
               <h3 className="font-semibold text-lg text-gray-900 mb-4">PLM/ERP Center:</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 leading-relaxed text-sm">
                 3rd Floor, Plot No.21, Kored Infra Building, Kakatiya Hills,
                 Guttala Begumpet, Kavuri Hills, Madhapur, Hyderabad, Telangana 500081
               </p>
@@ -181,7 +207,7 @@ export default function ContactPage() {
 
             <div className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition flex flex-col">
               <h3 className="font-semibold text-lg text-gray-900 mb-4">MES Training Center:</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 leading-relaxed text-sm">
                 18, Old Karur Road, Killa Chinthamani, Tiruchirappalli, Tamil Nadu 620002
               </p>
               <a href="https://maps.app.goo.gl/NmdtB37YDYvuVVgi9" target="_blank"
