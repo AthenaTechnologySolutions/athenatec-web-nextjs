@@ -22,6 +22,7 @@ function formatDate(date: string) {
   });
 }
 const EXCLUDED_BLOG_SLUGS = new Set([
+  "athena-announces-the-opening-of-its-new-office-in-portugal",
   "athena-featured-in-digital-it-news-national-it-service-provider-day",
   "athena-and-tech-mahindra-announce-partnership",
   "authorised-reseller-partnership-with-twinzo",

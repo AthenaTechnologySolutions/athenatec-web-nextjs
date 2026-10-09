@@ -55,6 +55,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: "/blog/athena-announces-the-opening-of-its-new-office-in-portugal",
+        destination: "/newsroom/athena-announces-the-opening-of-its-new-office-in-portugal/",
+        permanent: true,
+      },
+      {
         source: "/:path*",
         has: [
           {
