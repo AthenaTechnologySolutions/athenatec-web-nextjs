@@ -120,7 +120,11 @@ function buildBlogFaqs(title: string) {
 export async function generateStaticParams() {
   const posts = await getAllPosts();
   return posts
-    .filter((post) => post.slug !== "athena-announces-the-opening-of-its-new-office-in-portugal")
+    .filter(
+      (post) =>
+        post.slug !== "athena-opens-its-new-office-in-portugal" &&
+        post.slug !== "athena-announces-the-opening-of-its-new-office-in-portugal",
+    )
     .map((post) => ({ slug: post.slug }));
 }
 
@@ -128,11 +132,14 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  if (slug === "athena-announces-the-opening-of-its-new-office-in-portugal") {
+  if (
+    slug === "athena-opens-its-new-office-in-portugal" ||
+    slug === "athena-announces-the-opening-of-its-new-office-in-portugal"
+  ) {
     return buildMetadata({
       title: "Newsroom | Athenatec",
-      description: "Athena announces the opening of its new office in Portugal.",
-      path: "/newsroom/athena-announces-the-opening-of-its-new-office-in-portugal",
+      description: "Athena Opens Its New Office in Porto, Portugal",
+      path: "/newsroom/athena-opens-its-new-office-in-portugal/",
       noIndex: true,
     });
   }
@@ -166,8 +173,11 @@ export async function generateMetadata({
 
 export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
-  if (slug === "athena-announces-the-opening-of-its-new-office-in-portugal") {
-    redirect("/newsroom/athena-announces-the-opening-of-its-new-office-in-portugal");
+  if (
+    slug === "athena-opens-its-new-office-in-portugal" ||
+    slug === "athena-announces-the-opening-of-its-new-office-in-portugal"
+  ) {
+    redirect("/newsroom/athena-opens-its-new-office-in-portugal");
   }
 
   const post = await getPost(slug);

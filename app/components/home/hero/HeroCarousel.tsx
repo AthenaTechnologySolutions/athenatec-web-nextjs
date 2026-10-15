@@ -37,40 +37,12 @@ function getTitleVariant(title: string) {
 }
 
 const slides: HeroSlide[] = [
-  // {
-  //   id: "shop-floor-mobility-webinar",
-  //   title: "Athena introduces its Shop Floor Mobility Accelerator",
-  //   desc: "Watch our webinar to unlock real dollar and productivity benefits!",
-  //   cta: "Download",
-  //   link: "/webinars",
-  //   image: "/assets/images/shopfloor.webp",
-  // },
-  
-  // Siemens Realize LIVE 2026 is over; keep the old slide commented for reuse.
-  // {
-  //   id: "siemens-realize-live-2026",
-  //   title: "Siemens Realize LIVE 2026",
-  //   desc: "Infinite possibilities. Intelligent tomorrow. Join Athenatec at Realize LIVE 2026 to discover how Athena Opcenter, Opcenter Accelerators, and FabOrchestrator.AI drive innovation, efficiency, and intelligence across manufacturing enterprises.",
-  //   cta: "Book a meeting",
-  //   link: "/siemens-realize-live-2026-faborchestrator-ai",
-  //   image: "/assets/images/siemens-realize-live2026.webp",
-  //   imageClassName: "hero-carousel__image--siemens-live",
-  // },
-
-  // {
-  //   title:
-  //     "Building the Future of Manufacturing: Achieving Scalability and Compliance with Siemens and Athena.",
-  //   cta: "Download Now",
-  //   link: "/webinars/building-future-manufacturing-siemens-athena",
-  //   image: "/assets/images/webiner-banner.webp",
-  //   imageClassName: "hero-carousel__image--webinar",
-  // },
   {
     id: "portugal-expansion",
-    title: "Athena Announces European Expansion into Portugal",
-    desc: "Expanding our European presence with a strategic hub in Maia, Portugal to accelerate smart manufacturing, Critical Manufacturing MES, Siemens Opcenter, and Industry 4.0 innovation.",
-    cta: "More details",
-    link: "/newsroom/athena-announces-the-opening-of-its-new-office-in-portugal",
+    title: "Athena Opens Its New Office in Porto, Portugal",
+    desc: "Expanding our presence in Porto, Portugal, to strengthen customer relationships and support manufacturing innovation across Europe.",
+    cta: "Explore Our Portugal Office",
+    link: "/newsroom/athena-opens-its-new-office-in-portugal",
     image: "/assets/images/portugal-announcement.png",
     imageClassName: "hero-carousel__image--portugal",
   },

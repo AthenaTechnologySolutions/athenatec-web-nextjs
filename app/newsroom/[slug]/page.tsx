@@ -10,7 +10,7 @@ import {
   truncate,
 } from "@/lib/seo";
 import StructuredData from "@/app/components/seo/StructuredData";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import "@/app/blog/[slug]/post.scss";
@@ -28,7 +28,7 @@ type TocItem = {
 };
 
 const NEWSROOM_SLUGS = [
-  "athena-announces-the-opening-of-its-new-office-in-portugal",
+  "athena-opens-its-new-office-in-portugal",
   "athena-featured-in-digital-it-news-national-it-service-provider-day",
   "athena-launches-faborchestrator-agentic-ai-for-manufacturing",
   "athena-and-tech-mahindra-announce-partnership",
@@ -145,7 +145,8 @@ export async function generateMetadata({
 
   let heroImage = getPostImage(post);
   if (
-    slug === "athena-announces-the-opening-of-its-new-office-in-portugal" &&
+    (slug === "athena-opens-its-new-office-in-portugal" ||
+      slug === "athena-announces-the-opening-of-its-new-office-in-portugal") &&
     (!heroImage || heroImage.includes("demo6"))
   ) {
     heroImage = "/assets/images/Porto-River-Digital-Panorama.webp";
@@ -164,6 +165,9 @@ export async function generateMetadata({
 
 export default async function NewsroomPostPage({ params }: PageProps) {
   const { slug } = await params;
+  if (slug === "athena-announces-the-opening-of-its-new-office-in-portugal") {
+    redirect("/newsroom/athena-opens-its-new-office-in-portugal");
+  }
   const post = await getPost(slug);
 
   if (!post) notFound();
@@ -179,7 +183,8 @@ export default async function NewsroomPostPage({ params }: PageProps) {
 
   let heroImage = getPostImage(post);
   if (
-    slug === "athena-announces-the-opening-of-its-new-office-in-portugal" &&
+    (slug === "athena-opens-its-new-office-in-portugal" ||
+      slug === "athena-announces-the-opening-of-its-new-office-in-portugal") &&
     (!heroImage || heroImage.includes("demo6"))
   ) {
     heroImage = "/assets/images/portugal-announcement.png";
@@ -250,7 +255,7 @@ export default async function NewsroomPostPage({ params }: PageProps) {
           </Link>
 
           <div className="post-hero__meta">
-            <span className="post-hero__badge">ANNOUNCEMENT</span>
+            <span className="post-hero__badge text-[rgba(255,255,255,0.65)]">ANNOUNCEMENT</span>
             <time className="post-hero__date">{formattedDate}</time>
             <span className="post-hero__dot">.</span>
             <span className="post-hero__read">{readTime} min read</span>
@@ -316,6 +321,7 @@ export default async function NewsroomPostPage({ params }: PageProps) {
           <div className="related-grid">
             {relatedPosts.map((item, index) => {
               const img =
+                item.slug === "athena-opens-its-new-office-in-portugal" ||
                 item.slug === "athena-announces-the-opening-of-its-new-office-in-portugal"
                   ? "/assets/images/portugal-announcement.png"
                   : getPostImage(item);

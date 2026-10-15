@@ -8,7 +8,7 @@ import { getAllPosts, getPostImage, type WPPost } from "@/lib/wordpress";
 export const revalidate = 300;
 
 const NEWSROOM_SLUGS = [
-  "athena-announces-the-opening-of-its-new-office-in-portugal",
+  "athena-opens-its-new-office-in-portugal",
   "athena-featured-in-digital-it-news-national-it-service-provider-day",
   "athena-launches-faborchestrator-agentic-ai-for-manufacturing",
   "athena-and-tech-mahindra-announce-partnership",
@@ -52,6 +52,7 @@ export default async function NewsRoom() {
   const remainingPosts = posts.slice(1);
 
   const featuredImage =
+    featuredPost?.slug === "athena-opens-its-new-office-in-portugal" ||
     featuredPost?.slug === "athena-announces-the-opening-of-its-new-office-in-portugal"
       ? "/assets/images/portugal-announcement.png"
       : featuredPost

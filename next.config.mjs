@@ -50,13 +50,28 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: "/athena-opens-its-new-office-in-portugal",
+        destination: "/newsroom/athena-opens-its-new-office-in-portugal/",
+        permanent: true,
+      },
+      {
+        source: "/blog/athena-opens-its-new-office-in-portugal",
+        destination: "/newsroom/athena-opens-its-new-office-in-portugal/",
+        permanent: true,
+      },
+      {
         source: "/athena-announces-the-opening-of-its-new-office-in-portugal",
-        destination: "/newsroom/athena-announces-the-opening-of-its-new-office-in-portugal/",
+        destination: "/newsroom/athena-opens-its-new-office-in-portugal/",
         permanent: true,
       },
       {
         source: "/blog/athena-announces-the-opening-of-its-new-office-in-portugal",
-        destination: "/newsroom/athena-announces-the-opening-of-its-new-office-in-portugal/",
+        destination: "/newsroom/athena-opens-its-new-office-in-portugal/",
+        permanent: true,
+      },
+      {
+        source: "/newsroom/athena-announces-the-opening-of-its-new-office-in-portugal",
+        destination: "/newsroom/athena-opens-its-new-office-in-portugal/",
         permanent: true,
       },
       {
