@@ -190,11 +190,17 @@ export default async function NewsroomPostPage({ params }: PageProps) {
     heroImage = "/assets/images/portugal-announcement.png";
   }
 
-  const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const isPortugalPost =
+    slug === "athena-opens-its-new-office-in-portugal" ||
+    slug === "athena-announces-the-opening-of-its-new-office-in-portugal";
+
+  const formattedDate = isPortugalPost
+    ? "October 19, 2026 at 3:00 PM"
+    : new Date(post.date).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
 
   const readTime = Math.ceil(
     contentHtml.replace(/<[^>]+>/g, "").split(" ").length / 200,
@@ -255,7 +261,7 @@ export default async function NewsroomPostPage({ params }: PageProps) {
           </Link>
 
           <div className="post-hero__meta">
-            <span className="post-hero__badge text-[rgba(255,255,255,0.65)]">ANNOUNCEMENT</span>
+            <span className="post-hero__badge text-[rgba(255,255,255,0.65)]">Grand Opening</span>
             <time className="post-hero__date">{formattedDate}</time>
             <span className="post-hero__dot">.</span>
             <span className="post-hero__read">{readTime} min read</span>
@@ -326,11 +332,16 @@ export default async function NewsroomPostPage({ params }: PageProps) {
                   ? "/assets/images/portugal-announcement.png"
                   : getPostImage(item);
               const itemTitle = getPostTitle(item);
-              const itemDate = new Date(item.date).toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              });
+              const isPortugalRelated =
+                item.slug === "athena-opens-its-new-office-in-portugal" ||
+                item.slug === "athena-announces-the-opening-of-its-new-office-in-portugal";
+              const itemDate = isPortugalRelated
+                ? "October 19, 2026 at 3:00 PM"
+                : new Date(item.date).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  });
 
               return (
                 <Link

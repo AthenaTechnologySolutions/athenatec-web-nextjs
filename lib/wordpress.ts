@@ -72,12 +72,26 @@ export function getPostImage(post: WPPost): string | null {
   );
 }
 
+function patchPost(post: WPPost): WPPost {
+  if (
+    post.slug === "athena-opens-its-new-office-in-portugal" ||
+    post.slug === "athena-announces-the-opening-of-its-new-office-in-portugal"
+  ) {
+    return {
+      ...post,
+      date: "2026-10-19T15:00:00",
+      modified: "2026-10-19T15:00:00",
+    };
+  }
+  return post;
+}
+
 export async function getPosts(): Promise<WPPost[]> {
   const posts = await fetchWp<WPPost[]>(
     "/posts?_embed&orderby=date&order=desc",
     60,
   );
-  return posts ?? [];
+  return (posts ?? []).map(patchPost);
 }
 
 export async function getPost(slug: string): Promise<WPPost | null> {
@@ -86,7 +100,7 @@ export async function getPost(slug: string): Promise<WPPost | null> {
     `/posts?slug=${encodedSlug}&_embed`,
     300,
   );
-  return data?.length ? data[0] : null;
+  return data?.length ? patchPost(data[0]) : null;
 }
 
 export async function getAllPosts(): Promise<WPPost[]> {
@@ -94,5 +108,5 @@ export async function getAllPosts(): Promise<WPPost[]> {
     "/posts?_embed&per_page=100&orderby=date&order=desc",
     300,
   );
-  return posts ?? [];
+  return (posts ?? []).map(patchPost);
 }

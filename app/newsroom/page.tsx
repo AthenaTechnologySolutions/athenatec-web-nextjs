@@ -139,11 +139,14 @@ export default async function NewsRoom() {
                     </div>
 
                     <p className="text-xs font-semibold tracking-wider text-gray-500 uppercase mb-3">
-                      {new Date(featuredPost.date).toLocaleDateString("en-US", {
-                        month: "long",
-                        day: "numeric",
-                        year: "numeric",
-                      })}
+                      {featuredPost.slug === "athena-opens-its-new-office-in-portugal" ||
+                      featuredPost.slug === "athena-announces-the-opening-of-its-new-office-in-portugal"
+                        ? "October 19, 2026 at 3:00 PM"
+                        : new Date(featuredPost.date).toLocaleDateString("en-US", {
+                            month: "long",
+                            day: "numeric",
+                            year: "numeric",
+                          })}
                     </p>
 
                     <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 font-serif mb-4 leading-snug">
@@ -213,11 +216,14 @@ export default async function NewsRoom() {
 
                           <div className="mt-auto pt-4 flex items-center justify-between border-t border-gray-100 text-xs">
                             <span className="text-gray-400">
-                              {new Date(post.date).toLocaleDateString("en-US", {
-                                month: "short",
-                                day: "numeric",
-                                year: "numeric",
-                              })}
+                              {post.slug === "athena-opens-its-new-office-in-portugal" ||
+                              post.slug === "athena-announces-the-opening-of-its-new-office-in-portugal"
+                                ? "October 19, 2026 at 3:00 PM"
+                                : new Date(post.date).toLocaleDateString("en-US", {
+                                    month: "short",
+                                    day: "numeric",
+                                    year: "numeric",
+                                  })}
                             </span>
 
                             <Link

@@ -349,9 +349,6 @@ function renderSlideTitle(slide: HeroSlide) {
   if (slide.id === "portugal-expansion") {
     return (
       <span className="flex flex-col items-start">
-        <span className="hero-carousel__portugal-badge mb-2">
-          Strategic European Hub &bull; Maia, Portugal
-        </span>
         <span>{slide.title}</span>
       </span>
     );
