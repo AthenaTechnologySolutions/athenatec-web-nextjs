@@ -50,6 +50,16 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: "/athena-expands-europe-first-office-portugal",
+        destination: "/newsroom/athena-expands-europe-first-office-portugal/",
+        permanent: true,
+      },
+      {
+        source: "/blog/athena-expands-europe-first-office-portugal",
+        destination: "/newsroom/athena-expands-europe-first-office-portugal/",
+        permanent: true,
+      },
+      {
         source: "/athena-opens-its-new-office-in-portugal",
         destination: "/newsroom/athena-opens-its-new-office-in-portugal/",
         permanent: true,

@@ -8,6 +8,7 @@ import { getAllPosts, getPostImage, type WPPost } from "@/lib/wordpress";
 export const revalidate = 300;
 
 const NEWSROOM_SLUGS = [
+  "athena-expands-europe-first-office-portugal",
   "athena-opens-its-new-office-in-portugal",
   "athena-featured-in-digital-it-news-national-it-service-provider-day",
   "athena-launches-faborchestrator-agentic-ai-for-manufacturing",
@@ -16,6 +17,22 @@ const NEWSROOM_SLUGS = [
 ];
 
 const NEWSROOM_SLUG_SET = new Set(NEWSROOM_SLUGS);
+
+function getPostBadge(slug: string): string {
+  if (slug === "athena-expands-europe-first-office-portugal") {
+    return "Press Release";
+  }
+  if (
+    slug === "athena-opens-its-new-office-in-portugal" ||
+    slug === "athena-announces-the-opening-of-its-new-office-in-portugal"
+  ) {
+    return "Grand Opening";
+  }
+  if (slug.includes("partnership") || slug.includes("reseller")) {
+    return "Partnership";
+  }
+  return "Announcement";
+}
 
 const NEWSROOM_HERO_IMAGE = "/assets/images/newsroom-banner.webp";
 
@@ -56,7 +73,7 @@ export default async function NewsRoom() {
     featuredPost?.slug === "athena-announces-the-opening-of-its-new-office-in-portugal"
       ? "/assets/images/portugal-announcement.png"
       : featuredPost
-        ? getPostImage(featuredPost)
+        ? getPostImage(featuredPost) || "/assets/images/portugal-announcement.png"
         : null;
 
   const collectionSchema = {
@@ -132,9 +149,12 @@ export default async function NewsRoom() {
                   </div>
 
                   <div className="p-8 md:p-12 lg:p-14 flex flex-col justify-center">
-                    <div className="mb-4">
+                    <div className="mb-4 flex items-center gap-2">
                       <span className="inline-block bg-[#1c4584] text-white text-[11px] font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
                         FEATURED
+                      </span>
+                      <span className="inline-block bg-blue-50 text-[#1c4584] text-[11px] font-semibold px-3 py-1 rounded-full uppercase tracking-wider border border-blue-200">
+                        {getPostBadge(featuredPost.slug)}
                       </span>
                     </div>
 
@@ -178,7 +198,11 @@ export default async function NewsRoom() {
               {remainingPosts.length > 0 && (
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                   {remainingPosts.map((post: WPPost) => {
-                    const imageSrc = getPostImage(post);
+                    const imageSrc =
+                      post.slug === "athena-opens-its-new-office-in-portugal" ||
+                      post.slug === "athena-announces-the-opening-of-its-new-office-in-portugal"
+                        ? "/assets/images/portugal-announcement.png"
+                        : getPostImage(post);
 
                     return (
                       <article
@@ -203,6 +227,12 @@ export default async function NewsRoom() {
                         </div>
 
                         <div className="p-6 flex flex-col flex-1">
+                          <div className="mb-2">
+                            <span className="inline-block bg-slate-100 text-slate-700 text-[10px] font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                              {getPostBadge(post.slug)}
+                            </span>
+                          </div>
+
                           <h2 className="text-xl font-semibold mb-3 text-gray-900 line-clamp-2">
                             {stripHtml(post.title.rendered)}
                           </h2>

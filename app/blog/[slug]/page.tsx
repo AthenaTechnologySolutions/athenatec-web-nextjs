@@ -122,6 +122,7 @@ export async function generateStaticParams() {
   return posts
     .filter(
       (post) =>
+        post.slug !== "athena-expands-europe-first-office-portugal" &&
         post.slug !== "athena-opens-its-new-office-in-portugal" &&
         post.slug !== "athena-announces-the-opening-of-its-new-office-in-portugal",
     )
@@ -132,6 +133,16 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
+  if (slug === "athena-expands-europe-first-office-portugal") {
+    return buildMetadata({
+      title: "Newsroom | Athenatec",
+      description:
+        "Athena Technology Solutions Expands into Europe and Opens Its First European Office in Portugal",
+      path: "/newsroom/athena-expands-europe-first-office-portugal/",
+      noIndex: true,
+    });
+  }
+
   if (
     slug === "athena-opens-its-new-office-in-portugal" ||
     slug === "athena-announces-the-opening-of-its-new-office-in-portugal"
@@ -173,6 +184,10 @@ export async function generateMetadata({
 
 export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
+  if (slug === "athena-expands-europe-first-office-portugal") {
+    redirect("/newsroom/athena-expands-europe-first-office-portugal");
+  }
+
   if (
     slug === "athena-opens-its-new-office-in-portugal" ||
     slug === "athena-announces-the-opening-of-its-new-office-in-portugal"

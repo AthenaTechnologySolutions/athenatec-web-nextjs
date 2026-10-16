@@ -28,6 +28,7 @@ type TocItem = {
 };
 
 const NEWSROOM_SLUGS = [
+  "athena-expands-europe-first-office-portugal",
   "athena-opens-its-new-office-in-portugal",
   "athena-featured-in-digital-it-news-national-it-service-provider-day",
   "athena-launches-faborchestrator-agentic-ai-for-manufacturing",
@@ -36,6 +37,22 @@ const NEWSROOM_SLUGS = [
 ];
 
 const NEWSROOM_SLUG_SET = new Set(NEWSROOM_SLUGS);
+
+function getPostBadge(slug: string): string {
+  if (slug === "athena-expands-europe-first-office-portugal") {
+    return "Press Release";
+  }
+  if (
+    slug === "athena-opens-its-new-office-in-portugal" ||
+    slug === "athena-announces-the-opening-of-its-new-office-in-portugal"
+  ) {
+    return "Grand Opening";
+  }
+  if (slug.includes("partnership") || slug.includes("reseller")) {
+    return "Partnership";
+  }
+  return "Announcement";
+}
 
 function getPostDescription(post: WPPost) {
   const excerpt = stripHtml(post.excerpt?.rendered || "");
@@ -188,6 +205,8 @@ export default async function NewsroomPostPage({ params }: PageProps) {
     (!heroImage || heroImage.includes("demo6"))
   ) {
     heroImage = "/assets/images/portugal-announcement.png";
+  } else if (slug === "athena-expands-europe-first-office-portugal" && !heroImage) {
+    heroImage = "/assets/images/portugal-announcement.png";
   }
 
   const isPortugalPost =
@@ -261,7 +280,9 @@ export default async function NewsroomPostPage({ params }: PageProps) {
           </Link>
 
           <div className="post-hero__meta">
-            <span className="post-hero__badge text-[rgba(255,255,255,0.65)]">Grand Opening</span>
+            <span className="post-hero__badge text-[rgba(255,255,255,0.65)]">
+              {getPostBadge(slug)}
+            </span>
             <time className="post-hero__date">{formattedDate}</time>
             <span className="post-hero__dot">.</span>
             <span className="post-hero__read">{readTime} min read</span>
