@@ -73,6 +73,16 @@ function sanitizePostHtml(html: string, slug?: string): string {
     .replace(/<\/h1>/gi, "</h2>");
 
   if (slug === "athena-expands-europe-first-office-portugal") {
+    // 0. Format the post intro title/header with proper bold styling and spacing
+    const titlePattern =
+      /<p[^>]*>[\s\S]*?Athena Technology Solutions Expands into Europe and Opens Its First European Office in Portugal[\s\S]*?<\/p>/i;
+    if (titlePattern.test(sanitized)) {
+      sanitized = sanitized.replace(
+        titlePattern,
+        `<p class="post-content-title"><strong>Athena Technology Solutions Expands into Europe and Opens Its First European Office in Portugal</strong></p>`,
+      );
+    }
+
     // 1. Insert YouTube video embed right after the subtitle paragraph
     const subtitlePattern =
       /(The U\.S\. MES implementation specialist brings[\s\S]*?<\/p>)/i;
