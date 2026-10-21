@@ -75,7 +75,8 @@ export function getPostImage(post: WPPost): string | null {
 function patchPost(post: WPPost): WPPost {
   if (
     post.slug === "athena-opens-its-new-office-in-portugal" ||
-    post.slug === "athena-announces-the-opening-of-its-new-office-in-portugal"
+    post.slug === "athena-announces-the-opening-of-its-new-office-in-portugal" ||
+    post.slug === "athena-expands-europe-first-office-portugal"
   ) {
     return {
       ...post,
@@ -100,7 +101,11 @@ export async function getPost(slug: string): Promise<WPPost | null> {
     `/posts?slug=${encodedSlug}&_embed`,
     300,
   );
-  return data?.length ? patchPost(data[0]) : null;
+  if (data?.length) return patchPost(data[0]);
+
+  const allPosts = await getAllPosts();
+  const matched = allPosts.find((p) => p.slug === slug);
+  return matched ? patchPost(matched) : null;
 }
 
 export async function getAllPosts(): Promise<WPPost[]> {

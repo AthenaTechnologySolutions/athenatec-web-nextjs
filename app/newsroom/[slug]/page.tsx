@@ -64,13 +64,53 @@ function getPostTitle(post: WPPost) {
   return stripHtml(post.title.rendered);
 }
 
-function sanitizePostHtml(html: string): string {
+function sanitizePostHtml(html: string, slug?: string): string {
   if (!html) return "";
-  return html
+  let sanitized = html
     .replace(/http:\/\/www\.athenatec\.com/g, "https://www.athenatec.com")
     .replace(/http:\/\/athenatec\.com/g, "https://www.athenatec.com")
     .replace(/<h1(\s|>)/gi, "<h2$1")
     .replace(/<\/h1>/gi, "</h2>");
+
+  if (slug === "athena-expands-europe-first-office-portugal") {
+    // 1. Insert YouTube video embed right after the subtitle paragraph
+    const subtitlePattern =
+      /(The U\.S\. MES implementation specialist brings[\s\S]*?<\/p>)/i;
+    const videoEmbed = `\n<div class="post-video-wrapper">\n  <iframe src="https://www.youtube-nocookie.com/embed/GVbHZwqj1Do" title="Athena is now in Porto!" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>\n</div>\n`;
+
+    if (!sanitized.includes("GVbHZwqj1Do") && subtitlePattern.test(sanitized)) {
+      sanitized = sanitized.replace(subtitlePattern, `$1${videoEmbed}`);
+    }
+
+    // 2. Normalize and fix the "About Athena Technology Solutions" section
+    const aboutPattern =
+      /<p[^>]*>\s*<span[^>]*>\s*<b>\s*About Athena Technology Solutions\s*<\/b>\s*<\/span>\s*<\/p>[\s\S]*?(?:<h6[^>]*>[\s\S]*?<\/h6>|<p[^>]*>[\s\S]*?<\/p>)(?=\s*(?:<p><!-- \/wp:paragraph -->|<\/div>|$))/i;
+
+    const cleanAboutBlock = `\n<h2>About Athena Technology Solutions</h2>\n<p>Founded in 2011 and headquartered in Fremont, California, Athena Technology Solutions integrates, implements and supports Manufacturing Execution Systems (MES) for high-tech and discrete manufacturers in the semiconductor, electronics, medical device, solar and battery industries. Athena works on a hybrid delivery model with teams in the U.S. and India, now joined by Porto, Portugal, and employs about 200 people. Its portfolio also includes PLM, ERP and Managed Services, and FabOrchestrator.AI™, an agentic AI orchestration layer for manufacturing operations. More information at <a href="https://www.athenatec.com/" target="_blank" rel="noopener noreferrer">www.athenatec.com</a>.</p>\n`;
+
+    if (aboutPattern.test(sanitized)) {
+      sanitized = sanitized.replace(aboutPattern, cleanAboutBlock);
+    }
+
+    // 3. Strip conflicting inline font-family, font-size, line-height, letter-spacing, and color overrides
+    sanitized = sanitized
+      .replace(/<\/?font[^>]*>/gi, "")
+      .replace(/style="([^"]*)"/gi, (match, styleContent) => {
+        const cleaned = styleContent
+          .split(";")
+          .map((s: string) => s.trim())
+          .filter(
+            (s: string) =>
+              !/^(font-family|font-size|line-height|letter-spacing|margin|margin-bottom|margin-top|margin-left|margin-right|color|text-align):/i.test(
+                s,
+              ),
+          )
+          .join("; ");
+        return cleaned ? `style="${cleaned}"` : "";
+      });
+  }
+
+  return sanitized;
 }
 
 function slugifyHeading(input: string) {
@@ -192,7 +232,7 @@ export default async function NewsroomPostPage({ params }: PageProps) {
   const allPosts = await getAllPosts();
   const title = getPostTitle(post);
   const rawContentHtml = post.content?.rendered || "";
-  const contentHtml = sanitizePostHtml(rawContentHtml);
+  const contentHtml = sanitizePostHtml(rawContentHtml, slug);
 
   const relatedPosts = allPosts.filter(
     (p) => NEWSROOM_SLUG_SET.has(p.slug) && p.slug !== post.slug,
