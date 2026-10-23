@@ -108,8 +108,8 @@ const slides: HeroSlide[] = [
     title: "Athena Unveils Faborchestrator",
     desc: "The manufacturing industry's first Agentic AI Foundry designed to eliminate operational inefficiencies and unlock unprecedented productivity. Stop chasing data across disconnected systems and start commanding your factory with intelligent AI agents that work alongside your team.",
     cta: "FabOrchestrator AI",
-    link: "https://243988893.hs-sites-na2.com/faborchestratorai",
-    image: "/assets/images/FabOrchestratorAI.webp",
+    link: "/faborchestrator",
+    image: "/assets/images/fabaiii.webp",
   },
 
   // {

@@ -387,7 +387,7 @@ export default function SiemensBanClient() {
               </p>
               <a
                 className="siemens-ban-button siemens-ban-button--primary"
-                href="https://243988893.hs-sites-na2.com/faborchestratorai"
+                href="/faborchestrator"
               >
                 Explore FabOrchestrator.AI
               </a>

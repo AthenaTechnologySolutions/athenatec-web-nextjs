@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import HeroSection from "../components/HeroSection";
 import ScrollReveal from "../components/ScrollReveal";
@@ -47,6 +48,7 @@ import {
   Award,
   Users,
   Rocket,
+  FileBarChart,
   Eye,
   MessageSquare,
   GitBranch,
@@ -279,9 +281,9 @@ function FabOrchestratorDemoForm({ onSuccess, darkBg = false }: DemoFormProps) {
         >
           <option value="FabOrchestrator.AI Platform Overview">FabOrchestrator.AI Platform Overview</option>
           <option value="FabInsight Operational Analytics">FabInsight Operational Analytics</option>
-          <option value="AI Support & Troubleshooting">AI Support & Troubleshooting</option>
           <option value="Modeling Agent Impact Analysis">Modeling Agent Impact Analysis</option>
           <option value="Programming Agent MES Logic">Programming Agent MES Logic</option>
+          <option value="AI Support & Troubleshooting">AI Support & Troubleshooting</option>
         </select>
       </div>
 
@@ -353,10 +355,10 @@ const manufacturingSources = [
 ];
 
 const capabilityPreviews = [
-  { id: "fabinsight", name: "FabInsight", sub: "Operational Intelligence", icon: Eye },
-  { id: "support", name: "AI Support Agent", sub: "Contextual Manufacturing Assistance", icon: MessageSquare },
+  { id: "fabinsight", name: "FabInsight", sub: "Operational Intelligence", icon: FileBarChart },
   { id: "modeling", name: "Modeling Agent", sub: "Impact Analysis", icon: GitBranch },
   { id: "programming", name: "Programming Agent", sub: "Intelligent Development", icon: Code2 },
+  { id: "support", name: "AI Support Agent", sub: "Contextual Manufacturing Assistance", icon: MessageSquare },
 ];
 
 interface CapabilityDetail {
@@ -376,57 +378,57 @@ const capabilityDetails: CapabilityDetail[] = [
   {
     id: "fabinsight",
     name: "FabInsight",
-    tagline: "Turn manufacturing data into actionable intelligence.",
+    tagline: "From Data to Insight. From Insight to Prediction.",
     description:
-      "Get contextual operational insights from manufacturing data and information to support faster, better informed decisions.",
-    icon: Eye,
+      "Bring data from MES, quality, equipment and other manufacturing systems into one view. Generate reports and dashboards, uncover trends and apply predictive analysis. Schedule reports, receive snapshot updates and set alerts so decision makers know what needs attention and when.",
+    icon: FileBarChart,
     flow: [
-      { step: "1", title: "Data Collected", desc: "Manufacturing data from MES, equipment, and production systems" },
-      { step: "2", title: "AI Analysis", desc: "Contextual pattern recognition across operational data" },
-      { step: "3", title: "Insight Generated", desc: "Actionable intelligence for faster decision-making" },
-      { step: "4", title: "Decision Supported", desc: "Teams act on data-driven recommendations" },
-    ],
-  },
-  {
-    id: "support",
-    name: "AI Support Agent",
-    tagline: "Resolve manufacturing issues with contextual AI assistance.",
-    description:
-      "Help teams investigate problems, find relevant information, and identify potential resolution paths faster.",
-    icon: MessageSquare,
-    flow: [
-      { step: "1", title: "Issue Reported", desc: "Manufacturing problem identified on the shop floor" },
-      { step: "2", title: "Context Retrieved", desc: "AI retrieves relevant historical data and documentation" },
-      { step: "3", title: "Analysis Performed", desc: "Potential root causes and resolution paths identified" },
-      { step: "4", title: "Resolution Accelerated", desc: "Team resolves the issue faster with AI guidance" },
+      { step: "1", title: "Unify Data Streams", desc: "Bring data from MES, quality, equipment, and manufacturing systems into one view" },
+      { step: "2", title: "Reports & Dashboards", desc: "Generate immediate reports, custom dashboards, and uncover operational trends" },
+      { step: "3", title: "Predictive Analysis", desc: "Apply predictive modeling to forecast anomalies, yield risks, and tool behavior" },
+      { step: "4", title: "Alerts & Actions", desc: "Schedule reports, receive snapshot updates, and set proactive alerts for decision makers" },
     ],
   },
   {
     id: "modeling",
     name: "Modeling Agent",
-    tagline: "Understand the impact before you make the change.",
+    tagline: "Model. Analyze Impact. Validate. Load.",
     description:
-      "Analyze engineering and process changes across the manufacturing environment to identify potential downstream impacts.",
+      "Model and validate master data before it reaches the MES. See how proposed changes impact product lines and manufacturing processes, resolve issues, and load with confidence.",
     icon: GitBranch,
     flow: [
-      { step: "1", title: "ECO Enters System", desc: "Engineering change order submitted for review" },
-      { step: "2", title: "AI Analyzes Dependencies", desc: "Cross-references BOMs, routings, workflows, and rules" },
-      { step: "3", title: "Impacts Identified", desc: "Affected workflows, processes, and downstream systems mapped" },
-      { step: "4", title: "Impact View Produced", desc: "Comprehensive impact report for engineering decision" },
+      { step: "1", title: "Model Master Data", desc: "Model and configure master data changes before they reach the MES" },
+      { step: "2", title: "Analyze Impact", desc: "See how proposed changes impact product lines and manufacturing processes" },
+      { step: "3", title: "Validate & Resolve", desc: "Identify dependencies, resolve issues, and verify business rules" },
+      { step: "4", title: "Load with Confidence", desc: "Deploy validated master data safely and predictably into production MES" },
     ],
   },
   {
     id: "programming",
     name: "Programming Agent",
-    tagline: "Accelerate manufacturing solution development.",
+    tagline: "From Requirements to MES Ready Modules.",
     description:
-      "Use AI-assisted intelligence to accelerate application logic, workflow development, and MES solution engineering.",
+      "Provide the requirements. Turn them into functional specifications, generate the UI, and refine it as needed. Then build the logical modules on the MES framework, from scripts and backend code to queries and master data objects, and get the complete outputs ready for export.",
     icon: Code2,
     flow: [
-      { step: "1", title: "Development Need", desc: "New workflow, rule, or application logic required" },
-      { step: "2", title: "AI-Assisted Design", desc: "Context-aware code and workflow generation" },
-      { step: "3", title: "Validation Support", desc: "Automated testing and logic verification" },
-      { step: "4", title: "Faster Delivery", desc: "Reduced development effort, higher productivity" },
+      { step: "1", title: "Input Requirements", desc: "Provide requirements and turn them into functional specifications" },
+      { step: "2", title: "Generate & Refine UI", desc: "Generate user interfaces and refine layouts as needed for shop-floor tasks" },
+      { step: "3", title: "Build MES Modules", desc: "Build logical modules on the MES framework, from scripts and backend code to queries" },
+      { step: "4", title: "Ready for Export", desc: "Assemble complete master data objects and outputs ready for immediate export" },
+    ],
+  },
+  {
+    id: "support",
+    name: "AI Support Agent",
+    tagline: "From Ticket to Action. Intelligent Support.",
+    description:
+      "Connect directly to your support system. Understand the issue, learn from previous root cause analysis and recommend the next action. When no answer exists, route the ticket to the right group and trigger the right alerts. Every new ticket adds to the knowledge.",
+    icon: MessageSquare,
+    flow: [
+      { step: "1", title: "Connect Support System", desc: "Connect directly to your support system to capture tickets in real time" },
+      { step: "2", title: "Understand Root Cause", desc: "Understand the issue and learn from previous root cause analysis" },
+      { step: "3", title: "Action & Smart Routing", desc: "Recommend next actions or route the ticket to the right group with alerts" },
+      { step: "4", title: "Continuous Learning", desc: "Every new ticket resolution adds to the cumulative operational knowledge base" },
     ],
   },
 ];
@@ -683,7 +685,7 @@ export default function FabOrchestratorClient() {
       <HeroSection
         title="Manufacturing Intelligence, Orchestrated by AI."
         description="FabOrchestrator.AI brings AI-powered intelligence into the heart of manufacturing—combining Athena's deep MES expertise, manufacturing context, proven accelerators, and AI agents to help teams make faster decisions, solve problems faster, and deliver more with less effort."
-        image="/assets/images/fab-ai.webp"
+        image="/assets/images/fabaiii.webp"
         align="left"
         buttonText="Explore FabOrchestrator.AI"
         buttonLink="#product-intro"
@@ -709,46 +711,15 @@ export default function FabOrchestratorClient() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.15}>
-            <div className="product-diagram">
-              <div className="diagram-sources">
-                {manufacturingSources.map((s) => (
-                  <div className="source-pill" key={s.label}>
-                    <s.icon />
-                    {s.label}
-                  </div>
-                ))}
-              </div>
-             
-              <div className="diagram-center">
-                <div className="center-hub">
-                  <div className="hub-glow" />
-                  <Brain />
-                  FABORCHESTRATOR.AI
-                </div>
-              </div>
-
-              <div className="diagram-capabilities">
-                {capabilityPreviews.map((cap) => (
-                  <div
-                    className="capability-preview-card"
-                    key={cap.id}
-                    onClick={() => {
-                      const idx = capabilityDetails.findIndex((c) => c.id === cap.id);
-                      if (idx !== -1) {
-                        scrollTo(idx);
-                      }
-                      const el = document.getElementById("capabilities");
-                      if (el) el.scrollIntoView({ behavior: "smooth" });
-                    }}
-                  >
-                    <div className="cap-icon">
-                      <cap.icon />
-                    </div>
-                    <h4>{cap.name}</h4>
-                    <p>{cap.sub}</p>
-                  </div>
-                ))}
-              </div>
+            <div className="product-diagram-graphic">
+              <Image
+                src="/assets/images/FabOrchestrator-part.webp"
+                alt="FabOrchestrator.AI - FabInsight, Modeling Agent, Programming Agent, AI-Support Agent"
+                width={871}
+                height={475}
+                className="product-diagram-img"
+                priority
+              />
             </div>
           </ScrollReveal>
         </div>
