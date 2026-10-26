@@ -683,9 +683,9 @@ export default function FabOrchestratorClient() {
     <div className="fab-page-light min-h-screen bg-white text-slate-900">
 
       <HeroSection
-        title="Manufacturing Intelligence, Orchestrated by AI."
+        title="Manufacturing Intelligence Orchestrated by AI."
         description="FabOrchestrator.AI brings AI-powered intelligence into the heart of manufacturing—combining Athena's deep MES expertise, manufacturing context, proven accelerators, and AI agents to help teams make faster decisions, solve problems faster, and deliver more with less effort."
-        image="/assets/images/fabaiii.webp"
+        image="/assets/images/Faborchestratorai-banner.webp"
         align="left"
         buttonText="Explore FabOrchestrator.AI"
         buttonLink="#product-intro"

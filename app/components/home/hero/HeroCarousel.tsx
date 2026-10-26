@@ -109,7 +109,7 @@ const slides: HeroSlide[] = [
     desc: "The manufacturing industry's first Agentic AI Foundry designed to eliminate operational inefficiencies and unlock unprecedented productivity. Stop chasing data across disconnected systems and start commanding your factory with intelligent AI agents that work alongside your team.",
     cta: "FabOrchestrator AI",
     link: "/faborchestrator",
-    image: "/assets/images/fabaiii.webp",
+    image: "/assets/images/Faborchestratorai-banner.webp",
   },
 
   // {
