@@ -69,6 +69,7 @@ function sanitizePostHtml(html: string, slug?: string): string {
   let sanitized = html
     .replace(/http:\/\/www\.athenatec\.com/g, "https://www.athenatec.com")
     .replace(/http:\/\/athenatec\.com/g, "https://www.athenatec.com")
+    .replace(/https?:\/\/cms\.athenatec\.com\/wp-content\//g, "/wp-content/")
     .replace(/<h1(\s|>)/gi, "<h2$1")
     .replace(/<\/h1>/gi, "</h2>");
 

@@ -27,6 +27,7 @@ const nextConfig = {
       { protocol: "https", hostname: "athenatec.com" },
       { protocol: "https", hostname: "www.athenatec.com" },
       { protocol: "https", hostname: "cms.athenatec.com" },
+      { protocol: "http", hostname: "cms.athenatec.com" },
     ],
   },
   experimental: {
@@ -40,7 +41,16 @@ const nextConfig = {
     pagesBufferLength: 2,
   },
 
-   transpilePackages: [],
+  transpilePackages: [],
+
+  async rewrites() {
+    return [
+      {
+        source: "/wp-content/:path*",
+        destination: "http://cms.athenatec.com/wp-content/:path*",
+      },
+    ];
+  },
 
   async redirects() {
     return [

@@ -3,6 +3,7 @@ import "server-only";
 import { DEFAULT_WP_SITE_URL, getWpApiUrl } from "@/lib/wp";
 
 const LEGACY_WP_SITE_URL = "https://cms.athenatec.com";
+const HTTP_WP_SITE_URL = "http://cms.athenatec.com";
 
 function normalizeWpSiteUrl(url: string) {
   return url.replace(/\/wp-json(?:\/.*)?$/i, "").replace(/\/+$/, "");
@@ -13,8 +14,9 @@ function getWpSiteUrls() {
     process.env.WP_SITE_URL,
     process.env.NEXT_PUBLIC_WP_SITE_URL,
     process.env.NEXT_PUBLIC_WP_API_URL,
-    DEFAULT_WP_SITE_URL,
     LEGACY_WP_SITE_URL,
+    HTTP_WP_SITE_URL,
+    DEFAULT_WP_SITE_URL,
   ]
     .filter((value): value is string => Boolean(value))
     .map(normalizeWpSiteUrl);

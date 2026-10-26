@@ -1,4 +1,5 @@
 import { fetchWpJson } from "@/lib/wp-server";
+import postsCacheRaw from "@/lib/posts-cache.json";
 
 const WP_MEDIA_FALLBACK_HOST = "cms.athenatec.com";
 const WP_MEDIA_BLOCKED_HOSTS = new Set(["athenatec.com", "www.athenatec.com"]);
@@ -47,11 +48,12 @@ function normalizeWpMediaUrl(url?: string | null): string | null {
     const parsed = new URL(url);
 
     if (
-      WP_MEDIA_BLOCKED_HOSTS.has(parsed.hostname) &&
+      (WP_MEDIA_BLOCKED_HOSTS.has(parsed.hostname) ||
+        parsed.hostname === WP_MEDIA_FALLBACK_HOST) &&
       parsed.pathname.startsWith("/wp-content/")
     ) {
       parsed.hostname = WP_MEDIA_FALLBACK_HOST;
-      parsed.protocol = "https:";
+      parsed.protocol = "http:";
       parsed.port = "";
     }
 
@@ -87,12 +89,17 @@ function patchPost(post: WPPost): WPPost {
   return post;
 }
 
+const fallbackPosts: WPPost[] = (postsCacheRaw as WPPost[]).map(patchPost);
+
 export async function getPosts(): Promise<WPPost[]> {
   const posts = await fetchWp<WPPost[]>(
     "/posts?_embed&orderby=date&order=desc",
     60,
   );
-  return (posts ?? []).map(patchPost);
+  if (posts && posts.length > 0) {
+    return posts.map(patchPost);
+  }
+  return fallbackPosts;
 }
 
 export async function getPost(slug: string): Promise<WPPost | null> {
@@ -113,5 +120,8 @@ export async function getAllPosts(): Promise<WPPost[]> {
     "/posts?_embed&per_page=100&orderby=date&order=desc",
     300,
   );
-  return (posts ?? []).map(patchPost);
+  if (posts && posts.length > 0) {
+    return posts.map(patchPost);
+  }
+  return fallbackPosts;
 }
