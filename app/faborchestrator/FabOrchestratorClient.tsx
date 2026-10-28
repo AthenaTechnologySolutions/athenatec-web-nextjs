@@ -293,7 +293,7 @@ function FabOrchestratorDemoForm({ onSuccess, darkBg = false }: DemoFormProps) {
         </label>
         <textarea
           rows={3}
-          placeholder="Specify any cleanroom tools, MES platforms (e.g. Siemens Opcenter), or lot yield priorities..."
+          placeholder="Specify any cleanroom tools, MES platforms (e.g. Siemens Opcenter, Critical Manufacturing), or lot yield priorities..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           className={`w-full px-4 py-2.5 rounded-xl text-xs font-medium focus:outline-none transition-all ${darkBg
@@ -622,7 +622,7 @@ const ecosystemOutputs = [
 ];
 
 const whyAthenaSpokes = [
-  { title: "MES Expertise", desc: "Deep Siemens Opcenter and manufacturing execution knowledge", icon: Server },
+  { title: "MES Expertise", desc: "Deep Siemens Opcenter and Critical Manufacturing execution knowledge", icon: Server },
   { title: "Manufacturing Experience", desc: "Years solving complex production challenges", icon: Factory },
   { title: "Industry Knowledge", desc: "Semiconductor, medical devices, electronics, and more", icon: CircuitBoard },
   { title: "Proven Accelerators", desc: "Purpose-built solutions with measurable outcomes", icon: Rocket },

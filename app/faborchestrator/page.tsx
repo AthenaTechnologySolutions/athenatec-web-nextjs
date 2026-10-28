@@ -25,6 +25,7 @@ export const metadata: Metadata = buildMetadata({
     "Programming Agent",
     "AI Support Agent",
     "Siemens Opcenter AI",
+    "Critical Manufacturing MES AI",
     "Smart factory orchestration",
     "Manufacturing execution systems AI",
     "Predictive manufacturing analytics",
@@ -49,6 +50,7 @@ export default function FabOrchestratorPage() {
       "Agentic AI",
       "Smart Manufacturing",
       "Siemens Opcenter",
+      "Critical Manufacturing",
     ],
     offers: [
       {
@@ -100,7 +102,7 @@ export default function FabOrchestratorPage() {
       {
         question: "What is FabOrchestrator.AI?",
         answer:
-          "FabOrchestrator.AI is the manufacturing industry's first Agentic AI Foundry, designed to eliminate operational inefficiencies, automate troubleshooting, and provide real-time factory intelligence on top of MES platforms like Siemens Opcenter.",
+          "FabOrchestrator.AI is the manufacturing industry's first Agentic AI Foundry, designed to eliminate operational inefficiencies, automate troubleshooting, and provide real-time factory intelligence on top of MES platforms like Siemens Opcenter and Critical Manufacturing.",
       },
       {
         question: "What are the core capabilities of FabOrchestrator.AI?",

@@ -12,7 +12,6 @@ export default function HeroSlide({ slide, isActive }: HeroSlideProps) {
   return (
     <div className="relative flex h-[100vh] w-full items-center pb-36 sm:pb-40 md:pb-44">
 
-      {/* Background Media — fully visible, no dimming */}
      <div className="absolute inset-0 bg-[#15356e]/80 md:bg-gradient-to-r md:from-[#15356e]/90 md:via-[#15356e]/40 md:to-transparent">
 
         {slide.media.type === "video" ? (
@@ -34,16 +33,10 @@ export default function HeroSlide({ slide, isActive }: HeroSlideProps) {
           />
         )}
 
-        {/*
-          ✅ AVEVA-style "blind" overlay:
-          - Left 55%: strong charcoal/navy shadow so text is readable
-          - Fades to transparent on the right so the image shows through clearly
-          - No full-bleed dark overlay — background is visible on the right half
-        */}
+   
         <div className="absolute inset-0 md:bg-gradient-to-r md:from-[#15356e]/95 md:via-[#15356e]/70 md:to-transparent" />
       </div>
 
-      {/* Content — sits on the left over the gradient blind */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
         <div
           className={`w-full max-w-2xl transform transition-all duration-1000 ease-out ${
