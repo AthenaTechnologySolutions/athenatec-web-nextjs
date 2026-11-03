@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import Image from "next/image";
+import { internalHref } from "@/lib/seo";
 
 const mesSolutions = [
   { name: "MES Implementation Services", href: "/mes-implementation-services" },
@@ -194,7 +195,7 @@ export default function Footer() {
             {mesSolutions.map((item) => (
               <Link
                 key={item.name}
-                href={item.href}
+                href={internalHref(item.href)}
                 className="block text-[#c7d4f1] transition hover:text-[#17ace4]"
               >
                 {item.name}
@@ -208,7 +209,7 @@ export default function Footer() {
               {otherSolutions.map((item) => (
                 <Link
                   key={item.name}
-                  href={item.href}
+                  href={internalHref(item.href)}
                   className="block text-[#c7d4f1] transition hover:text-[#17ace4]"
                 >
                   {item.name}
@@ -224,7 +225,7 @@ export default function Footer() {
             {partners.map((item) => (
               <Link
                 key={item.name}
-                href={item.href}
+                href={internalHref(item.href)}
                 className="block text-[#c7d4f1] transition hover:text-[#17ace4]"
               >
                 {item.name}
@@ -239,7 +240,7 @@ export default function Footer() {
             {resources.map((item) => (
               <Link
                 key={item.name}
-                href={item.href}
+                href={internalHref(item.href)}
                 className="block text-[#c7d4f1] transition hover:text-[#17ace4]"
               >
                 {item.name}
@@ -273,7 +274,7 @@ export default function Footer() {
             </div>
 
             <Link
-              href="/contact"
+              href={internalHref("/contact")}
               className="inline-block rounded-md bg-[#17ace4] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#1c4584]"
             >
               Get a Demo →
@@ -286,10 +287,10 @@ export default function Footer() {
             © 2026 Athena Technologies. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link href="/privacy-policy" className="text-[#c7d4f1] hover:text-[#17ace4]">
+            <Link href={internalHref("/privacy-policy")} className="text-[#c7d4f1] hover:text-[#17ace4]">
               Privacy Policy
             </Link>
-            <Link href="/terms-of-use" className="text-[#c7d4f1] hover:text-[#17ace4]">
+            <Link href={internalHref("/terms-of-use")} className="text-[#c7d4f1] hover:text-[#17ace4]">
               Terms of Use
             </Link>
           </div>

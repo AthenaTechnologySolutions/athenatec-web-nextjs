@@ -1,6 +1,13 @@
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
-import { getAllPosts, getPost, getPostImage, type WPPost } from "@/lib/wordpress";
+import {
+  getAllPosts,
+  getPost,
+  getPostImage,
+  getPostSeoDescription,
+  getPostSeoTitle,
+  type WPPost,
+} from "@/lib/wordpress";
 import {
   buildArticleSchema,
   buildBreadcrumbSchema,
@@ -55,6 +62,9 @@ function getPostBadge(slug: string): string {
 }
 
 function getPostDescription(post: WPPost) {
+  const seoDescription = getPostSeoDescription(post);
+  if (seoDescription) return seoDescription;
+
   const excerpt = stripHtml(post.excerpt?.rendered || "");
   const content = stripHtml(post.content?.rendered || "");
   return truncate(excerpt || content, 160);
@@ -208,8 +218,7 @@ export async function generateMetadata({
   }
 
   const rawTitle = getPostTitle(post);
-  const metaTitle =
-    rawTitle.length > 40 ? `${truncate(rawTitle, 40)} | Athenatec Newsroom` : `${rawTitle} | Athenatec Newsroom`;
+  const metaTitle = getPostSeoTitle(post) || rawTitle;
 
   let heroImage = getPostImage(post);
   if (
@@ -221,7 +230,7 @@ export async function generateMetadata({
   }
 
   return buildMetadata({
-    title: metaTitle,
+    title: `${metaTitle} | Athenatec News`,
     description: getPostDescription(post),
     path: `/newsroom/${slug}`,
     image: heroImage ?? undefined,
@@ -234,7 +243,7 @@ export async function generateMetadata({
 export default async function NewsroomPostPage({ params }: PageProps) {
   const { slug } = await params;
   if (slug === "athena-announces-the-opening-of-its-new-office-in-portugal") {
-    redirect("/newsroom/athena-opens-its-new-office-in-portugal");
+    redirect("/newsroom/athena-opens-its-new-office-in-portugal/");
   }
   const post = await getPost(slug);
 
@@ -255,9 +264,9 @@ export default async function NewsroomPostPage({ params }: PageProps) {
       slug === "athena-announces-the-opening-of-its-new-office-in-portugal") &&
     (!heroImage || heroImage.includes("demo6"))
   ) {
-    heroImage = "/assets/images/portugal-announcement.png";
+    heroImage = "/assets/images/portugal-announcement.webp";
   } else if (slug === "athena-expands-europe-first-office-portugal" && !heroImage) {
-    heroImage = "/assets/images/portugal-announcement.png";
+    heroImage = "/assets/images/portugal-announcement.webp";
   }
 
   const isPortugalPost =
@@ -401,7 +410,7 @@ export default async function NewsroomPostPage({ params }: PageProps) {
               const img =
                 item.slug === "athena-opens-its-new-office-in-portugal" ||
                 item.slug === "athena-announces-the-opening-of-its-new-office-in-portugal"
-                  ? "/assets/images/portugal-announcement.png"
+                  ? "/assets/images/portugal-announcement.webp"
                   : getPostImage(item);
               const itemTitle = getPostTitle(item);
               const isPortugalRelated =

@@ -31,7 +31,12 @@ export async function generateMetadata({
   }
 
   const descriptionSource = study.summary.join(" ");
-  const metaTitle = `${study.title} | Athenatec Case Study`;
+  const metaTitle =
+    study.slug === "medical-device-mes-modernization"
+      ? "Medical Device MES Modernization | Athenatec"
+      : study.slug === "nevro-paperless-mes"
+        ? "Paperless MES Modernization | Athenatec"
+        : `${study.title} | Athenatec Case Study`;
 
   return buildMetadata({
     title: metaTitle,

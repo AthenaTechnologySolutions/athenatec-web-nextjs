@@ -71,9 +71,9 @@ export default async function NewsRoom() {
   const featuredImage =
     featuredPost?.slug === "athena-opens-its-new-office-in-portugal" ||
     featuredPost?.slug === "athena-announces-the-opening-of-its-new-office-in-portugal"
-      ? "/assets/images/portugal-announcement.png"
+      ? "/assets/images/portugal-announcement.webp"
       : featuredPost
-        ? getPostImage(featuredPost) || "/assets/images/portugal-announcement.png"
+        ? getPostImage(featuredPost) || "/assets/images/portugal-announcement.webp"
         : null;
 
   const collectionSchema = {
@@ -201,7 +201,7 @@ export default async function NewsRoom() {
                     const imageSrc =
                       post.slug === "athena-opens-its-new-office-in-portugal" ||
                       post.slug === "athena-announces-the-opening-of-its-new-office-in-portugal"
-                        ? "/assets/images/portugal-announcement.png"
+                        ? "/assets/images/portugal-announcement.webp"
                         : getPostImage(post);
 
                     return (

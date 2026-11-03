@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { internalHref } from "@/lib/seo";
 
 export type InternalLinkItem = {
   href: string;
@@ -90,7 +91,7 @@ export default function InternalLinkCluster({
           {links.map((link) => (
             <Link
               className="group rounded-lg border border-[#dbe9f3] bg-white p-5 shadow-[0_10px_30px_rgba(28,69,132,0.06)] transition hover:-translate-y-1 hover:border-[#17ace4]/70 hover:shadow-[0_18px_38px_rgba(28,69,132,0.12)]"
-              href={link.href}
+              href={internalHref(link.href)}
               key={link.href}
             >
               <span className="text-base font-semibold leading-snug text-[#1c4584] group-hover:text-[#17ace4]">

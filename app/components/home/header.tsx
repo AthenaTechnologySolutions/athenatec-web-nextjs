@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import HeaderMenu from "./HeaderMenu";
 import Image from "next/image";
+import { internalHref } from "@/lib/seo";
 
  
 export default function Header() {
@@ -70,7 +71,7 @@ export default function Header() {
           <NavLink href="/careers">Career</NavLink>
 
           <Link
-            href="/contact"
+            href={internalHref("/contact")}
             className="ml-2 min-[1180px]:ml-3 inline-flex items-center whitespace-nowrap rounded-lg bg-[#1c4584] px-3.5 min-[1180px]:px-5 py-2.5 text-[13px] min-[1180px]:text-sm font-semibold text-white
                        transition-all duration-200 hover:bg-[#17ace4] hover:shadow-[0_4px_14px_rgba(23,172,228,0.4)]"
           >
@@ -134,7 +135,7 @@ export default function Header() {
 
           <div className="mt-4 pb-2">
             <Link
-              href="/contact"
+              href={internalHref("/contact")}
               onClick={closeMobile}
               className="flex w-full items-center justify-center rounded-xl
                          bg-[#1c4584] py-3 text-sm font-semibold text-white
@@ -175,7 +176,7 @@ function NavLink({
 
   return (
     <Link
-      href={href}
+      href={internalHref(href)}
       className={classes}
     >
       {children}
@@ -194,7 +195,7 @@ function MobileNavLink({
 }) {
   return (
     <Link
-      href={href}
+      href={internalHref(href)}
       onClick={onClick}
       className="flex items-center py-3.5 border-b border-gray-100 font-medium
                  text-gray-700 hover:text-[#1c4584] transition-colors duration-150"

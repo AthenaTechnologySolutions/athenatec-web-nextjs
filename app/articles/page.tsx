@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
     title: "The Shop Floor Mobility Accelerator",
     description:
-      "Eliminate fixed workstation delays and manual errors. Athena's Mobility Accelerator puts real-time data capture in operators' hands, syncing instantly with your MES.",
+      "Explore Athenatec insights on shop-floor mobility, MES integration, and practical digital manufacturing improvements.",
     path: "/articles",
     image: "/assets/images/shopfloor.webp",
   });

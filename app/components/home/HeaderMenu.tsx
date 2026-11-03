@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
+import { internalHref } from "@/lib/seo";
 
 type Props = {
   variant?: "desktop" | "mobile";
@@ -153,7 +154,7 @@ export default function HeaderMenu({ variant = "desktop", onNavigate }: Props) {
       >
         <DropdownPanel onMouseEnter={cancelClose} onMouseLeave={scheduleClose}>
           {partnerLinks.map((l) => (
-            <Link key={l.href} href={l.href} className={itemCls}>
+            <Link key={l.href} href={internalHref(l.href)} className={itemCls}>
               {/* <span className="h-1.5 w-1.5 rounded-full bg-[#17ace4] opacity-0 group-hover:opacity-100 transition-opacity" /> */}
               {l.label}
             </Link>
@@ -179,7 +180,7 @@ export default function HeaderMenu({ variant = "desktop", onNavigate }: Props) {
             onMouseLeave={() => setOpenMES(false)}
           >
             <Link
-              href="/solutions/mes"
+              href={internalHref("/solutions/mes")}
               className={`${itemCls} justify-between`}
             >
               <span className="flex items-center gap-2">
@@ -201,7 +202,7 @@ export default function HeaderMenu({ variant = "desktop", onNavigate }: Props) {
                             p-2 animate-fadeIn"
               >
                 {mesSolutionLinks.map((l) => (
-                  <Link key={l.href} href={l.href} className={itemCls}>
+                  <Link key={l.href} href={internalHref(l.href)} className={itemCls}>
                     {/* <span className="h-1.5 w-1.5 rounded-full bg-[#17ace4] opacity-0 group-hover:opacity-100 transition-opacity" /> */}
                     {l.label}
                   </Link>
@@ -213,7 +214,7 @@ export default function HeaderMenu({ variant = "desktop", onNavigate }: Props) {
           <div className="my-1.5 h-px bg-gray-100 mx-2" />
 
           {otherSolutionLinks.map((l) => (
-            <Link key={l.href} href={l.href} className={itemCls}>
+            <Link key={l.href} href={internalHref(l.href)} className={itemCls}>
               {/* <span className="h-1.5 w-1.5 rounded-full bg-[#17ace4] opacity-0 group-hover:opacity-100 transition-opacity" /> */}
               {l.label}
             </Link>
@@ -222,7 +223,7 @@ export default function HeaderMenu({ variant = "desktop", onNavigate }: Props) {
       </DesktopDropdownWrapper>
 
       <Link
-        href="/faborchestrator"
+        href={internalHref("/faborchestrator")}
         className="relative whitespace-nowrap px-2 min-[1180px]:px-3 py-2 rounded-lg text-[13px] min-[1180px]:text-[14.5px] font-medium text-gray-700 transition-colors duration-150 hover:text-[#1c4584] hover:bg-[#1c4584]/5 after:absolute after:bottom-1 after:left-2 after:right-2 after:h-[2px] after:rounded-full after:bg-[#17ace4] after:scale-x-0 after:origin-left after:transition-transform after:duration-200 hover:after:scale-x-100"
       >
         FabOrchestrator AI
@@ -237,7 +238,7 @@ export default function HeaderMenu({ variant = "desktop", onNavigate }: Props) {
       >
         <DropdownPanel onMouseEnter={cancelClose} onMouseLeave={scheduleClose}>
           {resourceLinks.map((l) => (
-            <Link key={l.href} href={l.href} className={itemCls}>
+            <Link key={l.href} href={internalHref(l.href)} className={itemCls}>
               {/* <span className="h-1.5 w-1.5 rounded-full bg-[#17ace4] opacity-0 group-hover:opacity-100 transition-opacity" /> */}
               {l.label}
             </Link>
@@ -364,7 +365,7 @@ function MobileAccordion({
         {href ? (
           <>
             <Link
-              href={href}
+              href={internalHref(href)}
               className={`flex-1 py-3.5 ${labelBaseCls}`}
             >
               {label}
@@ -425,7 +426,7 @@ function MobileSubLink({
 }) {
   return (
     <Link
-      href={href}
+      href={internalHref(href)}
       onClick={onClick}
       className={[
         "flex items-center gap-2 py-2 text-gray-600 hover:text-[#1c4584] transition-colors duration-150",

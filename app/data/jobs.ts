@@ -4,6 +4,7 @@ export type Job = {
   type:             string;
   experience:       string;
   locations:        string[];
+  datePosted:       string;
   overview:         string;
   responsibilities: string[];
   requirements:     string[];
@@ -26,6 +27,7 @@ export const jobs: Job[] = [
       "Bangalore",
       // "Pune",
     ],
+    datePosted:   "2024-08-16T06:18:42Z",
     wpJobId:      "226650",  
 
     overview:
@@ -52,6 +54,7 @@ export const jobs: Job[] = [
     type:       "Full Time",
     experience: "5+ Years",
     locations:  ["Bangalore", "Chennai"],
+    datePosted: "2024-11-20T09:40:34Z",
     wpJobId:    "228087",  
 
     overview:
@@ -79,6 +82,7 @@ export const jobs: Job[] = [
     shift:      "9:30 AM IST to 6:30 PM IST",
     education:  "Computer Science Graduate / Degree / Engineering",
     locations:  ["Chennai", "Trichy", "India"],
+    datePosted: "2024-08-16T06:17:45Z",
     wpJobId:    "226649",
 
     overview:

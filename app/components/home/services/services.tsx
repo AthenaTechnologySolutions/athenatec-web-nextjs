@@ -1,7 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
 import "./services.scss";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
 import Image from "next/image";
@@ -30,11 +31,6 @@ export default function Services() {
     },
     [autoScroll.current],
   );
-
-  const handleManagedTabChange = (index: number) => {
-    if (index === active) return;
-    setActive(index);
-  };
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -128,63 +124,116 @@ export default function Services() {
   const managedServices = [
     {
       title: "Application Support",
-      subtitle: "Global enterprise-grade support",
+      headlinePrefix: "Enterprise-grade IT stability for",
+      headlineHighlight: "Application Support",
+      badge: "24/7 Operations",
+      description:
+        "Athena's global application experts deliver dedicated around-the-clock maintenance and support across mission-critical enterprise applications, ensuring continuous manufacturing uptime.",
       points: [
         "Athena's Global Application experts offer support for a wide range of Enterprise Applications.",
         "Supported platforms include Oracle R12 EBS, Agile PLM, and Siemens MOM Camstar MES.",
         "Flexible pricing structures are available, tailored to meet customer needs and budgets.",
       ],
-      image: "/assets/images/application-support.webp",
+      bgImage:
+        "/assets/images/businessman-using-laptop-while-showing-icon-cloud-files-technology-innovation-virtual-screen-concept-data-management-system-scaled-1.webp",
+      bgPosition: "left top",
     },
     {
       title: "Automation Testing",
-      subtitle: "Faster, safer releases",
+      headlinePrefix: "Zero-defect releases powered by",
+      headlineHighlight: "Automation Testing",
+      badge: "Quality Assurance",
+      description:
+        "Our Automated Systems Testing Suite delivers rigorous script-based validation for manufacturing execution systems, accelerating release cycles while eliminating production disruption.",
       points: [
         "Our Automated Systems Testing Suite delivers rigorous script-based testing for production releases.",
         "Ensures a smooth, error free release process.",
         "Achieves faster, more cost-effective deployments.",
       ],
-      image: "/assets/images/automation-test.webp",
+      bgImage:
+        "/assets/images/sap-system-software-automation-concept-virtual-screen-data-center-scaled.webp",
     },
     {
       title: "Defect & Ticket Tracking",
-      subtitle: "Closed-loop issue management",
+      headlinePrefix: "Closed-loop issue management with",
+      headlineHighlight: "Defect Tracking",
+      badge: "Continuous Improvement",
+      description:
+        "In manufacturing, effective issue tracking and remediation require a strong Root Cause Analysis (RCA) process. We implement CaPa-driven resolution to eliminate recurring operational setbacks.",
       points: [
         "In manufacturing, effective issue tracking and remediation require a strong Root Cause Analysis (RCA) process.",
         "Manufacturers that implement a closed-loop system for tracking issues through RCA, along with corrective and preventative actions, become industry leaders.",
-        "At Athena, we specialize in managing the issue remediation process, primarily using a CaPa approach, ensuring all issues are addressed with preventative actions to prevent future operational setbacks",
+        "We provide timely notifications at critical threshold levels, ensuring issues are addressed before they impact users or business operations.",
       ],
-      image: "/assets/images/ticket-tracking.webp",
+      bgImage:
+        "/assets/images/businessman-compliance-rules-law-regulation-policy-virtual-screen-documents-with-checkbox-lists-1920x1277.webp",
     },
     {
       title: "Remote Monitoring",
-      subtitle: "Always-on visibility",
+      headlinePrefix: "Proactive 24/7 visibility & uptime with",
+      headlineHighlight: "Remote Monitoring",
+      badge: "Real-Time Observability",
+      description:
+        "Always-on telemetry and real-time health monitoring across applications, databases, networks, and server hardware, alerting engineers before issues reach the factory floor.",
       points: [
         "The quality of services depends on uptime and performance.",
         "Athena offers flexible solutions for remote monitoring and remediation across Applications, Databases, Networks, OS, and Server Hardware.",
         "We provide timely notifications at critical threshold levels, ensuring issues are addressed before they impact users or business operations.",
       ],
-      image: "/assets/images/remote-monitering.webp",
+      bgImage:
+        "/assets/images/man-hard-hat-is-holding-tablet-front-blue-white-background-scaled.webp",
     },
     {
       title: "Staff Augmentation",
-      subtitle: "Scale teams instantly",
+      headlinePrefix: "Scale domain engineering teams with",
+      headlineHighlight: "Staff Augmentation",
+      badge: "Specialized Talent",
+      description:
+        "On-demand MES, PLM, and software engineering talent to navigate peak workloads, migrations, and specialized implementations without lengthy recruitment delays.",
       points: [
         "Athena understands that during challenging times, temporary expertise is often preferred over permanent hires to manage peak workloads.",
         "Our Staff Augmentation Services cover a wide range of needs, including Enterprise Application Support, Software Development and Testing, and Infrastructure Support.",
         "We offer flexible pricing models based on Off-shore or Near-shore solutions to meet each customer’s specific requirements.",
       ],
-      image: "/assets/images/staff-augement.webp",
+      bgImage: "/assets/images/careers.webp",
     },
   ];
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActive((current) => (current + 1) % managedServices.length);
-    }, 8000);
 
+  const [managedSliderRef, managedSliderApi] = useEmblaCarousel({
+    loop: true,
+    duration: 35,
+  });
+
+  const onManagedSelect = useCallback(() => {
+    if (!managedSliderApi) return;
+    setActive(managedSliderApi.selectedScrollSnap());
+  }, [managedSliderApi]);
+
+  useEffect(() => {
+    if (!managedSliderApi) return;
+    managedSliderApi.on("select", onManagedSelect);
+    return () => {
+      managedSliderApi.off("select", onManagedSelect);
+    };
+  }, [managedSliderApi, onManagedSelect]);
+
+  const handleManagedTabChange = (index: number) => {
+    setActive(index);
+    managedSliderApi?.scrollTo(index);
+  };
+
+  const scrollPrevManaged = () => managedSliderApi?.scrollPrev();
+  const scrollNextManaged = () => managedSliderApi?.scrollNext();
+
+  const [isSliderHovered, setIsSliderHovered] = useState(false);
+  useEffect(() => {
+    if (!managedSliderApi || isSliderHovered) return;
+    const interval = setInterval(() => {
+      managedSliderApi.scrollNext();
+    }, 7000);
     return () => clearInterval(interval);
-  }, [managedServices.length]);
-  const service = managedServices[active];
+  }, [managedSliderApi, isSliderHovered]);
+
 
   return (
     <>
@@ -289,50 +338,101 @@ export default function Services() {
 
       <section className="managed-switch">
         <div className="container">
-          <h2 className="managed-title">Athena Managed Services</h2>
+          <div className="managed-header">
+            <h2 className="managed-title">Athena Managed Services</h2>
+          </div>
 
-          <div className="managed-layout">
-            <div className="managed-tabs-wrapper">
-              <div className="managed-tabs">
-                {managedServices.map((item, i) => (
-                  <button
-                    key={i}
-                    className={`managed-tab ${i === active ? "active" : ""}`}
-                    onClick={() => handleManagedTabChange(i)}
-                  >
-                    {item.title}
-                  </button>
-                ))}
-              </div>
+          {/* Horizontal Tabs Bar (matching modern reference) */}
+          <div className="managed-tabs-container">
+            <div className="managed-tabs-nav" role="tablist">
+              {managedServices.map((item, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  role="tab"
+                  aria-selected={i === active}
+                  className={`managed-tab-item ${i === active ? "active" : ""}`}
+                  onClick={() => handleManagedTabChange(i)}
+                >
+                  <span className="tab-label">{item.title}</span>
+                  {i === active && <span className="tab-indicator" />}
+                </button>
+              ))}
             </div>
+          </div>
 
-            <div className="managed-content">
-              <div className="managed-image">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  width={600}
-                  height={400}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                  className="w-full h-full object-cover"
-                  quality={75}
-                />
-              </div>
+          {/* Smooth Slider Viewport & Banner Card */}
+          <div
+            className="managed-slider-viewport"
+            ref={managedSliderRef}
+            onMouseEnter={() => setIsSliderHovered(true)}
+            onMouseLeave={() => setIsSliderHovered(false)}
+          >
+            <div className="managed-slider-container">
+              {managedServices.map((item, i) => (
+                <div className="managed-slider-slide" key={i}>
+                  <div className="managed-banner-card">
+                    {/* Background Photography Image */}
+                    <div className="managed-banner-media">
+                      <Image
+                        src={item.bgImage}
+                        alt={item.title}
+                        fill
+                        sizes="(max-width: 1240px) 100vw, 1240px"
+                        priority={i === 0}
+                        className="managed-bg-image"
+                        style={item.bgPosition ? { objectPosition: item.bgPosition } : undefined}
+                        quality={85}
+                      />
+                      <div className="managed-banner-overlay" />
+                    </div>
 
-              <div className="managed-text">
-                <h3>{service.title}</h3>
-                <p>{service.subtitle}</p>
+                    {/* Floating White Card on Left */}
+                    <div className="managed-floating-card">
+                      <span className="managed-service-badge">{item.badge}</span>
+                      <h3 className="managed-card-title">
+                        {item.headlinePrefix}{" "}
+                        <span className="managed-card-highlight">{item.headlineHighlight}</span>
+                      </h3>
+                      <p className="managed-card-desc">{item.description}</p>
 
-                <ul>
-                  {service.points.map((point, i) => (
-                    <li key={i}>{point}</li>
-                  ))}
-                </ul>
-              </div>
+                      <ul className="managed-card-points">
+                        {item.points.map((pt, idx) => (
+                          <li key={idx}>
+                            <CheckCircle2 className="point-icon" />
+                            <span>{pt}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Slider Navigation Arrows */}
+                    <div className="managed-slider-controls">
+                      <button
+                        type="button"
+                        onClick={scrollPrevManaged}
+                        className="managed-control-btn"
+                        aria-label="Previous service"
+                      >
+                        <ChevronLeft />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={scrollNextManaged}
+                        className="managed-control-btn"
+                        aria-label="Next service"
+                      >
+                        <ChevronRight />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
+
       <section className="why-us">
         <div className="container why-us-grid">
           <div className="why-us-content">

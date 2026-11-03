@@ -11,9 +11,9 @@ import {
 } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "FabOrchestrator.AI | Agentic AI for Manufacturing & MES Intelligence | Athenatec",
+  title: "FabOrchestrator AI for Manufacturing | Athenatec",
   description:
-    "FabOrchestrator.AI is an Agentic AI Foundry for smart manufacturing. Unify shop-floor data, automate root-cause support, model MES changes, and build modules with FabInsight, Modeling, Programming & Support AI Agents.",
+    "FabOrchestrator.AI brings agentic AI to manufacturing, unifying shop-floor data, MES change modeling, and intelligent operational support.",
   path: "/faborchestrator",
   keywords: [
     "FabOrchestrator.AI",

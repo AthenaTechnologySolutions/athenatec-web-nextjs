@@ -1,0 +1,141 @@
+Audited 87 unique pages (87 sitemap URLs; 29 homepage links).
+
+sitemapRedirects (1)
+https://www.athenatec.com/newsroom/portugal-expansion/ — app/newsroom/[slug]/page.tsx — https://www.athenatec.com/newsroom/athena-expands-europe-first-office-portugal/
+
+redirects (1)
+https://www.athenatec.com/newsroom/portugal-expansion/ — app/newsroom/[slug]/page.tsx — https://www.athenatec.com/newsroom/athena-expands-europe-first-office-portugal/
+
+errors (1)
+https://www.athenatec.com/newsroom/portugal-expansion/ — app/newsroom/[slug]/page.tsx — https://www.athenatec.com/newsroom/athena-expands-europe-first-office-portugal/
+
+missingDescriptions (0)
+None
+
+shortDescriptions (20)
+https://www.athenatec.com/blog/authorised-reseller-partnership-with-twinzo/ — app/blog/[slug]/page.tsx
+https://www.athenatec.com/blog/athena-and-tech-mahindra-announce-partnership/ — app/blog/[slug]/page.tsx
+https://www.athenatec.com/blog/athena-launches-faborchestrator-agentic-ai-for-manufacturing/ — app/blog/[slug]/page.tsx
+https://www.athenatec.com/blog/athena-featured-in-digital-it-news-national-it-service-provider-day/ — app/blog/[slug]/page.tsx
+https://www.athenatec.com/blog/chips-making-chips-how-virtualization-digital-twins-and-machine-learning-are-accelerating-the-spiral-of-innovation/ — app/blog/[slug]/page.tsx
+https://www.athenatec.com/blog/erp-is-your-core-but-is-it-truly-connected/ — app/blog/[slug]/page.tsx
+https://www.athenatec.com/blog/beyond-the-software-why-your-mes-selection-needs-a-blueprint-not-just-a-demo/ — app/blog/[slug]/page.tsx
+https://www.athenatec.com/blog/empowering-manufacturers-for-digital-transformation-leveraging-opcenter-for-enhanced-efficiency-and-productivity/ — app/blog/[slug]/page.tsx
+https://www.athenatec.com/blog/minimize-idle-time-streamline-ordering-with-a-digital-twin/ — app/blog/[slug]/page.tsx
+https://www.athenatec.com/blog/the-ai-driven-evolution-of-mes-athenas-viewpoint/ — app/blog/[slug]/page.tsx
+https://www.athenatec.com/blog/solving-the-integration-puzzle-in-smt-manufacturing/ — app/blog/[slug]/page.tsx
+https://www.athenatec.com/blog/the-ai-powered-mes-from-system-of-record-to-system-of-intelligence/ — app/blog/[slug]/page.tsx
+https://www.athenatec.com/blog/transforming-manufacturing-key-focus-areas-trends-and-challenges-in-digital-transformation/ — app/blog/[slug]/page.tsx
+https://www.athenatec.com/leadership/maryanne-steidinger/ — app/leadership/[slug]/page.tsx
+https://www.athenatec.com/newsroom/athena-and-tech-mahindra-announce-partnership/ — app/newsroom/[slug]/page.tsx
+https://www.athenatec.com/newsroom/athena-expands-europe-first-office-portugal/ — app/newsroom/[slug]/page.tsx
+https://www.athenatec.com/newsroom/athena-featured-in-digital-it-news-national-it-service-provider-day/ — app/newsroom/[slug]/page.tsx
+https://www.athenatec.com/newsroom/athena-launches-faborchestrator-agentic-ai-for-manufacturing/ — app/newsroom/[slug]/page.tsx
+https://www.athenatec.com/newsroom/authorised-reseller-partnership-with-twinzo/ — app/newsroom/[slug]/page.tsx
+https://www.athenatec.com/newsroom/athena-opens-its-new-office-in-portugal/ — app/newsroom/[slug]/page.tsx
+
+longDescriptions (4)
+https://www.athenatec.com/articles/shop-floor-mobility-accelerator-real-time-data-capture/ — app/articles/[slug]/page.tsx
+https://www.athenatec.com/articles/ — app/articles/page.tsx
+https://www.athenatec.com/accelerators/ — app/accelerators/page.tsx
+https://www.athenatec.com/faborchestrator/ — app/faborchestrator/page.tsx
+
+longTitles (10)
+https://www.athenatec.com/accelerators/ — app/accelerators/page.tsx
+https://www.athenatec.com/careers/ — app/careers/page.tsx
+https://www.athenatec.com/case-studies/medical-device-mes-modernization/ — app/case-studies/[slug]/page.tsx
+https://www.athenatec.com/case-studies/nevro-paperless-mes/ — app/case-studies/[slug]/page.tsx
+https://www.athenatec.com/faborchestrator/ — app/faborchestrator/page.tsx
+https://www.athenatec.com/newsroom/athena-and-tech-mahindra-announce-partnership/ — app/newsroom/[slug]/page.tsx
+https://www.athenatec.com/newsroom/athena-expands-europe-first-office-portugal/ — app/newsroom/[slug]/page.tsx
+https://www.athenatec.com/newsroom/athena-featured-in-digital-it-news-national-it-service-provider-day/ — app/newsroom/[slug]/page.tsx
+https://www.athenatec.com/newsroom/athena-launches-faborchestrator-agentic-ai-for-manufacturing/ — app/newsroom/[slug]/page.tsx
+https://www.athenatec.com/newsroom/athena-opens-its-new-office-in-portugal/ — app/newsroom/[slug]/page.tsx
+
+missingH1 (0)
+None
+
+lowWords (7)
+https://www.athenatec.com/gallery/americas-partner-conference-2025/ — app/gallery/[slug]/page.tsx
+https://www.athenatec.com/gallery/industry-4-0-international-summit-2023/ — app/gallery/[slug]/page.tsx
+https://www.athenatec.com/gallery/realize-live-americas-2023/ — app/gallery/[slug]/page.tsx
+https://www.athenatec.com/gallery/realize-live-americas-2025/ — app/gallery/[slug]/page.tsx
+https://www.athenatec.com/gallery/realize-live-americas-2024/ — app/gallery/[slug]/page.tsx
+https://www.athenatec.com/gallery/realize-live-europe-2024/ — app/gallery/[slug]/page.tsx
+https://www.athenatec.com/gallery/hannover-messe-2025/ — app/gallery/[slug]/page.tsx
+
+noOutgoingLinks (0)
+None
+
+oneOutgoingLink (0)
+None
+
+mixedContent (19)
+https://www.athenatec.com/blog/authorised-reseller-partnership-with-twinzo/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2025/08/666c09d916a99547b3521b61_twinzo-og-1.png
+https://www.athenatec.com/blog/athena-and-tech-mahindra-announce-partnership/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2025/09/Tech-Mahindra-Recruitment-2022-for-Freshers.webp
+https://www.athenatec.com/blog/athena-launches-faborchestrator-agentic-ai-for-manufacturing/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/04/Agentic-AI-for-Manufacturing.webp
+https://www.athenatec.com/blog/athena-featured-in-digital-it-news-national-it-service-provider-day/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/05/IT-NEWS.webp
+https://www.athenatec.com/blog/chips-making-chips-how-virtualization-digital-twins-and-machine-learning-are-accelerating-the-spiral-of-innovation/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2025/08/cpu-processor-circuit-board-scaled-1.jpg
+https://www.athenatec.com/blog/erp-is-your-core-but-is-it-truly-connected/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/06/ERP-banner-1.png
+https://www.athenatec.com/blog/beyond-the-software-why-your-mes-selection-needs-a-blueprint-not-just-a-demo/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/03/WhatsApp-Image-2026-03-13-at-3.16.06-PM.jpeg
+https://www.athenatec.com/blog/empowering-manufacturers-for-digital-transformation-leveraging-opcenter-for-enhanced-efficiency-and-productivity/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2024/07/hand-touching-digital-screen-with-data-visualization-scaled-1.jpg
+https://www.athenatec.com/blog/minimize-idle-time-streamline-ordering-with-a-digital-twin/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2025/10/Digital-Twins-in-Manufacturing.jpg
+https://www.athenatec.com/blog/the-ai-driven-evolution-of-mes-athenas-viewpoint/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2025/09/Sep_Blog.png
+https://www.athenatec.com/blog/solving-the-integration-puzzle-in-smt-manufacturing/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2025/08/solar-panels-plant-employee-presenting-team-leader-manufacturing-process-scaled-1.jpg
+https://www.athenatec.com/blog/the-ai-powered-mes-from-system-of-record-to-system-of-intelligence/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2025/12/AI_Blog.png
+https://www.athenatec.com/blog/transforming-manufacturing-key-focus-areas-trends-and-challenges-in-digital-transformation/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2025/07/businessman-analyzing-company-financial-report-with-digital-augmented-reality-graphics-technology-scaled-1.jpg
+https://www.athenatec.com/newsroom/athena-and-tech-mahindra-announce-partnership/ — app/newsroom/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2025/09/Tech-Mahindra-Recruitment-2022-for-Freshers.webp
+https://www.athenatec.com/newsroom/athena-expands-europe-first-office-portugal/ — app/newsroom/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/10/Porto-Sunset-Riverside-Cityscape.webp
+https://www.athenatec.com/newsroom/athena-featured-in-digital-it-news-national-it-service-provider-day/ — app/newsroom/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/05/IT-NEWS.webp
+https://www.athenatec.com/newsroom/athena-launches-faborchestrator-agentic-ai-for-manufacturing/ — app/newsroom/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/04/Agentic-AI-for-Manufacturing.webp
+https://www.athenatec.com/newsroom/authorised-reseller-partnership-with-twinzo/ — app/newsroom/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2025/08/666c09d916a99547b3521b61_twinzo-og-1.png
+https://www.athenatec.com/newsroom/athena-opens-its-new-office-in-portugal/ — app/newsroom/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/10/Porto-River-Digital-Panorama.webp
+
+missingSocial (0)
+None
+
+invalidJsonLd (0)
+None
+
+missingArticleSchema (0)
+None
+
+incompleteArticleSchema (0)
+None
+
+brokenImages (3)
+https://www.athenatec.com/case-studies/medical-device-mes-modernization/ — app/case-studies/[slug]/page.tsx — https://www.athenatec.com/assets/images/case-study.webp [404]
+https://www.athenatec.com/newsroom/athena-opens-its-new-office-in-portugal/ — app/newsroom/[slug]/page.tsx — https://www.athenatec.com/newsroom/athena-opens-its-new-office-in-portugal/%22data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNXB4IiBoZWlnaHQ9IjRweCIgdmlld0JveD0iMCAwIDUgNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggNTYuMiAoODE2NzIpIC0gaHR0cHM6Ly9za2V0Y2guY29tIC0tPgogICAgPHRpdGxlPnNwZWxsaW5nX3NxdWlnZ2xlPC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGcgaWQ9IkZsYWdzIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTAxMC4wMDAwMDAsIC0yOTYuMDAwMDAwKSIgaWQ9InNwZWxsaW5nX3NxdWlnZ2xlIj4KICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAxMC4wMDAwMDAsIDI5Ni4wMDAwMDApIj4KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0wLDMgQzEuMjUsMyAxLjI1LDEgMi41LDEgQzMuNzUsMSAzLjc1LDMgNSwzIiBpZD0iUGF0aCIgc3Ryb2tlPSIjRTM3RDgxIiBzdHJva2Utd2lkdGg9IjEiPjwvcGF0aD4KICAgICAgICAgICAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUiIHg9IjAiIHk9IjAiIHdpZHRoPSI1IiBoZWlnaHQ9IjQiPjwvcmVjdD4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+%22/ [404]
+https://www.athenatec.com/newsroom/athena-opens-its-new-office-in-portugal/ — app/newsroom/[slug]/page.tsx — https://www.athenatec.com/u0026quot;data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNXB4IiBoZWlnaHQ9IjRweCIgdmlld0JveD0iMCAwIDUgNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggNTYuMiAoODE2NzIpIC0gaHR0cHM6Ly9za2V0Y2guY29tIC0tPgogICAgPHRpdGxlPnNwZWxsaW5nX3NxdWlnZ2xlPC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGcgaWQ9IkZsYWdzIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTAxMC4wMDAwMDAsIC0yOTYuMDAwMDAwKSIgaWQ9InNwZWxsaW5nX3NxdWlnZ2xlIj4KICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAxMC4wMDAwMDAsIDI5Ni4wMDAwMDApIj4KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0wLDMgQzEuMjUsMyAxLjI1LDEgMi41LDEgQzMuNzUsMSAzLjc1LDMgNSwzIiBpZD0iUGF0aCIgc3Ryb2tlPSIjRTM3RDgxIiBzdHJva2Utd2lkdGg9IjEiPjwvcGF0aD4KICAgICAgICAgICAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUiIHg9IjAiIHk9IjAiIHdpZHRoPSI1IiBoZWlnaHQ9IjQiPjwvcmVjdD4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+/u0026quot;/ [404]
+
+largeImages (30)
+https://www.athenatec.com/ — app/page.tsx — https://www.athenatec.com/assets/images/portugal-announcement.png [200, 2173 KB]
+https://www.athenatec.com/ — app/page.tsx — https://www.athenatec.com/assets/images/mary.png [200, 2226 KB]
+https://www.athenatec.com/blog/athena-launches-faborchestrator-agentic-ai-for-manufacturing/ — app/blog/[slug]/page.tsx — https://www.athenatec.com/wp-content/uploads/2026/04/PR-scaled.png [200, 1046 KB]
+https://www.athenatec.com/blog/athena-featured-in-digital-it-news-national-it-service-provider-day/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/06/ERP-banner-1.png [200, 1824 KB]
+https://www.athenatec.com/blog/ — app/blog/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/06/ERP-banner-1.png [200, 1824 KB]
+https://www.athenatec.com/blog/ — app/blog/page.tsx — http://cms.athenatec.com/wp-content/uploads/2025/12/AI_Blog.png [200, 6524 KB]
+https://www.athenatec.com/blog/ — app/blog/page.tsx — http://cms.athenatec.com/wp-content/uploads/2025/09/Sep_Blog.png [200, 7512 KB]
+https://www.athenatec.com/blog/chips-making-chips-how-virtualization-digital-twins-and-machine-learning-are-accelerating-the-spiral-of-innovation/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/06/ERP-banner-1.png [200, 1824 KB]
+https://www.athenatec.com/blog/erp-is-your-core-but-is-it-truly-connected/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/06/ERP-banner-1.png [200, 1824 KB]
+https://www.athenatec.com/blog/beyond-the-software-why-your-mes-selection-needs-a-blueprint-not-just-a-demo/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/06/ERP-banner-1.png [200, 1824 KB]
+https://www.athenatec.com/blog/empowering-manufacturers-for-digital-transformation-leveraging-opcenter-for-enhanced-efficiency-and-productivity/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/06/ERP-banner-1.png [200, 1824 KB]
+https://www.athenatec.com/blog/minimize-idle-time-streamline-ordering-with-a-digital-twin/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/06/ERP-banner-1.png [200, 1824 KB]
+https://www.athenatec.com/blog/the-ai-driven-evolution-of-mes-athenas-viewpoint/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2025/09/Sep_Blog.png [200, 7512 KB]
+https://www.athenatec.com/blog/the-ai-driven-evolution-of-mes-athenas-viewpoint/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/06/ERP-banner-1.png [200, 1824 KB]
+https://www.athenatec.com/blog/solving-the-integration-puzzle-in-smt-manufacturing/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/06/ERP-banner-1.png [200, 1824 KB]
+https://www.athenatec.com/blog/the-ai-powered-mes-from-system-of-record-to-system-of-intelligence/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2025/12/AI_Blog.png [200, 6524 KB]
+https://www.athenatec.com/blog/the-ai-powered-mes-from-system-of-record-to-system-of-intelligence/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/06/ERP-banner-1.png [200, 1824 KB]
+https://www.athenatec.com/blog/transforming-manufacturing-key-focus-areas-trends-and-challenges-in-digital-transformation/ — app/blog/[slug]/page.tsx — http://cms.athenatec.com/wp-content/uploads/2026/06/ERP-banner-1.png [200, 1824 KB]
+https://www.athenatec.com/leadership/maryanne-steidinger/ — app/leadership/[slug]/page.tsx — https://www.athenatec.com/assets/images/mary.png [200, 2226 KB]
+https://www.athenatec.com/newsroom/athena-and-tech-mahindra-announce-partnership/ — app/newsroom/[slug]/page.tsx — https://www.athenatec.com/assets/images/portugal-announcement.png [200, 2173 KB]
+https://www.athenatec.com/newsroom/athena-expands-europe-first-office-portugal/ — app/newsroom/[slug]/page.tsx — https://www.athenatec.com/assets/images/portugal-announcement.png [200, 2173 KB]
+https://www.athenatec.com/newsroom/athena-featured-in-digital-it-news-national-it-service-provider-day/ — app/newsroom/[slug]/page.tsx — https://www.athenatec.com/assets/images/portugal-announcement.png [200, 2173 KB]
+https://www.athenatec.com/newsroom/ — app/newsroom/page.tsx — https://www.athenatec.com/assets/images/portugal-announcement.png [200, 2173 KB]
+https://www.athenatec.com/newsroom/athena-launches-faborchestrator-agentic-ai-for-manufacturing/ — app/newsroom/[slug]/page.tsx — https://www.athenatec.com/wp-content/uploads/2026/04/PR-scaled.png [200, 1046 KB]
+https://www.athenatec.com/newsroom/athena-launches-faborchestrator-agentic-ai-for-manufacturing/ — app/newsroom/[slug]/page.tsx — https://www.athenatec.com/assets/images/portugal-announcement.png [200, 2173 KB]
+https://www.athenatec.com/siemens-opcenter-mes/discrete/ — app/siemens-opcenter-mes/[industry]/page.tsx — https://www.athenatec.com/assets/videos/discrete.mp4 [200, 1665 KB]
+https://www.athenatec.com/newsroom/authorised-reseller-partnership-with-twinzo/ — app/newsroom/[slug]/page.tsx — https://www.athenatec.com/assets/images/portugal-announcement.png [200, 2173 KB]
+https://www.athenatec.com/siemens-opcenter-mes/electronics/ — app/siemens-opcenter-mes/[industry]/page.tsx — https://www.athenatec.com/assets/videos/electronics.mp4 [200, 1376 KB]
+https://www.athenatec.com/siemens-opcenter-mes/medical-devices/ — app/siemens-opcenter-mes/[industry]/page.tsx — https://www.athenatec.com/assets/videos/medical-devices.mp4 [200, 1813 KB]
+https://www.athenatec.com/siemens-opcenter-mes/siemens-mendix/ — app/siemens-opcenter-mes/[industry]/page.tsx — https://www.athenatec.com/assets/videos/mendix.mp4 [200, 8035 KB]

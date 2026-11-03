@@ -10,10 +10,9 @@ import InternalLinkCluster, {
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title:
-    "Manufacturing Accelerators | Extend Your MES Investment | Athenatec",
+  title: "Manufacturing MES Accelerators | Athenatec",
   description:
-    "Purpose-built manufacturing accelerators that extend MES capabilities—engineering change management, quality validation, and Shop Floor mobility—without replacing your existing MES.",
+    "Extend your MES investment with Athenatec accelerators for change management, quality validation, and shop-floor mobility.",
   path: "/accelerators",
   image: "/assets/images/AMA.webp",
   keywords: [

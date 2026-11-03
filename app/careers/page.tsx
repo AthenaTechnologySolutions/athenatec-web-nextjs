@@ -3,7 +3,7 @@ import CareersClient from "./CareersClient";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Careers at Athenatec | MES & Manufacturing Technology Jobs",
+  title: "Manufacturing Technology Careers | Athenatec",
   description:
     "Join Athenatec's team building intelligent manufacturing solutions. Explore roles in Oracle SCM, .NET, and AI/ML across Chennai, Bangalore, and Hyderabad.",
   path: "/careers",

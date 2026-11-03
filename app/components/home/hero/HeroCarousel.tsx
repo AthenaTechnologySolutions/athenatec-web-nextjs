@@ -43,7 +43,7 @@ const slides: HeroSlide[] = [
     desc: "Expanding our presence in Porto, Portugal, to strengthen customer relationships and support manufacturing innovation across Europe.",
     cta: "Explore Our Portugal Office",
     link: "/newsroom/athena-opens-its-new-office-in-portugal",
-    image: "/assets/images/portugal-announcement.png",
+    image: "/assets/images/portugal-announcement.webp",
     imageClassName: "hero-carousel__image--portugal",
   },
   {

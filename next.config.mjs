@@ -107,12 +107,12 @@ const nextConfig = {
       },
       {
         source: "/mes/siemens-opcenter-mes",
-        destination: "/siemens-opcenter-mes",
+        destination: "/siemens-opcenter-mes/",
         permanent: true,
       },
       {
         source: "/solutions/mes/siemens-opcenter-mes-mes",
-        destination: "/siemens-opcenter-mes",
+        destination: "/siemens-opcenter-mes/",
         permanent: true,
       }, 
         {
@@ -122,32 +122,32 @@ const nextConfig = {
       },
       {
         source: "/mes/critical-manufacturing",
-        destination: "/critical-manufacturing",
+        destination: "/critical-manufacturing/",
         permanent: true,
       },
       {
         source: "/solutions/mes/critical-manufacturing",
-        destination: "/critical-manufacturing",
+        destination: "/critical-manufacturing/",
         permanent: true,
       },
       {
         source: "/solutions/enterprise-erp",
-        destination: "/solutions/oracle-cloud",
+        destination: "/solutions/oracle-cloud/",
         permanent: true,
       },
       {
         source: "/enterprise-erp",
-        destination: "/solutions/oracle-cloud",
+        destination: "/solutions/oracle-cloud/",
         permanent: true,
       },
       {
         source: "/eyelet",
-        destination: "/mes-implementation-services",
+        destination: "/mes-implementation-services/",
         permanent: true,
       },
       {
         source: "/eyelit",
-        destination: "/mes-implementation-services",
+        destination: "/mes-implementation-services/",
         permanent: true,
       },
     ];

@@ -30,9 +30,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     });
   }
 
+  const description =
+    leader.slug === "maryanne-steidinger"
+      ? "Meet Maryanne Steidinger, an Athenatec advisor focused on partner strategy, industrial software alliances, and go-to-market positioning."
+      : truncate(leader.shortBio, 155);
+
   return buildMetadata({
     title: `${leader.name} | Athenatec Leadership`,
-    description: truncate(leader.shortBio, 155),
+    description,
     path: `/leadership/${leader.slug}`,
     image: leader.profileImage,
     keywords: [

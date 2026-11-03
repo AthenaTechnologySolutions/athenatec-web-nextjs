@@ -45,7 +45,8 @@ export async function generateMetadata({
 
   return buildMetadata({
     title: metaTitle,
-    description: article.excerpt,
+    description:
+      "Discover how Athena's Shop Floor Mobility Accelerator gives operators real-time MES data capture, reducing workstation delays and manual errors.",
     path: `/articles/${article.slug}`,
     image: article.heroImage,
   });
@@ -69,8 +70,8 @@ export default async function ArticleDetailPage({ params }: PageProps) {
     headline: article.title,
     description: article.excerpt,
     path: `/articles/${article.slug}`,
-    datePublished: article.date,
-    dateModified: article.date,
+    datePublished: article.publishedAt,
+    dateModified: article.publishedAt,
     image: article.heroImage,
     authorName: article.author.name,
   });

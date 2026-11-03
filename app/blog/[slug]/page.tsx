@@ -1,6 +1,13 @@
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
-import { getAllPosts, getPost, getPostImage, type WPPost } from "@/lib/wordpress";
+import {
+  getAllPosts,
+  getPost,
+  getPostImage,
+  getPostSeoDescription,
+  getPostSeoTitle,
+  type WPPost,
+} from "@/lib/wordpress";
 import {
   buildArticleSchema,
   buildBreadcrumbSchema,
@@ -36,6 +43,9 @@ const NEWSROOM_SLUGS = new Set([
 ]);
 
 function getPostDescription(post: WPPost) {
+  const seoDescription = getPostSeoDescription(post);
+  if (seoDescription) return seoDescription;
+
   const excerpt = stripHtml(post.excerpt?.rendered || "");
   const content = stripHtml(post.content?.rendered || "");
   return truncate(excerpt || content, 160);
@@ -169,11 +179,10 @@ export async function generateMetadata({
   }
 
   const rawTitle = getPostTitle(post);
-  const metaTitle =
-    rawTitle.length > 40 ? `${truncate(rawTitle, 40)} | Athenatec` : `${rawTitle} | Athenatec`;
+  const metaTitle = getPostSeoTitle(post) || rawTitle;
 
   return buildMetadata({
-    title: metaTitle,
+    title: `${metaTitle} | Athenatec`,
     description: getPostDescription(post),
     path: `/blog/${slug}`,
     image: getPostImage(post) ?? undefined,
@@ -186,14 +195,14 @@ export async function generateMetadata({
 export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
   if (slug === "athena-expands-europe-first-office-portugal") {
-    redirect("/newsroom/athena-expands-europe-first-office-portugal");
+    redirect("/newsroom/athena-expands-europe-first-office-portugal/");
   }
 
   if (
     slug === "athena-opens-its-new-office-in-portugal" ||
     slug === "athena-announces-the-opening-of-its-new-office-in-portugal"
   ) {
-    redirect("/newsroom/athena-opens-its-new-office-in-portugal");
+    redirect("/newsroom/athena-opens-its-new-office-in-portugal/");
   }
 
   const post = await getPost(slug);

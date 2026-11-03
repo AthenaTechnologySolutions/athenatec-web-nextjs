@@ -4,6 +4,7 @@ export interface Article {
   subtitle: string;
   excerpt: string;
   date: string;
+  publishedAt: string;
   author: {
     name: string;
     role: string;
@@ -60,6 +61,7 @@ export const articles: Article[] = [
     subtitle: "How handheld mobile workflows eliminate fixed PC bottlenecks, lower hardware maintenance costs, and synchronize shop floor transactions directly into your MES.",
     excerpt: "Walk any manufacturing floor and you'll notice operators making constant trips back and forth to fixed PC workstations. Athena Technology's Shop Floor Mobility Accelerator puts the entire workstation into operators' hands using rugged Zebra devices, delivering real-time MES data capture and eliminating lost labor time.",
     date: "July 30, 2026",
+    publishedAt: "2026-07-30T00:00:00-07:00",
     author: {
       name: "Athena Technology Operations Team",
       role: "Manufacturing Solutions & MES Practice",

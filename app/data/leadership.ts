@@ -135,7 +135,7 @@ export const leadershipProfiles: LeaderProfile[] = [
       "Maryanne has a strong background in operational software and industrial controls, with more than 35 years in marketing and partner management.",
       "Her experience includes leadership roles and ecosystem work with companies including Siemens, Rockwell, and Schneider Electric, giving Athena valuable perspective on industrial technology partnerships and market alignment.",
     ],
-    profileImage: "/assets/images/mary.png",
+    profileImage: "/assets/images/mary.webp",
     achievements: [
       "35+ years across operational software and industrial controls",
       "Built partner and alliance strategies with major industrial technology companies",

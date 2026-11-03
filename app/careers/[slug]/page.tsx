@@ -123,6 +123,7 @@ export default async function JobDetailsPage({
     path: `/careers/${slug}`,
     employmentType: job.type,
     locations: job.locations,
+    datePosted: job.datePosted,
   });
 
   return (

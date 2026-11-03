@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { internalHref } from "@/lib/seo";
 
 interface CTAProps {
   title: React.ReactNode;
@@ -46,7 +47,7 @@ export default function CTASection({
         </p>
 
         <Link
-          href={buttonLink}
+          href={internalHref(buttonLink)}
           className="inline-block bg-[#17ace4] hover:bg-[#1c4584] transition-all duration-300 px-8 py-3 rounded-full font-semibold hover:-translate-y-1"
         >
           {buttonText}

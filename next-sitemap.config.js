@@ -11,6 +11,7 @@ module.exports = {
     "/thank-you",
     "/partners/twinzo",
     "/rsvp",
+    "/newsroom/portugal-expansion",
     "/siemens-realize-live-2026-faborchestrator-ai",
     "/api/*",
     "/icon.png",

@@ -101,6 +101,17 @@ export function canonicalUrl(path = "/") {
   return new URL(normalizePath(path), SITE_URL).toString();
 }
 
+/**
+ * Formats site-relative navigation targets in the same trailing-slash form as
+ * the deployed routes, avoiding an unnecessary redirect before navigation.
+ */
+export function internalHref(href: string) {
+  if (!href.startsWith("/") || href.startsWith("//")) return href;
+
+  const url = new URL(href, SITE_URL);
+  return `${normalizePath(url.pathname)}${url.search}${url.hash}`;
+}
+
 export function decodeHtmlEntities(input: string) {
   let output = input;
 
@@ -500,14 +511,14 @@ export function buildJobPostingSchema(input: {
   path: string;
   employmentType: string;
   locations: string[];
-  datePosted?: string;
+  datePosted: string;
 }) {
   return {
     "@context": "https://schema.org",
     "@type": "JobPosting",
     title: input.title,
     description: input.description,
-    employmentType: input.employmentType,
+    employmentType: input.employmentType.toUpperCase().replace(/\s+/g, "_"),
     datePosted: input.datePosted,
     url: canonicalUrl(input.path),
     directApply: true,
