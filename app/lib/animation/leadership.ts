@@ -24,8 +24,8 @@ export const leadershipStagger: Variants = {
 export const leadershipCardMotion = {
   rest: { y: 0, scale: 1 },
   hover: {
-    y: -8,
-    scale: 1.01,
+    y: -4,
+    scale: 1.005,
     transition: { duration: duration.fast, ease: ease.out },
   },
 } satisfies Variants;

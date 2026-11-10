@@ -137,6 +137,14 @@
     opacity: 1;
     filter: drop-shadow(0 0 26px rgba(23, 172, 228, 0.18));
   }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -10px;
+    pointer-events: auto;
+    z-index: -2;
+  }
 }
 
 .leader-card__link {

@@ -158,7 +158,7 @@ function InfoCard({
   icon: React.ElementType;
 }) {
   return (
-    <div className="group relative min-h-[116px] overflow-hidden rounded-xl border border-[#d9e7f2] bg-white/90 p-3 text-center shadow-[0_10px_26px_rgba(28,69,132,0.1)] transition-all duration-300 hover:-translate-y-1 hover:border-[#17ace4]/70 hover:bg-white hover:shadow-[0_18px_36px_rgba(28,69,132,0.16)] md:min-h-[124px] md:p-4">
+    <div className="card-hover-stabilized group relative min-h-[116px] rounded-xl border border-[#d9e7f2] bg-white/90 p-3 text-center shadow-[0_10px_26px_rgba(28,69,132,0.1)] transition-all duration-300 hover:-translate-y-1 hover:border-[#17ace4]/70 hover:bg-white hover:shadow-[0_18px_36px_rgba(28,69,132,0.16)] md:min-h-[124px] md:p-4">
       <div className="absolute inset-x-5 top-0 h-[3px] rounded-b-full bg-gradient-to-r from-[#17ace4] to-[#1c4584] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-lg bg-[#eaf8fe] text-[#1c4584] ring-1 ring-[#17ace4]/25 transition-all duration-300 group-hover:bg-[#17ace4] group-hover:text-white group-hover:ring-[#17ace4]">
         <Icon size={18} strokeWidth={2.2} />
@@ -167,9 +167,8 @@ function InfoCard({
       <p className="mb-1 text-2xl font-semibold text-[#15356e] sm:text-3xl">
         {value}
       </p>
-      <p className="mx-auto max-w-[15rem] text-xs leading-snug text-[#3f4f64] sm:text-sm">
-        {subtitle}
-      </p>
+
+
     </div>
   );
 }
@@ -229,7 +228,7 @@ function StatCard({
   return (
     <div
       ref={ref}
-      className="group relative min-h-[116px] overflow-hidden rounded-xl border border-[#d9e7f2] bg-white/90 p-3 text-center shadow-[0_10px_26px_rgba(28,69,132,0.1)] transition-all duration-300 hover:-translate-y-1 hover:border-[#17ace4]/70 hover:bg-white hover:shadow-[0_18px_36px_rgba(28,69,132,0.16)] md:min-h-[124px] md:p-4"
+      className="card-hover-stabilized group relative min-h-[116px] rounded-xl border border-[#d9e7f2] bg-white/90 p-3 text-center shadow-[0_10px_26px_rgba(28,69,132,0.1)] transition-all duration-300 hover:-translate-y-1 hover:border-[#17ace4]/70 hover:bg-white hover:shadow-[0_18px_36px_rgba(28,69,132,0.16)] md:min-h-[124px] md:p-4"
     >
       <div className="absolute inset-x-5 top-0 h-[3px] rounded-b-full bg-gradient-to-r from-[#17ace4] to-[#1c4584] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-lg bg-[#eaf8fe] text-[#1c4584] ring-1 ring-[#17ace4]/25 transition-all duration-300 group-hover:bg-[#17ace4] group-hover:text-white group-hover:ring-[#17ace4]">

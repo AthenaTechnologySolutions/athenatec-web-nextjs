@@ -199,12 +199,11 @@ export default function WhoWeAre() {
             ].map((p, i) => (
               <motion.div
                 key={p.title}
-                className="partner-card"
+                className="partner-card card-hover-stabilized"
                 initial={{ opacity: 0, y: 32 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.65, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -4, transition: { duration: 0.25 } }}
               >
                 <Image
                   src={p.src}

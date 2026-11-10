@@ -141,3 +141,65 @@ body {
   background: rgba(23, 172, 228, 0.2);
   color: inherit;
 }
+
+.card,
+[class*="-card"],
+[class*="_card"],
+.collaborator-feature,
+.advisory-card,
+.timeline-node,
+.card-hover-stabilized,
+[class*="hover\:-translate"],
+[class*="hover\:translate"],
+[class*="hover\:scale"],
+[class*="group-hover\:-translate"],
+[class*="group-hover\:translate"],
+[class*="group-hover\:scale"] {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  outline: 1px solid transparent;
+}
+
+ .partner-card,
+.leader-card,
+.collaborator-feature,
+.advisory-card,
+.testimonial-card,
+.about-card,
+.value-card,
+.accelerator-card,
+.article-card,
+.blog-card,
+.job-card,
+.case-card,
+.service-card,
+.journey-card,
+.why-card,
+.product-card,
+.card-hover-stabilized {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    pointer-events: auto;
+    z-index: -1;
+  }
+}
+
+@media (hover: none) {
+  .card,
+  [class*="-card"],
+  [class*="_card"],
+  .collaborator-feature,
+  .advisory-card,
+  .testimonial-card,
+  .card-hover-stabilized,
+  [class*="hover\:-translate"],
+  [class*="hover\:translate"] {
+    transform: none !important;
+  }
+}
+
