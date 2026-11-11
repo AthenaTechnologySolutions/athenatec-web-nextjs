@@ -63,7 +63,7 @@ const slides: HeroSlide[] = [
     desc: "Experienced in implementing and upgrading Opcenter MES across versions, from Camstar 3.2 to Opcenter 2410, ensuring seamless transitions and optimized performance.",
     cta: "Siemens Opcenter MES implementation",
     link: "/siemens-opcenter-mes",
-    image: "/assets/images/s8.webp",
+    image: "/assets/images/siemencealliance01.webp",
   },
   {
     title: "Critical Manufacturing Premier Implementation Partner",

@@ -352,7 +352,7 @@ export default function SiemensOpcenter() {
       <HeroSection
         title="Siemens Opcenter MES Implementation Services"
         description="Implementation, upgrades, integrations, testing, training, and hypercare for Siemens Opcenter MES in complex manufacturing environments."
-        image="/assets/images/siemens.webp"
+        image="/assets/images/siemencealliance01.webp"
         buttonText="Discuss a Siemens Opcenter MES project"
         buttonLink="/contact"
       />
