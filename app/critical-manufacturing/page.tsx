@@ -177,33 +177,6 @@ export default function CriticalManufacturingPage() {
           </div>
         </div>
       </section>
-      <section className="awards-section">
-        <div className="container">
-          <h2 className="section-title">Awards</h2>
-
-          <div className="awards-grid">
-            <div className="award-card">
-              <Image
-                src="/assets/images/image-3.webp"
-                alt="Marketing Award 2025"
-                width={500}
-                height={350}
-              />
-              <p>Partner of Marketing award from CM for the year 2025</p>
-            </div>
-
-            <div className="award-card">
-              <Image
-                src="/assets/images/Cm-02.webp"
-                alt="Knowledge Award 2023"
-                width={500}
-                height={350}
-              />
-              <p>Partner of Knowledge award from CM for the year 2023</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section className="cmf-section">
         <div className="container cmf-grid">
@@ -475,6 +448,33 @@ export default function CriticalManufacturingPage() {
         </div>
       </section>
       <CaseStudiesSection title="Case Studies" data={caseStudies} bg="light" />
+      <section className="awards-section">
+        <div className="container">
+          <h2 className="section-title">Awards</h2>
+
+          <div className="awards-grid">
+            <div className="award-card">
+              <Image
+                src="/assets/images/image-3.webp"
+                alt="Marketing Award 2025"
+                width={500}
+                height={350}
+              />
+              <p>Partner of Marketing award from CM for the year 2025</p>
+            </div>
+
+            <div className="award-card">
+              <Image
+                src="/assets/images/Cm-02.webp"
+                alt="Knowledge Award 2023"
+                width={500}
+                height={350}
+              />
+              <p>Partner of Knowledge award from CM for the year 2023</p>
+            </div>
+          </div>
+        </div>
+      </section>
       <GallerySection title="Event Gallery" data={galleryItems} bg="light" />
       {/* <FaqSection
         title="Critical Manufacturing MES Implementation FAQs"

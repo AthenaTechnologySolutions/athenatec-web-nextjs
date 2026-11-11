@@ -9,7 +9,7 @@ import {
 import Link from "next/link";
 
 const DEFAULT_SLIDE_INTERVAL_MS = 5000;
-const FIRST_SLIDE_INTERVAL_MS = 13000;
+const PORTUGAL_SLIDE_INTERVAL_MS = 13000;
 
 type HeroSlide = {
   id?: string;
@@ -37,15 +37,6 @@ function getTitleVariant(title: string) {
 }
 
 const slides: HeroSlide[] = [
-  {
-    id: "portugal-expansion",
-    title: "Athena Opens Its New Office in Porto, Portugal",
-    desc: "Expanding our presence in Porto, Portugal, to strengthen customer relationships and support manufacturing innovation across Europe.",
-    cta: "Explore Our Portugal Office",
-    link: "/newsroom/athena-opens-its-new-office-in-portugal",
-    image: "/assets/images/portugal-announcement.webp",
-    imageClassName: "hero-carousel__image--portugal",
-  },
   {
     title: "Digitizing the Manufacturing Enterprise Since 2011",
     desc: "Leveraging deep expertise to enhance partnerships and drive long-term manufacturing success.",
@@ -110,6 +101,15 @@ const slides: HeroSlide[] = [
     cta: "FabOrchestrator AI",
     link: "/faborchestrator",
     image: "/assets/images/Faborchestratorai-banner.webp",
+  },
+  {
+    id: "portugal-expansion",
+    title: "Athena Opens Its New Office in Porto, Portugal",
+    desc: "Expanding our presence in Porto, Portugal, to strengthen customer relationships and support manufacturing innovation across Europe.",
+    cta: "Explore Our Portugal Office",
+    link: "/newsroom/athena-opens-its-new-office-in-portugal",
+    image: "/assets/images/portugal-announcement.webp",
+    imageClassName: "hero-carousel__image--portugal",
   },
 
   // {
@@ -203,13 +203,15 @@ export default function HeroCarousel() {
 
   useEffect(() => {
     const slideInterval =
-      index === 0 ? FIRST_SLIDE_INTERVAL_MS : DEFAULT_SLIDE_INTERVAL_MS;
+      activeSlide.id === "portugal-expansion"
+        ? PORTUGAL_SLIDE_INTERVAL_MS
+        : DEFAULT_SLIDE_INTERVAL_MS;
 
     const timer = setTimeout(() => {
       changeSlide(index === total - 1 ? 0 : index + 1);
     }, slideInterval);
     return () => clearTimeout(timer);
-  }, [index, total]);
+  }, [index, total, activeSlide.id]);
 
   useEffect(() => {
     const scheduleDeferredImages = () => {
