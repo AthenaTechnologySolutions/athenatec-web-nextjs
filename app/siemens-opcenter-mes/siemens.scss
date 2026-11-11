@@ -17,7 +17,25 @@
     font-size: clamp(14px, 1.6vw, 16px);
   }
 }
+.section-title {
+  text-align: center;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #1c4584;
+}
 
+
+.partner-section {
+  padding: clamp(60px, 8vw, 60px) 20px;
+  text-align: center;
+
+  .partner-badge img {
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+  }
+}
 .soc-services {
   background: #f5f6f8;
   padding: clamp(48px, 8vw, 40px) clamp(16px, 4vw, 20px);

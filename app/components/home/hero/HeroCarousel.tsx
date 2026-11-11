@@ -72,13 +72,13 @@ const slides: HeroSlide[] = [
     link: "/critical-manufacturing",
     image: "/assets/images/CMC.webp",
   },
-  {
-    title: "Athena Announces Strategic Authorised Reseller Partnership with twinzo",
-    desc: "Strengthening smart manufacturing visibility and operational intelligence through Twinzo's digital twin platform.",
-    cta: "twinzo",
-    link: "/critical-manufacturing",
-    image: "/assets/images/twinzobanners.webp",
-  },
+  // {
+  //   title: "Athena Announces Strategic Authorised Reseller Partnership with twinzo",
+  //   desc: "Strengthening smart manufacturing visibility and operational intelligence through Twinzo's digital twin platform.",
+  //   cta: "twinzo",
+  //   link: "/critical-manufacturing",
+  //   image: "/assets/images/twinzobanners.webp",
+  // },
 
 // {
 //   id: "agentic-ai-training",

@@ -16,10 +16,10 @@ const partnerLinks = [
   { label: "Critical Manufacturing", href: "/critical-manufacturing" },
   // Eyelit route is disabled for now; keep this entry commented for future reuse.
   // { label: "Eyelit", href: "/eyelit" },
-  {
-    label: "Twinzo",
-    href: "/blog/authorised-reseller-partnership-with-twinzo",
-  },
+  // {
+  //   label: "Twinzo",
+  //   href: "/blog/authorised-reseller-partnership-with-twinzo",
+  // },
 ];
 
 const mesSolutionLinks = [

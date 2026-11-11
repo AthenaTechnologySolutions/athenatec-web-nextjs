@@ -356,6 +356,20 @@ export default function SiemensOpcenter() {
         buttonText="Discuss a Siemens Opcenter MES project"
         buttonLink="/contact"
       />
+ <section className="partner-section">
+        <div className="container">
+          <h2 className="section-title">Siemens Opcenter MES alliance partner</h2>
+
+          <div className="partner-badge">
+            <Image
+              src="/assets/images/partners.png"
+             alt="Siemens Opcenter MES alliance partner"
+              width={600}
+              height={400}
+            />
+          </div>
+        </div>
+      </section>
 
       <section className="soc-description">
         <div className="soc-description__card">

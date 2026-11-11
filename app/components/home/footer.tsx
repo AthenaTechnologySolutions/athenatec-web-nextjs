@@ -25,7 +25,7 @@ const partners = [
   { name: "Critical Manufacturing", href: "/critical-manufacturing" },
   // Eyelit route is disabled for now; keep this entry commented for future reuse.
   // { name: "Eyelit Technologies", href: "/eyelit" },
-  { name: "Twinzo", href: "/blog/authorised-reseller-partnership-with-twinzo" },
+  // { name: "Twinzo", href: "/blog/authorised-reseller-partnership-with-twinzo" },
 ];
 
 const resources = [

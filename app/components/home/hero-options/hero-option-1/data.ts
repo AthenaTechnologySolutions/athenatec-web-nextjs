@@ -92,24 +92,25 @@ export const heroData: HeroProps = {
         },
       ],
     },
-    {
-      id: "slide-6",
-      title: "Athena Announces Strategic Authorised Reseller Partnership with twinzo",
-      subtitle:
-        "Strengthening smart manufacturing visibility and operational intelligence through Twinzo's digital twin platform.",
-      media: {
-        type: "image",
-        src: "/assets/images/twinzobanners.webp",
-        alt: "twinzo Partnership",
-      },
-      ctas: [
-        {
-          label: "twinzo",
-          href: "/twinzo",
-          variant: "primary",
-        },
-      ],
-    },
+    // Twinzo route is disabled; keep this slide commented for future reuse.
+    // {
+    //   id: "slide-6",
+    //   title: "Athena Announces Strategic Authorised Reseller Partnership with twinzo",
+    //   subtitle:
+    //     "Strengthening smart manufacturing visibility and operational intelligence through Twinzo's digital twin platform.",
+    //   media: {
+    //     type: "image",
+    //     src: "/assets/images/twinzobanners.webp",
+    //     alt: "twinzo Partnership",
+    //   },
+    //   ctas: [
+    //     {
+    //       label: "twinzo",
+    //       href: "/twinzo",
+    //       variant: "primary",
+    //     },
+    //   ],
+    // },
     // Eyelit route is disabled for now; keep this slide commented for future reuse.
     // {
     //   id: "slide-7",

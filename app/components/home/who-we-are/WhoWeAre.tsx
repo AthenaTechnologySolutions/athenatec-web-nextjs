@@ -189,13 +189,13 @@ export default function WhoWeAre() {
                 desc: "As a Critical Manufacturing Premier Partner, our certified team of experts specializes in implementing Critical Manufacturing MES, delivering customized solutions that ensure seamless integration and optimal performance.",
                 href: "/critical-manufacturing",
               },
-              {
-                src: "/assets/Clients/twinzo-img.webp",
-                alt: "Twinzo",
-                title: "Twinzo Authorized Reseller",
-                desc: "Authorized Twinzo reseller and implementation partner providing industrial digital twin and smart factory solutions. We help manufacturers adopt real-time visualization, performance monitoring, and data-driven operations.",
-                href: "/blog/authorised-reseller-partnership-with-twinzo",
-              },
+              // {
+              //   src: "/assets/Clients/twinzo-img.webp",
+              //   alt: "Twinzo",
+              //   title: "Twinzo Authorized Reseller",
+              //   desc: "Authorized Twinzo reseller and implementation partner providing industrial digital twin and smart factory solutions. We help manufacturers adopt real-time visualization, performance monitoring, and data-driven operations.",
+              //   href: "/blog/authorised-reseller-partnership-with-twinzo",
+              // },
             ].map((p, i) => (
               <motion.div
                 key={p.title}
